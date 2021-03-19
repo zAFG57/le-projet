@@ -1,4 +1,4 @@
-<?php include_once('../templates/header.php'); ?>
+<?php include_once('../templates/nav.php'); ?>
 
 <?php $title = "se connecter";?>
 <?php ob_start(); ?>

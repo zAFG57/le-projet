@@ -1,4 +1,4 @@
-<?php include_once('header/nav.php'); ?>
+<?php include_once('templates/nav.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
