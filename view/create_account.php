@@ -1,6 +1,6 @@
 <?php include_once('../templates/nav.php'); ?>
 
-<?php $title = "créer mon compte";?>
+<?php $title = "créer mon compte"; $css = "create-account.css"?>
 <?php ob_start(); ?>
 
     <header>

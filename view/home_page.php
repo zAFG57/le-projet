@@ -1,6 +1,6 @@
 <?php include_once('../templates/nav.php'); ?>
 
-<?php $title = "Company name";?>
+<?php $title = "Company name"; $css = "home.css"?>
 <?php ob_start(); ?>
 
     <header>

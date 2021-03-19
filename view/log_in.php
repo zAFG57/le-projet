@@ -1,6 +1,6 @@
 <?php include_once('../templates/nav.php'); ?>
 
-<?php $title = "se connecter";?>
+<?php $title = "se connecter"; $css = "login.css"?>
 <?php ob_start(); ?>
 
     <header>
