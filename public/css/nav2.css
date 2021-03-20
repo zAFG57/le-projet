@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+nav ul {
+    padding-top: 1vh;
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+    padding-bottom: 0.5vh;
+    background-color: green;
+}
+
+nav ul li a {
+    color: rgba(195, 204, 66);
+    text-decoration: none;
+    font-size: 2em;
+    padding: 20px;
+    border-radius: 20px;
+    display: block;
+}
+
+nav ul li a:hover {
+    transition: all ease-in-out 0.5s;
+    background-color: rgba(195, 204, 66);
+    color: green;
+}
