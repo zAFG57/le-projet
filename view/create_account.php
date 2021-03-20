@@ -6,13 +6,12 @@
     <header>
         <?=$nav?>
     </header>
-    <form action="" method="post">
+    <form action="../model/create_account.php" method="POST">
     
         <input type="text" name="username" placeholder="Nom d'utilisateur">
         <input type="password" name="password" placeholder="Mot de passe">
         <input type="password" name="passwordVerify" placeholder="Mot de passe">
-
-        <input type="email" name="password" placeholder="email">
+        <input type="email" name="email" placeholder="email">
 
         <input type="submit" value="Créer mon compte">
         
