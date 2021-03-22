@@ -40,4 +40,4 @@ if (count($errors) === 0) {
     }
 }
 
-// echo json_encode($errors);
+echo json_encode($errors);

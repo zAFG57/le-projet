@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 nav ul {
@@ -15,7 +16,7 @@ nav ul {
 nav ul li a {
     color: rgba(195, 204, 66);
     text-decoration: none;
-    font-size: 2em;
+    font-size: 1.5em;
     padding: 20px;
     border-radius: 20px;
     display: block;

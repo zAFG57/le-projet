@@ -1,0 +1,17 @@
+#login_form {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: solid black 2px;
+    border-radius: 20px;
+    width: 450px;
+    height: 400px;
+    margin-top: 100px;
+    background-color: yellow;
+}
+
+#login_form h1 {
+    text-align: center;
+    font-size: 2em;
+}
