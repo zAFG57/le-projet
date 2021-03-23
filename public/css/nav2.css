@@ -1,4 +1,4 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -26,4 +26,72 @@ nav ul li a:hover {
     transition: all ease-in-out 0.5s;
     background-color: rgba(195, 204, 66);
     color: green;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* background-color: black; */
+    font-family: 'Montserrat', sans-serif;
+}
+
+.leftSiide {
+    display: flex;
+    margin-left: -40px;
+    margin-right: 40px;
+}
+
+.leftSiide h1 {
+    padding: 0px 20px;
+    font-size: 2em;
+}
+
+
+/* nav {
+    background-color: red;
+} */
+
+nav ul li,
+nav ul li a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #333333;
+    text-decoration: none;
+}
+
+header {
+    background: linear-gradient(to right, green 0%, green calc(7% + 435px), rgb(213, 235, 213) calc(10% + 200px), rgb(213, 235, 213) 100%);
+    /* background: linear-gradient(to right, #eeeeee -10%, green 100%); */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 7%;
+}
+
+.logo {
+    cursor: pointer;
+    border-radius: 100%;
+    padding: -50px;
+}
+
+.nav_links {
+    list-style: none;
+}
+
+.nav_links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_links li a {
+    transition: all 0.3s ease 0s;
+}
+
+.nav_links li a:hover {
+    color: green;
+    transition: all 0.3s ease 0s;
+    /* border-bottom: 2px #666666 solid; */
 }

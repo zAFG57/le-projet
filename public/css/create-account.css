@@ -1,4 +1,7 @@
 .submitButton {
     border: black solid 1px;
     color: red;
+    display: block;
+    width: max-content;
+    cursor: pointer;
 }
