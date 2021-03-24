@@ -6,7 +6,7 @@
     <header>
         <?=$nav?>
     </header>
-   <!-- <h1>This is the home page</h1> -->
+   <h1 class="presentation">Avec Mesréparations.com, trouvez un </br> réparateur <span>proche de chez vous.</span></h1>
 
 <?php $content = ob_get_clean();?>
 

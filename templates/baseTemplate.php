@@ -7,7 +7,7 @@
         <title><?= $title ?></title>
         <link href="../public/css/<?= $css ?>" rel="stylesheet" />
         <link href="../public/css/nav2.css" rel="stylesheet" />
-        <link rel="icon" href="../assets/logo.png">
+        <link rel="icon" href="../assets/Sans_titre-8.png">
     </head>
         
     <body>

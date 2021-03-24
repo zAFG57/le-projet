@@ -1,6 +1,23 @@
 body {
-    background-image: url(../../assets/environment1.jpg);
+    background-image: url("../../assets/environment1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 100% 110px;
+    /* background-position: 100%; */
+}
+
+header {
+    /* position: fixed; */
+    /* margin: 5vw 5vh; */
+    margin: 40px 40px;
+}
+
+.presentation {
+    color: rgb(213, 235, 213);
+    position: absolute;
+    top: 80%;
+    left: 60%;
+}
+
+.presentation span {
+    color: #2f743b;
 }
