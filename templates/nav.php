@@ -1,14 +1,14 @@
 <?php ob_start(); ?>
-<div class="leftSiide">
-    <img class="logo" src="../assets/Logorond2.png" alt="logo" height="50px">
+<a class="leftSiide" href="../view/home_page" title="Acceuil">
+    <img class="logo" src="../assets/Sans_titre-8.png" alt="logo" height="50px">
     <h1>Mesréparations.com</h1>
-</div>
+</a>
 <nav>
     <ul class="nav_links">
-        <li><a href="../view/home_page">Home</a></li>
-        <li><a href="../view/create_professional_account">Je suis un professionnel</a></li>
-        <li><a href="../view/log_in">se connecter</a></li>
-        <li><a href="../view/create_account">créer un compte</a></li>
+        <li><img src="../assets/drapeaufrancais.png" alt="drapeua français" height="25px"></li>
+        <li><a href="../view/log_in" title="Se connecter">Se connecter</a></li>
+        <li><a href="../view/create_account" title="Créer mon compte">Créer un compte</a></li>
+        <li><a id="pro" a href="../view/create_professional_account" title="Je suis un professionel">Je suis un professionnel</a></li>
     </ul>
 </nav>
 <!-- <a href="">Je suis artisan</a> -->

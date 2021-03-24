@@ -40,12 +40,18 @@ nav ul li a:hover {
 .leftSiide {
     display: flex;
     margin-left: -40px;
-    margin-right: 40px;
+    margin-right: 70px;
+    text-decoration: none;
 }
 
 .leftSiide h1 {
+    color: white;
     padding: 0px 20px;
     font-size: 2em;
+}
+
+.leftSiide img {
+    vertical-align: middle;
 }
 
 
@@ -63,7 +69,7 @@ nav ul li a {
 }
 
 header {
-    background: linear-gradient(to right, green 0%, green calc(7% + 435px), rgb(213, 235, 213) calc(10% + 200px), rgb(213, 235, 213) 100%);
+    background: linear-gradient(to right, #2f743b 0%, #2f743b calc(7% + 435px), rgb(213, 235, 213) calc(10% + 200px), rgb(213, 235, 213) 100%);
     /* background: linear-gradient(to right, #eeeeee -10%, green 100%); */
     display: flex;
     justify-content: space-between;
@@ -88,10 +94,29 @@ header {
 
 .nav_links li a {
     transition: all 0.3s ease 0s;
+    font-weight: bold;
 }
 
 .nav_links li a:hover {
-    color: green;
+    color: #2f743b;
     transition: all 0.3s ease 0s;
     /* border-bottom: 2px #666666 solid; */
+}
+
+#pro {
+    padding: 5px 5px;
+    /* border: white 3px solid; */
+    background-color: #2f743b;
+    color: #ffffff;
+    border-radius: 5px 5px;
+}
+
+#pro:hover {
+    padding: 5px 5px;
+    /* border: white 3px solid; */
+    color: #333333;
+}
+
+nav ul li img {
+    vertical-align: middle;
 }
