@@ -26,7 +26,7 @@
         <div class="pass">Mot de passe oublié ?</div>
 
 
-        <div class="submitButton" onclick="alert('test')"><p>Créer mon compte</p></div>
+        <div class="submitButton" onclick="alert('test')"><p>Connexion</p></div>
 
         <div class="singupLink">
             Pas encore de compte ? </br><a href="create_account">créer mon compte</a>

@@ -2,7 +2,7 @@
 require_once('util.php');
 $errors = [];
 
-if(!isset($_POST['username']) || strlen($_POST['username']) > 255 || preg_match('/^[a-zA-Z- ]+$/', $_POST['username'])){
+if(!isset($_POST['username']) || strlen($_POST['username']) > 255 || !preg_match('/^[a-zA-Z- ]+$/', $_POST['username'])){
     $errors[] = 1;
 }
 
@@ -19,24 +19,30 @@ if(!isset($_POST['password']) || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]
 }
 
 if (count($errors) === 0) {
-    $db = connect();
-    if($db) {
-        $res = sqlSelect($db, 'SELECT id FROM users WHERE email=?', 's', $_POST['email']);
-        if($res && $res->num_rows === 0){
-            $passHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $id = sqlInsert($db, 'INSERT INTO users VALUES (NULL, ?, ?, ?, 0)', 'sss', $_POST['username'], $_POST['email'], $passHash);
+    if (isset($_POST['csrf_token']) && validateToken($_POST['csrf_token'])) {
         
-            if ($id !== -1) {
-                $errors[] = 0;
+        $db = connect();
+        if($db) {
+            $res = sqlSelect($db, 'SELECT id FROM users WHERE email=?', 's', $_POST['email']);
+            if($res && $res->num_rows === 0){
+                $passHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                $id = sqlInsert($db, 'INSERT INTO users VALUES (NULL, ?, ?, ?, 0)', 'sss', $_POST['username'], $_POST['email'], $passHash);
+            
+                if ($id !== -1) {
+                    $errors[] = 0;
+                } else {
+                    $errors[] = 6;
+                }
+            
             } else {
-                $errors[] = 6;
+                $errors[] = 7;
             }
-        
         } else {
-            $errors[] = 7;
+            $errors[] = 8;
         }
     } else {
-        $errors[] = 8;
+        // bad csrf token
+        $errors[] = 9;
     }
 }
 

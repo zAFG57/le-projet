@@ -13,12 +13,16 @@ function request(url, data, callback) {
         }
     });
 
+
+
     var formdata = data ? (data instanceof FormData ? data : new FormData(document.querySelector(data))) : new FormData();
 
     var csrfMetaTag = document.querySelector('meta[name="csrf_token"]');
     if (csrfMetaTag) {
         formdata.append('csrf_token', csrfMetaTag.getAttribute('content'));
     }
+
+    console.log(formdata)
 
     xhr.send(formdata);
 }
@@ -29,12 +33,19 @@ function register() {
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
+        console.log('tets777')
         try {
+            console.log('tetsss')
             data = JSON.parse(data);
             if (!(data instanceof Array)) { throw Exception('bad data'); }
 
-            //Show errors to user
+            console.log('tets')
+                //Show errors to user
             for (var i = 0; i < data.length; ++i) {
+                // if ()
+                console.log(data[i])
+                console.log(i);
+
                 switch (data[i]) {
                     case 0:
                         document.getElementById('errs').innerHTML += '<div>Compte crée</div>';
@@ -59,14 +70,14 @@ function register() {
                         document.getElementById('errs').innerHTML += '<div class="err">le compte n\'a pas pu être crée. veuillez ressayez plus tard.</div>';
                         break;
                     case 7:
-                        document.getElementById('errs').innerHTML += '<div class="err">Cet email est deja utiliser pour un auutre compte</div>';
+                        document.getElementById('errs').innerHTML += '<div class="err">Cet email est deja utiliser pour un autre compte</div>';
                         break;
                     case 8:
                         document.getElementById('errs').innerHTML += '<div class="err">le client n\'a pas pu se connecter a la base de donnée. Veuillez ressayez plus tard.</div>';
                         break;
-                        // case 9:
-                        //     document.getElementById('errs').innerHTML += '<div class="err">Invalid CSRF Token. Please try again later.</div>';
-                        //     break;
+                    case 9:
+                        document.getElementById('errs').innerHTML += '<div class="err">jeton CSRF invalide </div>';
+                        break;
                         // case 10:
                         //     document.getElementById('errs').innerHTML += '<div class="err">Failed to send email. Please try again later.</div>';
                         //     break;
@@ -86,11 +97,12 @@ function register() {
                         //     document.getElementById('errs').innerHTML += '<div class="err">Failed to connect to database. Please try again later.</div>';
                         //     break;
                     default:
-                        document.getElementById('errs').innerHTML += '<div class="err">une erreur s\'est produite. Please try again later.</div>';
+                        document.getElementById('errs').innerHTML += '<div class="err">une erreur s\'est produite. veuillez réessayer plus tard.</div>';
                 }
             }
         } catch (e) {
-            document.getElementById('errs').innerHTML = '<div class="err">An unknown error occured. Veuillez ressayez plus tard.</div>';
+            console.log(e)
+            document.getElementById('errs').innerHTML = '<div class="err">une erreur s\'est produite. Veuillez ressayez plus tard.</div>';
         }
         setTimeout(function() {
             document.getElementById('errs').style.transition = transition;

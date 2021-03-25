@@ -9,10 +9,10 @@
 <div class="registerForm">
     <h1>Créer un compte</h1>
 
-    <form>
+    <form id="registerForm">
 
         <div class="txtfield">
-            <input type="text" name="username" onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" required autofocus>
+            <input type="text" name="username" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
             <span></span>
             <label>Nom d'utilisateur</label>
         </div>
@@ -34,13 +34,15 @@
             <span></span>
             <label>Confirmation</label>
         </div>
-          
+
+        <div id="errs"></div>
+        
         <div class="submitButton" onclick="register();"><p>Créer mon compte</p></div>
 
         <div class="singinLink">
-            Deja un compte ? </br><a href="log_in">Se connecter</a>
+            Déjà un compte ? </br><a href="log_in">Se connecter</a>
         </div>
-        <div id="errs"></div>
+        
 
     </form>
 </div>

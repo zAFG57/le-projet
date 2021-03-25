@@ -134,3 +134,8 @@ header {
 .singinLink a:hover {
     text-decoration: underline;
 }
+
+#errs {
+    color: red;
+    transition: .5s;
+}
