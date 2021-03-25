@@ -76,6 +76,8 @@ header {
     align-items: center;
     padding: 15px 7%;
     border-radius: 10px 10px;
+    /* overflow: hidden; */
+    /* height: 100vh; */
 }
 
 .logo {
