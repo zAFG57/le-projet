@@ -11,5 +11,4 @@
         <li><a id="pro" a href="../view/create_professional_account" title="Je suis un professionel">Je suis un professionnel</a></li>
     </ul>
 </nav>
-<!-- <a href="">Je suis artisan</a> -->
 <?php $nav = ob_get_clean(); ?>

@@ -6,16 +6,44 @@
 <header>
     <?=$nav?>
 </header>
-<form id="registerForm">
-    
-    <input type="text" name="username" placeholder="Nom d'utilisateur" onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
-    <input type="password" name="password" placeholder="Mot de passe" onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
-    <input type="password" name="passwordVerify" placeholder="Mot de passe" onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
-    <input type="email" name="email" placeholder="email" onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
+<div class="registerForm">
+    <h1>Créer un compte</h1>
 
-    <div class="submitButton" onclick="register();">register</div>
-    <div id="errs"></div>
-</form>
+    <form>
+
+        <div class="txtfield">
+            <input type="text" name="username" onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" required autofocus>
+            <span></span>
+            <label>Nom d'utilisateur</label>
+        </div>
+
+        <div class="txtfield">
+            <input type="text" name="email" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}">
+            <span></span>
+            <label>Email</label>
+        </div>
+      
+        <div class="txtfield">
+            <input type="password" name="password" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}">
+            <span></span>
+            <label>Mot de passe</label>
+        </div>
+
+        <div class="txtfield">
+            <input type="password" name="passwordVerify" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
+            <span></span>
+            <label>Confirmation</label>
+        </div>
+          
+        <div class="submitButton" onclick="register();"><p>Créer mon compte</p></div>
+
+        <div class="singinLink">
+            Deja un compte ? </br><a href="log_in">Se connecter</a>
+        </div>
+        <div id="errs"></div>
+
+    </form>
+</div>
 <script src="../public/js/script.js"></script>
 <?php $content = ob_get_clean();?>
 

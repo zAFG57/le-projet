@@ -96,7 +96,7 @@ header {
     text-decoration: underline;
 }
 
-input[type="submit"] {
+.submitButton {
     width: 100%;
     height: 50px;
     border: 1px solid;
@@ -109,9 +109,14 @@ input[type="submit"] {
     outline: none;
 }
 
-input[type="submit"]:hover {
+.submitButton:hover {
     border-color: #2f743b;
     transition: .5s;
+}
+
+.submitButton p {
+    text-align: center;
+    padding-top: 10px;
 }
 
 .singupLink {
