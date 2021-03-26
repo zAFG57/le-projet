@@ -13,16 +13,12 @@ function request(url, data, callback) {
         }
     });
 
-
-
     var formdata = data ? (data instanceof FormData ? data : new FormData(document.querySelector(data))) : new FormData();
 
     var csrfMetaTag = document.querySelector('meta[name="csrf_token"]');
     if (csrfMetaTag) {
         formdata.append('csrf_token', csrfMetaTag.getAttribute('content'));
     }
-
-    console.log(formdata)
 
     xhr.send(formdata);
 }
@@ -33,18 +29,12 @@ function register() {
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
-        console.log('tets777')
         try {
-            console.log('tetsss')
             data = JSON.parse(data);
             if (!(data instanceof Array)) { throw Exception('bad data'); }
 
-            console.log('tets')
-                //Show errors to user
+            //Show errors to user
             for (var i = 0; i < data.length; ++i) {
-                // if ()
-                console.log(data[i])
-                console.log(i);
 
                 switch (data[i]) {
                     case 0:

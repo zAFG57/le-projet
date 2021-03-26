@@ -42,29 +42,26 @@
 	}
 
     function createToken() {
-        $seed = random_bytes(8);
-        $t = time();
+		$seed = urlSafeEncode(random_bytes(8));
+		$t = time();
+		$hash = urlSafeEncode(hash_hmac('sha256', session_id() . $seed . $t, CSRF_TOKEN_SECRET, true));
+		return urlSafeEncode($hash . '|' . $seed . '|' . $t);
+	}
 
-        $hash = hash_hmac('sha256', session_id() . $seed . $t, CSRF_TOKEN_SECRET, true);
+    function validateToken($token) {
+		$parts = explode('|', urlSafeDecode($token));
+		if(count($parts) === 3) {
+			$hash = hash_hmac('sha256', session_id() . $parts[1] . $parts[2], CSRF_TOKEN_SECRET, true);
+			if(hash_equals($hash, urlSafeDecode($parts[0]))) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-        return urlSafeEncode($hash . '|' . $seed . '|' . $t);
-    }
-
-    function validtaeToken($token){
-        $parts = explode('|', urlSafeDecode($token));
-        if (count($parts) === 3) {
-            $hash = hash_hmac('sha256', session_id() . $parts[1] . $parts[2], CSRF_TOKEN_SECRET, true);
-            if (hash_equals($hash, $part[0])) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function urlSafeEncode($m){
-        return rtrim(strtr(base64_encode($m), '+/', '-_'), '=');
-    }
-
-    function urlSafeDecode($m){
-        return base64_decode(strtr($m), '-_', '+/');
-    }
+    function urlSafeEncode($m) {
+		return rtrim(strtr(base64_encode($m), '+/', '-_'), '=');
+	}
+	function urlSafeDecode($m) {
+		return base64_decode(strtr($m, '-_', '+/'));
+	}
