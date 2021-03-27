@@ -136,6 +136,11 @@ header {
 }
 
 #errs {
+    color: #2f743b;
+    transition: .5s;
+}
+
+.err {
     color: red;
     transition: .5s;
 }

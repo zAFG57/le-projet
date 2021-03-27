@@ -34,11 +34,12 @@ function register() {
             if (!(data instanceof Array)) { throw Exception('bad data'); }
 
             //Show errors to user
+            console.log(data)
             for (var i = 0; i < data.length; ++i) {
 
                 switch (data[i]) {
                     case 0:
-                        document.getElementById('errs').innerHTML += '<div>Compte crée</div>';
+                        document.getElementById('errs').innerHTML += '<div>Votre compte a bien été crée,</br> un Email de vérification vous a été envoyé </div>';
                         document.getElementById('registerForm').reset();
                         break;
                     case 1:
@@ -68,24 +69,24 @@ function register() {
                     case 9:
                         document.getElementById('errs').innerHTML += '<div class="err">jeton CSRF invalide </div>';
                         break;
-                        // case 10:
-                        //     document.getElementById('errs').innerHTML += '<div class="err">Failed to send email. Please try again later.</div>';
-                        //     break;
-                        // case 11:
-                        //     document.getElementById('errs').innerHTML += '<div class="err">Failed to insert request into database. Please try again later.</div>';
-                        //     break;
-                        // case 12:
-                        //     document.getElementById('errs').innerHTML += '<div class="err">You have excedded your number of allowed validation requests per day</div>';
-                        //     break;
-                        // case 13:
-                        //     document.getElementById('errs').innerHTML += '<div class="err">The user with this email is already validated</div>';
-                        //     break;
-                        // case 14:
-                        //     document.getElementById('errs').innerHTML += '<div class="err">A user with this email does not exist</div>';
-                        //     break;
-                        // case 15:
-                        //     document.getElementById('errs').innerHTML += '<div class="err">Failed to connect to database. Please try again later.</div>';
-                        //     break;
+                    case 10:
+                        document.getElementById('errs').innerHTML += '<div class="err">l\'email n\'a pas pu être envoyé, veuillez réessayez plus tard</div>';
+                        break;
+                    case 11:
+                        document.getElementById('errs').innerHTML += '<div class="err">La requète a la base de données a échoué, veuillez réessayez plus tard</div>';
+                        break;
+                    case 12:
+                        document.getElementById('errs').innerHTML += '<div class="err">Vous avez déjà fait toute les demandes de vérification autorisés par jour< /div>';
+                        break;
+                    case 13:
+                        document.getElementById('errs').innerHTML += '<div class="err">Votre email est déjà vérifié</div>';
+                        break;
+                    case 14:
+                        document.getElementById('errs').innerHTML += '<div class="err">Email incorrect</div>';
+                        break;
+                    case 15:
+                        document.getElementById('errs').innerHTML += '<div class="err">Le server n\'a pas pu se connecter avec la base de données < /div>';
+                        break;
                     default:
                         document.getElementById('errs').innerHTML += '<div class="err">une erreur s\'est produite. veuillez réessayer plus tard.</div>';
                 }
@@ -99,4 +100,47 @@ function register() {
             document.getElementById('errs').style.opacity = 1;
         }, 10);
     });
+}
+
+function sendValidateEmailRequest() {
+    request('../model/email_verification.php', '#verificationForm', function(data) {
+        document.getElementById('errs').innerHTML = "";
+        var transition = document.getElementById('errs').style.transition;
+        document.getElementById('errs').style.transition = "none";
+        document.getElementById('errs').style.opacity = 0;
+
+
+        //Show errors to user
+        console.log("data" + data)
+        switch (data) {
+            case '0':
+                document.getElementById('errs').innerHTML += '<div>Email envoyé, reagrdez dans votre boite mail et cliquez sur le lien</div>';
+                document.getElementById('verificationForm').reset();
+                break;
+            case '1':
+                document.getElementById('errs').innerHTML += '<div class="err">l\'email n\'a pas pu être envoyé, veuillez réessayez plus tard</div>';
+                break;
+            case '2':
+                document.getElementById('errs').innerHTML += '<div class="err">La requète a la base de données a échoué, veuillez réessayez plus tard</div>';
+                break;
+            case '3':
+                document.getElementById('errs').innerHTML += '<div class="err">Vous avez déjà fait toute les demandes de vérification autorisés par jour< /div>';
+                break;
+            case '4':
+                document.getElementById('errs').innerHTML += '<div class="err">Votre email est déjà vérifié</div>';
+                break;
+            case '5':
+                document.getElementById('errs').innerHTML += '<div class="err">Email incorrect</div>';
+                break;
+            case '6':
+                document.getElementById('errs').innerHTML += '<div class="err">Le server n\'a pas pu se connecter avec la base de données < /div>';
+                break;
+            default:
+                document.getElementById('errs').innerHTML += '<div class="err">une erreur s\'est produite. veuillez réessayer plus tard.</div>';
+        }
+        setTimeout(function() {
+            document.getElementById('errs').style.transition = transition;
+            document.getElementById('errs').style.opacity = 1;
+        }, 10);
+    })
 }

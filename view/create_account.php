@@ -40,7 +40,7 @@
         <div class="submitButton" onclick="register();"><p>Créer mon compte</p></div>
 
         <div class="singinLink">
-            Déjà un compte ? </br><a href="log_in">Se connecter</a>
+            Déjà un compte ? </br><a href="log_in">Se connecter</a> | <a href="email_verification">Vérifier mon email</a>
         </div>
         
 

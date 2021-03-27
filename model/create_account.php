@@ -1,5 +1,7 @@
 <?php
 require_once('util.php');
+require_once('email_verification.php');
+
 $errors = [];
 
 if(!isset($_POST['username']) || strlen($_POST['username']) > 255 || !preg_match('/^[a-zA-Z- ]+$/', $_POST['username'])){
@@ -29,11 +31,18 @@ if (count($errors) === 0) {
                 $id = sqlInsert($db, 'INSERT INTO users VALUES (NULL, ?, ?, ?, 0)', 'sss', $_POST['username'], $_POST['email'], $passHash);
             
                 if ($id !== -1) {
-                    $errors[] = 0;
+                    $err = snedValidationEmail($_POST['email']);
+                    if ($err === 0) {
+                        $errors[] = 0;
+                    } else {
+						$errors[] = $err + 9;
+					}
+                    
+                    
                 } else {
                     $errors[] = 6;
                 }
-            
+                $res->free_result();
             } else {
                 $errors[] = 7;
             }
