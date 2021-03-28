@@ -34,7 +34,6 @@ function register() {
             if (!(data instanceof Array)) { throw Exception('bad data'); }
 
             //Show errors to user
-            console.log(data)
             for (var i = 0; i < data.length; ++i) {
 
                 switch (data[i]) {
@@ -92,13 +91,58 @@ function register() {
                 }
             }
         } catch (e) {
-            console.log(e)
             document.getElementById('errs').innerHTML = '<div class="err">une erreur s\'est produite. Veuillez ressayez plus tard.</div>';
         }
         setTimeout(function() {
             document.getElementById('errs').style.transition = transition;
             document.getElementById('errs').style.opacity = 1;
         }, 10);
+    });
+}
+
+function login() {
+    request('../model/login.php', '#loginform', function(data) {
+
+        document.getElementById('errs').innerHTML = "";
+        var transition = document.getElementById('errs').style.transition;
+        document.getElementById('errs').style.transition = "none";
+        document.getElementById('errs').style.opacity = 0;
+        console.log(data);
+        switch (data) {
+            case '0':
+                window.location = '../';
+                break;
+            case '1':
+                document.getElementById('errs').innerHTML += '<div class="err">email ou mot de passe incorrect.</div>';
+                break;
+            case '2':
+                document.getElementById('errs').innerHTML += '<div class="err">Le serveur n\'a pas pu se connecter a la base de donnée.< /div>';
+                break;
+            case '3':
+                document.getElementById('errs').innerHTML += '<div class="err">Vous avez dépasser le nombre limite d\'essay en une heure. réessayez plus tard</div>';
+                break;
+            case '4':
+                document.getElementById('errs').innerHTML += '<div class="err">Votre compte n\'a toujours pas été validé. Regardez vos mail pour obtennir le lien de vérification ou <a href="../view/email_verification">réenvoyez un email de vérification</a></div>';
+                break;
+            default:
+                document.getElementById('errs').innerHTML += '<div class="err">Une erreur est survenu, Réessayez plus tard</div>';
+        }
+        setTimeout(function() {
+            document.getElementById('errs').style.transition = transition;
+            document.getElementById('errs').style.opacity = 1;
+        }, 10);
+    });
+}
+
+function logout() {
+    console.log("tezst")
+    request('../model/logout.php', false, function(data) {
+        console.log('test12')
+        console.log(data)
+        if (data === '0') {
+            console.log(data);
+            window.location = '../view/log_in';
+        }
     });
 }
 
@@ -111,7 +155,6 @@ function sendValidateEmailRequest() {
 
 
         //Show errors to user
-        console.log("data" + data)
         switch (data) {
             case '0':
                 document.getElementById('errs').innerHTML += '<div>Email envoyé, reagrdez dans votre boite mail et cliquez sur le lien</div>';

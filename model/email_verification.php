@@ -1,6 +1,6 @@
 <?php
     require_once('util.php');
-
+    session_start();
 function snedValidationEmail($email){ 
     $db = connect();
     if($db) {

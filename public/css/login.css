@@ -134,3 +134,14 @@ header {
 .singupLink a:hover {
     text-decoration: underline;
 }
+
+#errs {
+    color: #2f743b;
+    transition: .5s;
+    padding-bottom: 3vh;
+}
+
+.err {
+    color: red;
+    transition: .5s;
+}

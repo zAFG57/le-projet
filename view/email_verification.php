@@ -1,5 +1,7 @@
+<?php session_start(); ?>
 <?php include_once('../templates/nav.php'); ?>
 <?php require_once('../model/util.php');?>
+
 
 <?php $title = "Vérifier mon email"; $css = "email-verification.css"?>
 <?php ob_start(); ?>
