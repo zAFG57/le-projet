@@ -135,12 +135,8 @@ function login() {
 }
 
 function logout() {
-    console.log("tezst")
     request('../model/logout.php', false, function(data) {
-        console.log('test12')
-        console.log(data)
         if (data === '0') {
-            console.log(data);
             window.location = '../view/log_in';
         }
     });
