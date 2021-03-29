@@ -12,25 +12,25 @@
         <form id="registerproForm"> 
 
             <div class="txtfield">
-                <input type="text" name="username" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
+                <input type="text" name="prousername" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
                 <span></span>
                 <label>Nom d'utilisateur</label>
             </div>
 
             <div class="txtfield">
-                <input type="text" name="email" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}">
+                <input type="text" name="proemail" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}">
                 <span></span>
                 <label>Email</label>
             </div>
       
             <div class="txtfield">
-                <input type="password" name="password" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}">
+                <input type="password" name="propassword" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}">
                 <span></span>
                 <label>Mot de passe</label>
             </div>
 
             <div class="txtfield">
-                <input type="password" name="passwordVerify" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
+                <input type="password" name="propasswordVerify" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
                 <span></span>
                 <label>Confirmation</label>
             </div>
