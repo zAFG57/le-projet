@@ -1,6 +1,11 @@
 <?php session_start() ?>
 <?php include_once('../templates/nav.php'); ?>
 
+<?php 
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: ../index.php?location='homePage'");
+}
+?>
 
 <?php $title = "Company name"; $css = "home.css"?>
 <?php ob_start(); ?>
