@@ -73,6 +73,18 @@ header {
     /* border-bottom: 2px #666666 solid; */
 }
 
+.nav_links li div {
+    transition: all 0.3s ease 0s;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav_links li div:hover {
+    color: #2f743b;
+    transition: all 0.3s ease 0s;
+    /* border-bottom: 2px #666666 solid; */
+}
+
 #pro {
     padding: 5px 5px;
     /* border: white 3px solid; */

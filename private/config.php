@@ -15,6 +15,6 @@
 	define("SMTP_FROM_NAME", 'Test');
 
     define("MAX_EMAIL_VERIFICATION_REQUESTS_PER_DAY", 3);
+    define("MAX_LOGIN_ATTEMPTS_PER_HOUR", 5);
 
     date_default_timezone_set("UTC"); 
-

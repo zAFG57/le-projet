@@ -38,7 +38,6 @@ if (count($errors) === 0) {
 						$errors[] = $err + 9;
 					}
                     
-                    
                 } else {
                     $errors[] = 6;
                 }
