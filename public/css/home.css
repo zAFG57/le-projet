@@ -2,6 +2,7 @@ body {
     background-image: url("../../assets/environment1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     /* background-position: 100%; */
     overflow: hidden;
     height: 100vh;
@@ -16,10 +17,13 @@ header {
 .presentation {
     color: rgb(213, 235, 213);
     position: absolute;
-    top: 80%;
-    left: 60%;
+    bottom: 10%;
+    right: 10%;
 }
 
 .presentation span {
+
     color: #f1ee7f;
 }
+
+
