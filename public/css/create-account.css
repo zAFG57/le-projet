@@ -6,7 +6,7 @@ body {
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-blend-mode: difference; */
+    background-position: center;
     overflow: hidden;
 }
 
@@ -144,3 +144,24 @@ header {
     color: red;
     transition: .5s;
 }
+
+
+
+
+
+
+/*////////////////responsive 900px (téléphone et autre)//////*/
+@media screen and (max-width: 900px){
+    
+
+
+}
+
+
+/*/////////////////responsive 1500px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
+@media screen and (min-width: 900px) {
+@media screen and (max-width: 1500px){
+ 
+
+
+}}
