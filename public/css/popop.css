@@ -137,6 +137,7 @@ body {
     height: 5vw;
 }
 .sourcil {
+    pointer-events: none;
     height: 2.5vw;
     width: 7.5vw;
     background: black;
