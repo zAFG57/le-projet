@@ -41,6 +41,7 @@ body {
 
 
 .contemp {
+    cursor: pointer;
     position: relative;
     width: 30vw;
     height: 30vw;
@@ -78,6 +79,7 @@ body {
 
 
 .moyen {
+    cursor: pointer;
     position: relative;
     width: 30vw;
     height: 30vw;
@@ -107,6 +109,7 @@ body {
 
 
 .pascontemp {
+    cursor: pointer;
     position: relative;
     width: 30vw;
     height: 30vw;
