@@ -131,6 +131,8 @@ function login() {
             document.getElementById('errs').style.opacity = 1;
         }, 10);
     });
+
+    document.getElementById('loginform').reset();
 }
 
 function logout() {

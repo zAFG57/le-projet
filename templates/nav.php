@@ -29,7 +29,7 @@
 <nav>
     <ul class="nav_links">
         <li><img src="../assets/drapeaufrancais.png" alt="drapeau français" height="25px"></li>
-        <li><div>Mon profile</div></li>
+        <li><a href="../index.php?location=profile">Mon profil</a></li>
         <li><div onclick="logout()">Se déconnecter</div></li>
     </ul>
 </nav>
