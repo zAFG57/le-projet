@@ -1,0 +1,167 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #2f743b;
+}
+
+.eyes {
+    position: relative;
+    top: -4vw;
+    display: flex;
+}
+
+.eye {
+    position: relative;
+    width: 8vw;
+    height: 8vw;
+    display: block;
+    background: #fff;
+    margin: 0 1.5vw; 
+    border-radius: 50%;
+}
+.eye::before {
+    content:'';
+    position: absolute;
+    top: 50%;
+    left: 2.5vw;
+    transform: translate(-50%,-50%);
+    width: 4vw;
+    height: 4vw;
+    background: #333;
+    border-radius: 50%;
+}
+
+
+
+.contemp {
+    cursor: pointer;
+    position: relative;
+    width: 30vw;
+    height: 30vw;
+    border-radius: 50%;
+    background: #ffcd00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contemp::before {
+    content: '';
+    position: absolute;
+    top: 18vw;
+    width: 15vw;
+    height: 7vw;
+    background: #b57700;
+    border-bottom-left-radius: 7vw;
+    border-bottom-right-radius: 7vw;
+    transition: 0.2s;
+}
+.contemp:hover::before {
+    content: '';
+    position: absolute;
+    top: 18vw;
+    width: 20vw;
+    height: 10vw;
+    background: #b57700;
+    border-bottom-left-radius: 10vw;
+    border-bottom-right-radius: 10vw;
+}
+
+
+
+
+
+
+.moyen {
+    cursor: pointer;
+    position: relative;
+    width: 30vw;
+    height: 30vw;
+    border-radius: 50%;
+    background: #ffcd00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.moyen::before {
+    content: '';
+    position: absolute;
+    top: 20vw;
+    width: 15vw;
+    height: 2.5vw;
+    background: #b57700;
+    transition: 0.2s;
+}
+.moyen:hover::before {
+    border-top-right-radius: 10vw;
+    border-top-left-radius: 10vw;
+    border-bottom-right-radius: 10vw;
+    border-bottom-left-radius: 10vw;
+    height: 5vw;
+}
+
+
+
+.pascontemp {
+    cursor: pointer;
+    position: relative;
+    width: 30vw;
+    height: 30vw;
+    border-radius: 50%;
+    background: #ffcd00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pascontemp::before {
+    content: '';
+    position: absolute;
+    top: 20vw;
+    width: 15vw;
+    height: 2.5vw;
+    background: #b57700;
+    transition: 0.2s;
+    border-top-right-radius: 30vw;
+    border-top-left-radius: 30vw;
+}
+.pascontemp:hover::before {
+    width:12vw;
+    height: 10vw;
+    border-top-right-radius: 10vw;
+    border-top-left-radius: 10vw;
+    border-bottom-right-radius: 10vw;
+    border-bottom-left-radius: 10vw;
+    height: 5vw;
+}
+.sourcil {
+    pointer-events: none;
+    height: 2.5vw;
+    width: 7.5vw;
+    background: black;
+    position: fixed;
+    right: 18%;
+    top: 50%;
+    transform: translateY(-10vw);
+    transition: 0.2s;
+}
+
+.sourcil + .sourcil {
+    transform: translateY(-10vw) translateX(10vw);
+}
+.pascontemp:hover + .sourcil {
+    transform-origin: top left;
+    transform: rotateZ(45deg) translateY(-12vw) translateX(-5vw);
+}
+.pascontemp:hover + .sourcil +.sourcil{
+    transform-origin: top left;
+    transform: rotateZ(-45deg) translate(10vw,0vw);
+}
+.pascontemp:hover {
+    background: #ff9900;
+}
