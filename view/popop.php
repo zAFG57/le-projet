@@ -2,36 +2,54 @@
 <?php ob_start(); ?>
 
   
+<script>
 
 
-
-    <div class="contemp" onclick="satisfait()">
-        <div class="eyes">
-            <div class="eye"></div>
-            <div class="eye"></div>
-        </div>
-    </div>
+        play = false;
+        var ha = new Audio('../assets/Haaaaaaaaaaaaaa.mp3');
+        var ho = new Audio('../assets/hooooooooooooaa.mp3');
+        var hoa = new Audio('../assets/hoaaa.mp3');
 
 
-    <div class="moyen" onclick="moyennementsatisfait()">
-        <div class="eyes">
-            <div class="eye"></div>
-            <div class="eye"></div>
-        </div>
-    </div>
-
-
-    <div class="pascontemp" onclick="passatifait()">
-        <div class="eyes">
-            <div class="eye"></div>
-            <div class="eye"></div>
+        function has () {
+            if (play) {
+                ha.play()
+            } else {
+                g = 1;
+            }
+        }
+        function hoas () {
+            if (play) {
+                hoa.play();
+            } else {
+                g = 1;
+            }
             
-            
-        </div>
-    </div>
-    <div class="sourcil"></div>
-    <div class="sourcil"></div>
-    <script>
+        }
+        function hos () {
+            if (play){
+                ho.play()
+            } else {
+                g = 1;
+            }
+        }
+
+
+
+document.addEventListener('keydown', function (e){
+    if( e.keyCode == 'P'.charCodeAt(0)) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (play) {
+        play = false;
+        } else {
+            play = true;
+        }
+    }
+})
+
+
+
         document.querySelector('body').addEventListener('mousemove', sasuit);
 
         function sasuit (){
@@ -48,6 +66,51 @@
             })
         }
     </script>
+
+
+
+
+    <div class="contemp" onclick="satisfait();" onmouseover="has();">
+        <div class="eyes">
+
+            <div class="eye"></div>
+            <div class="eye"></div>
+
+        </div>
+    </div>
+
+
+    <div class="moyen" onclick="moyennementsatisfait();" onmouseover="hoas();">
+        <div class="eyes">
+
+            <div class="eye"></div>
+            <div class="eye"></div>
+
+        </div>
+    </div>
+
+
+    <div class="pascontemp" onclick="passatifait();" onmouseover="hos();">
+        <div class="eyes">
+
+            <div class="eye">   </div>
+            <div class="eye">   </div>
+            
+        </div>
+    </div>
+
+    <div class="sourcil">   </div>
+
+    <div class="sourcil">   </div>
+
+
+
+    <audio> <source src="../assets/Haaaaaaaaaaaaaa.mp3"/>     </audio>
+    <audio> <source src="../assets/hooooooooooooaa.mp3"/>     </audio>
+    <audio> <source src="../assets/hoaaa.mp3"/>               </audio>
+
+
+    
 
 
 
