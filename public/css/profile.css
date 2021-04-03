@@ -1,0 +1,24 @@
+body {
+    background-image: url("../../assets/environment1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100vh;
+}
+
+header {
+    margin: 40px 40px;
+}
+
+.mainWrapper {
+    border: 1px black solid;
+    margin: 0 15%;
+    /* width: max-content; */
+    display: flex;
+    justify-content: space-evenly;
+    min-height: 400px;
+}
+
+.dispaly_values {
+    border: 1px black solid;
+}

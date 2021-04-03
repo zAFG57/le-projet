@@ -1,0 +1,29 @@
+body {
+    background-image: url("../../assets/environment1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* background-position: 100%; */
+    overflow: hidden;
+    height: 100vh;
+}
+
+header {
+    /* position: fixed; */
+    /* margin: 5vw 5vh; */
+    margin: 40px 40px;
+}
+
+.presentation {
+    color: rgb(213, 235, 213);
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+}
+
+.presentation span {
+
+    color: #f1ee7f;
+}
+
+

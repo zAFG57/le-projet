@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../../assets/environment1.jpg");
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-blend-mode: difference; */
+    overflow: hidden;
+}
+h1 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    margin: 40px 40px;
+}
+
+
+.maindiv {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    color: #2f743b;
+    font-size: 1.5vw;
+}
+
+.électroménager {
+    min-width: 300px;
+    width: 30vw;
+    height: 20vw;
+    transition: 0.7s;
+    z-index: 1;
+    background: rgb(255, 255, 255);
+    border-radius: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.électroménager:hover {
+    scale: 1.1;
+    color: white;
+    background: #2f743b;
+    cursor: pointer;
+}
+
+.ordinateur {
+    min-width: 300px;
+    width: 30vw;
+    height: 20vw;
+    transition: 0.7s;
+    z-index: 1;
+    background: rgb(255, 255, 255);
+    border-radius: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.ordinateur:hover {
+    scale: 1.1;
+    color: white;
+    background: #2f743b;
+    cursor: pointer;
+}
+
+.téléphone {
+    min-width: 300px;
+    width: 30vw;
+    height: 20vw;
+    transition: 0.7s;
+    z-index: 1;
+    background: rgb(255, 255, 255);
+    border-radius: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.téléphone:hover {
+    scale: 1.1;
+    color: white;
+    background: #2f743b;
+    cursor: pointer;
+}
+
+
+.hover {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.img {
+    margin-left: 1vw;
+    width: 5vw;
+    height: 5vw;
+    fill: white;
+}
+
+svg {
+    fill: white;
+}
+
+
+/* .hover:hover {
+    opacity: 0.2;
+}
+
+
+.hover:hover .téléphone{
+    opacity: 1;
+}
+.hover:hover .ordinateur {
+    opacity: 1;
+}
+.hover:hover .électroménager {
+    opacity: 1;
+} */
+
+
+
+@media screen and (max-width: 900px){
+    .hover {
+        flex-direction: column;
+        font-size: 3vw;
+    }
+    .téléphone {
+        width: 80vw;
+        margin-top: 15px;
+    }
+    .électroménager {
+        width: 80vw;
+        margin-top: 15px;
+    }
+    .ordinateur {
+        width: 80vw;
+        margin-top: 15px;
+    }
+
+    .img {
+        height: 10vw;
+        width: 10vw;
+        margin-left: 3vw;
+    }
+}
+
+
+/*////////////////////////////////////////////responsive 1500px (tablette et autre intermediaire)///////////////////////////////////////////////////////////*/
+@media screen and (min-width: 900px) {
+  @media screen and (max-width: 1500px){
+ 
+
+
+}
+}
+
