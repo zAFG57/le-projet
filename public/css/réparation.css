@@ -8,7 +8,6 @@ body {
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-blend-mode: difference; */
     overflow: hidden;
 }
 h1 {
@@ -33,7 +32,7 @@ header {
     min-width: 300px;
     width: 30vw;
     height: 20vw;
-    transition: 0.7s;
+    transition: 0.5s;
     z-index: 1;
     background: rgb(255, 255, 255);
     border-radius: 3vw;
@@ -52,7 +51,7 @@ header {
     min-width: 300px;
     width: 30vw;
     height: 20vw;
-    transition: 0.7s;
+    transition: 0.5s;
     z-index: 1;
     background: rgb(255, 255, 255);
     border-radius: 3vw;
@@ -62,7 +61,7 @@ header {
     
 }
 .ordinateur:hover {
-    scale: 1.1;
+    transform: scale(1.1) ;
     color: white;
     background: #2f743b;
     cursor: pointer;
@@ -72,7 +71,7 @@ header {
     min-width: 300px;
     width: 30vw;
     height: 20vw;
-    transition: 0.7s;
+    transition: 0.5s;
     z-index: 1;
     background: rgb(255, 255, 255);
     border-radius: 3vw;
@@ -81,7 +80,7 @@ header {
     justify-content: center;
 }
 .téléphone:hover {
-    scale: 1.1;
+    transform: scale(1.1);
     color: white;
     background: #2f743b;
     cursor: pointer;
@@ -107,21 +106,6 @@ svg {
     fill: white;
 }
 
-
-/* .hover:hover {
-    opacity: 0.2;
-}
-
-
-.hover:hover .téléphone{
-    opacity: 1;
-}
-.hover:hover .ordinateur {
-    opacity: 1;
-}
-.hover:hover .électroménager {
-    opacity: 1;
-} */
 
 
 

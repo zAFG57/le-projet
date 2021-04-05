@@ -7,7 +7,6 @@ body {
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-blend-mode: difference; */
     overflow: hidden;
 }
 
@@ -23,7 +22,6 @@ header {
     width: 400px;
     background-color: rgb(213, 235, 213);
     border-radius: 10px;
-    /* box-shadow: 2px 2px 10px #2f743b; */
 }
 
 .login_form h1 {

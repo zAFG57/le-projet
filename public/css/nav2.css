@@ -50,7 +50,7 @@ header {
 .logo {
     cursor: pointer;
     border-radius: 100%;
-    padding: -50px;
+    padding: -1vw;
 }
 
 .nav_links {
@@ -59,7 +59,7 @@ header {
 
 .nav_links li {
     display: inline-block;
-    padding: 0px 20px;
+    padding: 0px 1vw;
 }
 
 .nav_links li a {
@@ -147,9 +147,34 @@ nav ul li img {
 }
 
 
-/*/////////////////responsive 1500px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
+/*/////////////////responsive 1300px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
 @media screen and (min-width: 900px) {
-@media screen and (max-width: 1500px){
+@media screen and (max-width: 1300px){
+
+    .leftSiide {
+        font-size: 1vw;
+    }
+
+    .responsivlien {
+        font-size: 1.1vw;
+    }
+    .responsivlien2 {
+        font-size: 1.3vw;
+    }
+
+    header {
+        background: linear-gradient(to right, #2f743b 0%, #2f743b 40vw, rgb(213, 235, 213) 40vw, rgb(213, 235, 213) 100%);
+    }
+
+    .pre li {
+        padding: 0px 5px;
+    }
+
+
+
+
+
+
  
 
 
