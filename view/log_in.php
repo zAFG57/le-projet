@@ -4,7 +4,7 @@
 <?php ob_start(); ?>
 
 <header>
-    <?=$nav?>
+    <?=$nav?> 
 </header>
 <div class="login_form">
     <h1>Se connecter</h1>
