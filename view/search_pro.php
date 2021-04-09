@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php $title= "Recherche Professionel"; $css = "search-pro.css" ?>
 <?php ob_start(); ?>
 

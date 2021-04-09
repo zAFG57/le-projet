@@ -6,7 +6,7 @@ body {
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-blend-mode: difference; */
+    background-position: center;
     overflow: hidden;
 }
 
@@ -18,7 +18,7 @@ header {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -45%);
     width: 400px;
     background-color: rgb(213, 235, 213);
     border-radius: 10px;
@@ -138,9 +138,31 @@ header {
 #errs {
     color: #2f743b;
     transition: .5s;
+    padding-bottom: 3vh;
 }
 
 .err {
     color: red;
     transition: .5s;
 }
+
+
+
+
+
+
+/*////////////////responsive 900px (téléphone et autre)//////*/
+@media screen and (max-width: 900px){
+    
+
+
+}
+
+
+/*/////////////////responsive 1500px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
+@media screen and (min-width: 900px) {
+@media screen and (max-width: 1500px){
+ 
+
+
+}}

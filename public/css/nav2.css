@@ -1,33 +1,3 @@
-/* * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-nav ul {
-    padding-top: 1vh;
-    display: flex;
-    justify-content: space-evenly;
-    list-style-type: none;
-    padding-bottom: 0.5vh;
-    background-color: green;
-}
-
-nav ul li a {
-    color: rgba(195, 204, 66);
-    text-decoration: none;
-    font-size: 1.5em;
-    padding: 20px;
-    border-radius: 20px;
-    display: block;
-}
-
-nav ul li a:hover {
-    transition: all ease-in-out 0.5s;
-    background-color: rgba(195, 204, 66);
-    color: green;
-} */
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 * {
     box-sizing: border-box;
@@ -55,9 +25,6 @@ nav ul li a:hover {
 }
 
 
-/* nav {
-    background-color: red;
-} */
 
 nav ul li,
 nav ul li a {
@@ -83,7 +50,7 @@ header {
 .logo {
     cursor: pointer;
     border-radius: 100%;
-    padding: -50px;
+    padding: -1vw;
 }
 
 .nav_links {
@@ -92,7 +59,7 @@ header {
 
 .nav_links li {
     display: inline-block;
-    padding: 0px 20px;
+    padding: 0px 1vw;
 }
 
 .nav_links li a {
@@ -101,6 +68,18 @@ header {
 }
 
 .nav_links li a:hover {
+    color: #2f743b;
+    transition: all 0.3s ease 0s;
+    /* border-bottom: 2px #666666 solid; */
+}
+
+.nav_links li div {
+    transition: all 0.3s ease 0s;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav_links li div:hover {
     color: #2f743b;
     transition: all 0.3s ease 0s;
     /* border-bottom: 2px #666666 solid; */
@@ -123,3 +102,80 @@ header {
 nav ul li img {
     vertical-align: middle;
 }
+
+
+
+/*////////////////responsive 900px (téléphone et autre)//////*/
+@media screen and (max-width: 900px){
+    
+    .leftSiide {
+        display: none;
+    }
+    .nav_links {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 90%;
+    }
+    .nav_links li {
+        padding: 0px 0px;
+    }
+
+    header {
+        background: linear-gradient(to right, rgb(213, 235, 213) 0%, rgb(213, 235, 213) 100%);
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        padding: 15px 7%;
+        border-radius: 10px 10px;
+    }
+    nav {
+        width: 100%;
+    }
+
+
+
+
+    @media screen and (max-width: 800px) {
+        nav ul li, nav ul li a {
+            font-size: 1.9vw;
+        }
+        
+    }
+}
+
+
+/*/////////////////responsive 1300px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
+@media screen and (min-width: 900px) {
+@media screen and (max-width: 1300px){
+
+    .leftSiide {
+        font-size: 1vw;
+    }
+
+    .responsivlien {
+        font-size: 1.1vw;
+    }
+    .responsivlien2 {
+        font-size: 1.3vw;
+    }
+
+    header {
+        background: linear-gradient(to right, #2f743b 0%, #2f743b 40vw, rgb(213, 235, 213) 40vw, rgb(213, 235, 213) 100%);
+    }
+
+    .pre li {
+        padding: 0px 5px;
+    }
+
+
+
+
+
+
+ 
+
+
+}}
