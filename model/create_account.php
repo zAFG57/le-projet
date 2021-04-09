@@ -1,7 +1,7 @@
 <?php
 require_once('util.php');
 require_once('email_verification.php');
-
+ 
 $errors = [];
 
 if(!isset($_POST['username']) || strlen($_POST['username']) > 255 || !preg_match('/^[a-zA-Z- ]+$/', $_POST['username'])){
