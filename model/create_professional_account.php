@@ -20,6 +20,7 @@ if(!isset($_POST['password']) || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]
     $errosr[] = 5;
 }
 
+
 if (count($errors) === 0) {
     if (isset($_POST['csrf_token']) && validateToken($_POST['csrf_token'])) {
         
@@ -28,7 +29,7 @@ if (count($errors) === 0) {
             $res = sqlSelect($db, 'SELECT id FROM users WHERE email=?', 's', $_POST['email']);
             if($res && $res->num_rows === 0){
                 $passHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                $id = sqlInsert($db, 'INSERT INTO users VALUES (NULL, ?, ?, ?, 0, 0)', 'sss', $_POST['username'], $_POST['email'], $passHash);
+                $id = sqlInsert($db, 'INSERT INTO users VALUES (NULL, ?, ?, ?, 0 , 1)', 'sss', $_POST['username'], $_POST['email'], $passHash);
             
                 if ($id !== -1) {
                     $err = snedValidationEmail($_POST['email']);

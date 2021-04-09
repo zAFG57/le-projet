@@ -4,7 +4,7 @@
 <?php ob_start(); ?>
 
 <header>
-    <?=$nav?>
+    <?=$nav?> 
 </header>
 <div class="login_form">
     <h1>Se connecter</h1>
@@ -14,7 +14,7 @@
         <div class="txtfield">
             <input type="text" name="email" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();login();}">
             <span></span>
-            <label>Nom d'utilisateur</label>
+            <label>Email</label>
         </div>
 
         <div class="txtfield">

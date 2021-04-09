@@ -5,6 +5,23 @@
 <script>
 
 
+
+var styles = [
+    'background: linear-gradient(45deg ,#e66465, #9198e5)'
+    , 'border: 1px solid #3E0E02'
+    , 'color: yellow'
+    , 'display: block'
+    , 'text-shadow: 0 5px 2px rgba(0, 0, 0, 0.5)'
+    , 'box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 5px 3px -5px rgba(0, 0, 0, 0.5), 0 -13px 5px -10px rgba(255, 255, 255, 0.4) inset'
+    , 'line-height: 40px'
+    , 'text-align: center'
+    , 'font-weight: bold'
+    , 'font-size: 1.5vw'
+].join(';');
+
+console.log('%c pour plus de fun, vous pouver tapper sur la touche secrete...', styles);
+
+
         play = false;
         var ha = new Audio('../assets/Haaaaaaaaaaaaaa.mp3');
         var ho = new Audio('../assets/hooooooooooooaa.mp3');
@@ -44,6 +61,7 @@ document.addEventListener('keydown', function (e){
         play = false;
         } else {
             play = true;
+            console.log(  '%c bien jouer , tu a trouver la bonne touche' , styles)
         }
     }
 })

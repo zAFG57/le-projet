@@ -3,17 +3,42 @@
 
 <?php 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: ../index.php?location='homePage'");
+    header("Location: ../index.php?location='réparation'");
 }
 ?>
-
-<?php $title = "Company name"; $css = "home.css"?>
+ 
+<?php $title = "mesréparation.com"; $css = "home.css"?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <!-- cette feuille css est la juste pour la forme de loupe dans le button ... -->
 <?php ob_start(); ?>
 
     <header>
         <?=$nav?>
     </header>
-   <h1 class="presentation">Avec Mesréparations.com, trouvez un </br> réparateur <span>proche de chez vous.</span></h1>
+    
+
+
+    <div class="content">
+        <form id="search">
+            <input type="text" class="search__input" placeholder="produit à réparer" name="search" required onkeydown="if(event.key === 'Enter'){event.preventDefault();searchf();}">
+            <button type="button" class="search__submit" onclick="searchf();" value=""><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+
+    <section class="maindiv">
+        <div class="hover"> 
+            <div onclick="window.location.href='../index?location=homePage';" class="électroménager">  <h1>électroménager</h1> <img class="img" src="../assets/électroménager.svg"/> </div>
+            <div onclick="window.location.href='../index?location=homePage';" class="ordinateur">      <h1>ordinateur    </h1> <img class="img" src="../assets/ordinateur2.svg"/>    </div>
+            <div onclick="window.location.href='../index?location=homePage';" class="téléphone">       <h1>téléphone     </h1> <img class="img" src="../assets/télephone.svg"/>      </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
 
 <?php $content = ob_get_clean(); ?>
 

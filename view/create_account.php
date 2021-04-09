@@ -27,13 +27,14 @@
             <input type="password" name="password" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}">
             <span></span>
             <label>Mot de passe</label>
-        </div>
+        </div>  
 
         <div class="txtfield">
             <input type="password" name="passwordVerify" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
             <span></span>
             <label>Confirmation</label>
         </div>
+        <input type="hidden" name="pro" value="0">
 
         <div id="errs"></div>
         

@@ -8,7 +8,7 @@ body {
     justify-content: space-around;
     align-items: center;
     min-height: 100vh;
-    background-color: #2f743b;
+    background-color: var(--clr-primary);
 }
 
 .eyes {
@@ -139,7 +139,7 @@ body {
     border-bottom-left-radius: 10vw;
     height: 5vw;
 }
-.sourcil {
+.sourcil { 
     pointer-events: none;
     height: 2.5vw;
     width: 7.5vw;
