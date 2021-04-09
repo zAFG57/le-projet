@@ -11,7 +11,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 <?php ob_start(); ?>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-        <!-- cette feuille css est la juste pour la forme de loup dans le button ... -->
+        <!-- cette feuille css est la juste pour la forme de loupe dans le button ... -->
 
 
     <header>

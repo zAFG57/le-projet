@@ -7,9 +7,9 @@
         <?=$nav?>
     </header>
 
-    <div class="registerproForm"> 
+    <div class="registerForm"> 
         <h1>Créer un compte professionnelle</h1>
-        <form id="registerproForm"> 
+        <form id="registerForm"> 
 
             <div class="txtfield">
                 <input type="text" name="prousername" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
@@ -34,6 +34,7 @@
                 <span></span>
                 <label>Confirmation</label>
             </div>
+            <input type="hidden" name="pro" value="1">
 
             <div id="errs"></div>
         
