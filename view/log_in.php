@@ -14,7 +14,7 @@
         <div class="txtfield">
             <input type="text" name="email" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();login();}">
             <span></span>
-            <label>Nom d'utilisateur</label>
+            <label>Email</label>
         </div>
 
         <div class="txtfield">

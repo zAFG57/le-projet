@@ -28,7 +28,7 @@ header {
     text-align: center;
     padding: 20px 0 20px 0;
     border-bottom: 1px solid #adadad;
-    color: #2f743b;
+    color: var(--clr-primary);
 }
 
 .login_form form {
@@ -70,14 +70,14 @@ header {
     left: 0;
     width: 0%;
     height: 2px;
-    background: #2f743b;
+    background: var(--clr-primary);
     transition: .5s;
 }
 
 .txtfield input:focus~label,
 .txtfield input:valid~label {
     top: -5px;
-    color: #2f743b;
+    color: var(--clr-primary);
 }
 
 .txtfield input:focus~span::before,
@@ -99,7 +99,7 @@ header {
     width: 100%;
     height: 50px;
     border: 1px solid;
-    background: #2f743b;
+    background: var(--clr-primary);
     border-radius: 25px;
     font-size: 18px;
     color: rgb(213, 235, 213);
@@ -109,7 +109,7 @@ header {
 }
 
 .submitButton:hover {
-    border-color: #2f743b;
+    border-color: var(--clr-primary);
     transition: .5s;
 }
 
@@ -126,7 +126,7 @@ header {
 }
 
 .singupLink a {
-    color: #2f743b;
+    color: var(--clr-primary);
     text-decoration: none;
 }
 
@@ -135,7 +135,7 @@ header {
 }
 
 #errs {
-    color: #2f743b;
+    color: var(--clr-primary);
     transition: .5s;
     padding-bottom: 3vh;
 }
