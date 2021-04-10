@@ -236,10 +236,11 @@ body {
 #resSearch {
     position: absolute;
     top: 40vh;
-    /* left: 40vw; */
+    left: 40vw;
     color: white;
-    background-color: black;
+    /* background-color: black; */
     width: 100%;
+    font-size: 1.5vw;
 }
 
 

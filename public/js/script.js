@@ -275,10 +275,23 @@ function searchf() {
         var transition = document.getElementById('resSearch').style.transition;
         document.getElementById('resSearch').style.transition = "none";
         document.getElementById('resSearch').style.opacity = 0;
-        document.getElementById('resSearch').innerHTML += data;
+
+
 
 
         document.getElementsByClassName('maindiv')[0].style.display = 'none';
+
+        switch (data) {
+            case '-1':
+                document.getElementById('resSearch').innerHTML += '<div class="noResFound">Trois lettres minimum sont requises</div>';
+                break;
+            case '-2':
+                document.getElementById('resSearch').innerHTML += '<div class="noResFound">Aucun resultat trouvé</div>';
+                break;
+            default:
+                document.getElementById('resSearch').innerHTML += data;
+                break;
+        }
 
 
         setTimeout(function() {
