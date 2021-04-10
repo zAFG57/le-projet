@@ -15,15 +15,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <header>
         <?=$nav?>
     </header>
-    
-
-
-
-        <div class="content">
-            <div class="search">
-              <input type="text" class="search__input" aria-label="search" placeholder="produit à réparer">
-              <div class="search__submit" aria-label="submit search"><i class="fas fa-search"></i></div>
-            </div>
 
     <div class="content">
         <form id="search">
@@ -39,6 +30,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div onclick="window.location.href='../index?location=homePage';" class="téléphone">       <h1>téléphone     </h1> <img class="img" src="../assets/télephone.svg"/>      </div>
         </div>
     </section>
+
+    <div id="resSearch"></div>
 
 
 
