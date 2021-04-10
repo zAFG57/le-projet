@@ -31,5 +31,4 @@ if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
     die();
 } else {
     header("Location: {$authorized_pages['homePage']}");
-    exit;
 }

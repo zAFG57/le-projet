@@ -10,15 +10,77 @@ header {
     margin: 40px 40px;
 }
 
-.mainWrapper {
-    border: 1px black solid;
-    margin: 0 15%;
-    /* width: max-content; */
-    display: flex;
-    justify-content: space-evenly;
-    min-height: 400px;
+.main {
+    height: 70vh;
+    width: 60vw;
+    border-radius: 60px;
+    position: absolute;
+    top: 20vh;
+    left: 20vw;
+    overflow: hidden;
 }
-
-.dispaly_values {
-    border: 1px black solid;
+.haut {
+    position: relative;
+    background: var(--clr-primary);
+    height: 20%;
+    display: flex;
+}
+.photo {
+    border-radius: 50%;
+    background-position: center;
+    width: 120px;
+    height: 120px;
+    background: white;
+    position: relative;
+    left: 5%;
+    top: 5%;
+}
+.haut h1 {
+    position: relative;
+    left: 30%;
+    top: 30%;
+    color: white;
+    font-size: 2vw;
+}
+.bas {
+    position: relative;
+    background: white;
+    height: 80%;
+}
+.email {
+    position: relative;
+    height: 8vh;
+    width: 50%;
+    left: 25%;
+    background: rgb(231, 193, 193);
+    top: 10vh;
+}
+.mdp {
+    position: relative;
+    height: 8vh;
+    width: 50%;
+    left: 25%;
+    background: rgb(231, 193, 193);
+    top: 20vh;
+}
+.changer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 40%;
+    width: 100%;
+    top: 18vh;
+}
+.changeremail {
+    width: 20vw;
+    height: 8vh;
+    text-align: center;
+    color: var(--clr-primary);
+}
+.changermdp {
+    width: 20vw;
+    height: 8vh;
+    text-align: center;
+    color: var(--clr-primary);
 }
