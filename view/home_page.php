@@ -20,11 +20,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
    <h1 class="presentation">Avec Mesréparations.com, trouvez un </br> réparateur <span>proche de chez vous.</span></h1>
 
 
-
         <div class="content">
             <div class="search">
               <input type="text" class="search__input" aria-label="search" placeholder="produit à réparer">
-              <button class="search__submit" aria-label="submit search"><i class="fas fa-search"></i></button>
+              <div class="search__submit" aria-label="submit search"><i class="fas fa-search"></i></div>
             </div>
         </div>
 
@@ -37,3 +36,4 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 <?php $content = ob_get_clean(); ?>
 
 <?php require('../templates/baseTemplate.php'); ?>
+

@@ -66,7 +66,7 @@ function register() {
                         document.getElementById('errs').innerHTML += '<div class="err">le client n\'a pas pu se connecter a la base de donnée. Veuillez ressayez plus tard.</div>';
                         break;
                     case 9:
-                        document.getElementById('errs').innerHTML += '<div class="err">jeton CSRF invalide (dommage :( )</div>';
+                        document.getElementById('errs').innerHTML += '<div class="err">jeton CSRF invalide </div>';
                         break;
                     case 10:
                         document.getElementById('errs').innerHTML += '<div class="err">l\'email n\'a pas pu être envoyé, veuillez réessayez plus tard</div>';
@@ -183,4 +183,8 @@ function sendValidateEmailRequest() {
             document.getElementById('errs').style.opacity = 1;
         }, 10);
     })
+}
+
+function search() {
+    console.log('ouo');
 }
