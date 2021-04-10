@@ -12,7 +12,7 @@ function request(url, data, callback) {
             loader.remove();
         }
     });
-
+ 
     var formdata = data ? (data instanceof FormData ? data : new FormData(document.querySelector(data))) : new FormData();
 
     var csrfMetaTag = document.querySelector('meta[name="csrf_token"]');
@@ -270,21 +270,17 @@ function sendValidateEmailRequest() {
 
 
 function searchf() {
+    console.log('a')
     request('../model/search.php', '#search', function(data) {
-        document.getElementById('resSearch').innerHTML = "";
-        var transition = document.getElementById('resSearch').style.transition;
-        document.getElementById('resSearch').style.transition = "none";
-        document.getElementById('resSearch').style.opacity = 0;
-        document.getElementById('resSearch').innerHTML += data;
+        document.getElementById('errs').innerHTML = "";
+        var transition = document.getElementById('errs').style.transition;
+        document.getElementById('errs').style.transition = "none";
+        document.getElementById('errs').style.opacity = 0;
 
-
-        document.getElementsByClassName('maindiv')[0].style.display = 'none';
-
-
+        console.log(data);
         setTimeout(function() {
-            document.getElementById('resSearch').style.transition = transition;
-            document.getElementById('resSearch').style.opacity = 1;
+            document.getElementById('errs').style.transition = transition;
+            document.getElementById('errs').style.opacity = 1;
         }, 10);
-        document.getElementById('search').reset();
     })
-}
+} 

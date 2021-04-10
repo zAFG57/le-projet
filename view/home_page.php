@@ -15,6 +15,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <header>
         <?=$nav?>
     </header>
+    
+
 
     <div class="content">
         <form id="search">
@@ -31,8 +33,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </div>
     </section>
 
-    <div id="resSearch"></div>
-
 
 
 
@@ -43,4 +43,3 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 <?php $content = ob_get_clean(); ?>
 
 <?php require('../templates/baseTemplate.php'); ?>
-
