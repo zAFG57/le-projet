@@ -14,6 +14,7 @@
 
 
 header {
+    z-index: 3;
     width: 90vw;
     height: 10vh;
     position: absolute;
@@ -44,7 +45,7 @@ header {
 .gauche a h1 {
     color: rgb(255, 255, 255);
     font-size: 2.5vw;
-    line-height: 3vh;
+    line-height: 3.5vh;
     transform: translateX(-2vw);
     transition: 300ms ease-in-out;
 }
@@ -143,7 +144,7 @@ header {
         font-size: 2vw;  
     }
     .responsivlien2 {
-        font-size: 2.5vw;
+        font-size: 3vw;
     }
         
     
@@ -153,7 +154,7 @@ header {
 /*/////////////////responsive 1300px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
 @media screen and (min-width: 900px) {
 @media screen and (max-width: 1300px){
-    
+     
     .responsivlien {
         font-size: 1.3vw;  
     }

@@ -21,7 +21,7 @@ header {
 
 .maindiv {
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     color: var(--clr-primary);
     font-size: 1.5vw;
 }
@@ -107,6 +107,24 @@ svg {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*                       barre de recherche                */
 
 *, *::before, *::after {
@@ -123,6 +141,7 @@ body {
 } 
 
 .content {
+  z-index: 3;
   width: 70vh ;
   position: absolute;
   top: 16vh;
@@ -184,8 +203,15 @@ body {
 #search:focus-within {
   width: 70vw;
 }
-
-
+#search:hover {
+  width: calc(var(--size) - 20px);
+}
+#searche:hover .content {
+  left: calc(49vw - 10px);
+}
+#search:hover:focus-within {
+  width: 70vw;
+}
 #search:focus-within .search__input {
   opacity: 1;
   z-index: initial;
@@ -203,8 +229,167 @@ body {
     transform: translateX(-34vw);
 }
 
+.search:focus-within , .search__submit:hover {
+  background-color: #398b47 !important;
+}
+
 
   /*                      fin barre de recherche             */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*                           résultat de la recherche:       */
+
+
+
+
+#resSearch {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.grid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -35%);
+  background-color: rgb(200, 200, 200);
+  width: 90vw;
+  height: 70vh;
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: repeat(auto-fill, 500px);
+  grid-template-rows: repeat(auto-fill,200px);
+  overflow: scroll;
+  justify-content: center;
+  padding: 10px;
+
+  box-shadow: -2px 4px 20px 6px rgba(0, 0, 0, 0.3) inset;
+
+
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.grid::-webkit-scrollbar {
+  display: none;
+}
+
+
+.card {
+  width: 500px;
+  height: 200px;
+  background-color: turquoise;
+  display: flex;
+  border-radius: 30px;
+  overflow: hidden;
+}
+.cardgauche {
+  position: relative;
+  width: 200px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 0, 0, 0.2);
+}
+.cardimg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.cardimg img {
+  width: 100%;
+}
+.carddroit {
+  position: relative;
+  width: calc(100% - 200px);
+  height: 100%;
+  text-align: center;
+}
+.cardnom {
+  position: relative;
+  height: 30%;
+  width: 100%;
+  background-color: var(--clr-primary);
+  color: white;
+}
+.carddescription {
+  padding-right: 10px;
+  padding-left: 10px;
+  text-overflow: " [..]";
+  line-height: 22px;         /*     128 caractère max*/
+}
+
+.cardétoile {
+  color: rgb(255, 187, 0);
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  font-size: 30px;
+  height: 30px;
+  transform: translateY(-10px);
+}
+
+
+
+
+
+
+
+
+
+
+/*                      fin résultat de la recherche;        */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media screen and (max-width: 900px){
     .hover {
@@ -228,6 +413,18 @@ body {
         height: 10vw;
         width: 10vw;
         margin-left: 3vw;
+    }
+    .cardgauche {
+      display: none;
+    }
+    .carddroit {
+      width: 100%;
+    }
+    .card {
+      width: 300px;
+    }
+    .grid {
+      grid-template-columns: repeat(auto-fill, 300px);
     }
 }
 
