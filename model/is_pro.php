@@ -4,7 +4,8 @@ session_start();
 
 
 function isPro(){
-    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && isset($_SESSION['userID']) && is_int($_SESSION['userID'])) {
+    // echo is_int($_SESSION['userID']);
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && isset($_SESSION['userID']) && is_int($_SESSION['userID']) == 1) {
         $db = connect();
         if($db) {
             $res = sqlSelect($db, 'SELECT users.pro, users.verified FROM users WHERE users.id = ?' ,'i', $_SESSION['userID']);
@@ -18,12 +19,11 @@ function isPro(){
                     }
                 }
             }
-    
         }
     }
     return false;
 }
 
 // if (condition) {
-    echo isPro();
+    // echo isPro();
 // }
