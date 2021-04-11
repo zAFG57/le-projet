@@ -31,4 +31,3 @@ function isConnected(){
     }
     return false;
 }
-    // echo isConnected();
