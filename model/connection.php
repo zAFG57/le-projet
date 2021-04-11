@@ -31,3 +31,22 @@ function isConnected(){
     }
     return false;
 }
+
+
+function getInfoUser() {
+    if (isConnected()) {
+        $db = connect();
+        if($db) {
+            $res = sqlSelect($db, 'SELECT ville, objets_reparables,note, username FROM users INNER JOIN pro_users ON users.id = pro_users.id WHERE users.id = ?' ,'i',$_SESSION['userID']);
+
+            if ($res->num_rows === 1) {
+                $userPro = $res->fetch_assoc();
+                
+                if($userPro) {
+                    return $userPro;  
+                }
+            }
+        }
+    }
+    return -1;
+}
