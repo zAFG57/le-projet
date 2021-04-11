@@ -271,11 +271,11 @@ function sendValidateEmailRequest() {
 
 function searchf() {
     request('../model/search.php', '#search', function(data) {
-        document.getElementById('resSearch').innerHTML = "";
+        // document.getElementById('resSearch').innerHTML = "";
         var transition = document.getElementById('resSearch').style.transition;
         document.getElementById('resSearch').style.transition = "none";
         document.getElementById('resSearch').style.opacity = 0;
-        document.getElementById('resSearch').innerHTML += data;
+        // document.getElementById('resSearch').innerHTML += data;
 
 
         document.getElementsByClassName('maindiv')[0].style.display = 'none';

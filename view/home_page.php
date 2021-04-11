@@ -31,7 +31,66 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </div>
     </section>
 
-    <div id="resSearch"></div>
+    
+    
+    <div id="resSearch">
+        <div class="grid">
+
+
+
+            <div class="card">
+                <div class="cardgauche">
+                    <div class="cardimg">   <img src="https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231712/thesomeday123171200009.jpg"/>  </div>
+                </div>
+                <div class="carddroit">
+                    <div class="cardnom"><h1>ludovic castigliaa</h1></div>
+                    <div class="cardétoile">★★★★</div>
+                    <div class="carddescription"><h3>je suis un agriculteur qui amie niquer avec des vache et au fait j'ai le coronassssssssssssssssssssss aaaaaaaa aaaaaaa aaa fffff</h3></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="cardgauche">
+                    <div class="cardimg">   <img src="https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231712/thesomeday123171200009.jpg"/>  </div>
+                </div>
+                <div class="carddroit">
+                    <div class="cardnom"><h1>ludovic castigliaa</h1></div>
+                    <div class="cardétoile">★★★★</div>
+                    <div class="carddescription"><h3>je suis un agriculteur qui amie niquer avec des vache et au fait j'ai le coronassssssssssssssssssssss aaaaaaaa aaaaaaa aaa fffff</h3></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="cardgauche">
+                    <div class="cardimg">   <img src="https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231712/thesomeday123171200009.jpg"/>  </div>
+                </div>
+                <div class="carddroit">
+                    <div class="cardnom"><h1>ludovic castigliaa</h1></div>
+                    <div class="cardétoile">★★★★</div>
+                    <div class="carddescription"><h3>je suis un agriculteur qui amie niquer avec des vache et au fait j'ai le coronassssssssssssssssssssss aaaaaaaa aaaaaaa aaa fffff</h3></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="cardgauche">
+                    <div class="cardimg">   <img src="https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231712/thesomeday123171200009.jpg"/>  </div>
+                </div>
+                <div class="carddroit">
+                    <div class="cardnom"><h1>ludovic castigliaa</h1></div>
+                    <div class="cardétoile">★★★★</div>
+                    <div class="carddescription"><h3>je suis un agriculteur qui amie niquer avec des vache et au fait j'ai le coronassssssssssssssssssssss aaaaaaaa aaaaaaa aaa fffff</h3></div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    
+    
+    
 
 
 
