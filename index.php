@@ -23,7 +23,8 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 $authorized_pages = array(
     "emailVerification" => "view/email_verification",
     "homePage" => "view/home_page",
-    "profile" => "view/profile_page"
+    "profile" => "view/profile_page",
+    "isPro" => "model/is_pro"
 );
 
 if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){

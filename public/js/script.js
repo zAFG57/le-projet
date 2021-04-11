@@ -280,6 +280,18 @@ function searchf() {
 
         document.getElementsByClassName('maindiv')[0].style.display = 'none';
 
+        switch (data) {
+            case '-1':
+                document.getElementById('resSearch').innerHTML += '<div class="noResFound">Trois lettres minimum sont requises</div>';
+                break;
+            case '-2':
+                document.getElementById('resSearch').innerHTML += '<div class="noResFound">Aucun resultat trouvé</div>';
+                break;
+            default:
+                document.getElementById('resSearch').innerHTML += data;
+                break;
+        }
+
 
         setTimeout(function() {
             document.getElementById('resSearch').style.transition = transition;
