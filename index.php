@@ -33,24 +33,3 @@ if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
     header("Location: {$authorized_pages['homePage']}");
     exit;
 }
-
-
-
-if(!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_pro === 1) {
-
-
-    $authorized_pro_pages = array(
-        "emailVerification" => "view/email_verification",
-        "homePage" => "view/home_page",
-        "profile" => "view/profile_pro_page"
-    );
-
-
-    if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
-        header("Location: {$authorized_pro_pages[$_GET['location']]}");
-        die();
-    } else {
-        header("Location: {$authorized_pro_pages['homePage']}");
-        exit;
-    }
-}
