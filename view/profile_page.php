@@ -1,5 +1,6 @@
 <?php session_start() ?>
 <?php include_once('../templates/nav.php'); ?>
+<?php include_once('../model/connection.php'); ?>
 
 <?php 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
@@ -13,27 +14,59 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <header>
         <?=$nav?>
     </header>
-    <div class='mainWrapper'>
+    
 
-<!-- username -->
-        <div class="dispaly_values">
-            <div class="actual_value"><?= 'test'?></div>
-            <div class="modify_Value">test</div>
-        </div>
+<?php 
+$profiluser = getInfoUser();
+if (isPro()) { ?>
 
-<!-- password -->
-        <div class="dispaly_values">
-            <div class="actual_value">test2</div>
-            <div class="modify_Value">test2</div>
-        </div>
-
-<!-- email -->
-        <div class="dispaly_values">
-            <div class="actual_value">test3</div>
-            <div class="modify_Value">test3</div>
-        </div>
-
+    <div class="bvn">
+        <h1> bienvenue <?= $profiluser['username'] ?></h1>
     </div>
+
+    <div class="mainpro">
+
+        
+    
+    </div>
+
+    
+
+
+
+
+
+
+
+<?php } else {?>
+
+        <div class="main">
+
+            <div class="haut">  
+                <div class="photo"></div>
+                <h1> $nom du useur </h1>
+            </div>
+
+            <div class="bas">
+
+                <div class="email"><h1>$email du user</h1></div>
+                <div class="mdp"><h1>des petit point en mode mdp secret</h1></div>
+
+                <div class="changer">
+                    <div class="changeremail"><h1>changer de mdp</h1></div>
+                    <div class="changermdp"><h1>changer l'email</h1></div>
+                </div>
+
+            </div>
+
+        </div>
+
+<?php } ?>
+
+
+
+
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('../templates/baseTemplate.php'); ?>

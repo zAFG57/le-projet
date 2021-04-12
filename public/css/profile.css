@@ -2,23 +2,123 @@ body {
     background-image: url("../../assets/environment1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    overflow: hidden;
+    background-position: center;
+    background-attachment: fixed;
     height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 header {
     margin: 40px 40px;
 }
 
-.mainWrapper {
-    border: 1px black solid;
-    margin: 0 15%;
-    /* width: max-content; */
+.main {
+    height: 70vh;
+    width: 60vw;
+    border-radius: 60px;
+    position: absolute;
+    top: 20vh;
+    left: 20vw;
+    overflow: hidden;
+}
+.haut {
+    position: relative;
+    background: var(--clr-primary);
+    height: 20%;
     display: flex;
-    justify-content: space-evenly;
-    min-height: 400px;
+}
+.photo {
+    border-radius: 50%;
+    background-position: center;
+    width: 120px;
+    height: 120px;
+    background: white;
+    position: relative;
+    left: 5%;
+    top: 5%;
+}
+.haut h1 {
+    position: relative;
+    left: 30%;
+    top: 30%;
+    color: white;
+    font-size: 2vw;
+}
+.bas {
+    position: relative;
+    background: white;
+    height: 80%;
+}
+.email {
+    position: relative;
+    height: 8vh;
+    width: 50%;
+    left: 25%;
+    background: rgb(231, 193, 193);
+    top: 10vh;
+}
+.mdp {
+    position: relative;
+    height: 8vh;
+    width: 50%;
+    left: 25%;
+    background: rgb(231, 193, 193);
+    top: 20vh;
+}
+.changer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 40%;
+    width: 100%;
+    top: 18vh;
+}
+.changeremail {
+    width: 20vw;
+    height: 8vh;
+    text-align: center;
+    color: var(--clr-primary);
+}
+.changermdp {
+    width: 20vw;
+    height: 8vh;
+    text-align: center;
+    color: var(--clr-primary);
 }
 
-.dispaly_values {
-    border: 1px black solid;
+
+
+
+
+
+/*                                      pro     */
+
+.bvn {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+.bvn h1 {
+    font-size: calc( 2em + 1.9vw);
+    font-weight: bold;
+    background-image: linear-gradient(to right ,var(--clr-primary)  0%, var(--clr-primary) 50%,#fff 50%, #fff 100%); 
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+.mainpro {
+    top: 100vh;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: darkblue;
+}
+
+
+/*                                      fin pro */

@@ -12,7 +12,7 @@ function request(url, data, callback) {
             loader.remove();
         }
     });
- 
+
     var formdata = data ? (data instanceof FormData ? data : new FormData(document.querySelector(data))) : new FormData();
 
     var csrfMetaTag = document.querySelector('meta[name="csrf_token"]');
@@ -270,17 +270,61 @@ function sendValidateEmailRequest() {
 
 
 function searchf() {
-    console.log('a')
     request('../model/search.php', '#search', function(data) {
-        document.getElementById('errs').innerHTML = "";
-        var transition = document.getElementById('errs').style.transition;
-        document.getElementById('errs').style.transition = "none";
-        document.getElementById('errs').style.opacity = 0;
+        document.getElementById('resSearch').innerHTML = "";
+        var transition = document.getElementById('resSearch').style.transition;
+        document.getElementById('resSearch').style.transition = "none";
+        document.getElementById('resSearch').style.opacity = 0;
+        document.getElementsByClassName('maindiv')[0].style.display = 'none';
 
-        console.log(data);
+        data = JSON.parse(data);
+
+        const createGrid = (data) => {
+            res = '<div class="grid">'
+            data.forEach(element => {
+                res += `<div class="card">
+                    <div class="cardgauche">
+                        <div class="cardimg">   <img src="${element['imgUsr'] || 'https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231712/thesomeday123171200009.jpg'}"/>  </div>
+                    </div>
+                    <div class="carddroit">
+                        <div class="cardnom"><h1>${element['username']}</h1></div>
+                        <div class="cardétoile">${createStar(element['note'])}</div>
+                        <div class="carddescription"><h3>${element['descUsr'] || 'coucou je suis un pro qui sait réparer plein de truques'}</h3></div>
+                    </div>
+                </div>`
+
+            });
+            res += '</div>'
+            return res;
+        }
+
+        const createStar = (nbStars) => {
+            res = "";
+            while (nbStars > 0) {
+                res += '★';
+                nbStars--;
+            }
+            return res;
+        }
+
+        switch (data) {
+            case -1:
+                document.getElementById('resSearch').innerHTML += '<div class="noResFound">Trois lettres minimum sont requises</div>';
+                break;
+            case -2:
+                document.getElementById('resSearch').innerHTML += '<div class="noResFound">Aucun resultat trouvé</div>';
+                break;
+
+            default:
+                document.getElementById('resSearch').innerHTML += createGrid(data);
+                break;
+        }
+
+
         setTimeout(function() {
-            document.getElementById('errs').style.transition = transition;
-            document.getElementById('errs').style.opacity = 1;
+            document.getElementById('resSearch').style.transition = transition;
+            document.getElementById('resSearch').style.opacity = 1;
         }, 10);
+        document.getElementById('search').reset();
     })
-} 
+}
