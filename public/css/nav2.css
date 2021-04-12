@@ -15,14 +15,12 @@
 
 header {
     z-index: 3;
-    width: 90vw;
+    width: 100vw;
     height: 10vh;
-    position: absolute;
+    position: fixed;
     display: flex;
-    margin-top: 2.5vh;
-    margin-left: 5vw;
-    border-radius: 10px 10px;
     overflow: hidden;
+    margin: 0;
 }
 
 .gauche {
