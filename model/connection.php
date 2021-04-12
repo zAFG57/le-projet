@@ -1,7 +1,5 @@
 <?php 
 require_once('util.php');
-session_start();
-
 
 function isPro(){
     // echo is_int($_SESSION['userID']);
