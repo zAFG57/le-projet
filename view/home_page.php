@@ -34,7 +34,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     
     
     <div id="resSearch">
-        <div class="grid">
+        <!-- <div class="grid">
 
 
 
@@ -85,20 +85,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
 
-        </div>
+        </div> -->
     </div>
 
     
-    
-    
-
-
-
-
-
-
-
-
 <?php $content = ob_get_clean(); ?>
 
 <?php require('../templates/baseTemplate.php'); ?>

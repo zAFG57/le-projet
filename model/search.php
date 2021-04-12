@@ -11,10 +11,9 @@
 
             if ($res->num_rows > 0) {
                 $object = $res->fetch_all(MYSQLI_ASSOC);
-                var_dump($object);
-                foreach ($object as $key) {
-                    echo $key . "\n";
-                }
+                // var_dump($object);
+                echo json_encode($object);
+                
 
             } else {
                 echo -2;
