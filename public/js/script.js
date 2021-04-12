@@ -275,24 +275,23 @@ function searchf() {
         var transition = document.getElementById('resSearch').style.transition;
         document.getElementById('resSearch').style.transition = "none";
         document.getElementById('resSearch').style.opacity = 0;
+        document.getElementsByClassName('maindiv')[0].style.display = 'none';
 
         data = JSON.parse(data);
-        document.getElementsByClassName('maindiv')[0].style.display = 'none';
 
         const createGrid = (data) => {
             res = '<div class="grid">'
-            console.log(data)
             data.forEach(element => {
                 res += `<div class="card">
-                <div class="cardgauche">
-                    <div class="cardimg">   <img src="${element['imgUsr'] || 'https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231712/thesomeday123171200009.jpg'}"/>  </div>
-                </div>
-                <div class="carddroit">
-                    <div class="cardnom"><h1>${element['username']}</h1></div>
-                    <div class="cardétoile">${createStar(element['note'])}</div>
-                    <div class="carddescription"><h3>${element['descUsr'] || 'coucou je suis un pro qui sait réparer plein de truques'}</h3></div>
-                </div>
-            </div>`
+                    <div class="cardgauche">
+                        <div class="cardimg">   <img src="${element['imgUsr'] || 'https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231712/thesomeday123171200009.jpg'}"/>  </div>
+                    </div>
+                    <div class="carddroit">
+                        <div class="cardnom"><h1>${element['username']}</h1></div>
+                        <div class="cardétoile">${createStar(element['note'])}</div>
+                        <div class="carddescription"><h3>${element['descUsr'] || 'coucou je suis un pro qui sait réparer plein de truques'}</h3></div>
+                    </div>
+                </div>`
 
             });
             res += '</div>'
@@ -309,15 +308,15 @@ function searchf() {
         }
 
         switch (data) {
-            case '-1':
+            case -1:
                 document.getElementById('resSearch').innerHTML += '<div class="noResFound">Trois lettres minimum sont requises</div>';
                 break;
-            case '-2':
+            case -2:
                 document.getElementById('resSearch').innerHTML += '<div class="noResFound">Aucun resultat trouvé</div>';
                 break;
 
             default:
-                document.getElementById('resSearch').innerHTML += createGrid(data)
+                document.getElementById('resSearch').innerHTML += createGrid(data);
                 break;
         }
 
