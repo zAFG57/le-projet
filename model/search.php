@@ -11,13 +11,12 @@
 
             if ($res->num_rows > 0) {
                 $object = $res->fetch_all(MYSQLI_ASSOC);
-                // var_dump($object);
+                array_push($object, $_POST['search']);
                 echo json_encode($object);
-                
+                // echo json_encode()
 
             } else {
                 echo -2;
-                return;
             }
         }
     } else {

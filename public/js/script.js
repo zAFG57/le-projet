@@ -276,11 +276,15 @@ function searchf() {
         document.getElementById('resSearch').style.transition = "none";
         document.getElementById('resSearch').style.opacity = 0;
         document.getElementsByClassName('maindiv')[0].style.display = 'none';
-
+        console.log(data)
         data = JSON.parse(data);
+        var search = data.pop(-1);
+        console.log(search)
+        console.log(data)
 
         const createGrid = (data) => {
             res = '<div class="grid">'
+            res = `voutre recherche ${search}`
             data.forEach(element => {
                 res += `<div class="card">
                     <div class="cardgauche">
