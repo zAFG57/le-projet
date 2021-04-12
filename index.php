@@ -8,7 +8,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         "createAccount" => "view/create_account",
         "createProAccount" => "view/create_professional_account",
         "emailVerification" => "view/email_verification",
-        "login" => "/view/log_in",    
+        "login" => "view/log_in",    
     );
 
     if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){

@@ -17,7 +17,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     
 
 <?php 
-$profiluser = getInfoUser();
+$profiluser = getInfoUser($_SESSION['userID']);
 if (isPro()) { ?>
 
     <div class="bvn">
