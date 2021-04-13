@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+// require_once('/model/connection.php');
+
+
 // echo 'hello World';
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
@@ -18,18 +22,37 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         header("Location: {$authorized_pages['login']}");
         exit;
     }
-}
 
-$authorized_pages = array(
-    "emailVerification" => "view/email_verification",
-    "homePage" => "view/home_page",
-    "profile" => "view/profile_page"
-);
+// } else if(isAdmin($_SESSION['userID'])) {
 
-if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
-    header("Location: {$authorized_pages[$_GET['location']]}");
-    die();
-} else {
-    header("Location: {$authorized_pages['homePage']}");
-    exit;
+//     $authorized_pages = array(
+//         "emailVerification" => "view/email_verification",
+//         "homePage" => "view/home_page",
+//         "profile" => "view/profile_page",
+//         "adminPanel" => "view/admin_panel"
+//     );
+
+//     if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
+//         header("Location: {$authorized_pages[$_GET['location']]}");
+//         die();
+//     } else {
+//         header("Location: {$authorized_pages['homePage']}");
+//         exit;
+//     }
+    
+} else { 
+
+    $authorized_pages = array(
+        "emailVerification" => "view/email_verification",
+        "homePage" => "view/home_page",
+        "profile" => "view/profile_page"
+    );
+
+    if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
+        header("Location: {$authorized_pages[$_GET['location']]}");
+        die();
+    } else {
+        header("Location: {$authorized_pages['homePage']}");
+        exit;
+    }
 }

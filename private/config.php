@@ -7,6 +7,8 @@
 
     define("CSRF_TOKEN_SECRET", "123zqddrg123rth14561f21fq54d9821hz65qdzzqdq");
 
+    define("ADMIN_TOKEN_SECRET", "qz54dqz5dqz56d1n65y165u5uryq1zrt1ze65r49n4rz");
+
     define("SMTP_HOST", 'smtp.gmail.com');
     define("SMTP_PORT", 465);
     define("SMTP_USERNAME", 'contact.mesreparations@gmail.com');

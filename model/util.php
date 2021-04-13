@@ -121,3 +121,32 @@
 
 		return str_replace($search, $replace, $query);	
 	}
+
+
+	function createAdminToken($id) {
+		$seed = urlSafeEncode(random_bytes(8));
+		$t = time();
+		$hash = urlSafeEncode(hash_hmac('sha256',  $seed . $t . $id . session_id(), ADMIN_TOKEN_SECRET, true));
+		return urlSafeEncode($hash . '|' . $seed . '|' . $t . '|' . $id);
+	}
+
+	function updateAdminToken($hash) {
+		$db = connect();
+
+        if($db) {
+            sqlUpdate($db, 'UPDATE admin SET hash=?' ,'s', $hash);
+			return true;
+        }
+		return false;
+	}
+
+    function validateAdminToken($token) {
+		$parts = explode('|', urlSafeDecode($token));
+		if(count($parts) === 4) {
+			$hash = hash_hmac('sha256', $parts[1] . $parts[2] . $parts[3] . session_id(), ADMIN_TOKEN_SECRET, true);
+			if(hash_equals($hash, urlSafeDecode($parts[0]))) {
+				return true;
+			}
+		}
+		return false;
+	}
