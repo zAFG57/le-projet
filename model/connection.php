@@ -35,7 +35,7 @@ function getInfoUser() {
     if (isConnected()) {
         $db = connect();
         if($db) {
-            $res = sqlSelect($db, 'SELECT ville, objets_reparables,note, username FROM users INNER JOIN pro_users ON users.id = pro_users.id WHERE users.id = ?' ,'i',$_SESSION['userID']);
+            $res = sqlSelect($db, 'SELECT ville, objets_reparables,note, username,CAST(CONVERT(bio USING utf8) AS binary) AS bio, email, note, CAST(CONVERT(photolien USING utf8) AS binary) AS photolien  FROM users INNER JOIN pro_users ON users.id = pro_users.id WHERE users.id = ?' ,'i',$_SESSION['userID']);
 
             if ($res->num_rows === 1) {
                 $userPro = $res->fetch_assoc();

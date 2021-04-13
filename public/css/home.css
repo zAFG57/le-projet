@@ -271,7 +271,6 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50% , -35%);
-  background-color: rgb(110, 147, 93);
   width: 95vw;
   height: 80vh;
 
@@ -279,13 +278,12 @@ body {
   grid-gap: 50px;
   grid-template-columns: repeat(auto-fill, 500px);
   grid-template-rows: repeat(auto-fill,200px);
-  overflow: scroll;
-  justify-content: center; */
+  justify-content: center;*/
   
-  padding: 10px;
-  box-shadow: -2px 4px 20px 6px rgba(0, 0, 0, 0.3) inset;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  overflow: scroll; 
+  padding: 40px;
+  -ms-overflow-style: none;   /*IE and Edge */
+  scrollbar-width: none;   /*Firefox */
 }
 .grid::-webkit-scrollbar {
   display: none;
@@ -293,21 +291,30 @@ body {
 
 
 .card {
-  width: 500px;
-  height: 200px;
-  background-color: turquoise;
+  margin-top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+  width: 90%;
+  height: 40vh;
+  background-color: white;
   display: flex;
   border-radius: 30px;
   overflow: hidden;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.card:hover {
+  transform: translate(calc(-50% - 2vw), -2vw);
+  box-shadow: 2vw 2vw 0px rgba(0, 0, 0, 0.5);
 }
 .cardgauche {
   position: relative;
-  width: 200px;
+  width: 40vh;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 0, 0, 0.2);
 }
 .cardimg {
   position: relative;
@@ -330,6 +337,11 @@ body {
   background-color: var(--clr-primary);
   color: white;
 }
+.cardnom h1 {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
 .carddescription {
   padding-right: 10px;
   padding-left: 10px;
@@ -339,7 +351,7 @@ body {
 
 .cardétoile {
   color: rgb(255, 187, 0);
-  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
   font-size: 30px;
   height: 30px;
   transform: translateY(-10px);
@@ -433,4 +445,5 @@ body {
 
 }
 }
+
 

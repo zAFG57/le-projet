@@ -21,12 +21,44 @@ $profiluser = getInfoUser();
 if (isPro()) { ?>
 
     <div class="bvn">
-        <h1> bienvenue <?= $profiluser['username'] ?></h1>
+        <h1> bienvenue <span><?= $profiluser['username'] ?></span></h1>
     </div>
 
     <div class="mainpro">
 
+        <form> 
+
+            <div class="titreprofilepro">
+                <div class="proimg"><img src="<?= $profiluser['photolien']?>"></div>
+            
+                <input id="proinpt" class="namein" name="name" value="<?= $profiluser['username'] ?>">
+                <div id="prodiv" class="namepro" ondblclick="nameédit()">
+                    <h1><?= $profiluser['username'] ?></h1>
+                </div>
+            
+            </div>
+                
+
+                <input id="proinpt" class="bioin" name="bio" value="<?= $profiluser['bio'] ?>">
+                <div id="prodiv" class="biopro" ondblclick="bioédit()">
+                    <h1><?= $profiluser['bio'] ?></h1>
+                </div>           
+
+                
+                <input id="proinpt" class="emailin" name="email" value="<?= $profiluser['email'] ?>">
+                <div id="prodiv" class="emailpro" ondblclick="emailédit()">
+                    <h1><?= $profiluser['email'] ?></h1>
+                </div>
+                
+                
+                <input id="proinpt" class="réparationin" name="objets_reparables" value="<?= $profiluser['objets_reparables'] ?>">
+                <div id="prodiv" class="réparationpro" ondblclick="réparationédit()">
+                    <h1><?= $profiluser['objets_reparables'] ?></h1>
+                </div>
+                
         
+        
+        </form>
     
     </div>
 
