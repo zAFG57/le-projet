@@ -1,0 +1,7 @@
+<Files "/.ht*">
+    Require all denied
+</Files>
+
+
+ErrorDocument 404 /errors/404.php
+
