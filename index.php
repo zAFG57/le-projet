@@ -35,7 +35,6 @@ if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
     header("Location: {$authorized_pages['homePage']}");
     exit;
 }
-=======
 <?php
 session_start();
 
@@ -72,4 +71,3 @@ if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
     header("Location: {$authorized_pages['homePage']}");
     exit;
 }
->>>>>>> e15dc6e8c5762f944feffb3300714a4f6e3710b4
