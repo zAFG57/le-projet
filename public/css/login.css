@@ -145,19 +145,11 @@ header {
     transition: .5s;
 }
 
-@media screen and (max-width: 900px){
-  
-
-
-}
+@media screen and (max-width: 900px) {}
 
 
 /*////////////////////////////////////////////responsive 1500px (tablette et autre intermediaire)///////////////////////////////////////////////////////////*/
+
 @media screen and (min-width: 900px) {
-  @media screen and (max-width: 1500px){
- 
-
-
+    @media screen and (max-width: 1500px) {}
 }
-}
-
