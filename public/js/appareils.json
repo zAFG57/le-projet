@@ -1,0 +1,23 @@
+{
+    "Électromenager": {
+        "Gros Électromenager": [
+            "Réfrigérateur",
+            "Congélateur",
+            "Lave-linge",
+            "Sèche-linge",
+            "Lave-vaisselle",
+            "Four",
+            "Mini-four",
+            "Hotte",
+            "Table de cuisson",
+            "Cuisinière"
+        ],
+
+        "Petit Électromenager": [
+            "Four micro-ondes",
+            "Cafetière",
+            "Robot de cuisine",
+            "Appareils de cuisson"
+        ]
+    }
+}

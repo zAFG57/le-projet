@@ -2,7 +2,6 @@
 require_once('util.php');
 
 function isPro(){
-    // echo is_int($_SESSION['userID']);
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && isset($_SESSION['userID']) && is_int($_SESSION['userID']) == 1 && $_SESSION['userID'] > 0) {
         $db = connect();
         if($db) {
