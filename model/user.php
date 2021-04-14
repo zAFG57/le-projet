@@ -8,6 +8,33 @@
         private $userInfo;
 
         public function __construct($id = false) {
+            // if (!$id) return;
+
+            // $res = parent::sqlSelect('SELECT 
+            //     users.id, users.username, users.email, users.verified, users.pro
+            //     FROM users 
+            //     WHERE users.id = ?',
+            //     'i', $id);
+
+            //     if ($res && $res->num_rows === 1) {
+            //         $this->userInfo = $res->fetch_assoc();
+            //     }  
+
+            //     if ($this->isPro()) {
+            //         $ress = parent::sqlSelect('SELECT 
+            //         ville, objets_reparables, note
+            //         FROM pro_users WHERE pro_users.user_id = ?',
+            //         'i', $id);
+
+            //         if ($ress && $ress->num_rows === 1) {
+            //             $this->userInfo += $ress->fetch_assoc();
+            //         } 
+            //     }
+        }
+
+        
+
+        public static function getInfoUser($id) {
             if (!$id) return;
 
             $res = parent::sqlSelect('SELECT 
@@ -30,10 +57,6 @@
                         $this->userInfo += $ress->fetch_assoc();
                     } 
                 }
-        }
-
-        public function getInfoUser() {
-            return $this->userInfo;
         }
 
         public function isPro(){

@@ -8,7 +8,7 @@
             self::$db = $this->connect();
         }
 
-        private static function connect() {
+        protected static function connect() {
             $db = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
     
             if($db->connect_error) {
