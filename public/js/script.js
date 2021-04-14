@@ -24,14 +24,16 @@ function request(url, data, callback) {
 }
 
 function register() {
-    request('../model/create_account.php', '#registerForm', function(data) {
+    request('../controller/create_account.php', '#registerForm', function(data) {
         document.getElementById('errs').innerHTML = "";
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
         try {
-            data = JSON.parse(data);
-            if (!(data instanceof Array)) { throw Exception('bad data'); }
+            console.log(data);
+            // data = JSON.parse(data);
+            console.log(data);
+            // if (!(data instanceof Array)) { throw Exception('bad data'); }
 
             //Show errors to user
             for (var i = 0; i < data.length; ++i) {
@@ -338,32 +340,36 @@ function searchf() {
 
 function validé() {
     console.log('plus dédit');
-    document.getElementsByClassName('namein')[0].style.display= 'none';
-    document.getElementsByClassName('namepro')[0].style.display= 'flex';
-    document.getElementsByClassName('bioin')[0].style.display= 'none';
-    document.getElementsByClassName('biopro')[0].style.display= 'flex';
-    document.getElementsByClassName('emailin')[0].style.display= 'none';
-    document.getElementsByClassName('emailpro')[0].style.display= 'flex';
-    document.getElementsByClassName('réparationin')[0].style.display= 'none';
-    document.getElementsByClassName('réparationpro')[0].style.display= 'flex';
+    document.getElementsByClassName('namein')[0].style.display = 'none';
+    document.getElementsByClassName('namepro')[0].style.display = 'flex';
+    document.getElementsByClassName('bioin')[0].style.display = 'none';
+    document.getElementsByClassName('biopro')[0].style.display = 'flex';
+    document.getElementsByClassName('emailin')[0].style.display = 'none';
+    document.getElementsByClassName('emailpro')[0].style.display = 'flex';
+    document.getElementsByClassName('réparationin')[0].style.display = 'none';
+    document.getElementsByClassName('réparationpro')[0].style.display = 'flex';
 }
+
 function nameédit() {
     console.log("name édit");
-    document.getElementsByClassName('namein')[0].style.display= 'flex';
-    document.getElementsByClassName('namepro')[0].style.display= 'none';    
+    document.getElementsByClassName('namein')[0].style.display = 'flex';
+    document.getElementsByClassName('namepro')[0].style.display = 'none';
 }
+
 function bioédit() {
     console.log("bio édit");
-    document.getElementsByClassName('bioin')[0].style.display= 'flex';
-    document.getElementsByClassName('biopro')[0].style.display= 'none';    
+    document.getElementsByClassName('bioin')[0].style.display = 'flex';
+    document.getElementsByClassName('biopro')[0].style.display = 'none';
 }
+
 function emailédit() {
     console.log("email édit");
-    document.getElementsByClassName('emailin')[0].style.display= 'flex';
-    document.getElementsByClassName('emailpro')[0].style.display= 'none';    
+    document.getElementsByClassName('emailin')[0].style.display = 'flex';
+    document.getElementsByClassName('emailpro')[0].style.display = 'none';
 }
+
 function réparationédit() {
     console.log("réparation édit");
-    document.getElementsByClassName('réparationin')[0].style.display= 'flex';
-    document.getElementsByClassName('réparationpro')[0].style.display= 'none';    
+    document.getElementsByClassName('réparationin')[0].style.display = 'flex';
+    document.getElementsByClassName('réparationpro')[0].style.display = 'none';
 }

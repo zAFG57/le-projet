@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+define("ROOTPATH", __DIR__);
+
+
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
