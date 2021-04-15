@@ -1,15 +1,16 @@
 <?php
-    require_once('../private/config.php');
+    // require_once('../private/config.php');
+    require_once('config.php');
 
-    class Database {
+    class Database extends Config{
         public static $db = null;
 
         public function __construct(Type $var = null) {
             self::$db = $this->connect();
         }
 
-        protected static function connect() {
-            $db = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+        private static function connect() {
+            $db = new mysqli(parent::$DB_HOST, parent::$DB_USERNAME,parent::$DB_PASSWORD, parent::$DB_DATABASE);
     
             if($db->connect_error) {
                 return false;
@@ -19,7 +20,7 @@
 
         protected static function sqlSelect($query, $format = false, ...$vars){
             if (self::$db === null) {
-                self::$db = Database::connect();
+                self::$db = self::connect();
             }
             $stmt = self::$db->prepare($query);
             if(!$stmt) {
@@ -41,7 +42,7 @@
 
         protected static function sqlInsert($query, $format = false, ...$vars) {
             if (self::$db === null) {
-                self::$db = $this->connect();
+                self::$db = self::connect();
             }
             $stmt = self::$db->prepare($query);
             if($format) {
@@ -60,7 +61,7 @@
 
         protected static function sqlUpdate($query, $format = false, ...$vars){
             if (self::$db === null) {
-                self::$db = $this->connect();
+                self::$db = self::connect();
             }
             $stmt = self::$db->prepare($query);
             if($format) {
