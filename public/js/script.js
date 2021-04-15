@@ -31,8 +31,8 @@ function register() {
         document.getElementById('errs').style.opacity = 0;
         try {
             console.log(data);
-            data = JSON.parse(data);
-            // document.getElementById('errs').innerHTML += data;
+            // data = JSON.parse(data);
+            document.getElementById('errs').innerHTML += data;
             // if (!(data instanceof Array)) { throw Exception('bad data'); }
 
             //Show errors to user

@@ -1,13 +1,6 @@
 <?php 
     require_once('../private/config.php');
 
-	use PHPMailer\PHPMailer\PHPMailer;
-	use PHPMailer\PHPMailer\Exception;
-
-	require '../src/PHPMailer-master/src/Exception.php';
-	require '../src/PHPMailer-master/src/PHPMailer.php';
-	require '../src/PHPMailer-master/src/SMTP.php';
-
     function connect() {
         $db = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 

@@ -5,8 +5,9 @@
     class ControllerLogin extends Login {
         public static function login() {
             if (isset($_POST['email']) && isset($_POST['password']) ) { 
+                if (!parent::userExisting()) {
                 if (isset($_POST['csrf_token']) && validateToken($_POST['csrf_token'])) {
-                    if (parent::isMaxLoginAttemptsAchevied($_POST['email'])) {
+                    if (!parent::isMaxLoginAttemptsAchevied($_POST['email'])) {
                         if (parent::isCorrectPassword($_POST['email'], $_POST['password'])) {
                             if(parent::isVerified($_POST['email'])) {
                                 parent::setSessionVariables($_POST['email']);
@@ -33,16 +34,14 @@
                     return 5;
                 }
             } else {
+                // email already using
+            }
+            } else {
                 // toutes les données sont obligatoires
                 return 6;
             }
         }
-
-        // public static function test() {
-        //     return parent::isMaxLoginAttemptsAchevied('jules.grivot.pelisson@gmail.com');
-        // }
     }
 
     echo json_encode(ControllerLogin::login());
-    // var_dump(ControllerLogin::test());
     

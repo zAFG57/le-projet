@@ -20,6 +20,6 @@ class CreateAccount extends Database {
     }
 
     protected static function idAlreadyExisting($id) {
-        return (parent::sqlSelect('SELECT null FROM users WHERE id=?', 'i', $id)->num_rows === 1);
+        return (parent::sqlSelect('SELECT id FROM users WHERE id=?', 'i', $id)->num_rows === 1);
     }
 }
