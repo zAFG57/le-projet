@@ -191,7 +191,7 @@ function login() {
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
-        // console.log(data === '0');
+        console.log(data);
         data = JSON.parse(data);
 
         // document.getElementById('errs').innerHTML += data;

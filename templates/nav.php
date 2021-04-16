@@ -34,7 +34,7 @@
         <ul>
         <li><img src="../assets/drapeaufrancais.png" alt="drapeau français"></li>
         <li><a class="responsivlien2" href="../index.php?location=profile">Mon profil</a></li>
-        <li><a class="responsivlien2" href="../index.php?location=réparation">mes réparation</a></li>
+        <li><a class="responsivlien2" href="../index.php?location=réparation">mes réparations</a></li>
         <li><div id="pro" class="responsivlien2" onclick="logout()">Se déconnecter</div></li>
     </ul>
     </div>

@@ -5,7 +5,7 @@
     class ControllerLogin extends Login {
         public static function login() {
             if (isset($_POST['email']) && isset($_POST['password']) ) { 
-                if (!parent::userExisting()) {
+                if (parent::userExisting($_POST['email'])) {
                 if (isset($_POST['csrf_token']) && validateToken($_POST['csrf_token'])) {
                     if (!parent::isMaxLoginAttemptsAchevied($_POST['email'])) {
                         if (parent::isCorrectPassword($_POST['email'], $_POST['password'])) {
@@ -18,7 +18,7 @@
                                 return 4;
                             }
                         } else {
-                            // password incorrect
+                            // password incorrect (email or pass bad)
                             if(parent::createLoginAttempt(parent::getId($_POST['email'])) !== 1){
                                 return 1;
                             } else {
@@ -34,7 +34,8 @@
                     return 5;
                 }
             } else {
-                // email already using
+                // user not existing (email or pass bad)
+                return 1;
             }
             } else {
                 // toutes les données sont obligatoires
