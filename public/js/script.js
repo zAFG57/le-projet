@@ -30,9 +30,8 @@ function register() {
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
         try {
-            console.log(data);
-            // data = JSON.parse(data);
-            document.getElementById('errs').innerHTML += data;
+            data = JSON.parse(data);
+            // document.getElementById('errs').innerHTML += data;
             // if (!(data instanceof Array)) { throw Exception('bad data'); }
 
             //Show errors to user
@@ -105,7 +104,7 @@ function register() {
 
 ///////////////////////////////////////////////////////////test début//////////////////////
 function registerpro() {
-    request('../model/create_professional_account.php', '#registerForm', function(data) {
+    request('../controller/create_professional_account.php', '#registerForm', function(data) {
         document.getElementById('errs').innerHTML = "";
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
@@ -225,15 +224,17 @@ function login() {
 }
 
 function logout() {
-    request('../model/logout.php', false, function(data) {
-        if (data === '0') {
+    request('../controller/logout.php', false, function(data) {
+        console.log(data)
+            // data = JSON.parse(data);
+        if (data === 0) {
             window.location = '../view/log_in';
         }
     });
 }
 
 function sendValidateEmailRequest() {
-    request('../model/email_verification.php', '#verificationForm', function(data) {
+    request('../controller/email_verification.php', '#verificationForm', function(data) {
         document.getElementById('errs').innerHTML = "";
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
@@ -277,14 +278,16 @@ function sendValidateEmailRequest() {
 
 
 function searchf() {
-    request('../model/search.php', '#search', function(data) {
+    request('../controller/search.php', '#search', function(data) {
         document.getElementById('resSearch').innerHTML = "";
         var transition = document.getElementById('resSearch').style.transition;
         document.getElementById('resSearch').style.transition = "none";
         document.getElementById('resSearch').style.opacity = 0;
         document.getElementsByClassName('maindiv')[0].style.display = 'none';
 
+        console.log(data);
         data = JSON.parse(data);
+        console.log(data);
 
         const createGrid = (data) => {
             res = '<div class="grid">'

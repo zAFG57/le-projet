@@ -1,5 +1,4 @@
 <?php 
-require_once('util.php');
 require_once('database.php');
 
 session_start();

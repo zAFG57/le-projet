@@ -1,12 +1,13 @@
 <?php 
 
     require_once('../model/login.php');
+    require_once('csrfConfig.php');
 
     class ControllerLogin extends Login {
         public static function login() {
             if (isset($_POST['email']) && isset($_POST['password']) ) { 
                 if (parent::userExisting($_POST['email'])) {
-                if (isset($_POST['csrf_token']) && validateToken($_POST['csrf_token'])) {
+                if (isset($_POST['csrf_token']) && ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
                     if (!parent::isMaxLoginAttemptsAchevied($_POST['email'])) {
                         if (parent::isCorrectPassword($_POST['email'], $_POST['password'])) {
                             if(parent::isVerified($_POST['email'])) {
@@ -43,6 +44,8 @@
             }
         }
     }
-
+    
+if (isset($_POST['email']) && isset($_POST['password'])) {
     echo json_encode(ControllerLogin::login());
+}
     

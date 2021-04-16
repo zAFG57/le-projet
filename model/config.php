@@ -19,6 +19,6 @@
         protected static $SMTP_FROM_NAME = '[Mes reparations.com] No-reply';
 
         protected static $MAX_EMAIL_VERIFICATION_REQUESTS_PER_DAY = 3;
-        protected static $MAX_LOGIN_ATTEMPTS_PER_HOUR = 5;
+        protected static $MAX_LOGIN_ATTEMPTS_PER_HOUR = 5; 
     }
     

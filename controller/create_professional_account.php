@@ -2,7 +2,7 @@
 
     // require_once(ROOTPATH . '/model/create_account.php');
     // require_once(ROOTPATH . '/model/email_verification.php');
-    require_once('../model/create_account.php');
+    require_once('../model/create_professional_account.php');
     require_once('email_verification.php');
     require_once('csrfConfig.php');
 

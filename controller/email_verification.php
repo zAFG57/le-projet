@@ -2,6 +2,8 @@
 
     require_once('../model/login.php');
     require_once('../model/email_verification.php');
+    require_once('csrfConfig.php');
+
 
 
     class ControllerEmailVerification extends EmailVerification {
@@ -33,16 +35,18 @@
         }
 
         public static function sendEmailVerificationFromPOST() {
-            if (isset($_POST['validateEmail']) && isset($_POST['csrf_token']) && validateToken($_POST['csrf_token'])) {
+            if (isset($_POST['validateEmail']) && isset($_POST['csrf_token']) && ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
                 return self::sendEmailVerification($_POST['validateEmail']);
             }
         }
         public static function sendValidationEmailFromArgs($email, $csrfToken){
-            if (isset($email) && isset($csrfToken) && validateToken($csrfToken)) {
+            if (isset($email) && isset($csrfToken) && ControllerCsrf::validateCsrfToken($csrfToken)) {
                 return self::sendEmailVerification($email);
             }
         }
 
     }
 
-    return json_encode(ControllerEmailVerification::sendEmailVerificationFromPOST());
+    if (isset($_POST['validateEmail']) && isset($_POST['csrf_token'])){
+        echo json_encode(ControllerEmailVerification::sendEmailVerificationFromPOST());
+    }

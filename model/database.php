@@ -1,5 +1,5 @@
 <?php
-    // require_once('../private/config.php');
+    
     require_once('config.php');
 
     class Database extends Config{
@@ -44,10 +44,12 @@
             if (self::$db === null) {
                 self::$db = self::connect();
             }
+
             $stmt = self::$db->prepare($query);
             if($format) {
                 $stmt->bind_param($format, ...$vars);
             }
+
             if($stmt->execute()) {
                 $id = $stmt->insert_id;
                 $stmt->close();

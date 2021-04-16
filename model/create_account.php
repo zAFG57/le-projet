@@ -13,7 +13,7 @@ class CreateAccount extends Database {
 
     protected static function createId() {
         do {
-            $id = rand(1, 10000000000);
+            $id = rand(1, 1000000000);
         } while (self::idAlreadyExisting($id));
         return $id;
     }
