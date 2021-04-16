@@ -1,9 +1,11 @@
 <?php
     session_start();
-    require_once(MainPath . 'model/connection.php');
+    require_once('../controller/panelAdmin.php');
+    require_once('../controller/user.php');
 
-    if(isConnected()) {
-        if(isAdmin($_SESSION['userID']) && validateAdminToken(getHashToken($_SESSION['userID'])) && password_verify(getHashToken($_SESSION['userID']), $_GET['h'])) {
+
+    if(ControllerUser::isConnected()) {
+        if(ControllerUser::isAdmin($_SESSION['userID']) && ControllerAdmin::validateAdminToken(ControllerAdmin::getHashToken($_SESSION['userID'])) && password_verify(ControllerAdmin::getHashToken($_SESSION['userID']), $_GET['h'])) {
             echo 'you are admin';
         } else {
             echo 'you are not admin';

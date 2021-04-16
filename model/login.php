@@ -18,7 +18,7 @@ class  Login extends Database {
     }
 
     protected static function isVerified($email){
-        return parent::sqlSelect('SELECT verified FROM users WHERE email=?','s', $email);
+        return parent::sqlSelect('SELECT verified FROM users WHERE email=?','s', $email)->fetch_assoc()['verified'];
     }
 
     protected static function suppAttempts($id){
