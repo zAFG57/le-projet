@@ -107,18 +107,115 @@ header {
 .bvn h1 {
     font-size: calc( 2em + 1.9vw);
     font-weight: bold;
-    background-image: linear-gradient(to right ,var(--clr-primary)  0%, var(--clr-primary) 50%,#fff 50%, #fff 100%); 
+    color: white;
+}
+/* .bvn h1 .h1 {
+     background-image: linear-gradient(to right ,#fff 5%, var(--clr-primary) , #fff 95% ); 
     color: transparent;
     background-clip: text;
-    -webkit-background-clip: text;
+    -webkit-background-clip: text; 
+} */
+.bvn h1 span {
+    color: var(--clr-primary);
 }
 .mainpro {
     top: 100vh;
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background: darkblue;
+    background: white;
+    padding-top: 10vh;
 }
+.mainpro form {
+    height: 100%;
+    width: 100%;
+}
+.titreprofilepro {
+    position: relative;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    transform: translateY(5vh);
+}
+.namepro {
+    width: 40vw;
+    left: 25%;
+    transform: translateX(-50%);
+}
+.biopro {
+    width: 60vw;
+    left: 30vw;
+    transform: translateY(15vh);
+}
+.bioinpt {
+    width: 60vw;
+    left: 30vw;
+    transform: translateY(15vh);
+}
+.emailin {
+    width: 60vw;
+    left: 30vw;
+    transform: translateY(15vh);
+}
+.emailpro {
+    width: 60vw;
+    left: 30vw;
+    transform: translateY(15vh);
+}
+.réparationin {
+    width: 60vw;
+    left: 30vw;
+    transform: translateY(15vh);
+}
+.réparationpro {
+    width: 60vw;
+    left: 30vw;
+    transform: translateY(15vh);
+}
+.titreprofilepro img {
+    position: relative;
+    width: 50vh;
+}
+#prodiv {
+    margin-top: 2vh;
+    position: relative;
+    border: 3px solid black;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--clr-primary);
+}
+#proinpt {
+    margin-top: 2vh;
+    all: unset;
+    position: relative;
+    overflow: wrap;
+    background-color: rgb(255, 255, 255);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.btndivform {
+    position: relative;
+    height: 5vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.btndivform div {
+    position: relative;
+    background-color: var(--clr-primary);
+    color: white;
+    padding: 30px;
+}
+
 
 
 /*                                      fin pro */

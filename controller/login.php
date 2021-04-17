@@ -1,0 +1,51 @@
+<?php 
+
+    require_once('../model/login.php');
+    require_once('csrfConfig.php');
+    session_start();
+    class ControllerLogin extends Login {
+        public static function login() {
+            if (isset($_POST['email']) && isset($_POST['password']) ) { 
+                if (parent::userExisting($_POST['email'])) {
+                if (isset($_POST['csrf_token']) && ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
+                    if (!parent::isMaxLoginAttemptsAchevied($_POST['email'])) {
+                        if (parent::isCorrectPassword($_POST['email'], $_POST['password'])) {
+                            if(parent::isVerified($_POST['email'])) {
+                                parent::setSessionVariables($_POST['email']);
+                                parent::suppAttempts($_POST['email']);
+                                return 0;
+                            } else {
+                                //utilisateur non vérifié
+                                return 4;
+                            }
+                        } else {
+                            // password incorrect (email or pass bad)
+                            if(parent::createLoginAttempt(parent::getId($_POST['email'])) !== 1){
+                                return 1;
+                            } else {
+                                return 2;
+                            }
+                        }
+                    } else {
+                        //trop d'essay en 1 heure 
+                        return 3;
+                    }
+                } else {
+                    // csrf token invalide
+                    return 5;
+                }
+            } else {
+                // user not existing (email or pass bad)
+                return 1;
+            }
+            } else {
+                // toutes les données sont obligatoires
+                return 6;
+            }
+        }
+    }
+    
+if (isset($_POST['email']) && isset($_POST['password'])) {
+    echo json_encode(ControllerLogin::login());
+}
+    
