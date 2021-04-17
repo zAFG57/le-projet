@@ -11,7 +11,7 @@
 
         public static function isPro($id) {
             if (is_int($id)) {
-                return parent::sPro($id);
+                return parent::isPro($id);
             }
         }
 
