@@ -32,7 +32,7 @@
                         if (ControllerEmailVerification::sendValidationEmailFromArgs($_POST['email'],$_POST['csrf_token']) === 0) {
                             return 0;
                         } else {
-                            return 10;
+                            return 9;
                         }
                     } else {
                         return 6;
@@ -41,9 +41,9 @@
                     return 7;
                 }     
             } else {
-                return 9;
+                return 8;
             }
-            return -10;
+            return 10;
         }
     }
 
