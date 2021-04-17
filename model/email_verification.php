@@ -64,4 +64,32 @@ class EmailVerification extends Database {
         
     }
 
+    protected static function requestExisting($requestId){
+        return parent::sqlSelect('SELECT userId FROM requests WHERE id=? AND type=0', 'i', $requestId)->num_rows === 1;
+    }
+
+    protected static function requestTimestampEcceded($requestId){
+        return parent::sqlSelect('SELECT timestamp FROM requests WHERE id=? AND type=0', 'i', $requestId)->fetch_assoc()['timestamp'] < (time() - 60*60*24);
+    }
+
+    protected static function verifyHash($hash, $dbHash){
+        return password_verify(Config::urlSafeDecode($hash), $dbHash);
+    }
+
+    protected static function getHash($requestId){
+        return parent::sqlSelect('SELECT hash FROM requests WHERE id=? AND type=0', 'i', $requestId)->fetch_assoc()['hash'];
+    }
+
+    protected static function updateDbVerified($userId){
+        return parent::sqlUpdate('UPDATE users SET verified=1 WHERE id=?', 'i', $userId);
+    }
+
+    protected static function deleteOldsRequests($userId){
+        return parent::sqlUpdate('DELETE FROM requests WHERE userId=? and type=0', 'i', $userId);
+    }
+
+    protected static function getUserId($requestId){
+        return parent::sqlSelect('SELECT userId FROM requests WHERE id=? and type=0', 'i', $requestId)->fetch_assoc()['userId'];
+    }
+
 }

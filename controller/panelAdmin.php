@@ -2,7 +2,7 @@
 
     require_once('../model/config.php');
     require_once('../model/panelAdmin.php');
-
+    
     class ControllerAdmin extends Admin {
         public static function createAdminToken($id) {
             if (is_int($id)) {

@@ -14,7 +14,7 @@
                         $verifyCode = random_bytes(16);
                         $requestID = parent::saveHash(parent::getId($email), parent::createHashCode($verifyCode));
                         if ($requestID !== -1) {
-                            if(parent::sendEmail($email, parent::getUsername($email), 'Email Verification', '<a href="http://localhost/site/view/email_verification?id=' . $requestID . '&hash=' .urlSafeEncode($verifyCode) . '">cliquez sur ce lien pour vérifier votre email</a>')){
+                            if(parent::sendEmail($email, parent::getUsername($email), 'Email Verification', '<a href="http://localhost/site/view/email_verification?id=' . $requestID . '&hash=' . Config::urlSafeEncode($verifyCode) . '">cliquez sur ce lien pour vérifier votre email</a>')){
                                 return 0;
                             } else {
                                 return 1;
@@ -43,6 +43,24 @@
             if (isset($email) && isset($csrfToken) && ControllerCsrf::validateCsrfToken($csrfToken)) {
                 return self::sendEmailVerification($email);
             }
+        }
+
+        public static function verificationEmailValidation($requestId, $hash){
+            if (isset($requestId) && $requestId !== '' && isset($hash) && $hash !== '') {
+                if (parent::requestExisting($requestId)) {
+                    if (!parent::requestTimestampEcceded($requestId)) {
+                        if (parent::verifyHash($hash, parent::getHash($requestId))) {
+                            if (parent::updateDbVerified(parent::getUserId($requestId))) {
+                                parent::deleteOldsRequests(parent::getUserId($requestId));
+                                // email verified
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            // email could not be verrified
+            return false;
         }
 
     }

@@ -240,7 +240,7 @@ function sendValidateEmailRequest() {
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
 
-
+        console.log(data);
         //Show errors to user
         switch (data) {
             case '0':

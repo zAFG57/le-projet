@@ -2,7 +2,7 @@
 
     require_once('../model/login.php');
     require_once('csrfConfig.php');
-
+    session_start();
     class ControllerLogin extends Login {
         public static function login() {
             if (isset($_POST['email']) && isset($_POST['password']) ) { 

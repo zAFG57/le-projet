@@ -9,7 +9,6 @@
             $seed = Config::urlSafeEncode(random_bytes(8));
             $t = time();
             $hash = Config::urlSafeEncode(hash_hmac('sha256',  $seed . $t . $id . session_id(), Config::$ADMIN_TOKEN_SECRET, true));
-            // return $id;
             return Config::urlSafeEncode($hash . '|' . $seed . '|' . $t . '|' . $id);
         }
     
