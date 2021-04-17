@@ -8,7 +8,10 @@
 
 :root {
     --clr-primary: #2f743b;
-}
+  }
+
+
+
 
 header {
     z-index: 3;
@@ -27,7 +30,6 @@ header {
     background: var(--clr-primary);
     display: flex;
 }
-
 .gauche a {
     position: relative;
     width: 100%;
@@ -38,23 +40,71 @@ header {
     padding-left: 2.5%;
     text-decoration: none;
 }
-
 .gauche a h1 {
     color: rgb(255, 255, 255);
     font-size: 2.5vw;
-    line-height: 3.5vh !important;
+    line-height: 3.5vh;
     transform: translateX(-2vw);
     transition: 300ms ease-in-out;
 }
-
 .gauche a h1 span {
+     font-size: 1vw;
+}
+.gauche a:hover h1 {
+    text-shadow: #ffffff 0px 0px 200px;
+    letter-spacing: 1px;
+}
+.gauche img {
+    height: 8vh;
+    transition: transform 0.7s cubic-bezier(0.5,0.5,0.5,1.5);
+}
+.gauche img:hover {
+    transform: rotateZ(360deg);
+}
+
+
+
+
+.droit {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+}
+.droit ul {
+    all: unset;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.droit li {
+    all: unset;
+}
+.droit li :hover {
+    color: var(--clr-primary);
+    transition: 0.3s ease-in-out;
+}
+.responsivlien2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
     font-size: 1vw;
     color: #333333;
     text-decoration: none;
     font-weight: bold;
     cursor: pointer;
 }
-
+.responsivlien {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 1vw;
+    color: #333333;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
 .droit #pro {
     padding: 5px;
     background-color: var(--clr-primary);
@@ -73,33 +123,42 @@ header {
 }
 
 
-/*////////////////responsive 900px (téléphone et autre)//////*/
 
-@media screen and (max-width: 900px) {
+
+
+
+
+/*////////////////responsive 900px (téléphone et autre)//////*/
+@media screen and (max-width: 900px){
+    
     .gauche {
         display: none;
     }
     .droit {
         width: 100%;
     }
+   
     .responsivlien {
-        font-size: 2vw;
+        font-size: 2vw;  
     }
     .responsivlien2 {
         font-size: 3vw;
     }
+        
+    
 }
 
 
 /*/////////////////responsive 1300px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
-
 @media screen and (min-width: 900px) {
-    @media screen and (max-width: 1300px) {
-        .responsivlien {
-            font-size: 1.3vw;
-        }
-        .responsivlien2 {
-            font-size: 1.3vw;
-        }
+@media screen and (max-width: 1300px){
+     
+    .responsivlien {
+        font-size: 1.3vw;  
     }
-}
+    .responsivlien2 {
+        font-size: 1.3vw;
+    }
+
+    
+}}
