@@ -9,6 +9,9 @@
             }
         }
 
+        public static function userExisiting($id) {
+            return parent::userExisting($id);
+        }
         public static function isPro($id) {
             if (is_int($id)) {
                 return parent::isPro($id);

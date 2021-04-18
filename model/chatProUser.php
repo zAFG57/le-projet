@@ -3,7 +3,7 @@
     require_once('database.php');
     class ChatProUserMessage extends Database {
         
-        public static function createMessage($chatID, $content, $authorId) {
+        protected static function createMessage($chatID, $content, $authorId) {
             $IV = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-192-CBC'));
             return self::sendMessageToDB(self::createMessageId(), $chatID, self::encodeMessage($content, $IV), time(), $authorId, $IV);
         }
@@ -43,14 +43,14 @@
             return parent::sqlSelect('SELECT encryption_IV FROM chat_messages WHERE message_id=?', 's', $msgID)->fetch_assoc()['encryption_IV'];
         }
 
-        public static function getAllMessages($chatId) {
+        protected static function getAllMessages($chatId) {
             return parent::sqlSelect('SELECT * FROM chat_messages WHERE chat_id=? ORDER BY message_creation DESC', 'i', $chatId)->fetch_all(MYSQLI_ASSOC);
         }
     }
 
     class ChatProUser extends ChatProUserMessage {
-        protected static function newMessage($msg, $userID){
-            return parent::createMessage(124578, $msg, $userID);
+        protected static function newMessage($chatID, $msg, $userID){
+            return parent::createMessage($chatID, $msg, $userID);
         }
 
         protected static function getMessages($chatId){
@@ -66,7 +66,7 @@
         protected static function createChatId(){
             do {
                 $id = rand(1, 1000000000);
-            } while (self::chatIdAlreadyExisting($id));
+            } while (self::chatIdAlreadyExist($id));
             return $id;
         }
 
@@ -74,16 +74,25 @@
             return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE chat_id=?', 'i', $chatId)->num_rows === 1;
         }
 
-        protected static function updateChat($chatId, $proID, $clientID) {
-            return Database::sqlUpdate('INSERT INTO chat_pro_client WHERE chat_id=?', 'i', $chatId)->num_rows === 1;
+        protected static function updateChat($chatId, $clientID, $proID) {
+            return Database::sqlUpdate('INSERT INTO `chat_pro_client`(`chat_id`, `pro_id`, `client_id`, `chat_creation`) VALUES (?,?,?,?)', 'iiii', $chatId, $proID, $clientID, time());
         }
 
-        protected static function chatAlreadyCreated($proID, $userID) {
-            return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE pro_id=? AND client_id=?', 'ii', $proID, $userID)->num_rows === 1;
+        protected static function chatAlreadyCreated($userID, $proID) {
+            return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE pro_id=? AND client_id=?', 'ii', $proID, $userID)->num_rows >= 1;
         }
 
-        protected static function getChatID($proID, $userID) {
+        protected static function getChatID($userID, $proID) {
             return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE pro_id=? AND client_id=?', 'ii', $proID, $userID)->fetch_assoc()['chat_id'];
+        }
+
+
+        protected static function belongsUsr($userID, $chatID) {
+            return Database::sqlSelect('SELECT client_id FROM chat_pro_client WHERE chat_id=?', 'i', $chatID)->fetch_assoc()['client_id'] === $userID;
+        }
+
+        protected static function belongsPro($proID, $chatID) {
+            return Database::sqlSelect('SELECT pro_id FROM chat_pro_client WHERE chat_id=?', 'i', $chatID)->fetch_assoc()['pro_id'] === $proID;
         }
     }
 

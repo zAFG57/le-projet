@@ -1,0 +1,152 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.main {
+    position: absolute;
+    height: 90vh;
+    margin-top: 10vh;
+    width: 100vw;
+    display: flex;
+}
+
+.discution {
+    position: relative;
+    height: 100%;
+    background: darkseagreen;
+}
+
+.chat {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 255);
+}
+
+.mainchat {
+    position: relative;
+    height: 90%;
+    width: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    /*Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    /* scroll-behavior: smooth; */
+    overflow-x: hidden;
+}
+
+.mainchat::-webkit-scrollbar {
+    display: none;
+}
+
+.chatinput {
+    position: relative;
+    width: 100%;
+    height: 10%;
+    background: #2f743a85;
+}
+
+.message {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 75%;
+    display: flex;
+}
+
+.message input {
+    all: unset;
+    color: rgb(21, 66, 10);
+    text-align: center;
+    background: white;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    border-radius: 444444444px;
+}
+
+.send {
+    position: absolute;
+    height: calc(6.45vh - 20px);
+    width: calc(6.45vh - 20px);
+    background: #2f743b;
+    border-radius: 50%;
+    right: 0.15vh;
+    top: 0.15vh;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.mainchat div {
+    position: relative;
+    border-radius: 4444444444px;
+    border-bottom-left-radius: 0px;
+    margin: 10px;
+    height: max-content;
+    max-width: 80vw;
+    width: max-content;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+}
+
+.mainchat .you {
+    left: 0px;
+    background: #dbd3d3;
+}
+
+.mainchat .me {
+    border-radius: 4444444444px;
+    border-bottom-right-radius: 0px;
+    left: 100%;
+    transform: translateX(calc(-100% - 20px));
+    background: #2f743b;
+    color: white;
+}
+
+span {
+    overflow-wrap: break-word;
+    min-width: 200px;
+}
+
+
+/*////////////////responsive 900px (téléphone et autre)//////*/
+
+@media screen and (max-width: 900px) {
+    .mainchat div {
+        font-size: 1rem;
+    }
+    .discution {
+        display: none;
+    }
+    .mainchat {
+        background: rgb(255, 255, 255);
+    }
+    .message {
+        width: 90%;
+    }
+}
+
+
+/*/////////////////responsive 1300px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
+
+@media screen and (min-width: 900px) {
+    @media screen and (max-width: 1300px) {
+        .discution {
+            display: none;
+        }
+        .message {
+            width: 80%;
+        }
+        .mainchat div {
+            font-size: 3vw;
+        }
+    }
+}

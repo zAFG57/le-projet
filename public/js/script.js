@@ -29,6 +29,7 @@ function register() {
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
+        // console.log(data);
         data = JSON.parse(data);
 
 
@@ -38,7 +39,7 @@ function register() {
         } else {
             fetch('../public/js/error.json')
                 .then(res => res.json())
-                .then(res => document.getElementById('errs').innerHTML += res['register'][data[i]]);
+                .then(res => document.getElementById('errs').innerHTML += res['register'][data]);
         }
 
         setTimeout(function() {
@@ -56,6 +57,7 @@ function registerpro() {
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
 
+        // console.log(data)
         data = JSON.parse(data);
 
         if (data === 0) {
@@ -64,7 +66,7 @@ function registerpro() {
         } else {
             fetch('../public/js/error.json')
                 .then(res => res.json())
-                .then(res => document.getElementById('errs').innerHTML += res['register'][data[i]]);
+                .then(res => document.getElementById('errs').innerHTML += res['register'][data]);
         }
 
         setTimeout(function() {
@@ -208,7 +210,25 @@ function searchf() {
 
 
 
+function sendMessage() {
+    request('../controller/chatProUser.php', '#message', function(data) {
+        console.log(data);
+        data = JSON.parse(data)
+    })
+    document.getElementById('message').reset();
 
+}
+
+function getMessage() {
+    request('../controller/chatProUser.php', '#getMessage', function(data) {
+        data = JSON.parse(data)
+        console.log(data);
+
+        getMessage()
+    })
+}
+
+// callGetMessage
 
 
 

@@ -1,8 +1,7 @@
 <?php
-    require_once('util.php');
     require_once('database.php');
 
-    class CreateAccount extends Database {
+    class CreateProAccount extends Database {
         protected static function isEmailNotAlreadyUsing($email) {
             return parent::sqlSelect('SELECT id FROM users WHERE email=?', 's', $email)->num_rows === 0;
         }
