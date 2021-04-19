@@ -44,7 +44,7 @@
         }
 
         protected static function getAllMessages($chatId) {
-            return parent::sqlSelect('SELECT * FROM chat_messages WHERE chat_id=? ORDER BY message_creation DESC', 'i', $chatId)->fetch_all(MYSQLI_ASSOC);
+            return parent::sqlSelect('SELECT * FROM chat_messages WHERE chat_id=? ORDER BY message_creation ASC', 'i', $chatId)->fetch_all(MYSQLI_ASSOC);
         }
     }
 
@@ -53,15 +53,18 @@
             return parent::createMessage($chatID, $msg, $userID);
         }
 
-        protected static function getMessages($chatId){
+        protected static function getMessages($chatId, $userID){
             $res = [];
             foreach (parent::getAllMessages($chatId) as $msg ) {
                 $msg['message_content'] = parent::decodeMessage($msg['message_content'], parent::getIVFromMessageID($msg['message_id']));
+                $msg['isMe'] = $msg['message_author_id'] === $userID;
+
                 unset($msg['message_id'], $msg['chat_id'], $msg['encryption_IV']);      
                 array_push($res, $msg);
             }
             return $res;
         }
+
 
         protected static function createChatId(){
             do {
@@ -93,6 +96,14 @@
 
         protected static function belongsPro($proID, $chatID) {
             return Database::sqlSelect('SELECT pro_id FROM chat_pro_client WHERE chat_id=?', 'i', $chatID)->fetch_assoc()['pro_id'] === $proID;
+        }
+
+        protected static function getLastProUserID($chatID){
+            return Database::sqlSelect('SELECT pro_id FROM chat_pro_client WHERE chat_id=?', 'i', $chatID)->fetch_assoc()['pro_id'];
+        }
+
+        protected static function getLastClientUserID($chatID){
+            return Database::sqlSelect('SELECT client_id FROM chat_pro_client WHERE chat_id=?', 'i', $chatID)->fetch_assoc()['client_id'];
         }
     }
 

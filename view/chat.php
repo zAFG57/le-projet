@@ -16,20 +16,6 @@ include_once('../templates/nav.php');
         }
     }
 
-        
-    // }
-    
-    // if (isset($_GET['chatID']) && isset($_SESSION['userID'])) {
-    //     $amsg = ControllerChatProUser::displayMessages($_SESSION['userID'], intval($_GET['chatID']));
-    //     if (!$amsg) {
-    //         header("Location: ./chat.php");
-    //         exit;
-    //     } else {
-    //          var_dump($amsg);
-    //     }
-    // }
-
-    // var_dump(ControllerChatProUser::newMessage(ControllerChatProUser::openChat($_SESSION['userID'], intval($_GET['proID'])), 'Deuxième Message', $_SESSION['userID']));
     $title = "Chat"; $css = "chat.css";
     ob_start(); 
 ?>
@@ -44,30 +30,14 @@ include_once('../templates/nav.php');
 
             <div class="chat">
 
-                <div class="mainchat" id="scroll">
-
-                    <div class="me"><span>sdhgzsgzsg</span></div>
-                    <div class="me"><span>fhqdhrdfqhq</span></div>
-                    <div  class="you"><span>dfhqdfhqdfhfhbdfh</span></div>
-                    <div class="you"><span>sqfqsfqsfqsfq</span></div>
-                    <div class="me"><span>fhdfhdqfhqdfhfdhqdfh</span></div>
-                    <div class="me"><span>dfhdfhdfhFGDFGDFGDFGDFGDFGDFGDGqhfdhqhdfh</span></div>
-                    <div  class="you"><span>dqhdfhdqhfrdqhdfhf</span></div>
-                    <div class="me"><span>fdqhfhdqhqrdhfh</span></div>
-                    <div  class="you"><span>fhdfhdfhdfhdfhfdh</span></div>
-                    <div class="me"><span>fhefqfqFDGDFGDFGDFGDFGDFGDFGDsdfqsf ujhrfzhefjklzhfizep fehzufhzeilfhuzie fhezuifhziuefga zgaulfqmfhisodfma zdfhuaipzfhiuapzf qsfqs</span></div>
-                    <div class="me"><span>qsqsfqsfqsfqsfqsf</span></div>
-                    <div class="me"><span>o^ùkmhjktyhdfg</span></div>
-                    <div  class="you"><span>sdfsdgdfbhfgjnfgjk</span></div>
-                    <div class="me"><span>DFGHDFGDGDFGFD<br/><br/><br/>GDFGdfvngrukikjtfg</span></div>
-
+                <div class="mainchat" id="chat">
                 </div>
                 <div class="chatinput">
 
                     <form class="message" id="message">
 
                         <input id="chatin" type="text" placeholder="votre message" name="chatin" onkeydown="if(event.key === 'Enter'){event.preventDefault();sendMessage();}">
-                        <input id="userID" type="hidden" placeholder="votre message" name="userID" value="<?=327088253?>" readonly>
+                        <input id="userID" type="hidden" placeholder="votre message" name="userID" value="<?=ControllerChatProUser::getLastUser($_SESSION['userID'], $_GET['chatID']) ?>" readonly>
                         <div class="send" onclick="sendMessage()" >
                             <img src="../assets/avion.svg">
                         </div>
@@ -87,9 +57,14 @@ include_once('../templates/nav.php');
         <script src="../public/js/script.js"></script>
         <script>
             getMessage();
-            var chat = document.getElementsByClassName('mainchat')[0];
-            chat.scrollTop = chat.scrollHeight;
-            document.getElementById('scroll').style.scrollBehavior = "smooth"
+           function  getToBot() {
+                // document.getElementById('scroll').style.scrollBehavior = "unset"
+                var chat = document.getElementsByClassName('mainchat')[0];
+                chat.scrollTop = chat.scrollHeight;
+                document.getElementById('scroll').style.scrollBehavior = "smooth"
+            }
+            getToBot();
+            
         </script>
 
 
