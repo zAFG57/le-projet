@@ -4,6 +4,7 @@ function request(url, data, callback) {
     var loader = document.createElement('div');
     loader.className = 'loader';
     document.body.appendChild(loader);
+    loaderdiv(loader);
     xhr.addEventListener('readystatechange', function() {
         if (xhr.readyState === 4) {
             if (callback) {
@@ -23,12 +24,25 @@ function request(url, data, callback) {
     xhr.send(formdata);
 }
 
+function loaderdiv(loader) {
+    var loadera = document.createElement('div');
+    var loaderb = document.createElement('div');
+    var loaderc = document.createElement('div');
+    loadera.className = 'loadera';
+    loaderb.className = 'loaderb';
+    loaderc.className = 'loaderc';
+    document.getElementsByClassName('loader')[0].appendChild(loadera);
+    document.getElementsByClassName('loader')[0].appendChild(loaderb);
+    document.getElementsByClassName('loader')[0].appendChild(loaderc);
+
+}
 function register() {
     request('../controller/create_account.php', '#registerForm', function(data) {
         document.getElementById('errs').innerHTML = "";
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
+        // console.log(data);
         data = JSON.parse(data);
 
 
@@ -38,7 +52,7 @@ function register() {
         } else {
             fetch('../public/js/error.json')
                 .then(res => res.json())
-                .then(res => document.getElementById('errs').innerHTML += res['register'][data[i]]);
+                .then(res => document.getElementById('errs').innerHTML += res['register'][data]);
         }
 
         setTimeout(function() {
@@ -56,6 +70,7 @@ function registerpro() {
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
 
+        // console.log(data)
         data = JSON.parse(data);
 
         if (data === 0) {
@@ -64,7 +79,7 @@ function registerpro() {
         } else {
             fetch('../public/js/error.json')
                 .then(res => res.json())
-                .then(res => document.getElementById('errs').innerHTML += res['register'][data[i]]);
+                .then(res => document.getElementById('errs').innerHTML += res['register'][data]);
         }
 
         setTimeout(function() {
@@ -208,42 +223,38 @@ function searchf() {
 
 
 
+function sendMessage() {
+    request('../controller/chatProUser.php', '#message', function(data) {
 
+        data = JSON.parse(data)
+    })
+    document.getElementById('message').reset();
 
-
-
-function validé() {
-    console.log('plus dédit');
-    document.getElementsByClassName('namein')[0].style.display = 'none';
-    document.getElementsByClassName('namepro')[0].style.display = 'flex';
-    document.getElementsByClassName('bioin')[0].style.display = 'none';
-    document.getElementsByClassName('biopro')[0].style.display = 'flex';
-    document.getElementsByClassName('emailin')[0].style.display = 'none';
-    document.getElementsByClassName('emailpro')[0].style.display = 'flex';
-    document.getElementsByClassName('réparationin')[0].style.display = 'none';
-    document.getElementsByClassName('réparationpro')[0].style.display = 'flex';
 }
 
-function nameédit() {
-    console.log("name édit");
-    document.getElementsByClassName('namein')[0].style.display = 'flex';
-    document.getElementsByClassName('namepro')[0].style.display = 'none';
-}
+function getMessage() {
+    request('../controller/chatProUser.php', '#getMessage', function(data) {
+        data = JSON.parse(data)
 
-function bioédit() {
-    console.log("bio édit");
-    document.getElementsByClassName('bioin')[0].style.display = 'flex';
-    document.getElementsByClassName('biopro')[0].style.display = 'none';
-}
+        const displayMessage = (data) => {
+            res = "";
+            data.forEach(element => {
+                res += `<div class="${element['isMe'] === true ? "me" : "you"}"><span>${element['message_content']}</span></div>`
 
-function emailédit() {
-    console.log("email édit");
-    document.getElementsByClassName('emailin')[0].style.display = 'flex';
-    document.getElementsByClassName('emailpro')[0].style.display = 'none';
-}
+            });
+            return res;
+        }
 
-function réparationédit() {
-    console.log("réparation édit");
-    document.getElementsByClassName('réparationin')[0].style.display = 'flex';
-    document.getElementsByClassName('réparationpro')[0].style.display = 'none';
+
+        if (data instanceof Array) {
+            if (displayMessage(data) != document.getElementById('chat').innerHTML) {
+                document.getElementById('chat').innerHTML = displayMessage(data);
+                getToBot();
+            }
+        }
+
+        getMessage()
+
+
+    })
 }
