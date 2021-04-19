@@ -29,7 +29,7 @@ function register() {
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
-        // console.log(data);
+        console.log(data);
         data = JSON.parse(data);
 
 
@@ -212,7 +212,7 @@ function searchf() {
 
 function sendMessage() {
     request('../controller/chatProUser.php', '#message', function(data) {
-
+        console.log(data);
         data = JSON.parse(data)
     })
     document.getElementById('message').reset();
@@ -221,7 +221,9 @@ function sendMessage() {
 
 function getMessage() {
     request('../controller/chatProUser.php', '#getMessage', function(data) {
+        // console.log(data)
         data = JSON.parse(data)
+        console.log(data);
 
         const displayMessage = (data) => {
             res = "";
@@ -234,7 +236,8 @@ function getMessage() {
 
 
         if (data instanceof Array) {
-            if (displayMessage(data) != document.getElementById('chat').innerHTML) {
+            if (displayMessage(data) !== document.getElementById('chat').innerHTML) {
+                console.log(displayMessage(data) !== document.getElementById('chat').innerHTML)
                 document.getElementById('chat').innerHTML = displayMessage(data);
                 getToBot();
             }

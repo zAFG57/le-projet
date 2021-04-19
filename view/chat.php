@@ -1,7 +1,9 @@
 <?php 
-include_once('../templates/nav.php');
 
     session_start();
+
+include_once('../templates/nav.php');
+
     require_once('../controller/chatProUser.php');
     require_once('../controller/user.php');
     // // echo $_SESSION['userID'];
@@ -18,55 +20,23 @@ include_once('../templates/nav.php');
 
     $title = "Chat"; $css = "chat.css";
     ob_start(); 
-?>
+?> 
+
 <header>
     <?=$nav?>
 </header>
-        <div class="main">
 
-            <div class="discution" id="scroll">
-                <h1>différente discution</h1>
-            </div>
-
-            <div class="chat">
-
-                <div class="mainchat" id="chat">
-                </div>
-                <div class="chatinput">
-
-                    <form class="message" id="message">
-
-                        <input id="chatin" type="text" placeholder="votre message" name="chatin" onkeydown="if(event.key === 'Enter'){event.preventDefault();sendMessage();}">
-                        <input id="userID" type="hidden" placeholder="votre message" name="userID" value="<?=ControllerChatProUser::getLastUser($_SESSION['userID'], $_GET['chatID']) ?>" readonly>
-                        <div class="send" onclick="sendMessage()" >
-                            <img src="../assets/avion.svg">
-                        </div>
-
-                    </form>
-
-                </div>
-
-            </div>
-
-        </div>
-        
-        <form id="getMessage">
-            <input type="hidden" name="chatID" value="<?=$_GET['chatID']?>" readonly>
-        </form>
-
-        <script src="../public/js/script.js"></script>
-        <script>
-            getMessage();
-           function  getToBot() {
-                // document.getElementById('scroll').style.scrollBehavior = "unset"
-                var chat = document.getElementsByClassName('mainchat')[0];
-                chat.scrollTop = chat.scrollHeight;
-                document.getElementById('scroll').style.scrollBehavior = "smooth"
-            }
-            getToBot();
-            
-        </script>
-
+<?php
+    if(!isset($_GET['chatID'])) {
+        require_once('./chats/chatBase.php');
+    } else if(isset($_GET['chatID'])) {
+        if(ControllerChatProUser::displayMessages($_SESSION['userID'], intval($_GET['chatID']))) {
+            require_once('../view/chats/displayChat.php');
+        } else {
+            require_once('./chats/chatBase.php');
+        }
+    }
+?>
 
 <?php $content = ob_get_clean(); ?>
 

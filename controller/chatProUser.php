@@ -66,16 +66,18 @@
                         return parent::getChatID($userID, $proID);
                     }
                 } else {
-                    return -1;
+                    return false;
                 }
                 // return $proID;
             } else {
-                return -2;
+                return false;
             }
         }
 
         public static function getLastUser($userID, $chatID) {
             if(ControllerUser::userExisiting($userID)){
+
+                //verifier si le chat existe
                 if (ControllerUser::isPro($userID)) {
                     return parent::getLastClientUserID($chatID);
                 } else {
@@ -83,6 +85,17 @@
                 }
             }
         }
+
+        public static function myDiscussions($userID) {
+            if (ControllerUser::userExisiting($userID)) {
+                if (ControllerUser::isPro($userID)) {
+                    return parent::getDiscutionsPro($userID);
+                } else {
+                    return parent::getDiscutionsUser($userID);
+                }
+            }
+        }
+
     }
 
     if (isset($_POST['chatin']) && isset($_POST['userID'])  && isset($_POST['csrf_token'])) {
@@ -105,6 +118,7 @@
 
 
     if (isset($_POST['chatID']) && isset($_POST['csrf_token'])) {
+        
         session_start();
         if (isset($_SESSION['userID'])) {
             if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {

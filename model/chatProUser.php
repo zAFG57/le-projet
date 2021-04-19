@@ -105,6 +105,14 @@
         protected static function getLastClientUserID($chatID){
             return Database::sqlSelect('SELECT client_id FROM chat_pro_client WHERE chat_id=?', 'i', $chatID)->fetch_assoc()['client_id'];
         }
+
+        protected static function getDiscutionsPro($chatID){
+            return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE pro_id=?', 'i', $chatID)->fetch_assoc()['chat_id'];
+        }
+
+        protected static function getDiscutionsUser($chatID){
+            return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE client_id=?', 'i', $chatID)->fetch_assoc()['chat_id'];
+        }
     }
 
     
