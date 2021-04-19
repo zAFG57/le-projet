@@ -241,9 +241,6 @@ body {
 
 /*                           résultat de la recherche:       */
 
-
-
-
 #resSearch {
   position: absolute;
   width: 100%;
@@ -254,60 +251,64 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50% , -35%);
-  background-color: rgb(110, 147, 93);
-  width: 90vw;
-  height: 70vh;
-  display: grid;
-  grid-gap: 50px;
-  grid-template-columns: repeat(auto-fill, 500px);
-  grid-template-rows: repeat(auto-fill,200px);
+  transform: translate(-50%, -35%);
+  width: 95vw;
+  height: 80vh;
   overflow: scroll;
-  justify-content: center;
-  padding: 10px;
-
-  box-shadow: -2px 4px 20px 6px rgba(0, 0, 0, 0.3) inset;
-
-
-  -ms-overflow-style: none;  /*Edge */
-  scrollbar-width: none;  /* Firefox */
+  padding: 40px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
+
 .grid::-webkit-scrollbar {
   display: none;
 }
 
-
 .card {
-  width: 500px;
-  height: 200px;
-  background-color: turquoise;
+  margin-top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+  width: 90%;
+  height: 40vh;
+  background-color: white;
   display: flex;
   border-radius: 30px;
   overflow: hidden;
+  cursor: pointer;
+  transition: 0.5s;
 }
+
+.card:hover {
+  transform: scale(1.05) translateX(-50%);
+}
+
 .cardgauche {
   position: relative;
-  width: 200px;
+  width: 40vh;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 0, 0, 0.2);
 }
+
 .cardimg {
   position: relative;
   width: 100%;
   height: 100%;
 }
+
 .cardimg img {
   width: 100%;
 }
+
 .carddroit {
   position: relative;
   width: calc(100% - 200px);
   height: 100%;
   text-align: center;
 }
+
 .cardnom {
   position: relative;
   height: 30%;
@@ -315,35 +316,80 @@ body {
   background-color: var(--clr-primary);
   color: white;
 }
+
+.cardnom h1 {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .carddescription {
   padding-right: 10px;
   padding-left: 10px;
   text-overflow: " [..]";
-  line-height: 22px;         /*     128 caractère max*/
+  line-height: 22px;
 }
 
 .cardétoile {
   color: rgb(255, 187, 0);
-  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
   font-size: 30px;
   height: 30px;
   transform: translateY(-10px);
 }
 
 
-
-
-
-
-
-
-
-
 /*                      fin résultat de la recherche;        */
 
 
 
+/*                                                                  loader                           */
 
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 70000;
+}
+.loader div {
+  position: relative;
+  width: 31%;
+  height: 100%;
+  background: rgb(255, 255, 255)
+}
+.loadera {
+  animation: loaderdiv 1s infinite linear; 
+}
+.loaderb {
+  animation: 1s loaderdiv -0.33s infinite linear;
+}
+.loaderc {
+  animation: 1s loaderdiv -0.66s infinite linear;
+}
+
+@keyframes loaderdiv {
+  0% {
+    height: 100%;
+    background: #90ce9a;
+  }
+  50% {
+    height: 20%;
+    background: var(--clr-primary);
+  }
+  100% {
+    height: 100%;
+    background: #90ce9a;
+  }
+}
+
+
+/*                                                                  loader     fin                      */
 
 
 
