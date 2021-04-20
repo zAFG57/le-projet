@@ -30,15 +30,14 @@
 <input type="hidden" name="chatID" value="<?=intval($_GET['chatID'])?>" readonly>
 </form>
 
-<script src="../public/js/script.js"></script>
 <script>
-getMessage();
-function  getToBot() {
-    // document.getElementById('scroll').style.scrollBehavior = "unset"
-    var chat = document.getElementsByClassName('mainchat')[0];
-    chat.scrollTop = chat.scrollHeight;
-    document.getElementById('scroll').style.scrollBehavior = "smooth"
-}
-getToBot();
+    getMessage();
+    function  getToBot() {
+        // document.getElementById('scroll').style.scrollBehavior = "unset"
+        var chat = document.getElementsByClassName('mainchat')[0];
+        chat.scrollTop = chat.scrollHeight;
+        document.getElementById('scroll').style.scrollBehavior = "smooth"
+    }
+    getToBot(); 
 
 </script>

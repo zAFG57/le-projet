@@ -14,11 +14,8 @@
         exit;
     }
 
-        if(ControllerChatProUser::openChat($_SESSION['userID'], intval($_GET['proID']))){
+        if(isset($_GET['proID']) && ControllerChatProUser::openChat($_SESSION['userID'], intval($_GET['proID']))){
             header("Location: ./chat.php?chatID=". ControllerChatProUser::openChat($_SESSION['userID'], intval($_GET['proID'])));
-            exit;
-        } else {
-            header("Location: ./chat.php");
             exit;
         }
 ?> 
@@ -31,9 +28,10 @@
 <header>
     <?=$nav?>
 </header>
-
+        <form id="getConv">
+            <input type="hidden" name="myIdForConvs" value="<?=$_SESSION['userID']?>">
+        </form>
 <?php
-
     if(isset($_GET['chatID']) && ControllerChatProUser::displayMessages($_SESSION['userID'], intval($_GET['chatID']))) {
         require_once('../view/chats/displayChat.php');
     } else {
@@ -42,6 +40,8 @@
     
 ?>
 
+<script src="../public/js/script.js"></script>
+<script>getConv()</script>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('../templates/baseTemplate.php'); ?>

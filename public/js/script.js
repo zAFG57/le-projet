@@ -1,16 +1,21 @@
-function request(url, data, callback) {
+function request(url, data, setloader = true, callback) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
-    var loader = document.createElement('div');
-    loader.className = 'loader';
-    document.body.appendChild(loader);
-    loaderdiv(loader);
+    if (setloader) {
+        var loader = document.createElement('div');
+        loader.className = 'loader';
+        document.body.appendChild(loader);
+        loaderdiv(loader);
+    }
+
     xhr.addEventListener('readystatechange', function() {
         if (xhr.readyState === 4) {
             if (callback) {
                 callback(xhr.response);
             }
-            loader.remove();
+            if (setloader) {
+                loader.remove();
+            }
         }
     });
 
@@ -31,9 +36,9 @@ function loaderdiv(loader) {
     loadera.className = 'loadera';
     loaderb.className = 'loaderb';
     loaderc.className = 'loaderc';
-    document.getElementsByClassName('loader')[0].appendChild(loadera);
-    document.getElementsByClassName('loader')[0].appendChild(loaderb);
-    document.getElementsByClassName('loader')[0].appendChild(loaderc);
+    loader.appendChild(loadera);
+    loader.appendChild(loaderb);
+    loader.appendChild(loaderc);
 
 }
 
@@ -225,8 +230,8 @@ function searchf() {
 
 
 function sendMessage() {
-    request('../controller/chatProUser.php', '#message', function(data) {
-        console.log(data);
+    request('../controller/chatProUser.php', '#message', setloader = false, function(data) {
+
         data = JSON.parse(data)
     })
     document.getElementById('message').reset();
@@ -234,10 +239,8 @@ function sendMessage() {
 }
 
 function getMessage() {
-    request('../controller/chatProUser.php', '#getMessage', function(data) {
-        // console.log(data)
+    request('../controller/chatProUser.php', '#getMessage', setloader = false, function(data) {
         data = JSON.parse(data)
-        console.log(data);
 
         const displayMessage = (data) => {
             res = "";
@@ -248,48 +251,53 @@ function getMessage() {
             return res;
         }
 
+        const changeEncoding = (data) => {
+            return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+        }
 
         if (data instanceof Array) {
-            if (displayMessage(data) !== document.getElementById('chat').innerHTML) {
-                console.log(displayMessage(data) !== document.getElementById('chat').innerHTML)
+            if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('chat').innerHTML)) {
                 document.getElementById('chat').innerHTML = displayMessage(data);
                 getToBot();
             }
         }
-
         getMessage()
-
-
     })
 }
 
+function getConv() {
 
 
-// callGetMessage
-
-function getMessage() {
-    request('../controller/chatProUser.php', '#getMessage', function(data) {
-        data = JSON.parse(data)
-
-        const displayMessage = (data) => {
-            res = "";
-            data.forEach(element => {
-                res += `<div class="${element['isMe'] === true ? "me" : "you"}"><span>${element['message_content']}</span></div>`
-
-            });
-            return res;
-        }
+    request('../controller/chatProUser.php', '#getConv', setloader = false, function(data) {
 
 
-        if (data instanceof Array) {
-            if (displayMessage(data) != document.getElementById('chat').innerHTML) {
-                document.getElementById('chat').innerHTML = displayMessage(data);
-                getToBot();
+            console.log(data)
+            data = JSON.parse(data)
+            data = data[0];
+
+            const displayMessage = (data) => {
+                res = "";
+                data.forEach(element => {
+                    res += `<a href="./chat?chatID=${element['chat_id']}" class="discutionlien">
+                            <div>
+                                <h1 class="discutionnom">${element['username']}</h1>
+                                <h2 class="discutionmessage"><span>${element['isMe'] === true ? "Moi" : element['username']} : </span>${element['message_content']}</h2>
+                            </div>
+                        </a>`
+                });
+                return res;
             }
-        }
 
-        getMessage()
+            const changeEncoding = (data) => {
+                return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+            }
 
-
-    })
+            if (data instanceof Array) {
+                if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('scroll').innerHTML)) {
+                    document.getElementById('scroll').innerHTML = displayMessage(data);
+                    // getToBot();
+                }
+            }
+        })
+        // getConv()
 }

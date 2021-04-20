@@ -46,6 +46,11 @@
         protected static function getAllMessages($chatId) {
             return parent::sqlSelect('SELECT * FROM chat_messages WHERE chat_id=? ORDER BY message_creation ASC', 'i', $chatId)->fetch_all(MYSQLI_ASSOC);
         }
+
+        protected static function getLastMessage($userID, $chatID) {
+            return parent::sqlSelect('SELECT * FROM chat_messages WHERE chat_id=? ORDER BY message_creation DESC LIMIT 1', 'i', $chatID)->fetch_assoc();
+        }
+
     }
 
     class ChatProUser extends ChatProUserMessage {
@@ -55,7 +60,11 @@
 
         protected static function getMessages($chatId, $userID){
             $res = [];
-            foreach (parent::getAllMessages($chatId) as $msg ) {
+            $messages = parent::getAllMessages($chatId);
+            if (empty($messages)) {
+                return true;
+            }
+            foreach ( $messages as $msg ) {
                 $msg['message_content'] = parent::decodeMessage($msg['message_content'], parent::getIVFromMessageID($msg['message_id']));
                 $msg['isMe'] = $msg['message_author_id'] === $userID;
 
@@ -107,12 +116,21 @@
         }
 
         protected static function getDiscutionsPro($chatID){
-            return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE pro_id=?', 'i', $chatID)->fetch_assoc()['chat_id'];
+            return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE pro_id=?', 'i', $chatID)->fetch_all(MYSQLI_ASSOC);
         }
 
         protected static function getDiscutionsUser($chatID){
-            return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE client_id=?', 'i', $chatID)->fetch_assoc()['chat_id'];
+            return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE client_id=?', 'i', $chatID)->fetch_all(MYSQLI_ASSOC);
         }
+
+        protected static function getLastMessage($userID, $chatID){
+            return parent::getLastMessage($userID, $chatID);
+        }
+
+        protected static function decodeMessage($msg, $IV){
+            return parent::decodeMessage($msg, $IV);
+        }
+
     }
 
     

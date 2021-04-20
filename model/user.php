@@ -63,5 +63,9 @@
         protected static function userExisting($id) {
             return parent::sqlSelect('SELECT id FROM users WHERE id = ?', 'i', $id)->num_rows === 1;
         }
+
+        protected static function getUserName($id) {
+            return parent::sqlSelect('SELECT username FROM users WHERE id = ?', 'i', $id)->fetch_assoc()['username'];
+        }
     }
     

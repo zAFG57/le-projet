@@ -14,12 +14,62 @@ body {
 .discution {
     position: relative;
     height: 100%;
-    background: darkseagreen;
+    width: 20%;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: hidden;
+}
+
+.discution::-webkit-scrollbar {
+    display: none;
+}
+
+.discutionlien {
+    margin: 10px;
+    text-decoration: none;
+}
+
+.discutionlien div {
+    border: 1px solid var(--clr-primary);
+    background: transparent;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 5px;
+    transition: 500ms;
+    color: var(--clr-primary);
+}
+
+.discutionnom {
+    font-size: 2em;
+    text-align: center;
+}
+
+.discutionmessage {
+    text-align: center;
+    position: relative;
+    width: 100%;
+    color: #333;
+    font-size: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.discutionlien div:hover {
+    background: var(--clr-primary);
+    color: #fff;
+}
+
+.discutionlien div:hover .discutionmessage {
+    color: hsl(0, 0%, 80%);
 }
 
 .chat {
+    border-left: 5px solid var(--clr-primary);
     position: relative;
-    width: 100%;
+    width: 80%;
     height: 100%;
     background: rgb(255, 255, 255);
 }
@@ -45,7 +95,7 @@ body {
     position: relative;
     width: 100%;
     height: 10%;
-    background: #2f743a85;
+    background: var(--clr-primary);
 }
 
 .message {
@@ -114,12 +164,28 @@ body {
 
 span {
     overflow-wrap: break-word;
-    min-width: 200px;
+    max-width: calc(80vw - 2em);
 }
 
 .mesmessagenav {
     display: none;
 }
+
+
+/*                          page sans chat ouvert:  */
+
+.bvnsurvosmessage {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: max-content;
+    color: var(--clr-primary);
+    font-size: calc(2em - 5px);
+}
+
+
+/*                          fin page sans chat ouvert:  */
 
 
 /*////////////////responsive 900px (téléphone et autre)//////*/
@@ -137,6 +203,10 @@ span {
     .message {
         width: 90%;
     }
+    .chat {
+        width: 100%;
+        border-left: none;
+    }
 }
 
 
@@ -152,6 +222,10 @@ span {
         }
         .mainchat div {
             font-size: 3vw;
+        }
+        .chat {
+            border-left: none;
+            width: 100%;
         }
     }
 }
