@@ -40,7 +40,7 @@
         }
 
         protected static function isPro($id){
-            return $this->parent::sqlSelect('SELECT users.pro FROM users WHERE users.id = ?', 'i', $id)->fetch_assoc()['pro'];
+            return parent::sqlSelect('SELECT users.pro FROM users WHERE users.id = ?', 'i', $id)->fetch_assoc()['pro'] === 1;
         }
 
         protected static function isConnected() {
@@ -58,6 +58,10 @@
                 }
             }
             return false;
+        }
+
+        protected static function userExisting($id) {
+            return parent::sqlSelect('SELECT id FROM users WHERE id = ?', 'i', $id)->num_rows === 1;
         }
     }
     

@@ -17,7 +17,7 @@
             // error ocured page a faire : require_once('email_verification_page_not_success.php')
         }
     } else {
-        require_once('email_verification_page.php');
+        require_once('vEmail/email_verification_page.php');
     }
 ?>
    
