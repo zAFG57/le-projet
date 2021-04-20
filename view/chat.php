@@ -1,7 +1,8 @@
 <?php 
+session_start();
 include_once('../templates/nav.php');
 
-    session_start();
+    
     require_once('../controller/chatProUser.php');
     require_once('../controller/user.php');
     // // echo $_SESSION['userID'];
