@@ -80,6 +80,7 @@ body {
     top: 0.15vh;
     padding: 10px;
     cursor: pointer;
+    box-sizing: unset;
 }
 
 .mainchat div {
@@ -114,6 +115,10 @@ body {
 span {
     overflow-wrap: break-word;
     min-width: 200px;
+}
+
+.mesmessagenav {
+    display: none;
 }
 
 

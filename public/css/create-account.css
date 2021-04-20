@@ -146,13 +146,22 @@ header {
 }
 
 
-/*////////////////responsive 900px (téléphone et autre)//////*/
 
-@media screen and (max-width: 900px) {}
+
+
+
+/*////////////////responsive 900px (téléphone et autre)//////*/
+@media screen and (max-width: 900px){
+    
+
+
+}
 
 
 /*/////////////////responsive 1500px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
-
 @media screen and (min-width: 900px) {
-    @media screen and (max-width: 1500px) {}
-}
+@media screen and (max-width: 1500px){
+ 
+
+
+}}
