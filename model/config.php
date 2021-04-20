@@ -11,6 +11,8 @@
 
         protected static $ADMIN_TOKEN_SECRET = '1qzd5q4r7zd6q5z415q4z56q4dzq84dq5d1zq87rf8v5k6i8r4rd84qnz';
 
+        protected static $MESSAGE_KEY_SECRET = '5d4f88t965az625l5i1u21b5e456w4x56dzd54qzdz845484zd4qzd5sd6r99ikupo87sef845151s5jjh5d4dz';
+
         protected static $SMTP_HOST = 'smtp.gmail.com';
         protected static $SMTP_PORT = 465;
         protected static $SMTP_USERNAME = 'contact.mesreparations@gmail.com';

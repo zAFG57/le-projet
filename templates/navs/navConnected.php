@@ -13,3 +13,9 @@
         <li><div id="pro" class="responsivlien2" onclick="logout()">Se déconnecter</div></li>
     </ul>
 </div>
+
+
+
+<div class="mesmessagenav" onclick="window.location.href='../index?location=chat';">
+    <img src="../assets/mail.svg">
+</div>
