@@ -105,7 +105,7 @@
                         unset($lastMessage['message_id'], $lastMessage['encryption_IV'], $lastMessage['message_creation'], $lastMessage['message_author_id']);      
                         array_push($res, [$lastMessage]);
                     }
-                    return $res;
+                    return $res[0];
                 } else {
                     $chatIDs = parent::getDiscutionsUser($userID);
 

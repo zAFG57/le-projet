@@ -1,11 +1,13 @@
 <div class="main">
 
 <div class="discution" id="scroll">
-    <h1>différente discution</h1>
+
 </div>
 
 <div class="chat">
-
+    <div class="bvnsurvosmessage">
+            <h1>Bienvenue sur vos messages</h1>
+    </div>
 </div>
 
 </div>
