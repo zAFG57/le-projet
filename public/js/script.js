@@ -1,16 +1,21 @@
-function request(url, data, callback) {
+function request(url, data, setloader = true, callback) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
-    var loader = document.createElement('div');
-    loader.className = 'loader';
-    document.body.appendChild(loader);
-    loaderdiv(loader);
+    if (setloader) {
+        var loader = document.createElement('div');
+        loader.className = 'loader';
+        document.body.appendChild(loader);
+        loaderdiv(loader);
+    }
+
     xhr.addEventListener('readystatechange', function() {
         if (xhr.readyState === 4) {
             if (callback) {
                 callback(xhr.response);
             }
-            loader.remove();
+            if (setloader) {
+                loader.remove();
+            }
         }
     });
 
@@ -31,13 +36,14 @@ function loaderdiv(loader) {
     loadera.className = 'loadera';
     loaderb.className = 'loaderb';
     loaderc.className = 'loaderc';
-    document.getElementsByClassName('loader')[0].appendChild(loadera);
-    document.getElementsByClassName('loader')[0].appendChild(loaderb);
-    document.getElementsByClassName('loader')[0].appendChild(loaderc);
+    loader.appendChild(loadera);
+    loader.appendChild(loaderb);
+    loader.appendChild(loaderc);
 
 }
+
 function register() {
-    request('../controller/create_account.php', '#registerForm', function(data) {
+    request('../controller/create_account.php', '#registerForm', setloader = true, function(data) {
         document.getElementById('errs').innerHTML = "";
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
@@ -64,7 +70,7 @@ function register() {
 
 ///////////////////////////////////////////////////////////test début//////////////////////
 function registerpro() {
-    request('../controller/create_professional_account.php', '#registerForm', function(data) {
+    request('../controller/create_professional_account.php', '#registerForm', setloader = true, function(data) {
         document.getElementById('errs').innerHTML = "";
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
@@ -93,7 +99,7 @@ function registerpro() {
 
 
 function login() {
-    request('../controller/login.php', '#loginform', function(data) {
+    request('../controller/login.php', '#loginform', setloader = true, function(data) {
 
         document.getElementById('errs').innerHTML = "";
         var transition = document.getElementById('errs').style.transition;
@@ -102,7 +108,7 @@ function login() {
         // console.log(data);
         data = JSON.parse(data);
 
-        if (data === 0) {
+        if (data == 0) {
             window.location = '../';
         } else {
             fetch('../public/js/error.json')
@@ -120,7 +126,7 @@ function login() {
 }
 
 function logout() {
-    request('../controller/logout.php', false, function(data) {
+    request('../controller/logout.php', false, setloader = true, function(data) {
         // console.log(data)
         data = JSON.parse(data);
         if (data === 0) {
@@ -130,7 +136,7 @@ function logout() {
 }
 
 function sendValidateEmailRequest() {
-    request('../controller/email_verification.php', '#verificationForm', function(data) {
+    request('../controller/email_verification.php', '#verificationForm', setloader = true, function(data) {
         document.getElementById('errs').innerHTML = "";
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
@@ -159,7 +165,7 @@ function sendValidateEmailRequest() {
 
 
 function searchf() {
-    request('../controller/search.php', '#search', function(data) {
+    request('../controller/search.php', '#search', setloader = true, function(data) {
         document.getElementById('resSearch').innerHTML = "";
         var transition = document.getElementById('resSearch').style.transition;
         document.getElementById('resSearch').style.transition = "none";
@@ -224,7 +230,7 @@ function searchf() {
 
 
 function sendMessage() {
-    request('../controller/chatProUser.php', '#message', function(data) {
+    request('../controller/chatProUser.php', '#message', setloader = false, function(data) {
 
         data = JSON.parse(data)
     })
@@ -233,7 +239,7 @@ function sendMessage() {
 }
 
 function getMessage() {
-    request('../controller/chatProUser.php', '#getMessage', function(data) {
+    request('../controller/chatProUser.php', '#getMessage', setloader = false, function(data) {
         data = JSON.parse(data)
 
         const displayMessage = (data) => {
@@ -245,16 +251,52 @@ function getMessage() {
             return res;
         }
 
+        const changeEncoding = (data) => {
+            return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+        }
 
         if (data instanceof Array) {
-            if (displayMessage(data) != document.getElementById('chat').innerHTML) {
+            if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('chat').innerHTML)) {
                 document.getElementById('chat').innerHTML = displayMessage(data);
                 getToBot();
             }
         }
-
         getMessage()
 
+    })
 
+}
+
+function getConv() {
+    request('../controller/chatProUser.php', '#getConv', setloader = false, function(data) {
+
+
+        // console.log(data)
+        data = JSON.parse(data)
+        console.log(data)
+        const displayMessage = (data) => {
+            res = "";
+            data.forEach(element => {
+                res += `<a href="./chat?chatID=${element['chat_id']}" class="discutionlien">
+                            <div>
+                                <h1 class="discutionnom">${element['username']}</h1>
+                                <h2 class="discutionmessage"><span>${element['isMe'] === true ? "Moi" : element['username']} : </span>${element['message_content']}</h2>
+                            </div>
+                        </a>`
+            });
+            return res;
+        }
+
+        const changeEncoding = (data) => {
+                return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+            }
+            // console.log("otazzo")
+
+        if (data instanceof Array) {
+            if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('scroll').innerHTML)) {
+                document.getElementById('scroll').innerHTML = displayMessage(data);
+            }
+        }
+        getConv()
     })
 }
