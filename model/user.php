@@ -14,7 +14,7 @@
             self::getInfoUser($id);
         }
 
-        protected static function getInfoUser($id) {
+        protected static function getInfoUser($id, $protectEmail = true) {
             if (!$id) return;
 
             $userInfo;
@@ -26,6 +26,9 @@
 
             if ($res && $res->num_rows === 1) {
                 $userInfo = $res->fetch_assoc();
+                if ($protectEmail) {
+                    $userInfo['email'] = self::protectEmail($userInfo['email']);
+                }
             }  
 
             if (self::isPro($userInfo['id'])) {
@@ -69,5 +72,11 @@
         protected static function getUserName($id) {
             return parent::sqlSelect('SELECT username FROM users WHERE id = ?', 'i', $id)->fetch_assoc()['username'];
         }
+
+        protected static function protectEmail($email) {
+
+            return $email[0] . $email[1] . $email[2] . $email[3] . $email[4] . "...@..." . $email[-4] . $email[-3] . $email[-2]. $email[-1];
+        }
+
     }
     

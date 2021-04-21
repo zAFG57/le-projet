@@ -24,8 +24,10 @@
                 $user = controllerUser::getUserInfo(intval($_GET['user']));
                 require_once('./profile/pro.php');
             } else if(intval($_GET['user']) === $_SESSION['userID']) {
-                $user = controllerUser::getUserInfo(intval($_SESSION['userID']));
+                $user = controllerUser::getUserInfo($_SESSION['userID']);
                 require_once('./profile/user.php');
+            } else {
+                require_once('./profile/userNotFound.php');
             }
             
         } else {
