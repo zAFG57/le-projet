@@ -69,13 +69,10 @@ body {
 .mainchat {
     position: relative;
     height: 90%;
-    width: 100%;
+    width: calc(100% - 10px);
     overflow-y: scroll;
     -ms-overflow-style: none;
-    /*Edge */
     scrollbar-width: none;
-    /* Firefox */
-    /* scroll-behavior: smooth; */
     overflow-x: hidden;
 }
 
@@ -131,7 +128,7 @@ body {
     border-bottom-left-radius: 0px;
     margin: 10px;
     height: max-content;
-    max-width: 80vw;
+    max-width: 70vw;
     width: max-content;
     padding: 1em;
     display: flex;
@@ -156,7 +153,7 @@ body {
 
 span {
     overflow-wrap: break-word;
-    max-width: calc(80vw - 2em);
+    max-width: calc(70vw - 2em);
 }
 .mesmessagenav {
     display: none;
