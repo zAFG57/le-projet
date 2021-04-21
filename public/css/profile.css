@@ -1,124 +1,163 @@
 body {
+    margin: 0;
+    padding: 0;
     background-image: url("../../assets/environment1.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
     background-position: center;
-    background-attachment: fixed;
     height: 100vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-header {
-    margin: 40px 40px;
-}
-
-.main {
-    height: 70vh;
-    width: 60vw;
-    border-radius: 60px;
-    position: absolute;
-    top: 20vh;
-    left: 20vw;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
     overflow: hidden;
 }
 .haut {
-    position: relative;
-    background: var(--clr-primary);
-    height: 20%;
-    display: flex;
-}
-.photo {
-    border-radius: 50%;
-    background-position: center;
-    width: 120px;
-    height: 120px;
-    background: white;
-    position: relative;
-    left: 5%;
-    top: 5%;
-}
-.haut h1 {
-    position: relative;
-    left: 30%;
-    top: 30%;
-    color: white;
-    font-size: 2vw;
-}
-.bas {
-    position: relative;
-    background: white;
-    height: 80%;
-}
-.email {
-    position: relative;
-    height: 8vh;
-    width: 50%;
-    left: 25%;
-    background: rgb(231, 193, 193);
-    top: 10vh;
-}
-.mdp {
-    position: relative;
-    height: 8vh;
-    width: 50%;
-    left: 25%;
-    background: rgb(231, 193, 193);
-    top: 20vh;
-}
-.changer {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    height: 40%;
-    width: 100%;
-    top: 18vh;
-}
-.changeremail {
-    width: 20vw;
-    height: 8vh;
-    text-align: center;
-    color: var(--clr-primary);
-}
-.changermdp {
-    width: 20vw;
-    height: 8vh;
-    text-align: center;
-    color: var(--clr-primary);
-}
-
-
-
-
-
-
-/*                                      pro     */
-
-.bvn {
-    position: fixed;
+    position: absolute;
     width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    height: 10vh;
+    top: 10vh;
+    left: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.bvn h1 {
-    font-size: calc( 2em + 1.9vw);
-    font-weight: bold;
-    background-image: linear-gradient(to right ,var(--clr-primary)  0%, var(--clr-primary) 50%,#fff 50%, #fff 100%); 
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
+.haut .form {
+    position: relative;
+    height: 75%;
+    width: 50%;
 }
-.mainpro {
-    top: 100vh;
+.haut .form div {
+    left: 103%;
+    padding: 1.2%;
+}
+.haut .form div:hover {
+    padding-top:2.5%;
+    padding-bottom: 2.5%;
+}
+.main {
     position: absolute;
     width: 100vw;
-    height: 100vh;
-    background: darkblue;
+    height: 80vh;
+    top: 20vh;
+    left: 0px;
+    display: flex;
+}
+.gauchephoto {
+    position: relative;
+    height: 100%;
+    width: 35%;
+    border: blueviolet 1px solid;
+}
+.droitmailpass {
+    position: relative;
+    height: 100%;
+    width: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.droitmailpass .mail , .password {
+    position: relative;
+    width: 50%;
+    height: 10%;
+}
+.droitmailpass .form , .droitmailpass .form input , .namein{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.modifier {
+    position: relative;
+    bottom: 100%;
+    left: 105%;  
+    height: 100%;
+    width: max-content;
+    border-radius: 10px;
+    background-color: var(--clr-primary);
+    padding: 2%;
+    cursor: pointer;
+    transition: padding 500ms;
+}
+.modifier img {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.modifier:hover {
+    padding-top:4%;
+    padding-bottom: 4%;
+}
+input {
+    border-radius: 20px;
+    background-color: var(--clr-primary);
+    text-align: center;
+    border:none;
+    outline: none;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: white;
+}
+#subbmit {
+    background-color: var(--clr-primary);
+    color: white;
+    border-radius: 20px;
+    padding: 20px;
+    cursor: pointer;
+    transition: background-color 500ms;
+}
+
+#subbmit:hover {
+    background-color: #42a352;
+}
+
+#err {
+    color: white;
+    text-shadow: 2px 2px 1px black;
+    font-size: 1.4em;
 }
 
 
-/*                                      fin pro */
+
+
+
+
+
+
+
+/*////////////////responsive 900px (téléphone et autre)//////*/
+
+@media screen and (max-width: 900px) {
+    
+    .gauchephoto {
+        display: none;
+    }
+    .droitmailpass {
+        width: 100%;
+        left: -5%;
+    }
+    .droitmailpass .mail , .password {
+        width: 65%;
+        font-size: 0.75em;
+    }
+    .modifier {
+        left: 102%;
+    }
+    .subbmit {
+        font-size: 0.75em;
+    }
+
+
+}
+/*/////////////////responsive 1300px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
+
+@media screen and (min-width: 900px) {
+    @media screen and (max-width: 1300px) {
+        
+        .gauchephoto {
+            display: none;
+        }
+        .droitmailpass {
+            width: 100%;
+        }
+    }
+}

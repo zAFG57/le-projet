@@ -9,9 +9,12 @@
             }
         }
 
+        public static function userExisiting($id) {
+            return parent::userExisting($id);
+        }
         public static function isPro($id) {
             if (is_int($id)) {
-                return parent::sPro($id);
+                return parent::isPro($id);
             }
         }
 
@@ -22,6 +25,12 @@
         public static function isAdmin($id) {
             if (is_int($id)) {
                 return parent::isAdmin($id);
+            }
+        }
+
+        public static function getUserName($id) {
+            if (is_int($id)) {
+                return parent::getUserName($id);
             }
         }
 
