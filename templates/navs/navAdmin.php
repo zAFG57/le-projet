@@ -1,3 +1,4 @@
+
 <div class="gauche">
     <a class="leftSiide" href="../index.php" title="Acceuil">
         <img class="logo" src="../assets/Sans_titre-8.png" alt="logo" height="50px">
@@ -13,9 +14,6 @@
         <li><div id="pro" class="responsivlien2" onclick="logout()">Se déconnecter</div></li>
     </ul>
 </div>
-
-
-
-<div class="mesmessage" onclick="window.location.href='../index?location=chat';">
-    <img src="">
+<div class="mesmessagenav" onclick="window.location.href='../index?location=chat';">
+    <img src="../assets/mail.svg">
 </div>

@@ -1,115 +1,7 @@
 <div class="main">
 
 <div class="discution" id="scroll">
-
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-    
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-    <a href="../index?location=chat" class="discutionlien">
-        <div>
-            <h1 class="discutionnom">bertant</h1>
-            <h2 class="discutionmessage"><span>moi: </span>merci pour la mère michelle</h2>
-        </div>
-    </a>
-
-
-    
+    <h1>différente discution</h1>
 </div>
 
 <div class="chat">
@@ -138,14 +30,14 @@
 <input type="hidden" name="chatID" value="<?=intval($_GET['chatID'])?>" readonly>
 </form>
 
-<script src="../public/js/script.js"></script>
 <script>
-getMessage();
-function  getToBot() {
-    var chat = document.getElementsByClassName('mainchat')[0];
-    chat.scrollTop = chat.scrollHeight;
-    document.getElementById('scroll').style.scrollBehavior = "smooth"
-}
-getToBot();
+    getMessage();
+    function  getToBot() {
+        // document.getElementById('scroll').style.scrollBehavior = "unset"
+        var chat = document.getElementsByClassName('mainchat')[0];
+        chat.scrollTop = chat.scrollHeight;
+        document.getElementById('scroll').style.scrollBehavior = "smooth"
+    }
+    getToBot(); 
 
 </script>

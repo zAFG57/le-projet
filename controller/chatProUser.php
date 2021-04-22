@@ -12,7 +12,6 @@
         }
 
         public static function displayMessages($userID, $chatID) {
-            // return 'ouo';
             if (ControllerUser::userExisiting($userID) && parent::chatIdAlreadyExist($chatID)) {
                 if (ControllerUser::isPro($userID)) {
                     if (parent::belongsPro($userID, $chatID)) {
@@ -86,31 +85,70 @@
             }
         }
 
-        public static function myDiscussions($userID) {
+        public static function displayDiscussions($userID) {
             if (ControllerUser::userExisiting($userID)) {
+                $res = [];
+
                 if (ControllerUser::isPro($userID)) {
-                    return parent::getDiscutionsPro($userID);
+                    $chatIDs = parent::getDiscutionsPro($userID);
+
+                    if (empty($chatIDs)) {
+                        return true;
+                    }
+                    foreach ($chatIDs as $chatID) {
+                        $lastMessage = parent::getLastMessage($userID, $chatID['chat_id']);
+                        $lastMessage['message_content'] = parent::decodeMessage($lastMessage['message_content'], $lastMessage['encryption_IV']);
+                        
+                        $lastMessage['username'] = ControllerUser::getUserName(parent::getLastClientUserID($chatID['chat_id']));
+                        $lastMessage['isMe'] = ControllerUser::getUserName($lastMessage['message_author_id']) === ControllerUser::getUserName($userID);
+
+                        unset($lastMessage['message_id'], $lastMessage['encryption_IV'], $lastMessage['message_creation'], $lastMessage['message_author_id']);      
+                        array_push($res, [$lastMessage]);
+                    }
+                    return $res[0];
                 } else {
-                    return parent::getDiscutionsUser($userID);
+                    $chatIDs = parent::getDiscutionsUser($userID);
+
+                    if (empty($chatIDs)) {
+                        return true;
+                    }
+                    foreach ($chatIDs as $chatID) {
+                     
+                        $lastMessage = parent::getLastMessage($userID, $chatID['chat_id']);
+                        $lastMessage['message_content'] = parent::decodeMessage($lastMessage['message_content'], $lastMessage['encryption_IV']);
+                        
+                        
+                        $lastMessage['username'] = ControllerUser::getUserName(parent::getLastProUserID($chatID['chat_id']));
+                        $lastMessage['isMe'] = ControllerUser::getUserName($lastMessage['message_author_id']) === ControllerUser::getUserName($userID);
+
+                        unset($lastMessage['message_id'], $lastMessage['encryption_IV'], $lastMessage['message_creation'], $lastMessage['message_author_id']);      
+                        array_push($res, [$lastMessage]);
+                    }
+                    return $res[0];
                 }
+            } else {
+                return -4;
             }
         }
-
     }
 
     if (isset($_POST['chatin']) && isset($_POST['userID'])  && isset($_POST['csrf_token'])) {
-        session_start();
+        if (empty($_POST['chatin'])) {
+            echo false;
+        } else {
+            session_start();
 
-        if(isset($_SESSION['userID'])){
-            if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
-            
-                if(ControllerUser::isPro(intval($_POST['userID']))) {
-                    echo json_encode(ControllerChatProUser::newMessage(ControllerChatProUser::openChat(intval($_SESSION['userID']), intval($_POST['userID'])), htmlspecialchars($_POST['chatin']), $_SESSION['userID']));
-                } else if(ControllerUser::isPro(intval($_SESSION['userID']))) {
-                    echo json_encode(ControllerChatProUser::newMessage(ControllerChatProUser::openChat(intval($_POST['userID']), intval($_SESSION['userID'])), htmlspecialchars($_POST['chatin']), $_SESSION['userID']));
+            if(isset($_SESSION['userID'])){
+                if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
+                
+                    if(ControllerUser::isPro(intval($_POST['userID']))) {
+                        echo json_encode(ControllerChatProUser::newMessage(ControllerChatProUser::openChat(intval($_SESSION['userID']), intval($_POST['userID'])), htmlspecialchars($_POST['chatin']), $_SESSION['userID']));
+                    } else if(ControllerUser::isPro(intval($_SESSION['userID']))) {
+                        echo json_encode(ControllerChatProUser::newMessage(ControllerChatProUser::openChat(intval($_POST['userID']), intval($_SESSION['userID'])), htmlspecialchars($_POST['chatin']), $_SESSION['userID']));
 
-                } else {
-                    echo -100;
+                    } else {
+                        echo false;
+                    }
                 }
             }
         }
@@ -124,5 +162,20 @@
             if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
                 echo json_encode(ControllerChatProUser::displayMessages($_SESSION['userID'], $_POST['chatID']));
             }
+        }
+    }
+
+
+    if (isset($_POST['myIdForConvs']) && isset($_POST['csrf_token'])) { 
+        session_start();
+        // echo json_encode($_POST['myIdForConvs']);
+        if (isset($_SESSION['userID']) && intval($_POST['myIdForConvs']) === $_SESSION['userID']) {
+            if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
+                echo json_encode(ControllerChatProUser::displayDiscussions($_SESSION['userID']));
+            } else {
+                echo -1;
+            }
+        } else {
+            echo -2;
         }
     }

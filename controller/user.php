@@ -28,5 +28,11 @@
             }
         }
 
+        public static function getUserName($id) {
+            if (is_int($id)) {
+                return parent::getUserName($id);
+            }
+        }
+
     }
     

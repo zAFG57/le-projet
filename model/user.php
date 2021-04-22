@@ -17,26 +17,28 @@
         protected static function getInfoUser($id) {
             if (!$id) return;
 
+            $userInfo;
             $res = parent::sqlSelect('SELECT 
                 users.id, users.username, users.email, users.verified, users.pro
                 FROM users 
                 WHERE users.id = ?',
                 'i', $id);
 
-                if ($res && $res->num_rows === 1) {
-                    $this->userInfo = $res->fetch_assoc();
-                }  
+            if ($res && $res->num_rows === 1) {
+                $userInfo = $res->fetch_assoc();
+            }  
 
-                if ($this->isPro()) {
-                    $ress = parent::sqlSelect('SELECT 
-                    ville, objets_reparables, note
-                    FROM pro_users WHERE pro_users.user_id = ?',
-                    'i', $id);
+            if (self::isPro($userInfo['id'])) {
+                $ress = parent::sqlSelect('SELECT 
+                ville, objets_reparables, note
+                FROM pro_users WHERE pro_users.user_id = ?',
+                'i', $id);
 
-                    if ($ress && $ress->num_rows === 1) {
-                        $this->userInfo += $ress->fetch_assoc();
-                    } 
-                }
+                if ($ress && $ress->num_rows === 1) {
+                    $userInfo += $ress->fetch_assoc();
+                } 
+            }
+            return $userInfo;
         }
 
         protected static function isPro($id){
@@ -62,6 +64,10 @@
 
         protected static function userExisting($id) {
             return parent::sqlSelect('SELECT id FROM users WHERE id = ?', 'i', $id)->num_rows === 1;
+        }
+
+        protected static function getUserName($id) {
+            return parent::sqlSelect('SELECT username FROM users WHERE id = ?', 'i', $id)->fetch_assoc()['username'];
         }
     }
     

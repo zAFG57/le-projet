@@ -1,8 +1,8 @@
 <div class="gauche">
-    <a class="leftSiide" href="../index.php?location=homePage" title="Acceuil">
-        <img class="logo" src="../assets/Sans_titre-8.png" alt="logo" height="50px">
-        <h1>Mesréparations.com </br><span>La réparation écologique et 100% française</span> </h1>
-    </a>
+        <a class="leftSiide" href="../index.php?location=homePage" title="Acceuil">
+            <img class="logo" src="../assets/Sans_titre-8.png" alt="logo" height="50px">
+            <h1>Mesréparations.com </br><span>La réparation écologique et 100% française</span> </h1>
+        </a>
 </div>
 
 <div class="droit">

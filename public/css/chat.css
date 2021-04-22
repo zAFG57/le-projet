@@ -21,13 +21,16 @@ body {
     scrollbar-width: none;
     overflow-x: hidden;
 }
+
 .discution::-webkit-scrollbar {
     display: none;
 }
+
 .discutionlien {
     margin: 10px;
     text-decoration: none;
 }
+
 .discutionlien div {
     border: 1px solid var(--clr-primary);
     background: transparent;
@@ -37,10 +40,12 @@ body {
     transition: 500ms;
     color: var(--clr-primary);
 }
+
 .discutionnom {
     font-size: 2em;
     text-align: center;
 }
+
 .discutionmessage {
     text-align: center;
     position: relative;
@@ -51,13 +56,23 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .discutionlien div:hover {
     background: var(--clr-primary);
     color: #fff;
 }
+
 .discutionlien div:hover .discutionmessage {
     color: hsl(0, 0%, 80%);
 }
+.discution .mesDiscutions {
+    color: var(--clr-primary);
+    background: #3333;
+    font-size: 2em;
+    text-align: center;
+    padding: 10px;
+}
+
 .chat {
     border-left: 5px solid var(--clr-primary);
     position: relative;
@@ -155,43 +170,26 @@ span {
     overflow-wrap: break-word;
     max-width: calc(70vw - 2em);
 }
+
 .mesmessagenav {
     display: none;
 }
 
 
-
-
-
 /*                          page sans chat ouvert:  */
-
-
 
 .bvnsurvosmessage {
     position: relative;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: max-content;
     color: var(--clr-primary);
     font-size: calc(2em - 5px);
 }
 
 
-
-
-
 /*                          fin page sans chat ouvert:  */
-
-
-
-
-
-
-
-
-
-
 
 
 /*////////////////responsive 900px (téléphone et autre)//////*/

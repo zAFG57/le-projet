@@ -15,7 +15,13 @@
             <div class="txtfield">
                 <input type="text" name="username" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
                 <span></span>
-                <label>Nom d'utilisateur</label>
+                <label>Nom</label>
+            </div>
+
+            <div class="txtfield">
+                <input type="text" name="username" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
+                <span></span>
+                <label>Prénom</label>
             </div>
 
             <div class="txtfield">
