@@ -275,7 +275,7 @@ function getConv() {
         data = JSON.parse(data)
         console.log(data)
         const displayMessage = (data) => {
-            res = "";
+            res = "<div class='mesDiscussions'>Mes discussions</div>";
             data.forEach(element => {
                 res += `<a href="./chat?chatID=${element['chat_id']}" class="discutionlien">
                             <div>
@@ -288,9 +288,8 @@ function getConv() {
         }
 
         const changeEncoding = (data) => {
-                return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
-            }
-            // console.log("otazzo")
+            return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+        }
 
         if (data instanceof Array) {
             if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('scroll').innerHTML)) {
@@ -298,5 +297,31 @@ function getConv() {
             }
         }
         getConv()
+    })
+}
+
+
+function modifyUser() {
+    request('../controller/user.php', '#modifprofile', setloader = true, function(data) {
+        document.getElementById('errs').innerHTML = "";
+        var transition = document.getElementById('errs').style.transition;
+        document.getElementById('errs').style.transition = "none";
+        document.getElementById('errs').style.opacity = 0;
+
+
+        if (data === 0) {
+            document.getElementById('errs').innerHTML += '<div>vos données on bien été enregistré</div>';
+            document.getElementById('modifprofile').reset();
+        } else {
+            fetch('../public/js/error.json')
+                .then(res => res.json())
+                .then(res => document.getElementById('errs').innerHTML += res['modifyUser'][data]);
+        }
+
+        setTimeout(function() {
+            document.getElementById('errs').style.transition = transition;
+            document.getElementById('errs').style.opacity = 1;
+        }, 10);
+
     })
 }

@@ -35,6 +35,10 @@ class EmailVerification extends Database {
         return parent::sqlSelect('SELECT username FROM users WHERE email=?','s', $email)->fetch_assoc()['username'];
     }
 
+    protected static function getEmail($id) {
+        return parent::sqlSelect('SELECT email FROM users WHERE id=?','i', $id)->fetch_assoc()['email'];
+    }
+
     protected static function sendEmail($to, $toName, $subj, $msg){
         
         $mail = new PHPMailer(true);

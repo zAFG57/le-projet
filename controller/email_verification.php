@@ -63,6 +63,13 @@
             return false;
         }
 
+        public static function sendEmailToModifyUsername($id){
+            return parent::sendEmail(parent::getEmail($id), parent::getUsername(parent::getEmail($id)), "modification du nom d'utilisateur", "Votre nom d'utilisateur a bien été changé");
+        }
+
+        public static function sendEmailToModifyPassword($id){
+            return parent::sendEmail(parent::getEmail($id), parent::getUsername(parent::getEmail($id)), "Mot de passe modifié", "Votre mot de passe a bien été changé");
+        }
     }
 
     if (isset($_POST['validateEmail']) && isset($_POST['csrf_token'])){

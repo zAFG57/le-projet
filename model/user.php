@@ -1,5 +1,7 @@
 <?php 
     require_once('database.php');
+    require_once('../controller/email_verification.php');
+
 
     /**
      * undocumented class
@@ -14,16 +16,25 @@
             self::getInfoUser($id);
         }
 
-        protected static function getInfoUser($id, $protectEmail = true) {
+        protected static function getInfoUser($id, $protectEmail = true, $getPassword = false) {
             if (!$id) return;
 
             $userInfo;
-            $res = parent::sqlSelect('SELECT 
+            if (!$getPassword) {
+                $res = parent::sqlSelect('SELECT 
                 users.id, users.username, users.email, users.verified, users.pro
                 FROM users 
                 WHERE users.id = ?',
                 'i', $id);
 
+            } else {
+                $res = parent::sqlSelect('SELECT 
+                users.id, users.username, user.password, users.email, users.verified, users.pro
+                FROM users 
+                WHERE users.id = ?',
+                'i', $id);
+            }
+            
             if ($res && $res->num_rows === 1) {
                 $userInfo = $res->fetch_assoc();
                 if ($protectEmail) {
@@ -74,9 +85,46 @@
         }
 
         protected static function protectEmail($email) {
-
-            return $email[0] . $email[1] . $email[2] . $email[3] . $email[4] . "...@..." . $email[-4] . $email[-3] . $email[-2]. $email[-1];
+            $email = explode ('@' , $email);
+            return $email[0][0] . "..." .$email[0][-1] . "@" . $email[1];
         }
+
+        protected static function ModifyUsername($id, $username) {
+            if (parent::sqlUpdate('UPDATE users SET username=? WHERE id = ?', 'si', $username, $id)) {
+                return ControllerEmailVerification::sendEmailToModifyUsername($id);
+            }
+        } 
+
+        protected static function ModifyPassword($id, $newPassword) {
+            if (parent::sqlUpdate('UPDATE user SET username=? WHERE id = ?', 'si', password_hash($newPassword, PASSWORD_DEFAULT), $id)) {
+                return ControllerEmailVerification::sendEmailToModifyPassword($id);
+            }
+        }
+
+        protected static function maxAttemptsChangeUsernameAchieved($id) {
+            return parent::sqlSelect('SELECT COUNT(change_username_attempts.id) FROM users LEFT JOIN change_username_attempts ON users.id = change_username_attempts.user_id AND change_username_attempts.timestamp>? WHERE users.id=? GROUP BY users.id', 'ii', time() - 60*60*24*10, $id);
+        }
+
+        protected static function maxAttemptsChangeEmailAchieved($id) {
+            return parent::sqlSelect('SELECT COUNT(change_email_attempts.id) FROM users LEFT JOIN change_email_attempts ON users.id = change_email_attempts.user_id AND change_email_attempts.timestamp>? WHERE users.id=? GROUP BY users.id', 'ii', time() - 60*60*24*90, $id);
+        }
+
+        protected static function maxAttemptsChangePasswordAchieved($id) {
+            return parent::sqlSelect('SELECT COUNT(change_password_attempts.id) FROM users LEFT JOIN change_password_attempts ON users.id = change_password_attempts.user_id AND change_password_attempts.timestamp>? WHERE users.id=? GROUP BY users.id', 'ii', time() - 60*60*24*5, $id);
+        }
+
+        protected static function addAttemptChangeUsername($id) {
+            return parent::sqlInsert('INSERT INTO change_username_attempts VALUES (NULL, ?, ?, ?)', 'isi', $id, $_SERVER['REMOTE_ADDR'], time());
+        }
+
+        protected static function addAttemptChangeEmail($id) {
+            return parent::sqlInsert('INSERT INTO change_email_attempts VALUES (NULL, ?, ?, ?)', 'isi', $id, $_SERVER['REMOTE_ADDR'], time());
+        }
+
+        protected static function addAttemptChangePass($id) {
+            return parent::sqlInsert('INSERT INTO change_password_attempts VALUES (NULL, ?, ?, ?)', 'isi', $id, $_SERVER['REMOTE_ADDR'], time());
+        }
+
 
     }
     
