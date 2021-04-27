@@ -271,11 +271,11 @@ function getConv() {
     request('../controller/chatProUser.php', '#getConv', setloader = false, function(data) {
 
 
-        // console.log(data)
+
         data = JSON.parse(data)
-        console.log(data)
+
         const displayMessage = (data) => {
-            res = "<div class='mesDiscussions'>Mes discussions</div>";
+            res = "<div class=\"mesDiscussions\">Mes discussions</div>";
             data.forEach(element => {
                 res += `<a href="./chat?chatID=${element['chat_id']}" class="discutionlien">
                             <div>
@@ -292,6 +292,10 @@ function getConv() {
         }
 
         if (data instanceof Array) {
+            console.log(changeEncoding(displayMessage(data)))
+            console.log(changeEncoding(document.getElementById('scroll').innerHTML))
+
+            console.log(changeEncoding(displayMessage(data)) === changeEncoding(document.getElementById('scroll').innerHTML))
             if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('scroll').innerHTML)) {
                 document.getElementById('scroll').innerHTML = displayMessage(data);
             }
