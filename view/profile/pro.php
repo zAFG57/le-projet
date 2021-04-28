@@ -4,9 +4,9 @@
 <?php ob_start(); ?>
 
 
-    <head>
+    <header>
         <?= $nav ?>
-    </head>
+    </header>
 
     <h1>Pro profile</h1>
     <?php var_dump($user) ?>
