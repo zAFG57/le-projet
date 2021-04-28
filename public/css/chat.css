@@ -65,6 +65,13 @@ body {
 .discutionlien div:hover .discutionmessage {
     color: hsl(0, 0%, 80%);
 }
+.discution .mesDiscutions {
+    color: var(--clr-primary);
+    background: #3333;
+    font-size: 2em;
+    text-align: center;
+    padding: 10px;
+}
 
 .chat {
     border-left: 5px solid var(--clr-primary);
