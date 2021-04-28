@@ -49,22 +49,26 @@ function register() {
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
         // console.log(data);
-        data = JSON.parse(data);
+        try {
+            data = JSON.parse(data);
 
 
-        if (data === 0) {
-            document.getElementById('errs').innerHTML += '<div>Votre compte a bien été crée,</br> un Email de vérification vous a été envoyé </div>';
-            document.getElementById('registerForm').reset();
-        } else {
-            fetch('../public/js/error.json')
-                .then(res => res.json())
-                .then(res => document.getElementById('errs').innerHTML += res['register'][data]);
+            if (data === 0) {
+                document.getElementById('errs').innerHTML += '<div>Votre compte a bien été crée,</br> un Email de vérification vous a été envoyé </div>';
+                document.getElementById('registerForm').reset();
+            } else {
+                fetch('../public/js/error.json')
+                    .then(res => res.json())
+                    .then(res => document.getElementById('errs').innerHTML += res['register'][data]);
+            }
+
+            setTimeout(function() {
+                document.getElementById('errs').style.transition = transition;
+                document.getElementById('errs').style.opacity = 1;
+            }, 10);
+        } catch (e) {
+
         }
-
-        setTimeout(function() {
-            document.getElementById('errs').style.transition = transition;
-            document.getElementById('errs').style.opacity = 1;
-        }, 10);
     });
 }
 
@@ -77,21 +81,25 @@ function registerpro() {
         document.getElementById('errs').style.opacity = 0;
 
         // console.log(data)
-        data = JSON.parse(data);
+        try {
+            data = JSON.parse(data);
 
-        if (data === 0) {
-            document.getElementById('errs').innerHTML += '<div>Votre compte a bien été crée,</br> un Email de vérification vous a été envoyé </div>';
-            document.getElementById('registerForm').reset();
-        } else {
-            fetch('../public/js/error.json')
-                .then(res => res.json())
-                .then(res => document.getElementById('errs').innerHTML += res['register'][data]);
+            if (data === 0) {
+                document.getElementById('errs').innerHTML += '<div>Votre compte a bien été crée,</br> un Email de vérification vous a été envoyé </div>';
+                document.getElementById('registerForm').reset();
+            } else {
+                fetch('../public/js/error.json')
+                    .then(res => res.json())
+                    .then(res => document.getElementById('errs').innerHTML += res['register'][data]);
+            }
+
+            setTimeout(function() {
+                document.getElementById('errs').style.transition = transition;
+                document.getElementById('errs').style.opacity = 1;
+            }, 10);
+        } catch (e) {
+
         }
-
-        setTimeout(function() {
-            document.getElementById('errs').style.transition = transition;
-            document.getElementById('errs').style.opacity = 1;
-        }, 10);
     });
 }
 ///////////////////////////////////////////////////////////test fin///////////////////////
@@ -106,20 +114,24 @@ function login() {
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
         // console.log(data);
-        data = JSON.parse(data);
+        try {
+            data = JSON.parse(data);
 
-        if (data == 0) {
-            window.location = '../';
-        } else {
-            fetch('../public/js/error.json')
-                .then(res => res.json())
-                .then(res => document.getElementById('errs').innerHTML += res['login'][data]);
+            if (data == 0) {
+                window.location = '../';
+            } else {
+                fetch('../public/js/error.json')
+                    .then(res => res.json())
+                    .then(res => document.getElementById('errs').innerHTML += res['login'][data]);
+            }
+
+            setTimeout(function() {
+                document.getElementById('errs').style.transition = transition;
+                document.getElementById('errs').style.opacity = 1;
+            }, 10);
+        } catch (e) {
+
         }
-
-        setTimeout(function() {
-            document.getElementById('errs').style.transition = transition;
-            document.getElementById('errs').style.opacity = 1;
-        }, 10);
     });
 
     document.getElementById('loginform').reset();
@@ -128,9 +140,13 @@ function login() {
 function logout() {
     request('../controller/logout.php', false, setloader = true, function(data) {
         // console.log(data)
-        data = JSON.parse(data);
-        if (data === 0) {
-            window.location = '../view/log_in';
+        try {
+            data = JSON.parse(data);
+            if (data === 0) {
+                window.location = '../view/log_in';
+            }
+        } catch (e) {
+
         }
     });
 }
@@ -143,22 +159,26 @@ function sendValidateEmailRequest() {
         document.getElementById('errs').style.opacity = 0;
 
         // console.log(data);
-        data = JSON.parse(data);
+        try {
+            data = JSON.parse(data);
 
-        //Show errors to user
-        if (data === 0) {
-            document.getElementById('errs').innerHTML += '<div>Email envoyé, reagrdez dans votre boite mail et cliquez sur le lien</div>';
-            document.getElementById('verificationForm').reset();
-        } else {
-            fetch('../public/js/error.json')
-                .then(res => res.json())
-                .then(res => document.getElementById('errs').innerHTML += res['validEmail'][data]);
+            //Show errors to user
+            if (data === 0) {
+                document.getElementById('errs').innerHTML += '<div>Email envoyé, reagrdez dans votre boite mail et cliquez sur le lien</div>';
+                document.getElementById('verificationForm').reset();
+            } else {
+                fetch('../public/js/error.json')
+                    .then(res => res.json())
+                    .then(res => document.getElementById('errs').innerHTML += res['validEmail'][data]);
+            }
+
+            setTimeout(function() {
+                document.getElementById('errs').style.transition = transition;
+                document.getElementById('errs').style.opacity = 1;
+            }, 10);
+        } catch (e) {
+
         }
-
-        setTimeout(function() {
-            document.getElementById('errs').style.transition = transition;
-            document.getElementById('errs').style.opacity = 1;
-        }, 10);
     })
 }
 
@@ -173,13 +193,14 @@ function searchf() {
         document.getElementsByClassName('maindiv')[0].style.display = 'none';
 
         // console.log(data);
-        data = JSON.parse(data);
-        // console.log(data);
+        try {
+            data = JSON.parse(data);
+            // console.log(data);
 
-        const createGrid = (data) => {
-            res = '<div class="grid">'
-            data.forEach(element => {
-                res += `<div class="card">
+            const createGrid = (data) => {
+                res = '<div class="grid">'
+                data.forEach(element => {
+                    res += `<div class="card">
                     <div class="cardgauche">
                         <div class="cardimg">   <img src="${element['imgUsr'] || 'https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231712/thesomeday123171200009.jpg'}"/>  </div>
                     </div>
@@ -190,39 +211,43 @@ function searchf() {
                     </div>
                 </div>`
 
-            });
-            res += '</div>'
-            return res;
-        }
-
-        const createStar = (nbStars) => {
-            res = "";
-            while (nbStars > 0) {
-                res += '★';
-                nbStars--;
+                });
+                res += '</div>'
+                return res;
             }
-            return res;
+
+            const createStar = (nbStars) => {
+                res = "";
+                while (nbStars > 0) {
+                    res += '★';
+                    nbStars--;
+                }
+                return res;
+            }
+
+            switch (data) {
+                case -1:
+                    document.getElementById('resSearch').innerHTML += '<div class="noResFound">Trois lettres minimum sont requises</div>';
+                    break;
+                case -2:
+                    document.getElementById('resSearch').innerHTML += '<div class="noResFound">Aucun resultat trouvé</div>';
+                    break;
+
+                default:
+                    document.getElementById('resSearch').innerHTML += createGrid(data);
+                    break;
+            }
+
+
+            setTimeout(function() {
+                document.getElementById('resSearch').style.transition = transition;
+                document.getElementById('resSearch').style.opacity = 1;
+            }, 10);
+            document.getElementById('search').reset();
+
+        } catch (e) {
+
         }
-
-        switch (data) {
-            case -1:
-                document.getElementById('resSearch').innerHTML += '<div class="noResFound">Trois lettres minimum sont requises</div>';
-                break;
-            case -2:
-                document.getElementById('resSearch').innerHTML += '<div class="noResFound">Aucun resultat trouvé</div>';
-                break;
-
-            default:
-                document.getElementById('resSearch').innerHTML += createGrid(data);
-                break;
-        }
-
-
-        setTimeout(function() {
-            document.getElementById('resSearch').style.transition = transition;
-            document.getElementById('resSearch').style.opacity = 1;
-        }, 10);
-        document.getElementById('search').reset();
     })
 }
 
@@ -240,28 +265,33 @@ function sendMessage() {
 
 function getMessage() {
     request('../controller/chatProUser.php', '#getMessage', setloader = false, function(data) {
-        data = JSON.parse(data)
+        try {
 
-        const displayMessage = (data) => {
-            res = "";
-            data.forEach(element => {
-                res += `<div class="${element['isMe'] === true ? "me" : "you"}"><span>${element['message_content']}</span></div>`
+            data = JSON.parse(data)
 
-            });
-            return res;
-        }
+            const displayMessage = (data) => {
+                res = "";
+                data.forEach(element => {
+                    res += `<div class="${element['isMe'] === true ? "me" : "you"}"><span>${element['message_content']}</span></div>`
 
-        const changeEncoding = (data) => {
-            return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
-        }
-
-        if (data instanceof Array) {
-            if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('chat').innerHTML)) {
-                document.getElementById('chat').innerHTML = displayMessage(data);
-                getToBot();
+                });
+                return res;
             }
+
+            const changeEncoding = (data) => {
+                return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+            }
+
+            if (data instanceof Array) {
+                if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('chat').innerHTML)) {
+                    document.getElementById('chat').innerHTML = displayMessage(data);
+                    getToBot();
+                }
+            }
+            getMessage()
+        } catch (e) {
+
         }
-        getMessage()
 
     })
 
@@ -271,36 +301,37 @@ function getConv() {
     request('../controller/chatProUser.php', '#getConv', setloader = false, function(data) {
 
 
+        try {
 
-        data = JSON.parse(data)
+            data = JSON.parse(data)
 
-        const displayMessage = (data) => {
-            res = "<div class=\"mesDiscussions\">Mes discussions</div>";
-            data.forEach(element => {
-                res += `<a href="./chat?chatID=${element['chat_id']}" class="discutionlien">
-                            <div>
-                                <h1 class="discutionnom">${element['username']}</h1>
-                                <h2 class="discutionmessage"><span>${element['isMe'] === true ? "Moi" : element['username']} : </span>${element['message_content']}</h2>
-                            </div>
-                        </a>`
-            });
-            return res;
-        }
-
-        const changeEncoding = (data) => {
-            return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
-        }
-
-        if (data instanceof Array) {
-            console.log(changeEncoding(displayMessage(data)))
-            console.log(changeEncoding(document.getElementById('scroll').innerHTML))
-
-            console.log(changeEncoding(displayMessage(data)) === changeEncoding(document.getElementById('scroll').innerHTML))
-            if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('scroll').innerHTML)) {
-                document.getElementById('scroll').innerHTML = displayMessage(data);
+            const displayMessage = (data) => {
+                res = "<div class=\"mesDiscussions\">Mes discussions</div>";
+                data.forEach(element => {
+                    res += `<a href="./chat?chatID=${element['chat_id']}" class="discutionlien">
+                                <div>
+                                    <h1 class="discutionnom">${element['username']}</h1>
+                                    <h2 class="discutionmessage"><span>${element['isMe'] === true ? "Moi" : element['username']} : </span>${element['message_content']}</h2>
+                                </div>
+                            </a>`
+                });
+                return res;
             }
+
+            const changeEncoding = (data) => {
+                return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+            }
+
+            if (data instanceof Array) {
+                if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('scroll').innerHTML)) {
+                    document.getElementById('scroll').innerHTML = displayMessage(data);
+                }
+            }
+            getConv()
+
+        } catch (e) {
+
         }
-        getConv()
     })
 }
 
