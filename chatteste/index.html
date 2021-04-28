@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Titre de la page</title>
+  <link rel="stylesheet" href="c.css">
+</head>
+<body>
+
+
+        <div class="nav"><h1>nav</h1></div>
+        <div class="main">
+
+            <div class="discution" id="scroll">
+                <h1>différente discution</h1>
+            </div>
+
+            <div class="chat">
+
+                <div class="mainchat" id="scroll">
+
+                    <div class="me"><span>sdhgzsgzsg</span></div>
+                    <div class="me"><span>fhqdhrdfqhq</span></div>
+                    <div  class="you"><span>dfhqdfhqdfhfhbdfh</span></div>
+                    <div class="you"><span>sqfqsfqsfqsfq</span></div>
+                    <div class="me"><span>fhdfhdqfhqdfhfdhqdfh</span></div>
+                    <div class="me"><span>dfhdfhdfhFGDFGDFGDFGDFGDFGDFGDGqhfdhqhdfh</span></div>
+                    <div  class="you"><span>dqhdfhdqhfrdqhdfhf</span></div>
+                    <div class="me"><span>fdqhfhdqhqrdhfh</span></div>
+                    <div  class="you"><span>fhdfhdfhdfhdfhfdh</span></div>
+                    <div class="me"><span>fhefqfqFDGDFGDFGDFGDFGDFGDFGDsdfqsf ujhrfzhefjklzhfizep fehzufhzeilfhuzie fhezuifhziuefga zgaulfqmfhisodfma zdfhuaipzfhiuapzf qsfqs</span></div>
+                    <div class="me"><span>qsqsfqsfqsfqsfqsf</span></div>
+                    <div class="me"><span>o^ùkmhjktyhdfg</span></div>
+                    <div  class="you"><span>sdfsdgdfbhfgjnfgjk</span></div>
+                    <div class="me"><span>DFGHDFGDGDFGFD<br/><br/><br/>GDFGdfvngrukikjtfg</span></div>
+
+                </div>
+                <div class="chatinput">
+
+                    <form class="message">
+
+                        <input id="chatin" type="text" placeholder="votre message" name="chatin">
+                        <div class="send" type="submit">
+                            <img src="../assets/avion.svg">
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+
+
+
+
+        <script>
+            var chat = document.getElementsByClassName('mainchat')[0];
+            chat.scrollTop = chat.scrollHeight;
+            document.getElementById('scroll').style.scrollBehavior = "smooth"
+        </script>
+</body>
+</html>

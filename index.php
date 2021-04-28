@@ -1,18 +1,17 @@
 <?php
 session_start();
 
-// require_once('/model/connection.php');
+define("ROOTPATH", __DIR__);
 
 
-// echo 'hello World';
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
     $authorized_pages = array(
-        "createAccount" => "view/create_account",
-        "createProAccount" => "view/create_professional_account",
-        "emailVerification" => "view/email_verification",
-        "login" => "view/log_in",    
+        "createAccount" => "view/create_account.php",
+        "createProAccount" => "view/create_professional_account.php",
+        "emailVerification" => "view/email_verification.php",
+        "login" => "view/log_in.php",    
     );
 
     if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
@@ -22,37 +21,19 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         header("Location: {$authorized_pages['login']}");
         exit;
     }
+}
 
-// } else if(isAdmin($_SESSION['userID'])) {
+$authorized_pages = array(
+    "emailVerification" => "view/email_verification.php",
+    "homePage" => "view/home_page.php",
+    "profile" => "view/profile.php",
+    "chat" => "view/chat.php"
+);
 
-//     $authorized_pages = array(
-//         "emailVerification" => "view/email_verification",
-//         "homePage" => "view/home_page",
-//         "profile" => "view/profile_page",
-//         "adminPanel" => "view/admin_panel"
-//     );
-
-//     if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
-//         header("Location: {$authorized_pages[$_GET['location']]}");
-//         die();
-//     } else {
-//         header("Location: {$authorized_pages['homePage']}");
-//         exit;
-//     }
-    
-} else { 
-
-    $authorized_pages = array(
-        "emailVerification" => "view/email_verification",
-        "homePage" => "view/home_page",
-        "profile" => "view/profile_page"
-    );
-
-    if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
-        header("Location: {$authorized_pages[$_GET['location']]}");
-        die();
-    } else {
-        header("Location: {$authorized_pages['homePage']}");
-        exit;
-    }
+if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
+    header("Location: {$authorized_pages[$_GET['location']]}");
+    die();
+} else {
+    header("Location: {$authorized_pages['homePage']}");
+    exit;
 }
