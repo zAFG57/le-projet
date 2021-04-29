@@ -25,6 +25,10 @@
                 return parent::getHashToken($id); 
             }
         }
+
+        public static function getUsersNum() {
+            return parent::getUsersNum();  
+        }
     }
 
 

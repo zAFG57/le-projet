@@ -35,13 +35,13 @@
         }
 
         public static function sendEmailVerificationFromPOST() {
-            if (isset($_POST['validateEmail']) && isset($_POST['csrf_token']) && ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
-                return self::sendEmailVerification($_POST['validateEmail']);
+            if (isset($_POST['validateEmail']) && isset($_POST['csrf_token']) && ControllerCsrf::validateCsrfToken(htmlspecialchars($_POST['csrf_token']))) {
+                return self::sendEmailVerification(htmlspecialchars($_POST['validateEmail']));
             }
         }
         public static function sendValidationEmailFromArgs($email, $csrfToken){
-            if (isset($email) && isset($csrfToken) && ControllerCsrf::validateCsrfToken($csrfToken)) {
-                return self::sendEmailVerification($email);
+            if (isset($email) && isset($csrfToken) && ControllerCsrf::validateCsrfToken(htmlspecialchars($csrfToken))) {
+                return self::sendEmailVerification(htmlspecialchars($email));
             }
         }
 

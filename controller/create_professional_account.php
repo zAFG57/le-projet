@@ -8,31 +8,31 @@
 
 
 
-    class ControllerCreateProAccount extends CreateProAccount {
-        public static function createAccount() {
-            if(!isset($_POST['username']) || strlen($_POST['username']) > 255 || !preg_match('/^[a-zA-Z- ]+$/', $_POST['username'])){
+    class ControllerCreateAccount extends CreateAccount {
+        public static function createAccount($username, $email, $password, $passwordverify, $csrfToken) {
+            if(!isset($username) || strlen($username) > 255 || !preg_match('/^[a-zA-Z- ]+$/', $username)){
                 return 1;
             }
 
-            if(!isset($_POST['email']) || strlen($_POST['email']) > 255 || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+            if(!isset($email) || strlen($email) > 255 || !filter_var($email, FILTER_VALIDATE_EMAIL)){
                 return 2;
-            }elseif (!checkdnsrr(substr($_POST['email'], strpos($_POST['email'], '@') + 1), 'MX')) {
+            }elseif (!checkdnsrr(substr($email, strpos($email, '@') + 1), 'MX')) {
                return 3;
             }
             
-            if(!isset($_POST['password']) || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\~?!@#\$%\^&\*])(?=.{8,})/', $_POST['password'])){
+            if(!isset($password) || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\~?!@#\$%\^&\*])(?=.{8,})/', $password)){
                 return 4;
-            } elseif (!isset($_POST['passwordVerify']) || $_POST['passwordVerify'] !== $_POST['password']) {
+            } elseif (!isset($passwordverify) || $passwordverify !== $password) {
                 return 5;
             }
 
-            if (isset($_POST['csrf_token']) && ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
-                if (parent::isEmailNotAlreadyUsing($_POST['email'])) {
-                    if(parent::addUser(parent::createId(), $_POST['username'], $_POST['email'], $_POST['password']) !== -1) {
-                        if (ControllerEmailVerification::sendValidationEmailFromArgs($_POST['email'],$_POST['csrf_token']) === 0) {
+            if (isset($csrfToken) && ControllerCsrf::validateCsrfToken($csrfToken)) {
+                if (parent::isEmailNotAlreadyUsing($email)) {
+                    if(parent::addUser(parent::createId(), $username, $email, $password) !== -1) {
+                        if (ControllerEmailVerification::sendValidationEmailFromArgs($email, $csrfToken) === 0) {
                             return 0;
                         } else {
-                            return 10;
+                            return 9;
                         }
                     } else {
                         return 6;
@@ -41,12 +41,12 @@
                     return 7;
                 }     
             } else {
-                return 9;
+                return 8;
             }
-            return -10;
+            return 10;
         }
     }
 
     if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['passwordVerify'])) {
-        echo json_encode(ControllerCreateProAccount::createAccount());
+        echo json_encode(ControllerCreateAccount::createAccount(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']), htmlspecialchars($_POST['passwordVerify']), htmlspecialchars($_POST['csrf_token'])));
     }

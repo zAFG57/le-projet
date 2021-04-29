@@ -107,8 +107,8 @@
     
     if (isset($_POST['usernameChange']) && isset($_POST['emailChange']) && isset($_POST['passwordChange']) && isset($_POST['passwordVerifyChange']) && isset($_POST['userIdChange']) && isset($_POST['csrf_token'])){
         session_start();
-        if(ControllerCsrf::validateCsrfToken($_POST['csrf_token']) && $_POST['userIdChange'] === $SESSION['userID']) {
-            echo json_encode(ControllerUser::modifyUser($_POST['userIdChange'], $_POST['usernameChange'], $_POST['emailChange'], $_POST['passwordChange'], $_POST['passwordVerifyChange']));
+        if(ControllerCsrf::validateCsrfToken(htmlspecialchars($_POST['csrf_token'])) && htmlspecialchars($_POST['userIdChange']) === htmlspecialchars($SESSION['userID'])) {
+            echo json_encode(ControllerUser::modifyUser(htmlspecialchars($_POST['userIdChange']), htmlspecialchars($_POST['usernameChange']), htmlspecialchars($_POST['emailChange']), htmlspecialchars($_POST['passwordChange']), htmlspecialchars($_POST['passwordVerifyChange'])));
         }
     }
     

@@ -15,7 +15,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     );
 
     if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
-        header("Location: {$authorized_pages[$_GET['location']]}");
+        header("Location: {$authorized_pages[htmlspecialchars($_GET['location'])]}");
         die();
     } else {
         header("Location: {$authorized_pages['login']}");
@@ -31,7 +31,7 @@ $authorized_pages = array(
 );
 
 if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
-    header("Location: {$authorized_pages[$_GET['location']]}");
+    header("Location: {$authorized_pages[htmlspecialchars($_GET['location'])]}"); 
     die();
 } else {
     header("Location: {$authorized_pages['homePage']}");

@@ -6,8 +6,8 @@
     session_start();
 
     class ControllerLogout extends Logout {
-        public static function logoutUser() {
-            if(isset($_POST['csrf_token']) && ControllerCsrf::validateCsrfToken($_POST['csrf_token'])){ 
+        public static function logoutUser($csrfToken) {
+            if(isset($csrfToken) && ControllerCsrf::validateCsrfToken($csrfToken)){ 
                 parent::unSetVariables();
                 return 0;
             } else {
@@ -18,7 +18,7 @@
     }
 
     if(isset($_POST['csrf_token'])) {
-        echo json_encode(ControllerLogout::logoutUser());
+        echo json_encode(ControllerLogout::logoutUser(htmlspecialchars($_POST['csrf_token'])));
     }
 
     

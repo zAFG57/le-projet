@@ -4,15 +4,15 @@
     require_once('csrfConfig.php');
     session_start();
     class ControllerLogin extends Login {
-        public static function login() {
-            if (isset($_POST['email']) && isset($_POST['password']) ) { 
-                if (parent::userExisting($_POST['email'])) {
-                if (isset($_POST['csrf_token']) && ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
-                    if (!parent::isMaxLoginAttemptsAchevied($_POST['email'])) {
-                        if (parent::isCorrectPassword($_POST['email'], $_POST['password'])) {
-                            if(parent::isVerified($_POST['email'])) {
-                                parent::setSessionVariables($_POST['email']);
-                                parent::suppAttempts($_POST['email']);
+        public static function login($email, $password, $csrfToken) {
+            if (isset($email) && isset($password) ) { 
+                if (parent::userExisting($email)) {
+                if (isset($csrfToken) && ControllerCsrf::validateCsrfToken($csrfToken)) {
+                    if (!parent::isMaxLoginAttemptsAchevied($email)) {
+                        if (parent::isCorrectPassword($email, $password)) {
+                            if(parent::isVerified($email)) {
+                                parent::setSessionVariables($email);
+                                parent::suppAttempts($email);
                                 return 0;
                             } else {
                                 //utilisateur non vérifié
@@ -20,7 +20,7 @@
                             }
                         } else {
                             // password incorrect (email or pass bad)
-                            if(parent::createLoginAttempt(parent::getId($_POST['email'])) !== 1){
+                            if(parent::createLoginAttempt(parent::getId($email)) !== 1){
                                 return 1;
                             } else {
                                 return 2;
@@ -46,6 +46,8 @@
     }
     
 if (isset($_POST['email']) && isset($_POST['password'])) {
-    echo json_encode(ControllerLogin::login());
+    // if (ControllerCsrf::validateCsrfToken(htmlspecialchars($_POST['csrf_token']))) {
+        echo json_encode(ControllerLogin::login(htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']), htmlspecialchars($_POST['csrf_token'])));
+    // }
 }
     
