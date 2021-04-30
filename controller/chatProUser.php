@@ -159,8 +159,8 @@
         
         session_start();
         if (isset($_SESSION['userID'])) {
-            if (ControllerCsrf::validateCsrfToken(htmlspecialchars($_POST['csrf_token']))) {
-                echo json_encode(ControllerChatProUser::displayMessages(htmlspecialchars($_SESSION['userID']), htmlspecialchars($_POST['chatID'])));
+            if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
+                echo json_encode(ControllerChatProUser::displayMessages($_SESSION['userID'], $_POST['chatID']));
             }
         }
     }
@@ -169,8 +169,8 @@
     if (isset($_POST['myIdForConvs']) && isset($_POST['csrf_token'])) { 
         session_start();
         if (isset($_SESSION['userID']) && intval($_POST['myIdForConvs']) === $_SESSION['userID']) {
-            if (ControllerCsrf::validateCsrfToken(htmlspecialchars($_POST['csrf_token']))) {
-                echo json_encode(ControllerChatProUser::displayDiscussions(htmlspecialchars($_SESSION['userID'])));
+            if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
+                echo json_encode(ControllerChatProUser::displayDiscussions($_SESSION['userID']));
             } else {
                 echo -1;
             }

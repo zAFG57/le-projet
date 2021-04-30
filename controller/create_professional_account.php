@@ -8,7 +8,7 @@
 
 
 
-    class ControllerCreateAccount extends CreateAccount {
+    class ControllerProCreateAccount extends CreateProAccount {
         public static function createAccount($username, $email, $password, $passwordverify, $csrfToken) {
             if(!isset($username) || strlen($username) > 255 || !preg_match('/^[a-zA-Z- ]+$/', $username)){
                 return 1;
@@ -48,5 +48,5 @@
     }
 
     if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['passwordVerify'])) {
-        echo json_encode(ControllerCreateAccount::createAccount(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']), htmlspecialchars($_POST['passwordVerify']), htmlspecialchars($_POST['csrf_token'])));
+        echo json_encode(ControllerProCreateAccount::createAccount(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']), htmlspecialchars($_POST['passwordVerify']), htmlspecialchars($_POST['csrf_token'])));
     }

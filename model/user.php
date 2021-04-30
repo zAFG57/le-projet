@@ -16,41 +16,46 @@
             self::getInfoUser($id);
         }
 
-        protected static function getInfoUser($id, $protectEmail = true, $getPassword = false) {
+        protected static function getInfoUser($id, $protectEmail = true, $getPassword = false, $bothEmail = false) {
             if (!$id) return;
 
-            $userInfo;
-            if (!$getPassword) {
+            $userInfo = -1;
+            if ($getPassword) {
                 $res = parent::sqlSelect('SELECT 
-                users.id, users.username, users.email, users.verified, users.pro
+                users.id, users.username, users.password, users.email, users.verified, users.pro
                 FROM users 
                 WHERE users.id = ?',
                 'i', $id);
 
             } else {
                 $res = parent::sqlSelect('SELECT 
-                users.id, users.username, user.password, users.email, users.verified, users.pro
+                users.id, users.username, users.email, users.verified, users.pro
                 FROM users 
                 WHERE users.id = ?',
                 'i', $id);
-            }
-            
+             }
             if ($res && $res->num_rows === 1) {
                 $userInfo = $res->fetch_assoc();
+                if ($bothEmail) {
+                    $userInfo['emailProtected'] = self::protectEmail($userInfo['email']);
+                    // return  $userInfo['emailProtected'];
+                }
+
                 if ($protectEmail) {
                     $userInfo['email'] = self::protectEmail($userInfo['email']);
-                }
-            }  
-
-            if (self::isPro($userInfo['id'])) {
-                $ress = parent::sqlSelect('SELECT 
-                ville, objets_reparables, note
-                FROM pro_users WHERE pro_users.user_id = ?',
-                'i', $id);
-
-                if ($ress && $ress->num_rows === 1) {
-                    $userInfo += $ress->fetch_assoc();
                 } 
+            
+                // return $userInfo;
+                if (self::isPro($userInfo['id'])) {
+                    $ress = parent::sqlSelect('SELECT 
+                    ville, objets_reparables, note
+                    FROM pro_users WHERE pro_users.user_id = ?',
+                    'i', $id);
+
+                    if ($ress && $ress->num_rows === 1) {
+                        $userInfo += $ress->fetch_assoc();
+                    } 
+                }
             }
             return $userInfo;
         }
@@ -102,15 +107,15 @@
         }
 
         protected static function maxAttemptsChangeUsernameAchieved($id) {
-            return parent::sqlSelect('SELECT COUNT(change_username_attempts.id) FROM users LEFT JOIN change_username_attempts ON users.id = change_username_attempts.user_id AND change_username_attempts.timestamp>? WHERE users.id=? GROUP BY users.id', 'ii', time() - 60*60*24*10, $id);
+            return parent::sqlSelect('SELECT COUNT(change_username_attempts.id) FROM users LEFT JOIN change_username_attempts ON users.id = change_username_attempts.user_id AND change_username_attempts.timestamp>? WHERE users.id=? GROUP BY users.id', 'ii', time() - 60*60*24*10, $id)->fetch_assoc()['COUNT(change_username_attempts.id)'] >= Config::$maxChangeAttempt;
         }
 
         protected static function maxAttemptsChangeEmailAchieved($id) {
-            return parent::sqlSelect('SELECT COUNT(change_email_attempts.id) FROM users LEFT JOIN change_email_attempts ON users.id = change_email_attempts.user_id AND change_email_attempts.timestamp>? WHERE users.id=? GROUP BY users.id', 'ii', time() - 60*60*24*90, $id);
+            return parent::sqlSelect('SELECT COUNT(change_email_attempts.id) FROM users LEFT JOIN change_email_attempts ON users.id = change_email_attempts.user_id AND change_email_attempts.timestamp>? WHERE users.id=? GROUP BY users.id', 'ii', time() - 60*60*24*90, $id)->fetch_assoc()['COUNT(change_email_attempts.id)'] >= Config::$maxChangeAttempt;
         }
 
         protected static function maxAttemptsChangePasswordAchieved($id) {
-            return parent::sqlSelect('SELECT COUNT(change_password_attempts.id) FROM users LEFT JOIN change_password_attempts ON users.id = change_password_attempts.user_id AND change_password_attempts.timestamp>? WHERE users.id=? GROUP BY users.id', 'ii', time() - 60*60*24*5, $id);
+            return parent::sqlSelect('SELECT COUNT(change_password_attempts.id) FROM users LEFT JOIN change_password_attempts ON users.id = change_password_attempts.user_id AND change_password_attempts.timestamp>? WHERE users.id=? GROUP BY users.id', 'ii', time() - 60*60*24*5, $id)->fetch_assoc()['COUNT(change_password_attempts.id)'] >= Config::$maxChangeAttempt;
         }
 
         protected static function addAttemptChangeUsername($id) {

@@ -37,7 +37,7 @@
 
                 <div class="form">
 
-                    <input class="passwordin" value="<?= $user['username'] ?>" readonly name="passwordChange">
+                    <input class="passwordin" value="defaultPassword" type="password" readonly name="passwordChange">
                     <div class="modifier mailsub"><img src="../assets/edit.svg"/></div>
 
                 </div>
@@ -47,7 +47,7 @@
             <input type="hidden" value="<?= $user['id'] ?>" name="userIdChange"/>
             <div class="subanuler">    
                 <div id="subbmit">
-                    <h1>enregistrer</h1>
+                    <h1 onclick="modifyUser()">enregistrer</h1>
                 </div>
                 <div id="subbmit">
                     <h1>annuler</h1>

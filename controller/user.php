@@ -5,9 +5,9 @@
 
 
     class ControllerUser extends User {
-        public static function getUserInfo($id) {
+        public static function getUserInfo($id, $protectEmail = true, $getPassword = false, $bothEmail = false) {
             if (is_int($id)) {
-                return parent::getInfoUser($id);
+                return parent::getInfoUser($id, $protectEmail, $getPassword, $bothEmail);
             }
         }
 
@@ -37,14 +37,17 @@
         }
 
         public static function modifyUser($id, $username, $email, $password, $passwordVerify) {
+
             $res = 0;
             if (!self::userExisiting($id)) {
                 return 1;
             }
-            if (password_verify($password, $passwordVerify)) {
-                $user = self::getInfoUser($id, false, true);
 
-                if (!$user['username'] === $username) {
+            $user = self::getUserInfo($id, false, true, true);
+          
+            if (password_verify($passwordVerify, $user['password'])) {
+
+                if ($user['username'] !== $username) {
                     if(parent::maxAttemptsChangeUsernameAchieved($id)) {
                         return 2;
                     } else {
@@ -62,7 +65,7 @@
                     }
                 }  
                 
-                if (!$user['email'] === $email) {
+                if (!$user['email'] === $email || !$user['emailProtected'] === $email) {
                     if(parent::maxAttemptsChangeEmailAchieved($id)) {
                         return 4;
                     } else {
@@ -82,7 +85,7 @@
                     }
                 }
                 
-                if (!password_verify($password, $user['password'])) {
+                if ($password !==  "defaultPassword") {
                     if(parent::maxAttemptsChangePasswordAchieved($id)) {
                         return 7;
                     } else {
@@ -98,6 +101,8 @@
                         }
                     }
                 }
+            } else {
+                return 10;
             }
             return $res;
         }
@@ -107,8 +112,8 @@
     
     if (isset($_POST['usernameChange']) && isset($_POST['emailChange']) && isset($_POST['passwordChange']) && isset($_POST['passwordVerifyChange']) && isset($_POST['userIdChange']) && isset($_POST['csrf_token'])){
         session_start();
-        if(ControllerCsrf::validateCsrfToken(htmlspecialchars($_POST['csrf_token'])) && htmlspecialchars($_POST['userIdChange']) === htmlspecialchars($SESSION['userID'])) {
-            echo json_encode(ControllerUser::modifyUser(htmlspecialchars($_POST['userIdChange']), htmlspecialchars($_POST['usernameChange']), htmlspecialchars($_POST['emailChange']), htmlspecialchars($_POST['passwordChange']), htmlspecialchars($_POST['passwordVerifyChange'])));
+        if(ControllerCsrf::validateCsrfToken($_POST['csrf_token']) && intval($_POST['userIdChange']) === $_SESSION['userID']) { 
+            echo json_encode(ControllerUser::modifyUser(intval(($_POST['userIdChange'])), ($_POST['usernameChange']), ($_POST['emailChange']), ($_POST['passwordChange']), ($_POST['passwordVerifyChange'])));
         }
     }
     

@@ -22,7 +22,8 @@
 
         protected static $MAX_EMAIL_VERIFICATION_REQUESTS_PER_DAY = 3;
         protected static $MAX_LOGIN_ATTEMPTS_PER_HOUR = 5; 
-
+        protected static $maxChangeAttempt = 1;
+        
         protected static function urlSafeEncode($m) {
             return rtrim(strtr(base64_encode($m), '+/', '-_'), '=');
         }

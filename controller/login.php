@@ -1,11 +1,11 @@
-<?php 
+<?php
 
     require_once('../model/login.php');
     require_once('csrfConfig.php');
     session_start();
     class ControllerLogin extends Login {
         public static function login($email, $password, $csrfToken) {
-            if (isset($email) && isset($password) ) { 
+            if (isset($email) && isset($password) ) {
                 if (parent::userExisting($email)) {
                 if (isset($csrfToken) && ControllerCsrf::validateCsrfToken($csrfToken)) {
                     if (!parent::isMaxLoginAttemptsAchevied($email)) {
@@ -27,7 +27,7 @@
                             }
                         }
                     } else {
-                        //trop d'essay en 1 heure 
+                        //trop d'essay en 1 heure
                         return 3;
                     }
                 } else {
@@ -44,10 +44,7 @@
             }
         }
     }
-    
+
 if (isset($_POST['email']) && isset($_POST['password'])) {
-    // if (ControllerCsrf::validateCsrfToken(htmlspecialchars($_POST['csrf_token']))) {
-        echo json_encode(ControllerLogin::login(htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']), htmlspecialchars($_POST['csrf_token'])));
-    // }
+        echo json_encode(ControllerLogin::login($_POST['email'], $_POST['password'], $_POST['csrf_token']));
 }
-    

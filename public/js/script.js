@@ -80,7 +80,6 @@ function registerpro() {
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
 
-        // console.log(data)
         try {
             data = JSON.parse(data);
 
@@ -338,25 +337,37 @@ function getConv() {
 
 function modifyUser() {
     request('../controller/user.php', '#modifprofile', setloader = true, function(data) {
-        document.getElementById('errs').innerHTML = "";
-        var transition = document.getElementById('errs').style.transition;
-        document.getElementById('errs').style.transition = "none";
-        document.getElementById('errs').style.opacity = 0;
+        document.getElementById('err').innerHTML = "";
+        var transition = document.getElementById('err').style.transition;
+        document.getElementById('err').style.transition = "none";
+        document.getElementById('err').style.opacity = 0;
 
-
+        console.log(data);
         if (data === 0) {
-            document.getElementById('errs').innerHTML += '<div>vos données on bien été enregistré</div>';
+            document.getElementById('err').innerHTML += '<div>vos données on bien été enregistré</div>';
             document.getElementById('modifprofile').reset();
         } else {
             fetch('../public/js/error.json')
                 .then(res => res.json())
-                .then(res => document.getElementById('errs').innerHTML += res['modifyUser'][data]);
+                .then(res => document.getElementById('err').innerHTML += res['modifyUser'][data]);
         }
 
         setTimeout(function() {
-            document.getElementById('errs').style.transition = transition;
-            document.getElementById('errs').style.opacity = 1;
+            document.getElementById('err').style.transition = transition;
+            document.getElementById('err').style.opacity = 1;
         }, 10);
 
     })
+}
+
+function modifyInputName() {
+    document.getElementById('nameinputmodif').removeAttribute('readonly');
+}
+
+function modifyInputEmail() {
+    document.getElementById('mailinputmodif').removeAttribute('readonly');
+}
+
+function modifyInputPassword() {
+    document.getElementById('passwordinputmodif').removeAttribute('readonly');
 }
