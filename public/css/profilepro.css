@@ -1,0 +1,128 @@
+.main {
+    position: absolute;
+    height: 90%;
+    width: 100%;
+    top: 10%;
+    display: flex;
+}
+.profil {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background: white;
+    transition: width 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.profil::after {
+    content: '';
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 0;
+    height: 0;
+    border-left: 5vw solid transparent;
+    border-right: 0vw solid transparent;
+    border-bottom: 45vh solid var(--clr-primary);
+    clear: both;
+}
+.profil:hover {
+    width: 70%;
+}
+.profil h1 {
+    font-size: 3em;
+    color: var(--clr-primary);
+}
+.profil p {
+    padding: 15px;
+    text-align: center;
+}
+.travail {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background: var(--clr-primary);
+    transition: width 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.travail::after {
+    content: '';
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    width: 0;
+    height: 0;
+    border-left: 0px solid transparent;
+    border-right: 5vw solid transparent;
+    border-top: 45vh solid white;
+    clear: both;
+}
+.travail:hover {
+    width: 70%;
+}
+.travail h1 {
+    font-size: 3em;
+    color: white;
+}
+.travail p {
+    padding: 15px;
+    text-align: center;
+}
+.main div {
+    cursor: pointer;
+}
+
+
+
+/*////////////////responsive 900px (téléphone et autre)//////*/
+
+@media screen and (max-width: 900px) {
+    .main {
+        flex-direction: column-reverse;
+    }
+    .profil {
+        width: 100%;
+        height: 50%;
+    }
+    .profil h1 {
+        font-size: 2em;
+        font-weight: bold;
+    }
+    .profil::after {
+        display: none;
+    }
+    .profil:hover {
+        width: 100%;
+    }
+    .travail {
+        width: 100%;
+        height: 50%;
+    }
+    .travail h1 {
+        font-size: 2em;
+        font-weight: bold;
+    }
+    .travail::after {
+        display: none;
+    }
+    .travail:hover {
+        width: 100%;
+    }
+}
+/*/////////////////responsive 1300px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
+
+@media screen and (min-width: 900px) {
+    @media screen and (max-width: 1300px) {
+        .travail h1 {
+            font-size: 2.5em;
+        }
+        .profil h1 {
+            font-size: 2.5em;
+        }
+    }
+}
