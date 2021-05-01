@@ -191,7 +191,7 @@ function searchf() {
         document.getElementById('resSearch').style.opacity = 0;
         document.getElementsByClassName('maindiv')[0].style.display = 'none';
 
-        // console.log(data);
+        console.log(data);
         try {
             data = JSON.parse(data);
             // console.log(data);

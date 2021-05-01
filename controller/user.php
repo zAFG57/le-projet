@@ -66,7 +66,7 @@
                     }
                 }  
                 
-                if ($user['email'] !== $email || $user['emailProtected'] !== $email) {
+                if ($user['email'] !== $email && $user['emailProtected'] !== $email) {
 
                     if(parent::maxAttemptsChangeEmailAchieved($id)) {
                         return 4;
