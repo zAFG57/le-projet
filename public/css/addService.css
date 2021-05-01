@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.progression {
+    position: absolute;
+    height: 80vh;
+    top: 15vh;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    z-index: 15;
+}
+.étape {
+    margin-top: 2.5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--clr-primary);
+    background: white;
+    color: var(--clr-primary);
+    transition: 0.5s;
+}
+.étape::after {
+    top: 101%;
+    left: 45%;
+    position: absolute;
+    content: '';
+    width: 10px;
+    height: 2.5vh;
+    background: white;
+    border: 3px solid var(--clr-primary);
+}
+.étape.fin::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border: none;
+}
+.étape.active {
+    background: var(--clr-primary);
+    color: white;
+}
+.étape.active::after {
+    background: var(--clr-primary);
+}
+.main {
+    left: 140px;
+    position: absolute; 
+    width: calc(100% - 150px);
+    height: 90%;
+    top: 10%;
+    background: white;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.main div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main select {
+    all: unset;
+    width: 40%;
+            background: #2f743b;
+            box-shadow: inset 34px 34px 68px #132e18, inset -34px -34px 68px #4bba5e;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    padding-right: 30px;
+}
+.main select option {
+    all: unset;
+    text-align: center;
+    background: hsl(130, 42%, 42%);
+}
+.select::after {
+    content: '';
+    position: relative;
+    right: 30px;
+    top: -5px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 0vw solid transparent;
+    border-bottom: 20px solid white;
+    clear: both;
+    transform: rotateZ(45deg);
+}
+.cat , .souscatdiv {
+    padding: 50px;
+    border-radius: 30px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+box-shadow:  5px 5px 10px #666666,
+             -5px -5px 10px #ffffff;
+}
+

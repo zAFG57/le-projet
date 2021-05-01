@@ -362,12 +362,19 @@ function modifyUser() {
 
 function modifyInputName() {
     document.getElementById('nameinputmodif').removeAttribute('readonly');
+    document.getElementById('nameinputmodif').focus();
 }
 
 function modifyInputEmail() {
     document.getElementById('mailinputmodif').removeAttribute('readonly');
+    document.getElementById('mailinputmodif').focus();
 }
 
-function modifyInputPassword() {
+function modifyInputpassword() {
     document.getElementById('passwordinputmodif').removeAttribute('readonly');
+    document.getElementById('passwordinputmodif').focus();
+}
+
+function anulermodif() {
+    document.location = document.location;
 }

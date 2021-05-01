@@ -1,4 +1,4 @@
-<?php 
+<?php  
 
     session_start();
 
@@ -25,11 +25,13 @@
                 $user = controllerUser::getUserInfo(intval($_GET['user']));
 
                 if (intval($_GET['user']) === $_SESSION['userID'] && isset($_GET['action']) && intval($_GET['action']) === 1) {
-                    require_once('./profile/editPro.php');
+                    require_once('./profile/user.php');
                 } else if(intval($_GET['user']) === $_SESSION['userID'] && isset($_GET['action']) && intval($_GET['action']) === 2){
                     require_once('./profile/prestationPro.php');
-                } else {
+                } else if(intval($_GET['user']) === $_SESSION['userID'] ){
                     require_once('./profile/pro.php');
+                } else {
+                    require_once('./profile/viewProProfile.php');
                 }
             } else if(intval($_GET['user']) === $_SESSION['userID']) {
                 $user = controllerUser::getUserInfo($_SESSION['userID']);

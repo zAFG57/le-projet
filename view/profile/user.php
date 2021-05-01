@@ -8,13 +8,22 @@
         <?= $nav ?>
     </header>
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 0b928407031195a245d6cca033ab2201eee4f4fd
 
 <form id="modifprofile">
     <div class="haut">
         <div class="form">
+<<<<<<< HEAD
             <input class="namein" value="<?= $user['username'] ?>" readonly name="usernameChange"/>
             <div class="modifier mailsub"><img src="../assets/edit.svg"/></div>
+=======
+            <input class="namein" value="<?= $user['username'] ?>" readonly name="usernameChange" id="nameinputmodif"/>
+            <div class="modifier namesub" onclick="modifyInputName()"><img src="../assets/edit.svg"/></div>
+>>>>>>> 0b928407031195a245d6cca033ab2201eee4f4fd
         </div>
     </div>
     <div class="main">
@@ -27,8 +36,8 @@
 
             <div class="mail">
                 <div class="form">
-                    <input class="mailin" value="<?= $user['email'] ?>" readonly name="emailChange">
-                    <div class="modifier mailsub"><img src="../assets/edit.svg"/></div>
+                    <input class="mailin" value="<?= $user['email'] ?>" readonly name="emailChange" id="mailinputmodif">
+                    <div class="modifier mailsub" onclick="modifyInputEmail()"><img src="../assets/edit.svg"/></div>
                 </div>
 
             </div>
@@ -37,8 +46,8 @@
 
                 <div class="form">
 
-                    <input class="passwordin" value="defaultPassword" type="password" readonly name="passwordChange">
-                    <div class="modifier mailsub"><img src="../assets/edit.svg"/></div>
+                    <input class="passwordin" type="password"value="defaultPassword" readonly name="passwordChange" id="passwordinputmodif">
+                    <div class="modifier passsub" onclick="modifyInputpassword()"><img src="../assets/edit.svg"/></div>
 
                 </div>
             </div>  
@@ -46,10 +55,10 @@
             <input type="password" class="mdpverif" id="passwordverify" name="passwordVerifyChange" placeholder="Mots de passe de vérification" />
             <input type="hidden" value="<?= $user['id'] ?>" name="userIdChange"/>
             <div class="subanuler">    
-                <div id="subbmit">
-                    <h1 onclick="modifyUser()">enregistrer</h1>
+                <div id="subbmit" onclick="modifyUser()">
+                    <h1>enregistrer</h1>
                 </div>
-                <div id="subbmit">
+                <div id="subbmit" onclick="anulermodif()">
                     <h1>annuler</h1>
                 </div>
             </div>
