@@ -101,8 +101,15 @@
         } 
 
         protected static function ModifyPassword($id, $newPassword) {
-            if (parent::sqlUpdate('UPDATE user SET username=? WHERE id = ?', 'si', password_hash($newPassword, PASSWORD_DEFAULT), $id)) {
+            if (parent::sqlUpdate('UPDATE users SET username=? WHERE id = ?', 'si', password_hash($newPassword, PASSWORD_DEFAULT), $id)) {
                 return ControllerEmailVerification::sendEmailToModifyPassword($id);
+            }
+        }
+
+        protected static function ModifyEmail($id, $newEmail, $csrfToken) {
+            if (parent::sqlUpdate('UPDATE users SET email=? WHERE id = ?', 'si', $newEmail, $id)) {
+                ControllerEmailVerification::sendValidationEmailFromArgs($newEmail, $csrfToken);
+                return parent::sqlUpdate('UPDATE users SET verified=0 WHERE id = ?', 'i', $id);
             }
         }
 

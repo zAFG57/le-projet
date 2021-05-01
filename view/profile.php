@@ -4,7 +4,7 @@
 
     require_once('../templates/nav.php');
     require_once('../controller/user.php');
-    require_once('../controller/user.php');
+    
 
     if (!controllerUser::isConnected()) {
         header("Location: ../index.php?location=profile");
@@ -21,8 +21,16 @@
     } else {
         if (controllerUser::userExisiting(intval($_GET['user']))) {
             if (controllerUser::isPro(intval($_GET['user']))) {
+
                 $user = controllerUser::getUserInfo(intval($_GET['user']));
-                require_once('./profile/pro.php');
+
+                if (intval($_GET['user']) === $_SESSION['userID'] && isset($_GET['action']) && intval($_GET['action']) === 1) {
+                    require_once('./profile/editPro.php');
+                } else if(intval($_GET['user']) === $_SESSION['userID'] && isset($_GET['action']) && intval($_GET['action']) === 2){
+                    require_once('./profile/prestationPro.php');
+                } else {
+                    require_once('./profile/pro.php');
+                }
             } else if(intval($_GET['user']) === $_SESSION['userID']) {
                 $user = controllerUser::getUserInfo($_SESSION['userID']);
                 require_once('./profile/user.php');

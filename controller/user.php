@@ -2,7 +2,9 @@
 
     require_once('../model/user.php');
     require_once('../model/csrfConfig.php');
-
+    require_once('../controller/email_verification.php');
+    // require_once('csrfConfig.php');
+    
 
     class ControllerUser extends User {
         public static function getUserInfo($id, $protectEmail = true, $getPassword = false, $bothEmail = false) {
@@ -36,7 +38,7 @@
             }
         }
 
-        public static function modifyUser($id, $username, $email, $password, $passwordVerify) {
+        public static function modifyUser($id, $username, $email, $password, $passwordVerify, $csrfToken) {
 
             $res = 0;
             if (!self::userExisiting($id)) {
@@ -58,26 +60,27 @@
                             if(!parent::addAttemptChangeUsername($id)) {
                                 return 9; // 
                             }
-                            
                         } else {
                             return 9; // 
                         }
                     }
                 }  
                 
-                if (!$user['email'] === $email || !$user['emailProtected'] === $email) {
+                if ($user['email'] !== $email || $user['emailProtected'] !== $email) {
+
                     if(parent::maxAttemptsChangeEmailAchieved($id)) {
                         return 4;
                     } else {
+
                         if(strlen($email) > 255 || !filter_var($email, FILTER_VALIDATE_EMAIL)){
                             return 5;
                         }elseif (!checkdnsrr(substr($email, strpos($email, '@') + 1), 'MX')) {
                            return 6;
                         }
-                        if (parent::ModifyEmail($id, $email)) {
+                        if (parent::ModifyEmail($id, $email, $csrfToken)) {
                             if(!parent::addAttemptChangeEmail($id)) {
                                 return 9; // 
-                            }
+                            }   
                             
                         } else {
                             return 9; // 
@@ -113,7 +116,7 @@
     if (isset($_POST['usernameChange']) && isset($_POST['emailChange']) && isset($_POST['passwordChange']) && isset($_POST['passwordVerifyChange']) && isset($_POST['userIdChange']) && isset($_POST['csrf_token'])){
         session_start();
         if(ControllerCsrf::validateCsrfToken($_POST['csrf_token']) && intval($_POST['userIdChange']) === $_SESSION['userID']) { 
-            echo json_encode(ControllerUser::modifyUser(intval(($_POST['userIdChange'])), ($_POST['usernameChange']), ($_POST['emailChange']), ($_POST['passwordChange']), ($_POST['passwordVerifyChange'])));
+            echo json_encode(ControllerUser::modifyUser(intval(($_POST['userIdChange'])), ($_POST['usernameChange']), ($_POST['emailChange']), ($_POST['passwordChange']), $_POST['passwordVerifyChange'], $_POST['csrf_token']));
         }
     }
     
