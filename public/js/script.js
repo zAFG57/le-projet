@@ -73,6 +73,11 @@ function register() {
 }
 
 ///////////////////////////////////////////////////////////test début//////////////////////
+
+/**
+ * @function registerpro
+ * @param none
+ */
 function registerpro() {
     request('../controller/create_professional_account.php', '#registerForm', setloader = true, function(data) {
         document.getElementById('errs').innerHTML = "";

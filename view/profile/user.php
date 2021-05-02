@@ -8,22 +8,13 @@
         <?= $nav ?>
     </header>
 
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 0b928407031195a245d6cca033ab2201eee4f4fd
 
 <form id="modifprofile">
     <div class="haut">
         <div class="form">
-<<<<<<< HEAD
-            <input class="namein" value="<?= $user['username'] ?>" readonly name="usernameChange"/>
-            <div class="modifier mailsub"><img src="../assets/edit.svg"/></div>
-=======
             <input class="namein" value="<?= $user['username'] ?>" readonly name="usernameChange" id="nameinputmodif"/>
             <div class="modifier namesub" onclick="modifyInputName()"><img src="../assets/edit.svg"/></div>
->>>>>>> 0b928407031195a245d6cca033ab2201eee4f4fd
         </div>
     </div>
     <div class="main">
