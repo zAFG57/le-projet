@@ -4,6 +4,7 @@
 
     class Logout extends Csrf{
         protected static function unSetVariables() {
-            session_destroy();
+            unset($_SESSION['userID'], $_SESSION['loggedin']);
+            // session_destroy();
         }
     }

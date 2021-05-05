@@ -42,5 +42,9 @@
                 }
         }
     }
+
+    protected static function getUsersNum() {
+        return parent::sqlSelect('SELECT COUNT(id) FROM users')->fetch_assoc()['COUNT(id)'];
+    }
 }
     

@@ -5,7 +5,7 @@
     class Database extends Config{
         public static $db = null;
 
-        public function __construct(Type $var = null) {
+        public function __construct() {
             self::$db = $this->connect();
         }
 
@@ -44,7 +44,6 @@
             if (self::$db === null) {
                 self::$db = self::connect();
             }
-
             $stmt = self::$db->prepare($query);
             if($format) {
                 $stmt->bind_param($format, ...$vars);
