@@ -32,8 +32,9 @@
         "<div class='err'>Le server n'a pas pu se connecter avec la base de données </div>",
         "<div class='err'>une erreur s'est produite. veuillez réessayer plus tard.</div>"
     ],
+
     "modifyUser": [
-        "<div class='err'>WOULA TOUT VAS BIEN BRO </div>",
+        "<div class='err'>vos données on bien été enregistrées</div>",
         "<div class='err'>Utilisatuer non trouvé</div>",
         "<div class='err'>Vous avez deja modifier votre nom d'utilisatuer il y a moins de 10 jours</div>",
         "<div class='err'>Le nom d'utilisatuer ne doit contennir que des lettres majuscules ou minuscules et des espaces</div>",
@@ -43,5 +44,15 @@
         "<div class='err'>Vous avez deja modifier votre email il y a moins de 5 jours</div>",
         "<div class='err'>le mot de passe doit contennir: <ul><li>au moins 8 caractères</li><li>au moins une lettre en minuscule</li><li>au moins une lettre en majuscule</li><li>au moins 1 nombre</li><li>au moins 1 caractere special (~?!@#$%^&*)</li></ul></div>",
         "<div class='err'>Erreur lors de la connection avec la base de donnée veuillez réessayer plus tard</div>"
+    ],
+
+    "addPresta": [
+        "<div class='err'>Prestation enregistrée, elle sera utilisable quand un administrateur l'aura approuvée</div>",
+        "<div class='err'>Tous les champs sont requis</div>",
+        "<div class='err'>La demande d'ajout n'as pas pu être faite</div>",
+        "<div class='err'>Le fichier n'a pas pu être téléchargé</div>",
+        "<div class='err'>Le service n'as pas pu être crée</div>",
+        "<div class='err'>Utilisateur invalide</div>",
+        "<div class='err'>Une erreur est survenue</div>"
     ]
 }

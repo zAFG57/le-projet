@@ -29,6 +29,10 @@
         public static function getUsersNum() {
             return parent::getUsersNum();  
         }
+
+        public static function verifAll($userID, $hash) {
+            return ControllerAdmin::validateAdminToken(ControllerAdmin::getHashToken($userID)) && password_verify(ControllerAdmin::getHashToken($userID), $hash);
+        }
     }
 
 

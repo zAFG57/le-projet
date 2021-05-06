@@ -39,6 +39,8 @@
                 
                 if($userPro) {
                     return $userPro['hash'];  
+                } else {
+                    return false;
                 }
         }
     }

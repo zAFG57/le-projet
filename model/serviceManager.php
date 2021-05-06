@@ -15,12 +15,13 @@
          * 
          * @return bool insert worked successfully
          */
-        protected static function submitService($serviceID, $id, $domain,$subDomain, $title, $description ) {
+        protected static function submitService($serviceID, $id, $domain, $subDomain, $title, $description ) {
             $domainIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-192-CBC'));
             $subDomainIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-192-CBC'));
             $titleIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-192-CBC'));
             $descriptionIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-192-CBC'));
-            return parent::sqlInsert('INSERT INTO services (id, user_id, domain, sub_domain, title, description, creation_date, encryption_IV_domaine, encryption_IV_desc, encryption_IV_sub_domain, encryption_IV_title) VALUES (?,?,?,?,?,?,?,?,?,?,?)', 'sissssissss', $serviceID, $id, self::encodeDomain($domain, $domainIV), self::encodeDescription($description,$descriptionIV), self::encodeSubDomain($subDomain,$subDomainIV),  self::encodeTitle($title,$titleIV), time(), $domainIV, $descriptionIV, $subDomainIV, $titleIV);
+            
+            return parent::sqlInsert('INSERT INTO services (id, user_id, domain, sub_domain, title, description, creation_date, encryption_IV_domaine, encryption_IV_desc, encryption_IV_sub_domain, encryption_IV_title, active) VALUES (?,?,?,?,?,?,?,?,?,?,?, false)', 'sissssissss', $serviceID, $id, self::encodeDomain($domain, $domainIV), self::encodeDescription($description,$descriptionIV), self::encodeSubDomain($subDomain,$subDomainIV),  self::encodeTitle($title,$titleIV), time(), $domainIV, $descriptionIV, $subDomainIV, $titleIV);
         }
 
 
@@ -147,9 +148,118 @@
          * remove a service with his id
          * @param string $id
          * 
-         * @return array of all elements 
+         * @return boolean for the rerquest's sucess
          */
         protected static function remServices($id) {
             return parent::sqlUpdate('DELETE FROM services WHERE id=?', 's', $id);
+        }
+
+        /**
+         * remove a service with his id
+         * @param string $id serviceID
+         * 
+         * @return boolean if the service existing
+         */
+        protected static function serviceExisting($id) {
+            return parent::sqlSelect('SELECT id from services WHERE id=?', 's', $id)->num_rows === 1;
+        }
+
+        /**
+         * remove a service with his id
+         * @param string $id serviceID
+         * 
+         * @return boolean if the insert is sucessfull
+         */
+        protected static function addServiceAttempt($id) {
+            return parent::sqlInsert('INSERT INTO services_attempts (`id`, `service_id`, `timestamp`) VALUES (null,?,?)', 'si', $id, time());
+        }
+
+        /**
+         * active the service
+         * @param string $id serviceID
+         * 
+         * @return boolean if the update is sucessfull
+         */
+        protected static function activateService($id) {
+            return parent::sqlUpdate('UPDATE services SET active=true WHERE service_id=?', 's', $id);
+        }
+
+        /**
+         * disable the service
+         * @param string $id serviceID
+         * 
+         * @return boolean if the update is sucessfull
+         */
+        protected static function disableService($id) {
+            return parent::sqlUpdate('UPDATE services SET active=false WHERE service_id=?', 's', $id);
+        }
+
+        /**
+         * remove a service_attempt with his id
+         * @param string $id serviceID
+         * 
+         * @return boolean if the deletation is sucessfull 
+         */
+        protected static function remServiceAttempt($id) {
+            return parent::sqlUpdate('DELETE FROM services_attempts WHERE service_id=?', 's', $id);
+        }
+
+
+        /**
+         * allow to upload files to the server
+         * @param array $file
+         * 
+         * @return boolean if the action is success
+         */
+        protected static function uploadServiceFile($file,$id, $serviceID) {
+            $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "png" => "image/png");
+            $filename = $file["name"];
+            $filetype = $file["type"];
+            $filesize = $file["size"];
+        
+            // Vérifie l'extension du fichier
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            if(!array_key_exists($ext, $allowed)) {
+                return -1;
+            }
+        
+            if($filesize > Config::$MAX_SIZE_SERVICES_DOCS) {
+                return -2;
+            }
+        
+            // Vérifie le type MIME du fichier
+
+            if(in_array($filetype, $allowed)){
+                if (!file_exists(Config::$FOLDER_STACK_SERVICES_DOCS . $id)) {
+                    mkdir(Config::$FOLDER_STACK_SERVICES_DOCS . $id);
+                }
+                // Vérifie si le fichier existe avant de le télécharger.
+                if(file_exists(Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID . '.' . $ext)){
+                    return -3;
+                } else{
+                    return move_uploaded_file($file["tmp_name"], Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID . '.' . $ext);
+                } 
+            } else{
+                return -4;
+            }
+        }
+        /**
+         * 
+         */
+        protected static function deleteServiceFile($id, $serviceID) {
+            $allowed = ["jpg", "jpeg", "png"];
+            
+            foreach ($allowed as $allowedKey) {
+                if (file_exists(Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID .  '.' . $allowedKey)){
+                    return unlink(Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID .  '.' . $allowedKey);
+                }
+            }
+            return false;
+        }
+
+
+
+        protected static function getUserIdFromService($serviceID) {
+            parent::sqlSelect('SELECT user_id FROM services WHERE id=?', 's', $serviceID)->fetch_assoc()['id'];
         }
     }

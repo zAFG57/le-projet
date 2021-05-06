@@ -14,13 +14,12 @@ body {
     top: 15vh;
     width: 150px;
     display: flex;
+    align-items: center;
     flex-direction: column;
     z-index: 15;
 }
 .étape {
     margin-top: 2.5vh;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,6 +42,7 @@ body {
     height: 2.5vh;
     background: white;
     border: 3px solid var(--clr-primary);
+    transition: 0.5s 0.1s;
 }
 .étape.fin::after {
     content: '';
@@ -59,16 +59,25 @@ body {
 }
 .main {
     left: 140px;
-    position: absolute; 
+    position: fixed; 
     width: calc(100% - 150px);
     height: 90%;
     top: 10%;
     background: white;
-    z-index: 1;
+    z-index: 12;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+}
+.main + .main {
+    z-index: 10;
+}
+.main + .main + .main{
+    z-index: 8;
+}
+.main + .main + .main{
+    z-index: 6;
 }
 .main div {
     display: flex;
@@ -77,13 +86,13 @@ body {
 }
 .main select {
     all: unset;
-    width: 40%;
-            background: #2f743b;
-            box-shadow: inset 34px 34px 68px #132e18, inset -34px -34px 68px #4bba5e;
+    width: 400px;
+    background: #2f743b;
     color: white;
     padding: 10px;
     text-align: center;
     padding-right: 30px;
+    margin-left: 2%;
 }
 .main select option {
     all: unset;
@@ -102,12 +111,246 @@ body {
     border-bottom: 20px solid white;
     clear: both;
     transform: rotateZ(45deg);
+    -webkit-touch-callout: none;
+     -webkit-user-select: none;
+     -khtml-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
 }
 .cat , .souscatdiv {
     padding: 50px;
     border-radius: 30px;
-    background: linear-gradient(145deg, #ffffff, #e6e6e6);
-box-shadow:  5px 5px 10px #666666,
-             -5px -5px 10px #ffffff;
+    background: white;
+    border: 2px solid var(--clr-primary);
+    width: 1000px;
+}
+.souscatdiv {
+    margin-top: 10vh;
+}
+.suivant {
+    z-index: 85;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%,0px);
+    color: var(--clr-primary);
+    background: white;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    font-size: 3em;
+    transition: ease-in-out 0.25s;
+    cursor: pointer;
+}
+.suivant:hover {
+    background: var(--clr-primary);
+    color: white;
+}
+#souscatjs {
+    margin-left: 1%;
 }
 
+.titrediv {
+    background: #2f743b;
+}
+.description {
+    position: relative;
+    height: 30vh;
+    width: 1000px;
+    padding: 40px;
+    background: var(--clr-primary);
+    border-radius: 40px;
+    resize: none;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: hidden;
+    border: none;
+    transition: background 0.5s ease-in-out;
+    margin-top: 30px;
+}
+.description:focus-within {
+    outline: none;
+    background: hsl(130, 42%, 42%);
+}
+.description::-webkit-scrollbar {
+    display: none;
+}
+.titre {
+    position: relative;
+    height: 10vh;
+    width: 1000px;
+    padding: 40px;
+    background: var(--clr-primary);
+    border-radius: 40px;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: hidden;
+    border: none;
+    transition: background 0.5s ease-in-out;
+    text-align: center;
+    font-size: 2em;
+    color: white;
+}
+.titre:focus-within {
+    outline: none;
+    background: hsl(130, 42%, 42%);
+}
+
+
+
+.doccument {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.doccument + label {
+    position: relative;
+    height: 20vh;
+    width: 1000px;
+    background: var(--clr-primary);
+    border-radius: 40px;
+    border: none;
+    font-size: 2em;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.25s ease-in-out;
+    text-align: center;
+}
+
+.doccument:focus + label,
+.doccument + label:hover {
+    font-size: 1.75em;
+    background-color: hsl(130, 42%, 42%);
+}
+.doccument + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+
+
+
+
+
+/*////////////////responsive 900px (téléphone et autre)//////*/
+
+@media screen and (max-width: 900px) {
+    .étape {
+        height: 21vw;
+        width: 21vw;
+        margin-left: 6.67vw;
+        font-size: 0.9em;
+    }
+    .étape::after {
+        top: 50%;
+        transform: translateY(-50%);
+        left: 100%;
+        height: 2vw;
+        width: 6.67vw;
+    }
+    .progression {
+        left: 0px;
+        width: 100vw;
+        height: 10vh;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .main {
+        width: 100%;
+        left: 0px;
+    }
+
+
+    .cat , .souscatdiv {
+        width: 95%;
+    }
+     .description {
+         width: 95%;
+    }
+     .titre {
+         width: 95%;
+    }
+     .doccument + label {
+         width: 95%;
+    }
+    .main select {
+        width: 150px;
+    }
+}
+
+
+/*/////////////////responsive 1300px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
+
+@media screen and (min-width: 900px) {
+    @media screen and (max-width: 1300px) {
+        .étape {
+            left: 0px;
+            margin-left: 30px;
+            margin-top: 0px;
+        }
+        .étape::after {
+            top: 50%;
+            transform: translateY(-50%);
+            left: 100%;
+            height: 10px;
+            width: 30px
+        }
+        .progression {
+            left: 0px;
+            width: 100vw;
+            height: 10vh;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+        .main {
+            width: 100%;
+            left: 0px;
+        }
+        .cat , .souscatdiv {
+            width: 750px;
+        }
+        .description {
+            width: 750px;
+        }
+        .titre {
+            width: 750px;
+        }
+        .doccument + label {
+            width: 750px;
+        }
+        .main select {
+            width: 300px;
+        }
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 400px) {
+    .étape {
+        height: 25vw;
+        width: 25vw;
+        margin-left: 6.67vw;
+        font-size: 0.9em;
+    }
+    .étape::after {
+        top: 50%;
+        transform: translateY(-50%);
+        left: 100%;
+        height: 2.5vw;
+        width: 6.67vw;
+    }
+}

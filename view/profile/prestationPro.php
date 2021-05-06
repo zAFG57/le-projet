@@ -6,6 +6,6 @@
         if (isset($_GET['addService'])) {
             require_once('./profile/addPrestationPro.php');
         } else {
-            echo '<h1>MODIFIER MES PRESTATIONS</h1>';
+            require_once('./profile/displayppro.php');
         }
     }

@@ -65,7 +65,6 @@ body {
 .discutionlien div:hover .discutionmessage {
     color: hsl(0, 0%, 80%);
 }
-
 .discution .mesDiscutions {
     color: var(--clr-primary);
     background: #3333;
@@ -177,7 +176,6 @@ span {
 .mesmessagenav {
     display: none;
 }
-
 .mesDiscussions {
     padding: 1em;
     text-align: center;
@@ -185,7 +183,6 @@ span {
     color: white;
     font-size: 160%;
 }
-
 .retourenarrière {
     display: none;
     background-image: url("../../assets/retour.svg");
@@ -200,22 +197,6 @@ span {
     z-index: 3;
     border-radius: 50%;
 }
-
-
-/*                          page sans chat ouvert:  */
-
-.bvnsurvosmessage {
-    position: relative;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: max-content;
-    color: var(--clr-primary);
-    font-size: calc(2em - 5px);
-}
-
-
-/*                          fin page sans chat ouvert:  */
 
 
 /*                          page sans chat ouvert:  */
@@ -278,10 +259,6 @@ span {
         }
         .retourenarrière {
             display: block;
-        }
-        .chat {
-            border-left: none;
-            width: 100%;
         }
     }
 }

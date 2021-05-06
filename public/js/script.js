@@ -18,8 +18,12 @@ function request(url, data, setloader = true, callback) {
             }
         }
     });
+    // document.querySelector(data)
 
     var formdata = data ? (data instanceof FormData ? data : new FormData(document.querySelector(data))) : new FormData();
+    // console.log(formdata);
+    // console.log(document.querySelector(data));
+
 
     var csrfMetaTag = document.querySelector('meta[name="csrf_token"]');
     if (csrfMetaTag) {
@@ -349,7 +353,7 @@ function modifyUser() {
 
         console.log(data);
         if (data === 0) {
-            document.getElementById('err').innerHTML += '<div>vos données on bien été enregistré</div>';
+            document.getElementById('err').innerHTML += '<div>vos données on bien été enregistrées</div>';
             document.getElementById('modifprofile').reset();
         } else {
             fetch('../public/js/error.json')
@@ -364,6 +368,36 @@ function modifyUser() {
 
     })
 }
+
+function newPrestation() {
+    request('../controller/serviceManager.php', '#addFerviceForm', setloader = true, function(data) {
+        document.getElementById('err').innerHTML = "";
+        var transition = document.getElementById('err').style.transition;
+        document.getElementById('err').style.transition = "none";
+        document.getElementById('err').style.opacity = 0;
+
+        console.log(data);
+        data = JSON.parse(data)
+            // console.log(typeof(data));
+
+        if (data === 0) {
+            document.getElementById('err').innerHTML += '<div>Prestation enregistrée, elle sera utilisable quand un administrateur l\'aura approuvée</div>';
+            document.getElementById('addFerviceForm').reset();
+        } else {
+            fetch('../public/js/error.json')
+                .then(res => res.json())
+                .then(res => /*document.getElementById('err').innerHTML += res['addPresta'][0]*/ console.log(res));
+        }
+
+        setTimeout(function() {
+            document.getElementById('err').style.transition = transition;
+            document.getElementById('err').style.opacity = 1;
+        }, 10);
+
+    })
+}
+
+
 
 function modifyInputName() {
     document.getElementById('nameinputmodif').removeAttribute('readonly');
