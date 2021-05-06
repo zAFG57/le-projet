@@ -21,7 +21,7 @@
             $titleIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-192-CBC'));
             $descriptionIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-192-CBC'));
             
-            return parent::sqlInsert('INSERT INTO services (id, user_id, domain, sub_domain, title, description, creation_date, encryption_IV_domaine, encryption_IV_desc, encryption_IV_sub_domain, encryption_IV_title, active) VALUES (?,?,?,?,?,?,?,?,?,?,?, false)', 'sissssissss', $serviceID, $id, self::encodeDomain($domain, $domainIV), self::encodeDescription($description,$descriptionIV), self::encodeSubDomain($subDomain,$subDomainIV),  self::encodeTitle($title,$titleIV), time(), $domainIV, $descriptionIV, $subDomainIV, $titleIV);
+            return parent::sqlInsert('INSERT INTO services (id, user_id, domain, sub_domain, title, description, creation_date, encryption_IV_domain, encryption_IV_desc, encryption_IV_sub_domain, encryption_IV_title, active) VALUES (?,?,?,?,?,?,?,?,?,?,?, false)', 'sissssissss', $serviceID, $id, self::encodeData($domain, $domainIV, Config::$DOMAIN_KEY_SECRET), self::encodeData($subDomain,$subDomainIV, Config::$SUBDOMAIN_KEY_SECRET),  self::encodeData($title, $titleIV, Config::$TITLE_KEY_SECRET), self::encodeData($description, $descriptionIV, Config::$DESCRIPTION_KEY_SECRET), time(), $domainIV, $descriptionIV, $subDomainIV, $titleIV);
         }
 
 
@@ -53,8 +53,8 @@
          * 
          * @return string encoded domain
          */
-        protected static function encodeDomain($domain, $IV) {
-            return Config::urlSafeEncode(openssl_encrypt($domain, "AES-192-CBC", Config::$DOMAIN_KEY_SECRET, 0, $IV));
+        protected static function encodeData($data, $IV, $schema) {
+            return Config::urlSafeEncode(openssl_encrypt($data, "AES-192-CBC", $schema, 0, $IV));
         }
 
         /**
@@ -64,74 +64,20 @@
          * 
          * @return string decoded domain
          */
-        protected static function decodeDomain($encryptedDomain, $IV) {
-            return openssl_decrypt(Config::urlSafeDecode($encryptedDomain), "AES-192-CBC",  Config::$DOMAIN_KEY_SECRET, 0, $IV);
+        protected static function decodeData($encryptedData, $IV, $schema) {
+            return openssl_decrypt(Config::urlSafeDecode($encryptedData), "AES-192-CBC",  $schema, 0, $IV);
         }
 
         /**
-         * encode with description key
-         * @param string $description 
-         * @param string $IV used do decrypt
-         * 
-         * @return string encoded domain
+         * @param array $service 
+         * @return array return the decoded service
          */
-        protected static function encodeDescription($description, $IV) {
-            return Config::urlSafeEncode(openssl_encrypt($description, "AES-192-CBC", Config::$DESCRIPTION_KEY_SECRET, 0, $IV));
-        }
-
-        /**
-         * decode with description key
-         * @param string $encryptedDescription
-         * @param string $IV
-         * 
-         * @return string decoded domain
-         */
-        protected static function decodeDescription($encryptedDescription, $IV) {
-            return openssl_decrypt(Config::urlSafeDecode($encryptedDescription), "AES-192-CBC",  Config::$DESCRIPTION_KEY_SECRET, 0, $IV);
-        }
-
-          /**
-         * encode with description key
-         * @param string $subDomain 
-         * @param string $IV used do decrypt
-         * 
-         * @return string encoded domain
-         */
-        protected static function encodeSubDomain($subDomain, $IV) {
-            return Config::urlSafeEncode(openssl_encrypt($subDomain, "AES-192-CBC", Config::$SUBDOMAIN_KEY_SECRET, 0, $IV));
-        }
-
-        /**
-         * decode with description key
-         * @param string $subDomain
-         * @param string $IV
-         * 
-         * @return string decoded domain
-         */
-        protected static function decodeSubDomain($subDomain, $IV) {
-            return openssl_decrypt(Config::urlSafeDecode($subDomain), "AES-192-CBC",  Config::$SUBDOMAIN_KEY_SECRET, 0, $IV);
-        }
-
-          /**
-         * encode with description key
-         * @param string $title 
-         * @param string $IV used do decrypt
-         * 
-         * @return string encoded domain
-         */
-        protected static function encodeTitle($title, $IV) {
-            return Config::urlSafeEncode(openssl_encrypt($title, "AES-192-CBC", Config::$TITLE_KEY_SECRET, 0, $IV));
-        }
-
-        /**
-         * decode with description key
-         * @param string $encryptedTitle
-         * @param string $IV
-         * 
-         * @return string decoded domain
-         */
-        protected static function decodeTitle($encryptedTitle, $IV) {
-            return openssl_decrypt(Config::urlSafeDecode($encryptedTitle), "AES-192-CBC",  Config::$TITLE_KEY_SECRET, 0, $IV);
+        protected static function decodeService(&$service) {
+            $service['domain'] = self::decodeData($service['domain'], $service['encryption_IV_domain'], Config::$DOMAIN_KEY_SECRET);
+            $service['description'] = self::decodeData($service['description'], $service['encryption_IV_desc'], Config::$DESCRIPTION_KEY_SECRET);
+            $service['sub_domain'] = self::decodeData($service['sub_domain'], $service['encryption_IV_sub_domain'], Config::$SUBDOMAIN_KEY_SECRET);
+            $service['title'] = self::decodeData($service['title'], $service['encryption_IV_title'], Config::$TITLE_KEY_SECRET);
+            return $service;
         }
 
         /**

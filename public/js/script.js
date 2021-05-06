@@ -386,7 +386,7 @@ function newPrestation() {
         } else {
             fetch('../public/js/error.json')
                 .then(res => res.json())
-                .then(res => /*document.getElementById('err').innerHTML += res['addPresta'][0]*/ console.log(res));
+                .then(res => document.getElementById('err').innerHTML += res['addPresta'][0]);
         }
 
         setTimeout(function() {

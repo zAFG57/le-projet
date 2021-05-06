@@ -22,7 +22,10 @@
 <div class="main" id="main">
     <?php 
         $services = ControllerService::showAllServices($_SESSION['userID']);
-        var_dump($services);
+
+        foreach ($services as $service) {
+            echo '<div class="préstation">' . $service['title'] . '<div class="suppr"><img src="../assets/trash.svg"></img></div></div>';
+        }
     ?>
 </div>
 <div class="scrolltop" onclick="main.scrollTop = 0;"><div></div></div>

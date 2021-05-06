@@ -43,14 +43,9 @@
             if(ControllerUser::userExisiting($id)) {
                 $services = parent::getAllServices($id);
                 if ($services) {
-                    foreach ($services as &$service) {
-                        // if ($service['active']) {
-                            $service['domain'] = parent::decodeDomain($service['domain'], $service['encryption_IV_domaine']);
-                            $service['description'] = parent::decodeDescription($service['description'], $service['encryption_IV_desc']);
-                            $service['sub_domain'] = parent::decodeSubDomain($service['sub_domain'], $service['encryption_IV_sub_domain']);
-                            $service['title'] = parent::decodeTitle($service['title'], $service['encryption_IV_title']);
-                            unset($service['creation_date'], $service['encryption_IV_domaine'], $service['encryption_IV_desc'], $service['encryption_IV_sub_domain'], $service['encryption_IV_title']);
-                        // }
+                    foreach ($services as &$service) {  
+                        parent::decodeService($service);
+                        unset($service['creation_date'], $service['encryption_IV_domaine'], $service['encryption_IV_desc'], $service['encryption_IV_sub_domain'], $service['encryption_IV_title']);  
                     }
                     return $services;
                 } else {
