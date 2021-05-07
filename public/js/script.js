@@ -386,7 +386,7 @@ function newPrestation() {
         } else {
             fetch('../public/js/error.json')
                 .then(res => res.json())
-                .then(res => document.getElementById('err').innerHTML += res['addPresta'][0]);
+                .then(res => document.getElementById('err').innerHTML += res['addPresta'][data]);
         }
 
         setTimeout(function() {
@@ -418,17 +418,31 @@ function anulermodif() {
     document.location = document.location;
 }
 
-var addpréstationdomain = document.getElementById('catégory');
+async function changeComboBoxValues() {
+    var addpréstationdomain = document.getElementById('catégory');
 
-addpréstationdomain.addEventListener('change', (event) => {
-    if (event.target.value === 'téléphone') {
-        console.log('tel');
-        document.getElementById('souscatjs').innerHTML = '<select class="sous-cat" id="tel" name="subdomain"><option value="">--sous cathégorie--</option><option value="apple"> apple</option><option value="samsung">samsung</option><option value="oppo">oppo</option><option value="oneplus">oneplus</option><option value="huawei">huawei</option><option value="sony">sony</option><option value="xiaomi">xiaomi</option><option value="nokia">nokia</option><option value="honor">honor</option><option value="autre">autre</option></select>';
-    } else if (event.target.value === 'ordinateur') {
-        console.log('ordi');
-        document.getElementById('souscatjs').innerHTML = '<select class="sous-cat" id="ordi" name="subdomain" ><option value="">--sous cathégorie--</option><option value="mac"> mac</option><option value="ordinateur portable">ordinateur portable</option><option value="carte graphique">carte graphique</option><option value="proceseur">proceseur</option><option value="ssd">ssd</option><option value="watter couling">watter couling</option><option value="assemblage tour">assemblage tour</option><option value="autre">autre</option></select>'
-    } else {
-        console.log('élec');
-        document.getElementById('souscatjs').innerHTML = '<select class="sous-cat" id="élec" name="subdomain"><option value="">--sous cathégorie--</option><option value="machine a laver">machine a laver</option><option value="frigo">frigo</option><option value="lave vaisselle">lave vaisselle</option><option value="climatisation">climatisation</option><option value="sèche linge">sèche linge</option><option value="congélateur">congélateur</option><option value="mixer">mixeur</option><option value="blender ">blender</option><option value="cafetière">cafetière</option><option value="bouilloir">bouilloir</option><option value="micronde">micronde</option><option value="four">four</option><option value="grille paint">grille paint</option><option value="friteuse">friteuse</option><option value="autre">autre</option></select>'
+    async function createCB(cat) {
+        var mainRes = "";
+
+        await fetch('../public/js/domains.json')
+            .then(async(res) => {
+                await res.json()
+                    .then(async(res) => {
+                        await res[cat].forEach(subDomain => {
+                            mainRes += "<option value=" + subDomain + ">" + subDomain + `</option>` // a changer dans le json
+                        });
+                    })
+            })
+        return mainRes;
     }
-});
+
+    addpréstationdomain.addEventListener('change', async(event) => {
+        if (event.target.value === 'telephone') {
+            document.getElementById('souscatjs').innerHTML = `<select class="sous-cat" id="tel" name="subdomain"><option value="">--sous catégorie--</option>${await createCB('telephone')}</select>`;
+        } else if (event.target.value === 'ordinateur') {
+            document.getElementById('souscatjs').innerHTML = `<select class="sous-cat" id="ordi" name="subdomain" ><option value="">--sous catégorie--</option>${await createCB('ordinateur')}</select>`;
+        } else if (event.target.value === 'electro menager') {
+            document.getElementById('souscatjs').innerHTML = `<select class="sous-cat" id="élec" name="subdomain"> <option value="">--sous catégorie--</option>${await createCB('electro menager')}</select>`;
+        }
+    });
+}

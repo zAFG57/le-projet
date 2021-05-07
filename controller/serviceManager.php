@@ -17,6 +17,19 @@
             if (empty($id) || empty($domain)  || empty($subdomain) || empty($title) || empty($description) || empty($file)) {
                 return 1;
             }
+
+            if (strlen($title) >= 255) { // a voir
+                return 8;
+            }
+
+            if (strlen($description) >= 2000) { // a voir
+                return 9;
+            }
+
+            if (!parent::acceptableDomain([$domain, $subdomain])) {
+                return 7;
+            }
+
             if(ControllerUser::userExisiting($id)) {
                 $serviceId = parent::newServiceID();
                 if (parent::submitService($serviceId, $id, $domain, $subdomain, $title, $description) !== -1) {

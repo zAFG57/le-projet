@@ -26,9 +26,9 @@
             <div class="select">
                 <select class="catégory" id="catégory" name="domaine">
                 <option value="">--catégory--</option>
-                    <option value="téléphone"> des téléphones</option>
+                    <option value="telephone"> des téléphones</option>
                     <option value="ordinateur">des ordinateurs</option>
-                    <option value="cat">de l'éléctro ménager</option>
+                    <option value="electro menager">de l'éléctro ménager</option>
                 </select>
             </div>
         </div>
@@ -36,17 +36,7 @@
             <div class="maintxt">plus particulièrement:</div>
             <div class="select" id="souscatjs">
                 <select class="sous-cat" id="tel" name="subdomain">
-                    <option value="">--sous cathégorie--</option>
-                    <option value="apple"> apple</option>
-                    <option value="samsung">samsung</option>
-                    <option value="oppo">oppo</option>
-                    <option value="oneplus">oneplus</option>
-                    <option value="huawei">huawei</option>
-                    <option value="sony">sony</option>
-                    <option value="xiaomi">xiaomi</option>
-                    <option value="nokia">nokia</option>
-                    <option value="honor">honor</option>
-                    <option value="autre">autre</option>
+                    <option value="">--sous catégorie--</option>
                 </select>
                 
             </div>
@@ -95,6 +85,7 @@
 
 
 <script src="../public/js/script.js"></script>
+<script>changeComboBoxValues()</script>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('../templates/baseTemplate.php'); ?>

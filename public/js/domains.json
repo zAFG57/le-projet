@@ -1,0 +1,41 @@
+{
+    "telephone": [
+        "apple",
+        "samsung",
+        "oppo",
+        "oneplus",
+        "huawei",
+        "sony",
+        "xiaomi",
+        "nokia",
+        "honor",
+        "autre"
+    ],
+    "ordinateur": [
+        "mac",
+        "ordinateur portable",
+        "carte graphique",
+        "proceseur",
+        "ssd",
+        "watter cooling",
+        "assemblage tour",
+        "autre"
+    ],
+    "electro menager": [
+        "machine a laver",
+        "frigo",
+        "lave vaisselle",
+        "climatisation",
+        "sèche linge",
+        "congélateur",
+        "mixer",
+        "blender",
+        "cafetiere",
+        "bouilloir",
+        "micro ondes",
+        "four",
+        "grille pain",
+        "friteuse",
+        "autre"
+    ]
+}

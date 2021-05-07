@@ -189,6 +189,7 @@
                 return -4;
             }
         }
+
         /**
          * 
          */
@@ -204,8 +205,31 @@
         }
 
 
-
+        /**
+         * 
+         * 
+         */
         protected static function getUserIdFromService($serviceID) {
             parent::sqlSelect('SELECT user_id FROM services WHERE id=?', 's', $serviceID)->fetch_assoc()['id'];
+        }
+
+        /**
+         * verify if the entry is correcte
+         * @param array @data
+         * @return boolean if the domain is accepted
+         */
+
+        protected static function acceptableDomain($data) {
+            $json = file_get_contents('../public/js/domains.json');
+            $json_data = json_decode($json,true);
+
+            if (isset($json_data[$data[0]])) {
+                foreach ($json_data[$data[0]] as $subdomain) {
+                    if ($subdomain === $data[1]) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }

@@ -53,6 +53,7 @@
         "<div class='err'>Le fichier n'a pas pu être téléchargé</div>",
         "<div class='err'>Le service n'as pas pu être crée</div>",
         "<div class='err'>Utilisateur invalide</div>",
-        "<div class='err'>Une erreur est survenue</div>"
+        "<div class='err'>Une erreur est survenue</div>",
+        "<div class='err'>Domain non pris en compte</div>"
     ]
 }
