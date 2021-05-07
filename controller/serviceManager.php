@@ -72,6 +72,8 @@
         if (ControllerUser::isConnected()) {
             if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
                 echo json_encode(ControllerService::createService($_SESSION['userID'], $_POST['domaine'], $_POST['subdomain'], $_POST['title'], $_POST['description'], $_FILES["doccumentsLegeaux"]));
+            } else {
+                echo -7;
             }
         } else {
             echo json_encode(-1);

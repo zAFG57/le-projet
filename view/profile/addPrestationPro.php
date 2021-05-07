@@ -1,7 +1,5 @@
 <?php 
-
     include_once('../templates/nav.php');
- 
 ?> 
 
 <?php 
@@ -100,9 +98,6 @@
 <?php $content = ob_get_clean(); ?>
 
 <?php require('../templates/baseTemplate.php'); ?>
-
-
-
 
 
 
