@@ -158,6 +158,11 @@
          * @return boolean if the action is success
          */
         protected static function uploadServiceFile($file,$id, $serviceID) {
+            if ($_FILES["fileDoc"]["error"] != 0) {
+                return 1;
+            }
+
+
             $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "png" => "image/png");
             $filename = $file["name"];
             $filetype = $file["type"];
@@ -166,11 +171,11 @@
             // Vérifie l'extension du fichier
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
             if(!array_key_exists($ext, $allowed)) {
-                return -1;
+                return 2;
             }
         
             if($filesize > Config::$MAX_SIZE_SERVICES_DOCS) {
-                return -2;
+                return 3;
             }
         
             // Vérifie le type MIME du fichier
@@ -181,17 +186,21 @@
                 }
                 // Vérifie si le fichier existe avant de le télécharger.
                 if(file_exists(Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID . '.' . $ext)){
-                    return -3;
+                    return 4;
                 } else{
                     return move_uploaded_file($file["tmp_name"], Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID . '.' . $ext);
                 } 
             } else{
-                return -4;
+                return -5;
             }
         }
 
         /**
+         * delete the service picture
+         * @param int $id
+         * @param string $serviceID
          * 
+         * @return boolean if the deletation sucess
          */
         protected static function deleteServiceFile($id, $serviceID) {
             $allowed = ["jpg", "jpeg", "png"];
@@ -206,8 +215,10 @@
 
 
         /**
+         * get user id from service id
+         * @param string $serviceID
          * 
-         * 
+         * @return int the user id
          */
         protected static function getUserIdFromService($serviceID) {
             parent::sqlSelect('SELECT user_id FROM services WHERE id=?', 's', $serviceID)->fetch_assoc()['id'];
@@ -215,7 +226,7 @@
 
         /**
          * verify if the entry is correcte
-         * @param array @data
+         * @param array @data [domain, subdomain]
          * @return boolean if the domain is accepted
          */
 
@@ -225,7 +236,7 @@
 
             if (isset($json_data[$data[0]])) {
                 foreach ($json_data[$data[0]] as $subdomain) {
-                    if ($subdomain === $data[1]) {
+                    if ($subdomain[0] === $data[1]) {
                         return true;
                     }
                 }

@@ -9,7 +9,10 @@
         /**
          * @param int $id
          * @param string $domaine
+         * @param string $subdomain
+         * @param string $title
          * @param string $description
+         * @param array $file
          * 
          * @return bool
          */
@@ -18,11 +21,11 @@
                 return 1;
             }
 
-            if (strlen($title) >= 255) { // a voir
+            if (strlen($title) >= 255 ||  strlen($title) <= 4) { // a voir
                 return 8;
             }
 
-            if (strlen($description) >= 2000) { // a voir
+            if (strlen($description) >= 2000 || strlen($description) <= 4) { // a voir
                 return 9;
             }
 

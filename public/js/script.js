@@ -429,7 +429,7 @@ async function changeComboBoxValues() {
                 await res.json()
                     .then(async(res) => {
                         await res[cat].forEach(subDomain => {
-                            mainRes += "<option value=" + subDomain + ">" + subDomain + `</option>` // a changer dans le json
+                            mainRes += ` <option value="${subDomain[0]}">${subDomain[1]}</option>` // a changer dans le json
                         });
                     })
             })
