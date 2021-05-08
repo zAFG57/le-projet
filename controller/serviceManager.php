@@ -71,12 +71,31 @@
             }
         }
 
+
+        public static function showServiceAttempt($id, $userID, $adminToken) {
+            if (ControllerUser::userExisiting(intval($userID)) && intval($userID) === $_SESSION['userID']) {
+                if(parent::serviceAttemptExisting($id)) {
+                    if (ControllerAdmin::verifAll($_SESSION['userID'], $adminToken)) {
+                        return parent::getServiceAttempt($id);
+                    }else {
+                        return -198798; 
+                    }
+                } else {
+                    return -2; 
+                }
+            } else {
+                return -3; 
+            }
+        }
+        
+
         public static function showAllServicesAttempts($userID, $adminToken) {
             if (ControllerUser::userExisiting(intval($userID)) && intval($userID) === $_SESSION['userID']) {
                 if (ControllerAdmin::verifAll($_SESSION['userID'], $adminToken)) {
                     return parent::getAllServicesAttempt();
                 }
             }
+            return -1;
         }
 
         public static function enableService($serviceId) {

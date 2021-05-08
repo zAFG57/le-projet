@@ -117,9 +117,24 @@
          * 
          * @return boolean if the insert is sucessfull
          */
-        protected static function addServiceAttemptExisting($id) {
-            return parent::sqlSelect('SELECT id from services_attempts WHERE id=?', 's', $id)->num_rows === 1;
+        protected static function serviceAttemptExisting($id) {
+            return parent::sqlSelect('SELECT service_id from services_attempts WHERE service_id=?', 's', $id)->num_rows === 1;
         }
+
+        /**
+         * remove a service with his id
+         * 
+         * @return array if the insert is sucessfull
+         */
+        protected static function getAllServicesAttempt() {
+            $services = parent::sqlSelect('SELECT * from services_attempts INNER JOIN services ON services_attempts.service_id = services.id WHERE services.active = 0')->fetch_all(MYSQLI_ASSOC);
+            
+            foreach ($services as &$service) {
+                self::decodeService($service);
+            }
+            return  $services;
+        }
+
 
         /**
          * remove a service with his id
@@ -127,8 +142,8 @@
          * 
          * @return boolean if the insert is sucessfull
          */
-        protected static function getAllServicesAttempt() {
-            return parent::sqlSelect('SELECT * from services_attempts')->fetch_all(MYSQLI_ASSOC);
+        protected static function getServiceAttempt($id) {
+            return self::decodeService(parent::sqlSelect('SELECT * from services_attempts INNER JOIN services ON services_attempts.service_id = services.id WHERE services.active = 0 AND services.id=?', 's', $id)->fetch_all(MYSQLI_ASSOC)[0]);
         }
 
 
@@ -179,12 +194,12 @@
          * 
          * @return boolean if the action is success
          */
-        protected static function uploadServiceFile($file,$id, $serviceID) {
+        protected static function uploadServiceFile($file,$id, $serviceID, $fileName='0') {
             if ($file["error"] != 0) {
                 return 1;
             }
 
-            $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "png" => "image/png");
+            $allowed = array("pdf" => "application/pdf");
             $filename = $file["name"];
             $filetype = $file["type"];
             $filesize = $file["size"];
@@ -206,10 +221,10 @@
                     mkdir(Config::$FOLDER_STACK_SERVICES_DOCS . $id);
                 }
                 // Vérifie si le fichier existe avant de le télécharger.
-                if(file_exists(Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID . '.' . $ext)){
-                    return 4;
+                if(!file_exists(Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID)){
+                    mkdir(Config::$FOLDER_STACK_SERVICES_DOCS . $id. '/' . $serviceID );
                 } else{
-                    return move_uploaded_file($file["tmp_name"], Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID . '.' . $ext);
+                    return move_uploaded_file($file["tmp_name"], Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID . '/' .  $fileName . '.' . $ext);
                 } 
             } else{
                 return -5;
@@ -223,12 +238,12 @@
          * 
          * @return boolean if the deletation sucess
          */
-        protected static function deleteServiceFile($id, $serviceID) {
-            $allowed = ["jpg", "jpeg", "png"];
+        protected static function deleteServiceFile($id, $serviceID, $fileName='0') {
+            $allowed = ["pdf"];
             
             foreach ($allowed as $allowedKey) {
-                if (file_exists(Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID .  '.' . $allowedKey)){
-                    return unlink(Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID .  '.' . $allowedKey);
+                if (file_exists(Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID . "/" . $fileName . '.' . $allowedKey)){
+                    return unlink(Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID . "/" . $fileName . '.' . $allowedKey);
                 }
             }
             return false;

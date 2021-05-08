@@ -13,7 +13,24 @@
 
 
 <?php
-    var_dump(ControllerService::showAllServicesAttempts($_SESSION['userID'], password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT)));
+    $services = ControllerService::showAllServicesAttempts($_SESSION['userID'], password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT));
+    foreach ($services as $service) {
+    ?>
+
+        <div class="service" onclick="window.location='./admin_panel.php?h=<?=password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT)?>&manageServices=<?=$service['service_id']?>'">
+            <div class="titre">
+                <h1><?=$service['title']?></h1>
+            </div>
+            <div class="description">
+                <p>
+                    <?=$service['description']?>
+                </p>
+            </div>
+        </div>
+    <?php
+    }
+
+    // echo password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT);
 ?>
 
 
