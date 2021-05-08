@@ -110,6 +110,28 @@
             return parent::sqlSelect('SELECT id from services WHERE id=?', 's', $id)->num_rows === 1;
         }
 
+
+        /**
+         * remove a service with his id
+         * @param string $id serviceID
+         * 
+         * @return boolean if the insert is sucessfull
+         */
+        protected static function addServiceAttemptExisting($id) {
+            return parent::sqlSelect('SELECT id from services_attempts WHERE id=?', 's', $id)->num_rows === 1;
+        }
+
+        /**
+         * remove a service with his id
+         * @param string $id serviceID
+         * 
+         * @return boolean if the insert is sucessfull
+         */
+        protected static function getAllServicesAttempt() {
+            return parent::sqlSelect('SELECT * from services_attempts')->fetch_all(MYSQLI_ASSOC);
+        }
+
+
         /**
          * remove a service with his id
          * @param string $id serviceID
@@ -158,10 +180,9 @@
          * @return boolean if the action is success
          */
         protected static function uploadServiceFile($file,$id, $serviceID) {
-            if ($_FILES["fileDoc"]["error"] != 0) {
+            if ($file["error"] != 0) {
                 return 1;
             }
-
 
             $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "png" => "image/png");
             $filename = $file["name"];

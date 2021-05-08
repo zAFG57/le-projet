@@ -376,9 +376,7 @@ function newPrestation() {
         document.getElementById('err').style.transition = "none";
         document.getElementById('err').style.opacity = 0;
 
-        console.log(data);
         data = JSON.parse(data)
-            // console.log(typeof(data));
 
         if (data === 0) {
             document.getElementById('err').innerHTML += '<div>Prestation enregistrée, elle sera utilisable quand un administrateur l\'aura approuvée</div>';
@@ -396,8 +394,6 @@ function newPrestation() {
 
     })
 }
-
-
 
 function modifyInputName() {
     document.getElementById('nameinputmodif').removeAttribute('readonly');

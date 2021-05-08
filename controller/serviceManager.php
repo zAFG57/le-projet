@@ -71,6 +71,14 @@
             }
         }
 
+        public static function showAllServicesAttempts($userID, $adminToken) {
+            if (ControllerUser::userExisiting(intval($userID)) && intval($userID) === $_SESSION['userID']) {
+                if (ControllerAdmin::verifAll($_SESSION['userID'], $adminToken)) {
+                    return parent::getAllServicesAttempt();
+                }
+            }
+        }
+
         public static function enableService($serviceId) {
             if (ControllerUser::userExisiting(parent::getUserIdFromService($serviceId))) {
                 if (parent::serviceExisting($serviceId)) {
