@@ -1,9 +1,2 @@
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.*)$ $1.php [NC,L] 
-
-
-order allow,deny
-deny from all
-allow from 127.0.0.2
+ErrorDocument 404 /errors/404.php
+ErrorDocument 403 /errors/404.php

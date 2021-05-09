@@ -164,7 +164,7 @@
          * @return boolean if the update is sucessfull
          */
         protected static function activateService($id) {
-            return parent::sqlUpdate('UPDATE services SET active=true WHERE service_id=?', 's', $id);
+            return parent::sqlUpdate('UPDATE services SET active=? WHERE id=?', 'is',1,  $id);
         }
 
         /**
@@ -174,7 +174,17 @@
          * @return boolean if the update is sucessfull
          */
         protected static function disableService($id) {
-            return parent::sqlUpdate('UPDATE services SET active=false WHERE service_id=?', 's', $id);
+            return parent::sqlUpdate('UPDATE services SET active=false WHERE id=?', 's', $id);
+        }
+
+        /**
+         * delete the service
+         * @param string $id serviceID
+         * 
+         * @return boolean if the update is sucessfull
+         */
+        protected static function deleteService($id) {
+            return parent::sqlUpdate('DELETE from services WHERE id=?', 's', $id);
         }
 
         /**
@@ -223,12 +233,12 @@
                 // Vérifie si le fichier existe avant de le télécharger.
                 if(!file_exists(Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID)){
                     mkdir(Config::$FOLDER_STACK_SERVICES_DOCS . $id. '/' . $serviceID );
-                } else{
-                    return move_uploaded_file($file["tmp_name"], Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID . '/' .  $fileName . '.' . $ext);
-                } 
-            } else{
+                }
+                return move_uploaded_file($file["tmp_name"], Config::$FOLDER_STACK_SERVICES_DOCS . $id . '/' . $serviceID . '/' .  $fileName . '.' . $ext);
+            } else {
                 return -5;
             }
+            return -15;
         }
 
         /**
@@ -257,7 +267,7 @@
          * @return int the user id
          */
         protected static function getUserIdFromService($serviceID) {
-            parent::sqlSelect('SELECT user_id FROM services WHERE id=?', 's', $serviceID)->fetch_assoc()['id'];
+            return parent::sqlSelect('SELECT user_id FROM services WHERE id=?', 's', $serviceID)->fetch_assoc()['user_id'];
         }
 
         /**

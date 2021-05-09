@@ -8,10 +8,10 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
     $authorized_pages = array(
-        "createAccount" => "view/create_account.php",
-        "createProAccount" => "view/create_professional_account.php",
-        "emailVerification" => "view/email_verification.php",
-        "login" => "view/log_in.php",    
+        "createAccount" => "/view/create_account.php",
+        "createProAccount" => "/view/create_professional_account.php",
+        "emailVerification" => "/view/email_verification.php",
+        "login" => "/view/log_in.php",    
     );
 
     if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
@@ -24,10 +24,10 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 $authorized_pages = array(
-    "emailVerification" => "view/email_verification.php",
-    "homePage" => "view/home_page.php",
-    "profile" => "view/profile.php",
-    "chat" => "view/chat.php"
+    "emailVerification" => "/view/email_verification.php",
+    "homePage" => "/view/home_page.php",
+    "profile" => "/view/profile.php",
+    "chat" => "/view/chat.php"
 );
 
 if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){

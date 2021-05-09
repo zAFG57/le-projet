@@ -18,12 +18,8 @@ function request(url, data, setloader = true, callback) {
             }
         }
     });
-    // document.querySelector(data)
 
     var formdata = data ? (data instanceof FormData ? data : new FormData(document.querySelector(data))) : new FormData();
-    // console.log(formdata);
-    // console.log(document.querySelector(data));
-
 
     var csrfMetaTag = document.querySelector('meta[name="csrf_token"]');
     if (csrfMetaTag) {
@@ -296,7 +292,7 @@ function getMessage() {
                     getToBot();
                 }
             }
-            getMessage()
+            setTimeout(getMessage(), 100);
         } catch (e) {
 
         }
@@ -316,7 +312,7 @@ function getConv() {
             const displayMessage = (data) => {
                 res = "<div class=\"mesDiscussions\">Mes discussions</div>";
                 data.forEach(element => {
-                    res += `<a href="./chat?chatID=${element['chat_id']}" class="discutionlien">
+                    res += `<a href="./chat.php?chatID=${element['chat_id']}" class="discutionlien">
                                 <div>
                                     <h1 class="discutionnom">${element['username']}</h1>
                                     <h2 class="discutionmessage"><span>${element['isMe'] === true ? "Moi" : element['username']} : </span>${element['message_content']}</h2>
@@ -335,8 +331,7 @@ function getConv() {
                     document.getElementById('scroll').innerHTML = displayMessage(data);
                 }
             }
-            getConv()
-
+            setTimeout(getConv(), 500);
         } catch (e) {
 
         }
@@ -375,7 +370,7 @@ function newPrestation() {
         var transition = document.getElementById('err').style.transition;
         document.getElementById('err').style.transition = "none";
         document.getElementById('err').style.opacity = 0;
-
+        console.log(data)
         data = JSON.parse(data)
 
         if (data === 0) {

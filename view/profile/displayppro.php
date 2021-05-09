@@ -22,9 +22,12 @@
 <div class="main" id="main">
     <?php 
         $services = ControllerService::showAllServices($_SESSION['userID']);
-
-        foreach ($services as $service) {
-            echo '<div class="préstation">' . $service['title'] . '<div class="suppr"><img src="../assets/trash.svg"></img></div></div>';
+        if (sizeof($services) > 0) {
+            foreach ($services as $service) {
+                echo '<div class="préstation">' . $service['title'] . '<div class="suppr"><img src="../assets/trash.svg"></img></div></div>';
+            }
+        } else {
+            // aucun service crée
         }
     ?>
 </div>

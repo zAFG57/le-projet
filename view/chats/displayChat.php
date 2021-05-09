@@ -33,7 +33,6 @@
 <script>
     getMessage();
     function  getToBot() {
-        // document.getElementById('scroll').style.scrollBehavior = "unset"
         var chat = document.getElementsByClassName('mainchat')[0];
         chat.scrollTop = chat.scrollHeight;
         document.getElementById('scroll').style.scrollBehavior = "smooth"
