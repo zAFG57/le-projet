@@ -1,3 +1,4 @@
+<link href="../public/css/chatBase.css" rel="stylesheet" />
 <div class="main">
 
 <div class="discution" id="scroll">

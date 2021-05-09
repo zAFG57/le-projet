@@ -11,7 +11,7 @@
 </header>
 <h1>Admin panel</h1>
 
-<a href="./admin_Panel?h=<?= password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT)?>&manageServices">demandes de prestations</a>
+<a href="./admin_panel.php?h=<?= password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT)?>&manageServices">demandes de prestations</a>
 
 
 <?php $content = ob_get_clean(); ?>

@@ -29,8 +29,6 @@
         </div>
     <?php
     }
-
-    // echo password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT);
 ?>
 
 
