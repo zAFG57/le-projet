@@ -4,7 +4,7 @@
     class ChatProUserMessage extends Database {
         
         protected static function createMessage($chatID, $content, $authorId) {
-            $IV = openssl_random_pseudo_bytes(openssl_cipher_iv_length(Config::$ENCODING_MESSAGES_SCHEMA));
+            $IV = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-192-CBC'));
             return self::sendMessageToDB(self::createMessageId(), $chatID, self::encodeMessage($content, $IV), time(), $authorId, $IV);
         }
 
@@ -24,11 +24,11 @@
         }
 
         protected static function encodeMessage($msg, $IV) {
-            return Config::urlSafeEncode(openssl_encrypt($msg, Config::$ENCODING_MESSAGES_SCHEMA, Config::$MESSAGE_KEY_SECRET, 0, $IV));
+            return Config::urlSafeEncode(openssl_encrypt($msg, "AES-192-CBC", Config::$MESSAGE_KEY_SECRET, 0, $IV));
         }
 
         protected static function decodeMessage($msg, $IV) {
-            return openssl_decrypt(Config::urlSafeDecode($msg),Config::$ENCODING_MESSAGES_SCHEMA,  Config::$MESSAGE_KEY_SECRET,0, $IV);
+            return openssl_decrypt(Config::urlSafeDecode($msg),"AES-192-CBC",  Config::$MESSAGE_KEY_SECRET,0, $IV);
         }
 
         protected static function getMessagesFromChatID($chatID) {
@@ -115,12 +115,12 @@
             return Database::sqlSelect('SELECT client_id FROM chat_pro_client WHERE chat_id=?', 'i', $chatID)->fetch_assoc()['client_id'];
         }
 
-        protected static function getDiscutionsPro($proID){
-            return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE pro_id=?', 'i', $proID)->fetch_all(MYSQLI_ASSOC);
+        protected static function getDiscutionsPro($chatID){
+            return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE pro_id=?', 'i', $chatID)->fetch_all(MYSQLI_ASSOC);
         }
 
-        protected static function getDiscutionsUser($userID){
-            return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE client_id=?', 'i', $userID)->fetch_all(MYSQLI_ASSOC);
+        protected static function getDiscutionsUser($chatID){
+            return Database::sqlSelect('SELECT chat_id FROM chat_pro_client WHERE client_id=?', 'i', $chatID)->fetch_all(MYSQLI_ASSOC);
         }
 
         protected static function getLastMessage($userID, $chatID){

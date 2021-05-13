@@ -1,0 +1,88 @@
+h1 , p , h2 , body {
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+.main {
+    position: absolute;
+    top: 10vh;
+    height: 90vh;
+    width: 100vw;
+    background: #3337;
+    display: flex;
+    flex-direction: row;
+}
+.admingauche {
+    position: relative;
+    width: 40%;
+    height: 100%;
+    padding: 20px;
+}
+.admindroit {
+    position: relative;
+    width: 60%;
+    height: 100%;
+    padding: 20px;
+}
+.lien {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 10vh;
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    background: var(--clr-primary);
+    border-radius: 25px;
+    color: #fff;
+    text-align: center;
+    font-size: 3.5vw;
+    font-weight: 900;
+    text-decoration: none;
+    overflow: hidden;
+    transition: font-size 0.25s ease-in-out;
+}
+.a {
+    font-size: 2.5vw;
+}
+.lien:hover {
+    font-size: 3vw;
+}
+.a:hover {
+    font-size: 2vw;
+}
+.statistique {
+    position: absolute;
+    width: calc(40vw - 40px);
+    left: 20px;
+    height: 30vh;
+    background: var(--clr-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75em;
+    border-radius: 25px;
+    padding: 10px;
+    bottom: 10px;
+}
+.jaipasdenompourcettediv {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    border-radius: 25px;
+}
+.jaipasdenompourcettediv div {
+    cursor: pointer;
+    padding: 10px;
+    font-size: 2em;
+    background: var(--clr-primary);
+    color: #fff;
+    border-radius: 10px;
+}

@@ -29,13 +29,7 @@
         protected static $MAX_SIZE_SERVICES_DOCS = 5 * 1024 * 1024;
         protected static $FOLDER_STACK_SERVICES_DOCS = "../users/";
 
-        protected static $ENCODING_MESSAGES_SCHEMA = 'AES-192-CBC';
-        protected static $ENCODING_SERVICES_SCHEMA = 'AES-192-CBC';
-
-        protected static $MAX_SERVICES_DISPLAY = 25;
-        protected static $MIN_PERCENTAGE_CORRESPONDE_DOMAIN_SEARCH = 70;
-
-
+        
         protected static function urlSafeEncode($m) {
             return rtrim(strtr(base64_encode($m), '+/', '-_'), '=');
         }

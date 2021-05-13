@@ -1,13 +1,18 @@
-function acceptPrestation() {
-    form = document.getElementById('aceptServicesForm')
-    form.innerHTML += '<input type="hidden" value="true" name="accept"></input>'
-    request('../controller/serviceManager.php', '#aceptServicesForm', setloader = true, function(data) {
-        document.getElementById('err').innerHTML = data;
+function acceptPrestation(serviceID) {
+    var service = document.querySelector("#" + serviceID)
+    service.innerHTML += '<input type="hidden" value="true" name="accept"></input>'
+        // return;
+    request('../controller/serviceManager.php', "#" + serviceID, setloader = true, function(data) {
+        document.getElementById('err').innerHTML = "";
         var transition = document.getElementById('err').style.transition;
         document.getElementById('err').style.transition = "none";
         document.getElementById('err').style.opacity = 0;
 
+        console.log(data);
         data = JSON.parse(data)
+        console.log(data);
+
+
 
         setTimeout(function() {
             document.getElementById('err').style.transition = transition;
@@ -17,16 +22,21 @@ function acceptPrestation() {
     })
 }
 
-function rejectPrestation() {
-    form = document.getElementById('aceptServicesForm')
-    form.innerHTML += '<input type="hidden" value="false" name="accept"></input>'
-    request('../controller/serviceManager.php', "#aceptServicesForm", setloader = true, function(data) {
-        document.getElementById('err').innerHTML = data;
+function rejectPrestation(serviceID) {
+    var service = document.querySelector("#" + serviceID)
+    service.innerHTML += '<input type="hidden" value="true" name="accept"></input>'
+        // return;
+    request('../controller/serviceManager.php', "#" + serviceID, setloader = true, function(data) {
+        document.getElementById('err').innerHTML = "";
         var transition = document.getElementById('err').style.transition;
         document.getElementById('err').style.transition = "none";
         document.getElementById('err').style.opacity = 0;
 
+        console.log(data);
         data = JSON.parse(data)
+        console.log(data);
+
+
 
         setTimeout(function() {
             document.getElementById('err').style.transition = transition;
