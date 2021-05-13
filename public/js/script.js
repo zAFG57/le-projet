@@ -186,77 +186,13 @@ function sendValidateEmailRequest() {
     })
 }
 
-
-
 function searchf() {
-    request('../controller/search.php', '#search', setloader = true, function(data) {
-        document.getElementById('resSearch').innerHTML = "";
-        var transition = document.getElementById('resSearch').style.transition;
-        document.getElementById('resSearch').style.transition = "none";
-        document.getElementById('resSearch').style.opacity = 0;
-        document.getElementsByClassName('maindiv')[0].style.display = 'none';
+    if (document.getElementsByClassName('search__input')[0].value != "") {
+        window.location.href = './home.php?query=' +
+            document.getElementsByClassName('search__input')[0].value;
+    }
 
-        console.log(data);
-        try {
-            data = JSON.parse(data);
-            // console.log(data);
-
-            const createGrid = (data) => {
-                res = '<div class="grid">'
-                data.forEach(element => {
-                    res += `<div class="card">
-                    <div class="cardgauche">
-                        <div class="cardimg">   <img src="${element['imgUsr'] || 'https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231712/thesomeday123171200009.jpg'}"/>  </div>
-                    </div>
-                    <div class="carddroit">
-                        <div class="cardnom"><h1>${element['username']}</h1></div>
-                        <div class="cardétoile">${createStar(element['note'])}</div>
-                        <div class="carddescription"><h3>${element['bio'] || 'coucou je suis un pro qui sait réparer plein de truques'}</h3></div>
-                    </div>
-                </div>`
-
-                });
-                res += '</div>'
-                return res;
-            }
-
-            const createStar = (nbStars) => {
-                res = "";
-                while (nbStars > 0) {
-                    res += '★';
-                    nbStars--;
-                }
-                return res;
-            }
-
-            switch (data) {
-                case -1:
-                    document.getElementById('resSearch').innerHTML += '<div class="noResFound">Trois lettres minimum sont requises</div>';
-                    break;
-                case -2:
-                    document.getElementById('resSearch').innerHTML += '<div class="noResFound">Aucun resultat trouvé</div>';
-                    break;
-
-                default:
-                    document.getElementById('resSearch').innerHTML += createGrid(data);
-                    break;
-            }
-
-
-            setTimeout(function() {
-                document.getElementById('resSearch').style.transition = transition;
-                document.getElementById('resSearch').style.opacity = 1;
-            }, 10);
-            document.getElementById('search').reset();
-
-        } catch (e) {
-
-        }
-    })
 }
-
-
-
 
 function sendMessage() {
     request('../controller/chatProUser.php', '#message', setloader = false, function(data) {
@@ -291,6 +227,9 @@ function getMessage() {
                     document.getElementById('chat').innerHTML = displayMessage(data);
                     getToBot();
                 }
+            } else {
+                console.log('pas de message');
+                // aucun message n'as été trouvé
             }
             setTimeout(getMessage(), 100);
         } catch (e) {
@@ -306,7 +245,7 @@ function getConv() {
 
 
         try {
-
+            console.log(data);
             data = JSON.parse(data)
 
             const displayMessage = (data) => {
@@ -330,6 +269,9 @@ function getConv() {
                 if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('scroll').innerHTML)) {
                     document.getElementById('scroll').innerHTML = displayMessage(data);
                 }
+            } else {
+                // aucune coversation n'as été trouvé
+                console.log('pas de conv');
             }
             setTimeout(getConv(), 500);
         } catch (e) {

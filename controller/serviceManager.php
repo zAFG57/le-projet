@@ -58,7 +58,7 @@
 
         public static function showAllServices($id) {
             if(ControllerUser::userExisiting($id)) {
-                $services = parent::getAllServices($id);
+                $services = parent::getAllUserServices($id);
                 if ($services) {
                     foreach ($services as &$service) {  
                         parent::decodeService($service);
@@ -100,42 +100,46 @@
         }
 
         public static function acceptServiceManager($serviceId, $accept) {
-            if (ControllerUser::userExisiting(parent::getUserIdFromService($serviceId))) {
-                if (parent::serviceExisting($serviceId)) {
-                    if ($accept === 'true') {
-                        if (parent::activateService($serviceId)) {
-                            if (parent::deleteServiceFile(parent::getUserIdFromService($serviceId), $serviceId)){;
-                                if (parent::remServiceAttempt($serviceId)) {
-                                    return 0;
+            if (parent::serviceExisting($serviceId)) {
+                if (ControllerUser::userExisiting(parent::getUserIdFromService($serviceId))) {
+                    if (parent::serviceExisting($serviceId)) {
+                        if ($accept === 'true') {
+                            if (parent::activateService($serviceId)) {
+                                if (parent::deleteServiceFile(parent::getUserIdFromService($serviceId), $serviceId)){;
+                                    if (parent::remServiceAttempt($serviceId)) {
+                                        return 0;
+                                    } else {
+                                        return -1;
+                                    }
                                 } else {
-                                    return -1;
+                                    return -2;
+                                }
+                            } 
+                        } else if($accept === 'false') {
+                            if (parent::deleteServiceFile(parent::getUserIdFromService($serviceId), $serviceId)) {
+                                if (parent::deleteService($serviceId)) {
+                                    if (parent::remServiceAttempt($serviceId)) {
+                                        return 0;
+                                    } else {
+                                        return -1;
+                                    } 
+                                } else {
+                                    return -3;
                                 }
                             } else {
                                 return -2;
                             }
-                        } 
-                    } else if($accept === 'false') {
-                        if (parent::deleteServiceFile(parent::getUserIdFromService($serviceId), $serviceId)) {
-                            if (parent::deleteService($serviceId)) {
-                                if (parent::remServiceAttempt($serviceId)) {
-                                    return 0;
-                                } else {
-                                    return -1;
-                                } 
-                            } else {
-                                return -3;
-                            }
                         } else {
-                            return -2;
-                        }
+                            return -4;
+                            }
                     } else {
-                        return -4;
-                        }
-                } else {
-                    return -5;
+                        return -5;
+                    }
+                }  else {
+                    return -6;
                 }
-            }  else {
-                return -6;
+            } else {
+                return -7;
             }
         }
     }

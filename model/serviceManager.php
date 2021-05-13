@@ -16,12 +16,12 @@
          * @return bool insert worked successfully
          */
         protected static function submitService($serviceID, $id, $domain, $subDomain, $title, $description ) {
-            $domainIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-192-CBC'));
-            $subDomainIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-192-CBC'));
-            $titleIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-192-CBC'));
-            $descriptionIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-192-CBC'));
+            $domainIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length(Config::$ENCODING_SERVICES_SCHEMA));
+            $subDomainIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length(Config::$ENCODING_SERVICES_SCHEMA));
+            $titleIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length(Config::$ENCODING_SERVICES_SCHEMA));
+            $descriptionIV = openssl_random_pseudo_bytes(openssl_cipher_iv_length(Config::$ENCODING_SERVICES_SCHEMA));
             
-            return parent::sqlInsert('INSERT INTO services (id, user_id, domain, sub_domain, title, description, creation_date, encryption_IV_domain, encryption_IV_desc, encryption_IV_sub_domain, encryption_IV_title, active) VALUES (?,?,?,?,?,?,?,?,?,?,?, false)', 'sissssissss', $serviceID, $id, self::encodeData($domain, $domainIV, Config::$DOMAIN_KEY_SECRET), self::encodeData($subDomain,$subDomainIV, Config::$SUBDOMAIN_KEY_SECRET),  self::encodeData($title, $titleIV, Config::$TITLE_KEY_SECRET), self::encodeData($description, $descriptionIV, Config::$DESCRIPTION_KEY_SECRET), time(), $domainIV, $descriptionIV, $subDomainIV, $titleIV);
+            return parent::sqlInsert('INSERT INTO services (id, user_id, domain, sub_domain, title, description, creation_date, encryption_IV_domain, encryption_IV_desc, encryption_IV_sub_domain, encryption_IV_title, active, note) VALUES (?,?,?,?,?,?,?,?,?,?,?, false, -1)', 'sissssissss', $serviceID, $id, self::encodeData($domain, $domainIV, Config::$DOMAIN_KEY_SECRET), self::encodeData($subDomain,$subDomainIV, Config::$SUBDOMAIN_KEY_SECRET),  self::encodeData($title, $titleIV, Config::$TITLE_KEY_SECRET), self::encodeData($description, $descriptionIV, Config::$DESCRIPTION_KEY_SECRET), time(), $domainIV, $descriptionIV, $subDomainIV, $titleIV);
         }
 
 
@@ -54,7 +54,7 @@
          * @return string encoded domain
          */
         protected static function encodeData($data, $IV, $schema) {
-            return Config::urlSafeEncode(openssl_encrypt($data, "AES-192-CBC", $schema, 0, $IV));
+            return Config::urlSafeEncode(openssl_encrypt($data, Config::$ENCODING_SERVICES_SCHEMA, $schema, 0, $IV));
         }
 
         /**
@@ -65,7 +65,7 @@
          * @return string decoded domain
          */
         protected static function decodeData($encryptedData, $IV, $schema) {
-            return openssl_decrypt(Config::urlSafeDecode($encryptedData), "AES-192-CBC",  $schema, 0, $IV);
+            return openssl_decrypt(Config::urlSafeDecode($encryptedData), Config::$ENCODING_SERVICES_SCHEMA,  $schema, 0, $IV);
         }
 
         /**
@@ -86,7 +86,7 @@
          * 
          * @return array of all elements 
          */
-        protected static function getAllServices($user_id) {
+        protected static function getAllUserServices($user_id) {
             return parent::sqlSelect('SELECT * FROM services WHERE user_id=? ORDER BY creation_date DESC', 'i', $user_id)->fetch_all(MYSQLI_ASSOC);
         }
 

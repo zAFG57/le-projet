@@ -25,7 +25,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 $authorized_pages = array(
     "emailVerification" => "/view/email_verification.php",
-    "homePage" => "/view/home_page.php",
+    "homePage" => "/view/home.php",
     "profile" => "/view/profile.php",
     "chat" => "/view/chat.php"
 );

@@ -10,6 +10,7 @@
         <link href="../public/css/<?= $css ?>" rel="stylesheet" />
         <link href="../public/css/nav2.css" rel="stylesheet" />
         <link rel="icon" href="../assets/Sans_titre-8.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     </head>
         
     <body>
