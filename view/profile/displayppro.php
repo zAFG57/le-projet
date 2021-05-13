@@ -20,16 +20,32 @@
         </div>
         
 <div class="main" id="main">
+
+
+
+
+
+
     <?php 
         $services = ControllerService::showAllServices($_SESSION['userID']);
-        if (sizeof($services) > 0) {
-            foreach ($services as $service) {
-                echo '<div class="préstation">' . $service['title'] . '<div class="suppr"><img src="../assets/trash.svg"></img></div></div>';
-            }
-        } else {
-            // aucun service crée
+
+        foreach ($services as $service) {
+            echo '<div class="service" ><div class="titre"><h1>' . $service["title"] . '</h1></div><div class="description"><p>' . $service["description"] . '</p></div></div>';
+            echo '<div class="service" ><div class="titre"><h1>' . $service["title"] . '</h1></div><div class="description"><p>' . $service["description"] . '</p></div></div>';
         }
     ?>
+
+
+
+        
+
+
+
+
+
+
+
+
 </div>
 <div class="scrolltop" onclick="main.scrollTop = 0;"><div></div></div>
 
