@@ -1,27 +1,19 @@
 <?php
     
     require_once('database.php');
-    require_once('../model/serviceManager.php');
 
-    class Search extends Service {
-        protected static function getAllServices($min, $max) {
-            return Database::sqlSelect('SELECT `services`.`id`, `user_id`, `domain`, `sub_domain`, `title`, `description`, `services`.`creation_date`, `encryption_IV_domain`, `encryption_IV_desc`, `encryption_IV_sub_domain`, `encryption_IV_title`, `active`, `note`, `username`, `verified` FROM services INNER JOIN users ON users.id = services.user_id LIMIT ' . $min . ', ' . $max)->fetch_all(MYSQLI_ASSOC);
+    class Search extends Database {
+        protected static function searchDomainName($query) {
+            // $res = parent::sqlSelect('SELECT users.id, users.username, users.email, pro_users.note FROM users INNER JOIN pro_users ON users.id=pro_users.user_id WHERE pro_users.objets_reparables LIKE ? ORDER BY pro_users.note DESC LIMIT 0,25' ,'s', "%" . $query . "%");
+            
+            // if ($res && $res->num_rows > 0) {
+            //     return $res->fetch_all(MYSQLI_ASSOC);
+            // } else {
+            //     return -2;
+            // }
+
+            $sim = similar_text('machine a laver', 'machine', $perc);
+            echo "similarity: $sim ($perc %)\n";
         }
-
-        protected static function isActivate($serviceID) {
-            return Database::sqlSelect('SELECT active FROM services WHERE id=?', 's', $serviceID)->fetch_assoc()['active'] == 1;
-        }
-
-        protected static function numPageVerify(&$page) {
-            $nbMaxRow = ceil(Database::sqlSelect('SELECT id FROM services')->num_rows / Config::$MAX_SERVICES_DISPLAY);
-            if ($page > $nbMaxRow) {
-                $page = $nbMaxRow;
-            }
-            return $nbMaxRow;
-        }
-
-        
-        // $sim = similar_text('machine a laver', 'machine', $perc);
-        // echo "similarity: $sim ($perc %)\n";
     }
     

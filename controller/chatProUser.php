@@ -103,11 +103,12 @@
                         $lastMessage['isMe'] = ControllerUser::getUserName($lastMessage['message_author_id']) === ControllerUser::getUserName($userID);
 
                         unset($lastMessage['message_id'], $lastMessage['encryption_IV'], $lastMessage['message_creation'], $lastMessage['message_author_id']);      
-                        array_push($res, $lastMessage);
+                        array_push($res, [$lastMessage]);
                     }
-                    return $res;
+                    return $res[0];
                 } else {
                     $chatIDs = parent::getDiscutionsUser($userID);
+
                     if (empty($chatIDs)) {
                         return true;
                     }
@@ -121,9 +122,9 @@
                         $lastMessage['isMe'] = ControllerUser::getUserName($lastMessage['message_author_id']) === ControllerUser::getUserName($userID);
 
                         unset($lastMessage['message_id'], $lastMessage['encryption_IV'], $lastMessage['message_creation'], $lastMessage['message_author_id']);      
-                        array_push($res, $lastMessage);
+                        array_push($res, [$lastMessage]);
                     }
-                    return $res;
+                    return $res[0];
                 }
             } else {
                 return -4;

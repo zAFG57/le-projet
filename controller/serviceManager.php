@@ -3,7 +3,6 @@
     require_once('../controller/csrfConfig.php');
     require_once('../model/serviceManager.php');
     require_once('../controller/user.php');
-    require_once('../controller/panelAdmin.php');
 
     class ControllerService extends Service {
 
@@ -58,7 +57,7 @@
 
         public static function showAllServices($id) {
             if(ControllerUser::userExisiting($id)) {
-                $services = parent::getAllUserServices($id);
+                $services = parent::getAllServices($id);
                 if ($services) {
                     foreach ($services as &$service) {  
                         parent::decodeService($service);
@@ -99,47 +98,14 @@
             return -1;
         }
 
-        public static function acceptServiceManager($serviceId, $accept) {
-            if (parent::serviceExisting($serviceId)) {
-                if (ControllerUser::userExisiting(parent::getUserIdFromService($serviceId))) {
-                    if (parent::serviceExisting($serviceId)) {
-                        if ($accept === 'true') {
-                            if (parent::activateService($serviceId)) {
-                                if (parent::deleteServiceFile(parent::getUserIdFromService($serviceId), $serviceId)){;
-                                    if (parent::remServiceAttempt($serviceId)) {
-                                        return 0;
-                                    } else {
-                                        return -1;
-                                    }
-                                } else {
-                                    return -2;
-                                }
-                            } 
-                        } else if($accept === 'false') {
-                            if (parent::deleteServiceFile(parent::getUserIdFromService($serviceId), $serviceId)) {
-                                if (parent::deleteService($serviceId)) {
-                                    if (parent::remServiceAttempt($serviceId)) {
-                                        return 0;
-                                    } else {
-                                        return -1;
-                                    } 
-                                } else {
-                                    return -3;
-                                }
-                            } else {
-                                return -2;
-                            }
-                        } else {
-                            return -4;
-                            }
-                    } else {
-                        return -5;
+        public static function enableService($serviceId) {
+            if (ControllerUser::userExisiting(parent::getUserIdFromService($serviceId))) {
+                if (parent::serviceExisting($serviceId)) {
+                    if (parent::activateService($serviceId)) {
+                        parent::deleteServiceFile(parent::getUserIdFromService($serviceId), $serviceId);
+                        return parent::remServiceAttempt($serviceId);
                     }
-                }  else {
-                    return -6;
                 }
-            } else {
-                return -7;
             }
         }
     }
@@ -157,11 +123,11 @@
         }
     }
 
-    if (isset($_POST['serviceIDSubmited']) && isset($_POST['accept']) && isset($_POST['csrf_token']) && isset($_POST['adminToken'])) {
+    if (isset($_POST['serviceID']) && isset($_POST['csrf_token']) && isset($_POST['adminToken'])) {
         session_start();
         if (ControllerAdmin::verifAll($_SESSION['userID'], $_POST['adminToken'])) {
             if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
-                echo json_encode(ControllerService::acceptServiceManager($_POST['serviceIDSubmited'], $_POST['accept']));
+                echo json_encode(ControllerService::enableService($_POST['serviceID']));
             }
         }
     }
