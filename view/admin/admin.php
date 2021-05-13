@@ -9,27 +9,11 @@
 <header>
     <?=$nav?>
 </header>
+<h1>Admin panel</h1>
+
+<a href="./admin_panel.php?h=<?= password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT)?>&manageServices">demandes de prestations</a>
 
 
-    <div class="main">
-
-        <div class="admingauche">
-
-            <a class="lien" href="./admin_panel.php?h=<?= password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT) ?>">Admin panel</a>
-            <a class="lien a" href="./admin_panel.php?h=<?= password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT)?>&manageServices">demandes de prestations</a>
-            
-            <div class="statistique">
-                statistique comming soon
-            </div>
-        </div>
-
-        <div class="admindroit">
-            <div class="jaipasdenompourcettediv">
-                <div class="reutilisateur">recherche utilisateur</div>
-                <div class="modifcontenu">modifier le contenue</div>
-            </div>
-        </div>
-    </div>
 <?php $content = ob_get_clean(); ?>
 
-<?php require('../templates/baseTemplate.php'); ?> 
+<?php require('../templates/baseTemplate.php'); ?>

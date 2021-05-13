@@ -1,8 +1,9 @@
-
-h1 , p {
+h1,
+p {
     padding: 0px;
     margin: 0px;
 }
+
 body {
     padding: 0px;
     margin: 0px;
@@ -21,9 +22,11 @@ body {
     scrollbar-width: none;
     overflow-x: hidden;
 }
+
 .main::-webkit-scrollbar {
     display: none;
 }
+
 .service {
     border-radius: 20px;
     position: relative;
@@ -34,14 +37,15 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: 0.175s ease-in;
-    border: 2px solid var(--clr-primary);
+    transition: box-shadow 0.175s ease-in;
+    box-shadow: 0px 0px 0px 0vh var(--clr-primary);
     cursor: pointer;
 }
+
 .service:hover {
-    scale: 1.05;
-    border: 2px solid var(--clr-primary);
+    box-shadow: 0px 0px 0px 4vh var(--clr-primary);
 }
+
 .titre {
     position: relative;
     height: 30%;
@@ -53,6 +57,7 @@ body {
     color: white;
     background: var(--clr-primary);
 }
+
 .description {
     background: #fff;
     height: 70%;

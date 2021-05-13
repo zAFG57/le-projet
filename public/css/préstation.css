@@ -65,13 +65,13 @@ body {
     justify-content: center;
     font-size: 3em;
     color: white;
-    background: #2f743b;
-    box-shadow: inset 8px 8px 16px #215129,inset -8px -8px 16px #3d974d;
+    background: #333;
+    box-shadow: inset 5px 5px 6px hsl(0, 0%, 9%), inset -5px -5px 6px hsl(0, 0%, 31%);
     transition: 0.25s ease-in-out;
 }
 .addprésta:hover {
     font-size: 2.75em;
-    box-shadow: inset 23px 23px 46px #215129,inset -23px -23px 46px #3d974d;
+    box-shadow: inset 11px 11px 22px hsl(0, 0%, 9%),inset -11px -11px 22px hsl(0, 0%, 31%);
 }
 .scrolltop{
     position: absolute;
@@ -82,10 +82,10 @@ body {
     height: 60px;
     width: 60px;
     border-radius: 50%;
-    border: 1px solid var(--clr-primar);
+    border: 1px solid black;
     cursor: pointer;
     transition: scale 0.25s;
-    background: var(--clr-primary);
+    background: #333;
 }
 .scrolltop div {
     position: relative;
@@ -106,47 +106,6 @@ body {
 }
 .scrolltop:hover {
     scale: 1.2;
-}
-
-
-
-
-
-.service {
-    border-radius: 20px;
-    position: relative;
-    height: 30vh;
-    width: 60%;
-    left: 20%;
-    margin-top: 5vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transition: 0.175s ease-in;
-    border: 2px solid var(--clr-primary);
-}
-.titre {
-    position: relative;
-    height: 30%;
-    width: 100%;
-    font-size: 1.25em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    background: var(--clr-primary);
-}
-.description {
-    background: #fff;
-    height: 70%;
-    padding-left: 3vw;
-    padding-right: 3vw;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
 }
 
 

@@ -1,8 +1,9 @@
 <div class="main">
-    <a class="retourenarrière" href="chat.php"></a>
+
 <div class="discution" id="scroll">
     <h1>différente discution</h1>
 </div>
+
 <div class="chat">
 
     <div class="mainchat" id="chat">
@@ -32,7 +33,6 @@
 <script>
     getMessage();
     function  getToBot() {
-        // document.getElementById('scroll').style.scrollBehavior = "unset"
         var chat = document.getElementsByClassName('mainchat')[0];
         chat.scrollTop = chat.scrollHeight;
         document.getElementById('scroll').style.scrollBehavior = "smooth"
