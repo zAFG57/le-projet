@@ -4,8 +4,7 @@
     require_once('../templates/nav.php');
 
     if (!empty($_GET['query'])) {
-        $resultSearch = ControllerSearch::searchByDomainName(htmlspecialchars($_GET['query']), (isset($_GET['page']) && intval($_GET['page']) && intval($_GET['page']) > 0) ? intval($_GET['page']) : 1);
-
+        $resultSearch = ControllerSearch::searchService(htmlspecialchars($_GET['query']), (isset($_GET['page']) && intval($_GET['page']) && intval($_GET['page']) > 0) ? intval($_GET['page']) : 1, 'domain');
         $title = "Recherche - " . $_GET['query']; $css = "home.css";
         ob_start(); 
         ?>
@@ -37,7 +36,7 @@
                         </div>
                         <div class="carddroit">
                             <div class="cardnom"><h1><?=$service['username']?></h1></div>
-                            <div class="cardétoile"><?=$service['note']?></div>
+                            <div class="cardétoile"><?=ControllerSearch::createStars($service['note'])?></div>
                             <div class="carddescription"><h3><?=$service['description']?></h3></div>
                         </div>
                     </div>
