@@ -70,7 +70,7 @@
         public static function displayPDF($userID, $serviceID) {
             $res = '';
             for ($i=2; $i < sizeof(scandir(Config::$FOLDER_STACK_SERVICES_DOCS . $userID . '/' . $serviceID)); $i++) {
-               $res =  $res . '<iframe src="' . Config::$FOLDER_STACK_SERVICES_DOCS . $userID . '/' . $serviceID . '/' . ($i-2) . '.pdf"></iframe>';
+               $res .= '<iframe src="' . Config::$FOLDER_STACK_SERVICES_DOCS . $userID . '/' . $serviceID . '/' . ($i-2) . '.pdf"></iframe>';
             }
             return $res;
         }

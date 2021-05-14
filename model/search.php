@@ -20,8 +20,8 @@
             return $nbMaxRow;
         }
 
-        
-        // $sim = similar_text('machine a laver', 'machine', $perc);
-        // echo "similarity: $sim ($perc %)\n";
+        protected static function verifyTypes(&...$types){
+            $typesAllowed = ['domain', 'sub_domain','title','description'];
+            return !empty(array_intersect($typesAllowed, $types)) ? array_values(array_intersect($typesAllowed, $types)) : $typesAllowed;
+        }
     }
-    

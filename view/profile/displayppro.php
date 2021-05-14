@@ -16,7 +16,7 @@
         
 
 <div class="addprésta" onclick="window.location += '&addService'">
-            ajouter une préstation <span></span>
+            ajouter une préstation
         </div>
         
 <div class="main" id="main">
@@ -28,10 +28,12 @@
 
     <?php 
         $services = ControllerService::showAllServices($_SESSION['userID']);
-
-        foreach ($services as $service) {
-            echo '<div class="service" ><div class="titre"><h1>' . $service["title"] . '</h1></div><div class="description"><p>' . $service["description"] . '</p></div></div>';
-            echo '<div class="service" ><div class="titre"><h1>' . $service["title"] . '</h1></div><div class="description"><p>' . $service["description"] . '</p></div></div>';
+        if (!empty($services)) {
+            foreach ($services as $service) {
+                echo '<div class="service" ><div class="titre"><h1>' . $service["title"] . '</h1></div><div class="description"><p>' . $service["description"] . '</p></div></div>';
+            }
+        } else {
+            // pas de presta
         }
     ?>
 

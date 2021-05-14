@@ -48,7 +48,6 @@ function register() {
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
-        // console.log(data);
         try {
             data = JSON.parse(data);
 
@@ -117,7 +116,6 @@ function login() {
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
-        // console.log(data);
         try {
             data = JSON.parse(data);
 
@@ -143,7 +141,6 @@ function login() {
 
 function logout() {
     request('../controller/logout.php', false, setloader = true, function(data) {
-        // console.log(data)
         try {
             data = JSON.parse(data);
             if (data === 0) {
@@ -162,7 +159,6 @@ function sendValidateEmailRequest() {
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
 
-        // console.log(data);
         try {
             data = JSON.parse(data);
 
@@ -231,7 +227,7 @@ function getMessage() {
                 console.log('pas de message');
                 // aucun message n'as été trouvé
             }
-            setTimeout(getMessage(), 100);
+            setTimeout(getMessage, 250);
         } catch (e) {
 
         }
@@ -245,7 +241,6 @@ function getConv() {
 
 
         try {
-            console.log(data);
             data = JSON.parse(data)
 
             const displayMessage = (data) => {
@@ -273,7 +268,7 @@ function getConv() {
                 // aucune coversation n'as été trouvé
                 console.log('pas de conv');
             }
-            setTimeout(getConv(), 500);
+            setTimeout(getConv, 1000);
         } catch (e) {
 
         }
@@ -288,7 +283,6 @@ function modifyUser() {
         document.getElementById('err').style.transition = "none";
         document.getElementById('err').style.opacity = 0;
 
-        console.log(data);
         if (data === 0) {
             document.getElementById('err').innerHTML += '<div>vos données on bien été enregistrées</div>';
             document.getElementById('modifprofile').reset();
@@ -307,13 +301,11 @@ function modifyUser() {
 }
 
 function newPrestation() {
-    console.log('ouo');
     request('../controller/serviceManager.php', '#addFerviceForm', setloader = true, function(data) {
         document.getElementById('err').innerHTML = "";
         var transition = document.getElementById('err').style.transition;
         document.getElementById('err').style.transition = "none";
         document.getElementById('err').style.opacity = 0;
-        console.log(data)
         data = JSON.parse(data)
 
         if (data === 0) {

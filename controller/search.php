@@ -5,14 +5,13 @@
 
 
     class ControllerSearch extends Search {
-        public static function searchService($query, $page, ...$type) {
-            // return $type[0];
-            // return explode(' ', $query);
+        public static function searchService($query, $page, ...$types) {
             parent::numPageVerify($page);
             $max = $page * Config::$MAX_SERVICES_DISPLAY;
             $min = $max - Config::$MAX_SERVICES_DISPLAY;
             $services = parent::getAllServices($min, $max);
-
+            $types = parent::verifyTypes(...$types);
+            // return $types;
             $i = 0;
             while ($i < count($services)) {
                 if (!parent::isActivate($services[$i]['id'])) {
@@ -22,7 +21,7 @@
                 } else {
                     $accepted = false;
                     Service::decodeService($services[$i]);
-                    foreach ($type as $key) {
+                    foreach ($types as $key) {
                         if(isset($services[$i][$key])) {
                             foreach (explode(' ', $query) as $queryPart) {
                                 similar_text($queryPart, $services[$i][$key], $perc);
