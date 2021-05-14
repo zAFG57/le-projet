@@ -14,6 +14,18 @@
         <li><div id="pro" class="responsivlien2" onclick="logout()">Se déconnecter</div></li>
     </ul>
 </div>
-<div class="mesmessagenav" onclick="window.location.href='../index?location=chat';">
+<div class="mesmessagenav" id="messagenav" onclick="messagecssanim()">
     <img src="../assets/mail.svg">
 </div>
+
+
+<script>
+    function messagecssanim (){
+        nav = document.getElementById('messagenav');
+        nav.classList.add("messagenavanim");
+        setTimeout(windowlocationmessage, 500); 
+    }
+    function windowlocationmessage (){
+        window.location.href='../index?location=chat';
+    }
+</script>
