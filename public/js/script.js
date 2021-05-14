@@ -117,6 +117,7 @@ function login() {
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
         try {
+            console.log(data);
             data = JSON.parse(data);
 
             if (data == 0) {

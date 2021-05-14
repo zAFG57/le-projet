@@ -8,7 +8,7 @@
             if (isset($email) && isset($password) ) {
                 if (parent::userExisting($email)) {
                 if (isset($csrfToken) && ControllerCsrf::validateCsrfToken($csrfToken)) {
-                    if (!parent::isMaxLoginAttemptsAchevied($email)) {
+                    if (!parent::isMaxLoginAttemptsAchevied($email, $_SERVER['REMOTE_ADDR'])) {
                         if (parent::isCorrectPassword($email, $password)) {
                             if(parent::isVerified($email)) {
                                 parent::setSessionVariables($email);
