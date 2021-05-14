@@ -9,7 +9,7 @@
 
         /**
          * @param int $id
-         * @param string $domaine
+         * @param string $domain
          * @param string $subdomain
          * @param string $title
          * @param string $description
@@ -21,7 +21,7 @@
             if (empty($id) || empty($domain)  || empty($subdomain) || empty($title) || empty($description) || empty($file)) {
                 return 1;
             }
-
+            
             if (strlen($title) >= 255 ||  strlen($title) <= 4) { // a voir
                 return 8;
             }
@@ -33,27 +33,46 @@
             if (!parent::acceptableDomain([$domain, $subdomain])) {
                 return 7;
             }
-
-            if(ControllerUser::userExisiting($id)) {
-                $serviceId = parent::newServiceID();
-                if (parent::uploadServiceFile($file, $id, $serviceId)) {
-                    if (parent::submitService($serviceId, $id, $domain, $subdomain, $title, $description) !== -1) {
-                        if(parent::addServiceAttempt($serviceId)){
-                            return 0;
+            if (!parent::maxNumAttemptsachieved($id)) {
+                if(ControllerUser::userExisiting($id)) {
+                    $serviceId = parent::newServiceID();
+                    // return parent::uploadServiceFile($file, $id, $serviceId);
+                    if (parent::uploadServiceFile($file, $id, $serviceId)) {
+                        if (parent::submitService($serviceId, $id, $domain, $subdomain, $title, $description) !== -1) {
+                            if(parent::addServiceAttempt($serviceId)){
+                                return 0;
+                            } else {
+                                return 2;
+                            }
                         } else {
-                            return 2;
+                            return 4;
                         }
                     } else {
-                        return 4;
+                        return 3;
                     }
                 } else {
-                    return 3;
+                    // utilisateur non existant
+                    return 5;
                 }
             } else {
-                // utilisateur non existant
-                return 5;
+                // attempts equals at max
+                return 10;
             }
             return 6;
+        }
+
+        public static function hasPresta($userID) {
+            if(ControllerUser::userExisiting($userID)) {
+                return parent::hasPresta($userID);
+            }
+        }
+
+        public static function displayPDF($userID, $serviceID) {
+            $res = '';
+            for ($i=2; $i < sizeof(scandir(Config::$FOLDER_STACK_SERVICES_DOCS . $userID . '/' . $serviceID)); $i++) {
+               $res =  $res . '<iframe src="' . Config::$FOLDER_STACK_SERVICES_DOCS . $userID . '/' . $serviceID . '/' . ($i-2) . '.pdf"></iframe>';
+            }
+            return $res;
         }
 
         public static function showAllServices($id) {
@@ -62,7 +81,7 @@
                 if ($services) {
                     foreach ($services as &$service) {  
                         parent::decodeService($service);
-                        unset($service['creation_date'], $service['encryption_IV_domaine'], $service['encryption_IV_desc'], $service['encryption_IV_sub_domain'], $service['encryption_IV_title']);  
+                        unset($service['creation_date'], $service['encryption_IV_domain'], $service['encryption_IV_desc'], $service['encryption_IV_sub_domain'], $service['encryption_IV_title']);  
                     }
                     return $services;
                 } else {
@@ -144,11 +163,11 @@
         }
     }
 
-    if (isset($_POST['domaine']) && isset($_POST['subdomain']) && isset($_POST['title']) && isset($_POST['description']) && isset($_POST['csrf_token']) && isset($_FILES["doccumentsLegeaux"])) {
+    if (isset($_POST['domain']) && isset($_POST['subdomain']) && isset($_POST['title']) && isset($_POST['description']) && isset($_POST['csrf_token']) && isset($_FILES["doccumentsLegeaux"])) {
         session_start();
         if (ControllerUser::isConnected()) {
             if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
-                echo json_encode(ControllerService::createService($_SESSION['userID'], $_POST['domaine'], $_POST['subdomain'], $_POST['title'], $_POST['description'], $_FILES["doccumentsLegeaux"]));
+                echo json_encode(ControllerService::createService($_SESSION['userID'], $_POST['domain'], $_POST['subdomain'], $_POST['title'], $_POST['description'], $_FILES["doccumentsLegeaux"]));
             } else {
                 echo -7;
             }
@@ -165,4 +184,3 @@
             }
         }
     }
-    

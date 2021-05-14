@@ -307,6 +307,7 @@ function modifyUser() {
 }
 
 function newPrestation() {
+    console.log('ouo');
     request('../controller/serviceManager.php', '#addFerviceForm', setloader = true, function(data) {
         document.getElementById('err').innerHTML = "";
         var transition = document.getElementById('err').style.transition;

@@ -4,6 +4,7 @@
 
     require_once('../templates/nav.php');
     require_once('../controller/user.php');
+    require_once('../controller/serviceManager.php');
     
 
     if (!controllerUser::isConnected()) {
@@ -20,28 +21,23 @@
         }
     } else {
         if (controllerUser::userExisiting(intval($_GET['user']))) {
-            if (controllerUser::isPro(intval($_GET['user']))) {
+            
+            $user = controllerUser::getUserInfo(intval($_GET['user']));
 
-                $user = controllerUser::getUserInfo(intval($_GET['user']));
-
-                if (intval($_GET['user']) === $_SESSION['userID'] && isset($_GET['action']) && intval($_GET['action']) === 1) {
-                    require_once('./profile/user.php');
-                } else if(intval($_GET['user']) === $_SESSION['userID'] && isset($_GET['action']) && intval($_GET['action']) === 2){
-                    require_once('./profile/prestationPro.php');
-                } else if(intval($_GET['user']) === $_SESSION['userID'] ){
-                    require_once('./profile/pro.php');
-                } else {
-                    require_once('./profile/viewProProfile.php');
-                }
-            } else if(intval($_GET['user']) === $_SESSION['userID']) {
-                $user = controllerUser::getUserInfo($_SESSION['userID']);
+            if (intval($_GET['user']) === $_SESSION['userID'] && isset($_GET['action']) && intval($_GET['action']) === 1) {
                 require_once('./profile/user.php');
-            } else {
+            } else if(intval($_GET['user']) === $_SESSION['userID'] && isset($_GET['action']) && intval($_GET['action']) === 2){
+                require_once('./profile/prestationPro.php');
+            } else if(intval($_GET['user']) === $_SESSION['userID'] ){
+                require_once('./profile/pro.php');
+
+            } else if (!ControllerService::hasPresta(intval($_GET['user']))) {
+                require_once('./profile/viewProProfile.php');
+            } else {  
                 require_once('./profile/userNotFound.php');
             }
-            
+        
         } else {
-            // utilisateur non trouvé
             require_once('./profile/userNotFound.php');
         }
     }
