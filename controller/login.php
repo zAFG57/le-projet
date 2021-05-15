@@ -12,7 +12,7 @@
                         if (parent::isCorrectPassword($email, $password)) {
                             if(parent::isVerified($email)) {
                                 parent::setSessionVariables($email);
-                                parent::suppAttempts($email);
+                                parent::suppAttempts($email, $_SERVER['REMOTE_ADDR']);
                                 return 0;
                             } else {
                                 //utilisateur non vérifié

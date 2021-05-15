@@ -19,8 +19,8 @@
             return parent::sqlSelect('SELECT verified FROM users WHERE email=?','s', $email)->fetch_assoc()['verified'];
         }
 
-        protected static function suppAttempts($id){
-            return parent::sqlUpdate('DELETE FROM loginattempts WHERE userId=?', 'i', $id);
+        protected static function suppAttempts($id, $ip){
+            return parent::sqlUpdate('DELETE FROM loginattempts WHERE userId=? AND ip=?', 'is', $id, $ip);
         }
 
         protected static function getId($email) {

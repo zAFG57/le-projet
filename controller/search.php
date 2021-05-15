@@ -11,7 +11,6 @@
             $min = $max - Config::$MAX_SERVICES_DISPLAY;
             $services = parent::getAllServices($min, $max);
             $types = parent::verifyTypes(...$types);
-            // return $types;
             $i = 0;
             while ($i < count($services)) {
                 if (!parent::isActivate($services[$i]['id'])) {

@@ -22,6 +22,9 @@
 
         protected static function verifyTypes(&...$types){
             $typesAllowed = ['domain', 'sub_domain','title','description'];
+            foreach ($types as &$key) {
+                htmlspecialchars($key);
+            }
             return !empty(array_intersect($typesAllowed, $types)) ? array_values(array_intersect($typesAllowed, $types)) : $typesAllowed;
         }
     }

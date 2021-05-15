@@ -70,6 +70,10 @@
         public static function sendEmailToModifyPassword($id){
             return parent::sendEmail(parent::getEmail($id), parent::getUsername(parent::getEmail($id)), "Mot de passe modifié", "Votre mot de passe a bien été changé");
         }
+
+        public static function sendEmailForgotPassword($email, $hash){
+            return parent::sendEmail($email, parent::getUsername($email), "Changement de mot de passe", '<a href="' . Config::$FORGOT_PASSWORD_LINK . '?h=' . $hash . '">Cliquez ici pour reset votre mot de passe</a> <br/> <p>si vous n\'etes pas a l\'origine de ce changement ne cliquez sur aucun lien</p>');
+        }
     }
 
     if (isset($_POST['validateEmail']) && isset($_POST['csrf_token'])){

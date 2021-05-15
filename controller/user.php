@@ -108,6 +108,33 @@
             }
             return $res;
         }
+
+        public static function forgotPasswordSend($email) {
+            $userID = parent::getUserIDFromEmail($email);
+            if ($userID) {
+                if (self::userExisiting($userID)) {
+                    if (!parent::maxForgotPasswordAttemptAchieved($userID)) {
+                        $hash = parent::createTokenForgotPassword();
+                        parent::saveForgotPasswordAttempt($userID, $hash);
+                        if (ControllerEmailVerification::sendEmailForgotPassword($email, $hash)) {
+                            return 0;
+                        } else {
+                            return 1;
+                        }
+                    } else {
+                        return 2;
+                    }
+                } else {
+                    return 3;
+                }
+            } else {
+                return 4;
+            }
+        }
+
+        public static function forgotPasswordVerify($hash) {
+            return parent::validateTokenForgotPassword(htmlspecialchars($hash));
+        }
     }
 
 
