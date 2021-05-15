@@ -34,7 +34,7 @@
     ],
 
     "modifyUser": [
-        "<div class='err'>vos données on bien été enregistrées</div>",
+        "<div>vos données on bien été enregistrées</div>",
         "<div class='err'>Utilisatuer non trouvé</div>",
         "<div class='err'>Vous avez deja modifier votre nom d'utilisatuer il y a moins de 10 jours</div>",
         "<div class='err'>Le nom d'utilisatuer ne doit contennir que des lettres majuscules ou minuscules et des espaces</div>",
@@ -47,7 +47,7 @@
     ],
 
     "addPresta": [
-        "<div class='err'>Prestation enregistrée, elle sera utilisable quand un administrateur l'aura approuvée</div>",
+        "<div>Prestation enregistrée, elle sera utilisable quand un administrateur l'aura approuvée</div>",
         "<div class='err'>Tous les champs sont requis</div>",
         "<div class='err'>La demande d'ajout n'as pas pu être faite</div>",
         "<div class='err'>Le fichier n'a pas pu être téléchargé</div>",
@@ -55,5 +55,20 @@
         "<div class='err'>Utilisateur invalide</div>",
         "<div class='err'>Une erreur est survenue</div>",
         "<div class='err'>Domain non pris en compte</div>"
+    ],
+
+    "modifyPassword": [
+        "<div>Le mot de passe a bien été modifié</div>",
+        "<div class='err'>Une erreur s'est produite</div>",
+        "<div class='err'>Les mots de passe ne concordent pas</div>",
+        "<div class='err'>Le mot de passe doit contennir: <ul><li>au moins 8 caractères</li><li>au moins une lettre en minuscule</li><li>au moins une lettre en majuscule</li><li>au moins 1 nombre</li><li>au moins 1 caractere special (~?!@#$%^&*)</li></ul></div>",
+        "<div class='err'>Le lien est invalide</div>"
+    ],
+    "resetPasswordSend": [
+        "<div>Un email vous a été envoyé il vous suffit de cliquer sur le lien</div>",
+        "<div class='err'>Une erreur s'est produite</div>",
+        "<div class='err'>Vous avez deja fait une reuqete de réinitialisation regardez votre boite mail</div>",
+        "<div class='err'>L'email notifié n'est pas valide</div>",
+        "<div class='err'>L'email notifié n'est pas valide</div>"
     ]
 }

@@ -135,6 +135,26 @@
         public static function forgotPasswordVerify($hash) {
             return parent::validateTokenForgotPassword(htmlspecialchars($hash));
         }
+
+        public static function changePasswordForgot($newPassword, $newPasswordVerify, $hash) {
+            if (parent::forgotPasswordAttemptExisting($hash)) {
+                if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\~?!@#\$%\^&\*])(?=.{8,})/', $newPassword)){
+                    if ($newPassword === $newPasswordVerify) {
+                        if(parent::ModifyPassword(parent::getUserIDFromHashForgotPassword($hash), $newPassword)) {
+                            return 0;
+                        } else {
+                            return 1;
+                        }
+                    } else {
+                        return 2;
+                    }
+                } else {
+                    return 3;
+                }
+            } else {
+                return 4;
+            }
+        }
     }
 
 
@@ -143,6 +163,20 @@
         session_start();
         if(ControllerCsrf::validateCsrfToken($_POST['csrf_token']) && intval($_POST['userIdChange']) === $_SESSION['userID']) { 
             echo json_encode(ControllerUser::modifyUser(intval(($_POST['userIdChange'])), trim($_POST['usernameChange']), trim($_POST['emailChange']), trim($_POST['passwordChange']), trim($_POST['passwordVerifyChange']), trim($_POST['csrf_token'])));
+        }
+    }
+
+    if (isset($_POST['passwordChange']) && isset($_POST['passwordVerifyChange']) && isset($_POST['hash']) && isset($_POST['csrf_token'])){
+        session_start();
+        if(ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) { 
+            echo json_encode(ControllerUser::changePasswordForgot($_POST['passwordChange'], $_POST['passwordVerifyChange'], $_POST['hash']));
+        }
+    }
+
+    if (isset($_POST['email']) && isset($_POST['csrf_token'])){
+        session_start();
+        if(ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) { 
+            echo json_encode(ControllerUser::forgotPasswordSend(htmlspecialchars($_POST['email'])));
         }
     }
     

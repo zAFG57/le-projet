@@ -3,14 +3,14 @@
     <div class="main" id="main">
         <h1>Error 404 Not found</h1>
         <div class="btn" onclick="window.location = '/'">
-            revenir a la page d'accueille
+            revenir a la page d'accueil
         </div>
     </div>
 
     <div class="bas">
         <h1 class="a">    Ludovic Castiglia       <span>|</span>   </h1>
-        <h1 class="b">    Jules Grivot Pellisson  <span>|</span>   </h1>
-        <h1 class="c">    Pierre Ohanessian       <span>|</span>   </h1>
+        <h1 class="b">    Jules Grivot Pélisson  <span>|</span>   </h1>
+        <h1 class="c">    Pierre Ohannessian       <span>|</span>   </h1>
         <h1 class="d">    Enzo El Younoussi       <span>|</span>   </h1>
         <h1 class="e">    Mathis Maupetit         <span>|</span>   </h1>
     </div>

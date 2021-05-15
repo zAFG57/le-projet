@@ -174,7 +174,16 @@
         }
 
         protected static function getUserIDFromEmail($email) {
-            return parent::sqlSelect('SELECT id FROM users WHERE email=? ', 's',$email)->fetch_assoc()['id'];
+            return parent::sqlSelect('SELECT id FROM users WHERE email=?', 's',$email)->fetch_assoc()['id'];
+        }
+
+
+        protected static function forgotPasswordAttemptExisting($hash) {
+            return parent::sqlSelect('SELECT id FROM forgot_password_attempts WHERE hash=?', 's',$hash)->num_rows == 0; 
+        }
+
+        protected static function getUserIDFromHashForgotPassword($hash) {
+            return parent::sqlSelect('SELECT user_id FROM forgot_password_attempts WHERE hash=?', 's',$hash)->fetch_assoc()['user_id']; 
         }
 
     }

@@ -326,6 +326,33 @@ function newPrestation() {
     })
 }
 
+
+function sendResetPasswordAttempt() {
+    request('../controller/user.php', "#resetPasswordAttempt", setloader = true, function(data) {
+        document.getElementById('err').innerHTML = data;
+        var transition = document.getElementById('err').style.transition;
+        document.getElementById('err').style.transition = "none";
+        document.getElementById('err').style.opacity = 0;
+
+        data = JSON.parse(data)
+
+        if (data === 0) {
+            document.getElementById('err').innerHTML += '<div>Un email vous a été envoyé il vous suffit de cliquer sur le lien</div>';
+            document.getElementById('resetPasswordAttempt').reset();
+        } else {
+            fetch('../public/js/error.json')
+                .then(res => res.json())
+                .then(res => document.getElementById('err').innerHTML += res['resetPasswordSend'][data]);
+        }
+
+        setTimeout(function() {
+            document.getElementById('err').style.transition = transition;
+            document.getElementById('err').style.opacity = 1;
+        }, 10);
+
+    })
+}
+
 function modifyInputName() {
     document.getElementById('nameinputmodif').removeAttribute('readonly');
     document.getElementById('nameinputmodif').focus();
