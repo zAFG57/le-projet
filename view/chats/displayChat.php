@@ -1,3 +1,8 @@
+<?php 
+    use \controller\ControllerChatProUser;
+    include_once '../controller/chatProUser.php';
+?>
+
 <div class="main">
     <a class="retourenarrière" href="chat.php"></a>
 <div class="discution" id="scroll">

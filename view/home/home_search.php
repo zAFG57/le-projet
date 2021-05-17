@@ -1,7 +1,7 @@
 <?php 
-
-    require_once('../controller/search.php');
-    require_once('../templates/nav.php');
+    use \controller\ControllerSearch;
+    include_once '../controller/search.php';
+    include_once '../templates/nav.php';
 
     if (!empty($_GET['query'])) {
         $resultSearch = ControllerSearch::searchService(htmlspecialchars($_GET['query']), (isset($_GET['page']) && intval($_GET['page']) && intval($_GET['page']) > 0) ? intval($_GET['page']) : 1, (isset($_GET['filter'])) ? $_GET['filter'] : '');

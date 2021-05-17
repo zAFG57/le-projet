@@ -1,5 +1,5 @@
 <?php 
-    include_once('../templates/nav.php');
+    include_once '../templates/nav.php';
 ?> 
 
 <?php 

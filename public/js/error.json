@@ -67,7 +67,7 @@
     "resetPasswordSend": [
         "<div>Un email vous a été envoyé il vous suffit de cliquer sur le lien</div>",
         "<div class='err'>Une erreur s'est produite</div>",
-        "<div class='err'>Vous avez deja fait une reuqete de réinitialisation regardez votre boite mail</div>",
+        "<div class='err'>Vous avez deja fait une requête de réinitialisation dans les 30 derrnières minutes, regardez votre boite mail</div>",
         "<div class='err'>L'email notifié n'est pas valide</div>",
         "<div class='err'>L'email notifié n'est pas valide</div>"
     ]

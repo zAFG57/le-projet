@@ -1,4 +1,4 @@
-<?php include_once('../templates/nav.php'); ?>
+<?php include_once '../templates/nav.php'; ?>
 
 <?php $title ="My Profile" ; $css ="viewProProfile.css" ;?>
 

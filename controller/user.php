@@ -1,9 +1,11 @@
 <?php 
+    namespace Controller;
 
-    require_once('../model/user.php');
-    require_once('../model/csrfConfig.php');
-    require_once('../controller/email_verification.php');
-    
+    use \Model\User;
+
+    include_once '../model/user.php';
+    include_once '../controller/email_verification.php';
+    include_once '../controller/csrfConfig.php';
 
     class ControllerUser extends User {
         public static function getUserInfo($id, $protectEmail = true, $getPassword = false, $bothEmail = false) {
@@ -138,9 +140,10 @@
 
         public static function changePasswordForgot($newPassword, $newPasswordVerify, $hash) {
             if (parent::forgotPasswordAttemptExisting($hash)) {
-                if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\~?!@#\$%\^&\*])(?=.{8,})/', $newPassword)){
+                if(preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\~?!@#\$%\^&\*])(?=.{8,})/', $newPassword)){
                     if ($newPassword === $newPasswordVerify) {
                         if(parent::ModifyPassword(parent::getUserIDFromHashForgotPassword($hash), $newPassword)) {
+                            parent::destroyAttempt($hash);
                             return 0;
                         } else {
                             return 1;
@@ -156,8 +159,6 @@
             }
         }
     }
-
-
     
     if (isset($_POST['usernameChange']) && isset($_POST['emailChange']) && isset($_POST['passwordChange']) && isset($_POST['passwordVerifyChange']) && isset($_POST['userIdChange']) && isset($_POST['csrf_token'])){
         session_start();
@@ -165,18 +166,17 @@
             echo json_encode(ControllerUser::modifyUser(intval(($_POST['userIdChange'])), trim($_POST['usernameChange']), trim($_POST['emailChange']), trim($_POST['passwordChange']), trim($_POST['passwordVerifyChange']), trim($_POST['csrf_token'])));
         }
     }
-
-    if (isset($_POST['passwordChange']) && isset($_POST['passwordVerifyChange']) && isset($_POST['hash']) && isset($_POST['csrf_token'])){
+    if (isset($_POST['newPasswordForgotPassword']) && isset($_POST['newValidatePasswordForgotPassword']) && isset($_POST['hash']) && isset($_POST['csrf_token'])){
         session_start();
         if(ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) { 
-            echo json_encode(ControllerUser::changePasswordForgot($_POST['passwordChange'], $_POST['passwordVerifyChange'], $_POST['hash']));
+            echo json_encode(ControllerUser::changePasswordForgot($_POST['newPasswordForgotPassword'], $_POST['newValidatePasswordForgotPassword'], $_POST['hash']));
         }
     }
-
-    if (isset($_POST['email']) && isset($_POST['csrf_token'])){
+    
+    if (isset($_POST['emailForgotPassword']) && isset($_POST['csrf_token'])){
         session_start();
         if(ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) { 
-            echo json_encode(ControllerUser::forgotPasswordSend(htmlspecialchars($_POST['email'])));
+            echo json_encode(ControllerUser::forgotPasswordSend(htmlspecialchars($_POST['emailForgotPassword'])));
         }
     }
     

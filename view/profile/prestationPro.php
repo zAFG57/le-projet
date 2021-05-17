@@ -1,6 +1,6 @@
 <?php
-    // session_start();
-    require_once('../controller/user.php');
+    use \controller\ControllerUser;
+    include_once '../controller/user.php';
 
     if (controllerUser::userExisiting($_SESSION['userID']) ) {
         if (isset($_GET['addService'])) {

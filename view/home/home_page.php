@@ -1,10 +1,10 @@
 
-<?php include_once('../templates/nav.php'); ?>
+<?php include_once '../templates/nav.php'; ?>
 
 <?php 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: ../index.php?location='réparation'");
-}
+// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+//     header("Location: ../index.php?location='réparation'");
+// }
 ?>
  
 <?php $title = "mesréparation.com"; $css = "home.css"?>
@@ -14,7 +14,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <header>
         <?=$nav?>
     </header>
-
+    <?php var_dump($_SERVER['SERVER_NAME'])?>
     <div class="content">
         <form id="search">
             <input type="text" class="search__input" placeholder="object à réparer" name="search" required onkeydown="if(event.key === 'Enter'){event.preventDefault();searchf();}">

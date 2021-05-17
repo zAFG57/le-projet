@@ -1,10 +1,11 @@
 <?php 
+    namespace Controller;
 
-    require_once('../model/login.php');
-    require_once('../model/email_verification.php');
-    require_once('csrfConfig.php');
+    use \Model\EmailVerification;
+    use \Model\Config;
 
-
+    include_once '../model/email_verification.php';
+    include_once '../model/config.php';
 
     class ControllerEmailVerification extends EmailVerification {
         private static function sendEmailVerification($email) {
@@ -14,7 +15,7 @@
                         $verifyCode = random_bytes(16);
                         $requestID = parent::saveHash(parent::getId($email), parent::createHashCode($verifyCode));
                         if ($requestID !== -1) {
-                            if(parent::sendEmail($email, parent::getUsername($email), 'Email Verification', '<a href="http://localhost/site/view/email_verification?id=' . $requestID . '&hash=' . Config::urlSafeEncode($verifyCode) . '">cliquez sur ce lien pour vérifier votre email</a>')){
+                            if(parent::sendEmail($email, parent::getUsername($email), 'Email Verification', '<a href="http://' . Config::$DOMAI_NNAME . '/view/email_verification?id=' . $requestID . '&hash=' . Config::urlSafeEncode($verifyCode) . '">cliquez sur ce lien pour vérifier votre email</a>')){
                                 return 0;
                             } else {
                                 return 1;
@@ -34,10 +35,10 @@
             return 6;
         }
 
-        public static function sendEmailVerificationFromPOST() {
-            if (isset($_POST['validateEmail']) && isset($_POST['csrf_token']) && ControllerCsrf::validateCsrfToken(htmlspecialchars($_POST['csrf_token']))) {
-                return self::sendEmailVerification(htmlspecialchars($_POST['validateEmail']));
-            }
+        public static function sendEmailVerificationFromPOST($email) {
+           
+                return self::sendEmailVerification($email);
+            
         }
         public static function sendValidationEmailFromArgs($email, $csrfToken){
             if (isset($email) && isset($csrfToken) && ControllerCsrf::validateCsrfToken(htmlspecialchars($csrfToken))) {
@@ -77,5 +78,5 @@
     }
 
     if (isset($_POST['validateEmail']) && isset($_POST['csrf_token'])){
-        echo json_encode(ControllerEmailVerification::sendEmailVerificationFromPOST());
+        echo json_encode(ControllerEmailVerification::sendEmailVerificationFromPOST(htmlspecialchars($_POST['validateEmail'])));
     }

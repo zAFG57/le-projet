@@ -1,7 +1,12 @@
 <?php 
+
+    use \Controller\ControllerUser;
+    use \Controller\ControllerAdmin;
+
+    include_once '../controller/user.php';
+    include_once '../controller/panelAdmin.php';
+
     ob_start();  
-    require_once('../controller/user.php');
-    require_once('../controller/panelAdmin.php');
     
     if(ControllerUser::isConnected()) { 
         if (isset($_SESSION['userID']) && ControllerUser::isAdmin($_SESSION['userID'])){ 

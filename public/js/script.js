@@ -48,6 +48,7 @@ function register() {
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
         document.getElementById('errs').style.opacity = 0;
+        console.log(data);
         try {
             data = JSON.parse(data);
 
@@ -329,7 +330,7 @@ function newPrestation() {
 
 function sendResetPasswordAttempt() {
     request('../controller/user.php', "#resetPasswordAttempt", setloader = true, function(data) {
-        document.getElementById('err').innerHTML = data;
+        document.getElementById('err').innerHTML = "";
         var transition = document.getElementById('err').style.transition;
         document.getElementById('err').style.transition = "none";
         document.getElementById('err').style.opacity = 0;

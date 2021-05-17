@@ -1,3 +1,7 @@
+<?php
+    use \Controller\ControllerAdmin;
+    include_once '../controller/panelAdmin.php';
+?>
 
 <div class="gauche">
     <a class="leftSiide" href="../index.php" title="Acceuil">

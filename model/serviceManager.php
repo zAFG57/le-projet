@@ -1,7 +1,8 @@
 <?php 
+    namespace Model;
 
-    require_once('database.php');
-
+    include_once 'database.php';
+    include_once 'config.php';
 
     class Service extends Database {
 

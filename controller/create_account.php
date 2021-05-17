@@ -1,12 +1,12 @@
 <?php
-
+    namespace Controller;
     // require_once(ROOTPATH . '/model/create_account.php');
     // require_once(ROOTPATH . '/model/email_verification.php');
-    require_once('../model/create_account.php');
-    require_once('email_verification.php');
-    require_once('csrfConfig.php');
+    use \Model\CreateAccount;
 
-
+    include_once '../model/create_account.php';
+    include_once '../controller/csrfConfig.php';
+    include_once '../controller/email_verification.php';
 
     class ControllerCreateAccount extends CreateAccount {
         public static function createAccount($username, $email, $password, $passwordverify, $csrfToken) {

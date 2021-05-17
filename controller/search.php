@@ -1,8 +1,13 @@
 <?php 
+    namespace Controller;
 
-    require_once('csrfConfig.php');
-    require_once('../model/search.php');
+    use \Model\Search;
+    use \Model\Config;
+    use \Model\Service;
 
+    include_once '../model/search.php';
+    include_once '../model/config.php';
+    include_once '../model/serviceManager.php';
 
     class ControllerSearch extends Search {
         public static function searchService($query, $page, ...$types) {

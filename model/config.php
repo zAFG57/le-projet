@@ -1,6 +1,8 @@
 <?php 
-
+    namespace Model;
+    
     class Config {
+        protected static $DOMAI_NNAME = '127.0.0.2';
 
         protected static $DB_USERNAME = 'root';
         protected static $DB_PASSWORD = '';

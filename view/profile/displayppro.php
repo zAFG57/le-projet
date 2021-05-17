@@ -1,8 +1,8 @@
 <?php 
-
-    include_once('../templates/nav.php');
-    require_once('../controller/serviceManager.php');
-
+    use \Controller\ControllerService;
+    
+    include_once '../templates/nav.php';
+    include_once '../controller/serviceManager.php';
 ?> 
 
 <?php 
@@ -21,11 +21,6 @@
         
 <div class="main" id="main">
 
-
-
-
-
-
     <?php 
         $services = ControllerService::showAllServices($_SESSION['userID']);
         if (!empty($services)) {
@@ -36,17 +31,6 @@
             // pas de presta
         }
     ?>
-
-
-
-        
-
-
-
-
-
-
-
 
 </div>
 <div class="scrolltop" onclick="main.scrollTop = 0;"><div></div></div>

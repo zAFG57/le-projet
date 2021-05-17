@@ -1,9 +1,13 @@
 <?php
+    namespace Controller;
 
-    require_once('../controller/csrfConfig.php');
-    require_once('../model/serviceManager.php');
-    require_once('../controller/user.php');
-    require_once('../controller/panelAdmin.php');
+    use \Model\Service;
+    use \Model\Config;
+
+    include_once '../model/serviceManager.php';
+    include_once '../model/config.php';
+    include_once '../controller/user.php';
+    include_once '../controller/csrfConfig.php';
 
     class ControllerService extends Service {
 

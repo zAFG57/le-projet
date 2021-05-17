@@ -1,7 +1,7 @@
 <?php
-    
-    require_once('database.php');
-    require_once('../model/serviceManager.php');
+    namespace Model;
+
+    include_once 'serviceManager.php';
 
     class Search extends Service {
         protected static function getAllServices($min, $max) {

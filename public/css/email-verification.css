@@ -140,6 +140,11 @@ header {
     transition: .5s;
     padding-bottom: 3vh;
 }
+#err {
+    color: #2f743b;
+    transition: .5s;
+    padding-bottom: 3vh;
+}
 
 .err {
     color: red;

@@ -1,7 +1,9 @@
 <?php 
+    namespace Controller;
 
-    require_once('../model/config.php');
-    require_once('../model/panelAdmin.php');
+    use \Model\Admin;
+    
+    include_once '../model/panelAdmin.php';
     
     class ControllerAdmin extends Admin {
         public static function createAdminToken($id) {

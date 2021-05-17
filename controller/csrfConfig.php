@@ -1,6 +1,9 @@
 <?php 
+    namespace Controller;
 
-    require_once('../model/csrfConfig.php');
+    use \Model\Csrf;
+
+    include_once '../model/csrfConfig.php';
 
     class ControllerCsrf extends Csrf {
         public static function createCsrfToken() {

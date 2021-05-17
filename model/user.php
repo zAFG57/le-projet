@@ -1,16 +1,17 @@
 <?php 
-    require_once('database.php');
-    require_once('../controller/email_verification.php');
+    namespace Model;
 
+    use Controller\ControllerEmailVerification;
+    
+    include_once '../controller/email_verification.php';
+    include_once 'database.php';
 
     /**
      * undocumented class
-     * 
+     * @author Jules
      */
     
     class User extends database{
-
-        private $userInfo;
 
         public function __construct($id) {
             self::getInfoUser($id);
@@ -141,8 +142,6 @@
             return parent::sqlInsert('INSERT INTO change_password_attempts VALUES (NULL, ?, ?, ?)', 'isi', $userID, $_SERVER['REMOTE_ADDR'], time());
         }
 
-
-
         protected static function createTokenForgotPassword() {
             $seed = Config::urlSafeEncode(random_bytes(8));
             $t = time();
@@ -151,11 +150,11 @@
         }
 
         protected static function saveForgotPasswordAttempt($userID, $hash) {
-            return parent::sqlInsert('INSERT INTO forgot_password_attempts VALUES (NULL, ?, ?, ?, ?)', 'issi', $userID,  $hash, $_SERVER['REMOTE_ADDR'], time());
+            return parent::sqlInsert('INSERT INTO forgot_password_attempts VALUES (NULL, ?, ?, ?, ?, "on")', 'issi', $userID,  $hash, $_SERVER['REMOTE_ADDR'], time());
         }
 
         protected static function getHashForgotPasswordAttempt($userID) {
-            return parent::sqlSelect('SELECT hash FROM forgot_password_attempts WHERE user_id=? AND timestamp>?', 'ii', $userID, time() - 30*60)->fetch_assoc()['hash'];
+            return parent::sqlSelect('SELECT hash FROM forgot_password_attempts WHERE user_id=? AND timestamp>? AND status="on"', 'ii', $userID, time() - 30*60)->fetch_assoc()['hash'];
         }
 
         protected static function maxForgotPasswordAttemptAchieved($userID) {
@@ -179,12 +178,15 @@
 
 
         protected static function forgotPasswordAttemptExisting($hash) {
-            return parent::sqlSelect('SELECT id FROM forgot_password_attempts WHERE hash=?', 's',$hash)->num_rows == 0; 
+            return parent::sqlSelect('SELECT id FROM forgot_password_attempts WHERE hash=? AND status="on"' , 's',$hash)->num_rows == 1; 
         }
 
         protected static function getUserIDFromHashForgotPassword($hash) {
             return parent::sqlSelect('SELECT user_id FROM forgot_password_attempts WHERE hash=?', 's',$hash)->fetch_assoc()['user_id']; 
         }
 
+        protected static function destroyAttempt($hash){
+            return parent::sqlUpdate('UPDATE forgot_password_attempts SET status="off" WHERE hash=?', 's',$hash);
+        }
     }
     

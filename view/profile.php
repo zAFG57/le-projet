@@ -1,10 +1,16 @@
 <?php  
-
     session_start();
+    
+    use \Controller\ControllerUser;
+    use \Controller\ControllerService;
 
-    require_once('../templates/nav.php');
-    require_once('../controller/user.php');
-    require_once('../controller/serviceManager.php');
+    include_once '../templates/nav.php';
+    include_once '../controller/user.php';
+    include_once '../controller/serviceManager.php';
+
+    
+
+    
     
 
     if (!controllerUser::isConnected()) {

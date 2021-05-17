@@ -1,6 +1,7 @@
 <?php 
+    namespace Model;
 
-    require_once('csrfConfig.php');
+    include_once 'csrfConfig.php';
 
     class Logout extends Csrf{
         protected static function unSetVariables() {

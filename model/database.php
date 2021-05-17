@@ -1,6 +1,9 @@
 <?php
+    namespace Model;
+
+    use Mysqli;
     
-    require_once('config.php');
+    include_once 'config.php';
 
     class Database extends Config{
         public static $db = null;
@@ -10,7 +13,7 @@
         }
 
         private static function connect() {
-            $db = new mysqli(parent::$DB_HOST, parent::$DB_USERNAME,parent::$DB_PASSWORD, parent::$DB_DATABASE);
+            $db = new Mysqli(parent::$DB_HOST, parent::$DB_USERNAME,parent::$DB_PASSWORD, parent::$DB_DATABASE);
     
             if($db->connect_error) {
                 return false;

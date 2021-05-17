@@ -1,6 +1,8 @@
 <?php 
-    require_once('../controller/serviceManager.php');
-    require_once('../templates/nav.php');
+    use \controller\ControllerAdmin;
+    
+    include_once '../controller/serviceManager.php';
+    include_once '../templates/nav.php';
 ?>
 
 <?php $title = "Admin Panel"; $css = "adminPanel.css"?>

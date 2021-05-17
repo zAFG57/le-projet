@@ -1,10 +1,14 @@
 <?php 
-    require_once('../controller/serviceManager.php');
-    require_once('../templates/nav.php');
-?>
+    use \controller\ControllerService;
+    use \controller\ControllerAdmin;
 
-<?php $title = "Admin Panel - Manage services"; $css = "adminPanelManageServices.css"?>
-<?php ob_start(); ?>
+    include_once '../controller/serviceManager.php';
+    include_once '../templates/nav.php';
+
+    $title = "Admin Panel - Manage services"; 
+    $css = "adminPanelManageServices.css";
+    ob_start(); 
+?>
 
 <header>
         <?=$nav?>

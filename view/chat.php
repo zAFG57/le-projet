@@ -1,26 +1,26 @@
 <?php 
-
     session_start();
+    
+    use \Controller\ControllerChatProUser;
+    use \Controller\ControllerUser;
 
-    include_once('../templates/nav.php');
+    include_once '../templates/nav.php';
+    include_once '../controller/chatProUser.php';
+    include_once '../controller/user.php';
 
-    require_once('../controller/chatProUser.php');
-    require_once('../controller/user.php');
 
-
+  
 
     if (!ControllerUser::isConnected()) {
         header("Location: ../index.php?location=chat");
         exit;
     }
 
-        if(isset($_GET['proID']) && ControllerChatProUser::openChat($_SESSION['userID'], intval($_GET['proID']))){
-            header("Location: ./chat.php?chatID=". ControllerChatProUser::openChat($_SESSION['userID'], intval($_GET['proID'])));
-            exit;
-        }
-?> 
+    if(isset($_GET['proID']) && ControllerChatProUser::openChat($_SESSION['userID'], intval($_GET['proID']))){
+        header("Location: ./chat.php?chatID=". ControllerChatProUser::openChat($_SESSION['userID'], intval($_GET['proID'])));
+        exit;
+    }
 
-<?php 
     $title = "Chat"; $css = "chat.css";
     ob_start();  
 ?>

@@ -1,8 +1,7 @@
 <?php 
+    namespace Model;
 
-    require_once('config.php');
-    require_once('database.php');
-
+    include_once 'database.php';
 
     class Admin extends Database {
         protected static function createAdminToken($id) {

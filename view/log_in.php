@@ -23,7 +23,7 @@
             <label>Mot de passe</label>
         </div>
 
-        <div class="pass">Mot de passe oublié ?</div>
+        <div class="pass" onclick="window.location = './forgot_password.php'">Mot de passe oublié ?</div>
 
         <div id="errs"></div>
 

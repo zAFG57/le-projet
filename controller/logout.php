@@ -1,7 +1,9 @@
 <?php 
+    namespace Controller;
+    
+    use \Model\Logout;
 
-    require_once('../model/logout.php');
-    require_once('csrfConfig.php');
+    include_once '../model/logout.php';
 
     session_start();
 

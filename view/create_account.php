@@ -1,7 +1,10 @@
-<?php session_start(); ?>
-<?php include_once('../templates/nav.php'); ?>
-<?php $title = "créer mon compte"; $css = "create-account.css"?>
-<?php ob_start(); ?>
+<?php 
+    session_start();
+    include_once '../templates/nav.php'; 
+    $title = "créer mon compte"; 
+    $css = "create-account.css";
+    ob_start(); 
+?>
 
 <header>
     <?=$nav?>

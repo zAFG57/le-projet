@@ -1,4 +1,8 @@
-<?php require_once("../controller/csrfConfig.php")?>
+<?php 
+    use \Controller\ControllerCsrf;
+
+    include_once "../controller/csrfConfig.php";
+?>
 <!DOCTYPE html>
 <html>
     <head>

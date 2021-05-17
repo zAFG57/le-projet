@@ -1,11 +1,12 @@
 <?php 
+    namespace Controller;
 
-    require_once('../model/chatProUser.php');
-    require_once('../controller/user.php');
-    require_once('../controller/csrfConfig.php');
-
+    use \Model\ChatProUser;
     
-
+    include_once '../model/chatProUser.php';
+    include_once '../controller/user.php';
+    include_once '../controller/csrfConfig.php';
+    
     class ControllerChatProUser extends ChatProUser {
         public static function newMessage($chatID, $msg, $userID){
             return parent::newMessage($chatID, $msg, $userID);

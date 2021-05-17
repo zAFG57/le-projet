@@ -1,10 +1,15 @@
-<?php session_start(); ?>
-<?php include_once('../templates/nav.php'); ?>
-<?php require_once('../controller/email_verification.php')?>
+<?php 
+    use \Controller\ControllerEmailVerification;
 
+    include_once '../templates/nav.php';
+    include_once '../controller/email_verification.php';
 
-<?php $title = "Vérifier mon email"; $css = "email-verification.css"?>
-<?php ob_start(); ?>
+    $title = "Vérifier mon email"; 
+    $css = "email-verification.css";
+
+    ob_start(); 
+    session_start();
+ ?>
 <header>
     <?=$nav?>
 </header>

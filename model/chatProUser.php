@@ -1,6 +1,8 @@
 <?php 
+    namespace Model;
 
-    require_once('database.php');
+    include_once 'database.php';
+
     class ChatProUserMessage extends Database {
         
         protected static function createMessage($chatID, $content, $authorId) {
