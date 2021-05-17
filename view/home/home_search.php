@@ -4,7 +4,7 @@
     require_once('../templates/nav.php');
 
     if (!empty($_GET['query'])) {
-        $resultSearch = ControllerSearch::searchService(htmlspecialchars($_GET['query']), (isset($_GET['page']) && intval($_GET['page']) && intval($_GET['page']) > 0) ? intval($_GET['page']) : 1, 'domain');
+        $resultSearch = ControllerSearch::searchService(htmlspecialchars($_GET['query']), (isset($_GET['page']) && intval($_GET['page']) && intval($_GET['page']) > 0) ? intval($_GET['page']) : 1, (isset($_GET['filter'])) ? $_GET['filter'] : '');
         $title = "Recherche - " . $_GET['query']; $css = "home.css";
         ob_start(); 
         ?>

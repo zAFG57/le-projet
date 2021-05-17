@@ -24,7 +24,7 @@
         <div class="cat">
             <div class="maintxt">vous pouvez réparer:</div>
             <div class="select">
-                <select class="catégory" id="catégory" name="domaine">
+                <select class="catégory" id="catégory" name="domain">
                 <option value="">--catégory--</option>
                     <option value="telephone"> des téléphones</option>
                     <option value="ordinateur">des ordinateurs</option>

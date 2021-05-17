@@ -1,4 +1,4 @@
-<?php  
+<?php 
     require_once('../controller/serviceManager.php');
     require_once('../templates/nav.php');
 ?>
@@ -35,20 +35,24 @@
             <div class="car" id="car">
                 <div class="btn avant" onclick="avant()"><img src="../assets/gauche.svg"></div>
                 <div class="btn après" onclick="après()"><img src="../assets/droit.svg"></div>
-                <iframe src="../users/327088253/Correction DS.pdf"></iframe>
-                <iframe src="../users/327088253/a.pdf"></iframe>
-                <iframe src="../users/327088253/b.pdf"></iframe>
+                <?=ControllerService::displayPDF($service['user_id'], $_GET['manageServices']);?>
             </div>
         </div>
- 
+
+        <form id="aceptServicesForm">
+            <input type="hidden" value="<?=password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT)?>" name="adminToken"></input>
+            <input type="hidden" value=<?=$_GET['manageServices']?> name="serviceIDSubmited"></input>
+        </form>
+
+        <div id="err"></div>
 
         <div class="verdict">
-            <div class="refuser  verbtn" onclick="">refuser</div>
-            <div class="accepter verbtn" onclick="">confirmer</div>
+            <div class="refuser  verbtn" onclick="rejectPrestation()">refuser</div>
+            <div class="accepter verbtn" onclick="acceptPrestation()">confirmer</div>
         </div>
 
     </div>
-
+    <script src="../public/js/adminscript.js"></script>
     <script>
         const car = document.getElementById("car");
         function après() {
@@ -56,7 +60,6 @@
             car.scrollLeft += pdfWidth;
             if (car.scrollLeft + car.offsetWidth === car.scrollWidth) {
                 car.scrollLeft = 0;
-                console.log("fin du car");
             }
         }
         function avant() {
@@ -64,7 +67,6 @@
             car.scrollLeft -= pdfWidth;
             if (car.scrollLeft === 0) {
                 car.scrollLeft = car.scrollWidth;
-                console.log('début du car');
             }
         }
     </script>

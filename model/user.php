@@ -101,7 +101,7 @@
         } 
 
         protected static function ModifyPassword($id, $newPassword) {
-            if (parent::sqlUpdate('UPDATE users SET username=? WHERE id = ?', 'si', password_hash($newPassword, PASSWORD_DEFAULT), $id)) {
+            if (parent::sqlUpdate('UPDATE users SET password=? WHERE id = ?', 'si', password_hash($newPassword, PASSWORD_DEFAULT), $id)) {
                 return ControllerEmailVerification::sendEmailToModifyPassword($id);
             }
         }
@@ -137,6 +137,45 @@
             return parent::sqlInsert('INSERT INTO change_password_attempts VALUES (NULL, ?, ?, ?)', 'isi', $id, $_SERVER['REMOTE_ADDR'], time());
         }
 
+        protected static function addAttemptChangeForgotPass($userID) {
+            return parent::sqlInsert('INSERT INTO change_password_attempts VALUES (NULL, ?, ?, ?)', 'isi', $userID, $_SERVER['REMOTE_ADDR'], time());
+        }
+
+
+
+        protected static function createTokenForgotPassword() {
+            $seed = Config::urlSafeEncode(random_bytes(8));
+            $t = time();
+            $hash = Config::urlSafeEncode(hash_hmac('sha256', $seed . $t, Config::$FORGOT_PASS_SECRET_TOKEN, true));
+            return Config::urlSafeEncode($hash . '|' . $seed . '|' . $t);
+        }
+
+        protected static function saveForgotPasswordAttempt($userID, $hash) {
+            return parent::sqlInsert('INSERT INTO forgot_password_attempts VALUES (NULL, ?, ?, ?, ?)', 'issi', $userID,  $hash, $_SERVER['REMOTE_ADDR'], time());
+        }
+
+        protected static function getHashForgotPasswordAttempt($userID) {
+            return parent::sqlSelect('SELECT hash FROM forgot_password_attempts WHERE user_id=? AND timestamp>?', 'ii', $userID, time() - 30*60)->fetch_assoc()['hash'];
+        }
+
+        protected static function maxForgotPasswordAttemptAchieved($userID) {
+            return parent::sqlSelect('SELECT id FROM forgot_password_attempts WHERE user_id=? AND timestamp>?', 'ii', $userID, time() - 30*60)->num_rows >= 1;
+        }
+
+        protected static function validateTokenForgotPassword($token) {
+            $parts = explode('|', Config::urlSafeDecode($token));
+            if(count($parts) === 3) {
+                $hash = hash_hmac('sha256', $parts[1] . $parts[2], Config::$FORGOT_PASS_SECRET_TOKEN, true);
+                if(hash_equals($hash, Config::urlSafeDecode($parts[0]))) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        protected static function getUserIDFromEmail($email) {
+            return parent::sqlSelect('SELECT id FROM users WHERE email=? ', 's',$email)->fetch_assoc()['id'];
+        }
 
     }
     

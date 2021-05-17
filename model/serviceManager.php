@@ -289,4 +289,15 @@
             }
             return false;
         }
+
+        /**
+         * @return boolean if the user has send a prestation and verified by the admins
+         */
+        protected static function hasPresta($userID){
+            return Database::sqlSelect('SELECT id FROM services WHERE id=? and active=1', 'i',$userID)->num_rows > 0;
+        }
+
+        protected static function maxNumAttemptsachieved($userID) {
+            return Database::sqlSelect('SELECT id FROM services WHERE user_id=? and active=0', 'i',$userID)->num_rows >= Config::$MAX_SERVICE_ATTEMPTS;
+        }
     }
