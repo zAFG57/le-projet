@@ -146,7 +146,7 @@ function logout() {
         try {
             data = JSON.parse(data);
             if (data === 0) {
-                window.location = '../view/log_in';
+                window.location = '../';
             }
         } catch (e) {
 
@@ -193,9 +193,11 @@ function searchf() {
 }
 
 function sendMessage() {
-    request('../controller/chatProUser.php', '#message', setloader = false, function(data) {
+    request('../requests/newMessage.php', '#message', setloader = false, function(data) {
+        console.log(data);
 
         data = JSON.parse(data)
+        console.log(data);
     })
     document.getElementById('message').reset();
 
@@ -239,9 +241,8 @@ function getMessage() {
 }
 
 function getConv() {
-    request('../controller/chatProUser.php', '#getConv', setloader = false, function(data) {
-
-
+    request('../requests/getConvs.php', '#getConv', setloader = false, function(data) {
+        console.log(data);
         try {
             data = JSON.parse(data)
 

@@ -1,15 +1,17 @@
 <?php 
     session_start();
-    
     use \Controller\ControllerChatProUser;
+    use \Controller\ControllerActionManager;
     use \Controller\ControllerUser;
+    use \model\ActionManager;
 
-    include_once '../templates/nav.php';
+    include_once '../controller/actionManager.php';
+    include_once '../controller/chatProUser.php';
     include_once '../controller/chatProUser.php';
     include_once '../controller/user.php';
+    include_once '../templates/nav.php';
+    include_once '../model/actionManager.php';
 
-
-  
 
     if (!ControllerUser::isConnected()) {
         header("Location: ../index.php?location=chat");
@@ -30,6 +32,7 @@
 </header>
         <form id="getConv">
             <input type="hidden" name="myIdForConvs" value="<?=$_SESSION['userID']?>">
+            <input type="hidden" name="action_token" value="<?=ControllerActionManager::createRequestAction(ActionManager::$GET_CONV_ACTION_TOKEN)?>">
         </form>
 <?php
     if(isset($_GET['chatID']) && ControllerChatProUser::displayMessages($_SESSION['userID'], intval($_GET['chatID']))) {

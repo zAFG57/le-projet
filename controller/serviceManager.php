@@ -8,6 +8,7 @@
     include_once '../model/config.php';
     include_once '../controller/user.php';
     include_once '../controller/csrfConfig.php';
+    include_once '../controller/panelAdmin.php';
 
     class ControllerService extends Service {
 
@@ -164,6 +165,7 @@
             } else {
                 return -7;
             }
+            return -8;
         }
     }
 

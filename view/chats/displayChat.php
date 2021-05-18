@@ -1,5 +1,10 @@
 <?php 
-    use \controller\ControllerChatProUser;
+    use \Controller\ControllerChatProUser;
+    use \Controller\ControllerActionManager;
+    use \model\ActionManager;
+    
+    include_once '../model/actionManager.php';
+    include_once '../controller/actionManager.php';
     include_once '../controller/chatProUser.php';
 ?>
 
@@ -18,6 +23,7 @@
 
             <input id="chatin" type="text" placeholder="votre message" name="chatin" onkeydown="if(event.key === 'Enter'){event.preventDefault();sendMessage();}">
             <input id="userID" type="hidden" placeholder="votre message" name="userID" value="<?=ControllerChatProUser::getLastUser($_SESSION['userID'], intval($_GET['chatID'])) ?>" readonly>
+            <input type="hidden" name="action_token" value="<?=ControllerActionManager::createRequestAction(ActionManager::$NEW_MESSAGE_ACTION_TOKEN)?>">
             <div class="send" onclick="sendMessage()" >
                 <img src="../assets/avion.svg">
             </div>
@@ -31,7 +37,7 @@
 </div>
 
 <form id="getMessage">
-<input type="hidden" name="chatID" value="<?=intval($_GET['chatID'])?>" readonly>
+    <input type="hidden" name="chatID" value="<?=intval($_GET['chatID'])?>" readonly>
 </form>
 
 <script>
