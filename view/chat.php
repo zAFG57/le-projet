@@ -42,7 +42,7 @@
     }
     
 ?>
-
+<script src="../public/js/baseScript.js"></script>
 <script src="../public/js/script.js"></script>
 <script>getConv()</script>
 <?php $content = ob_get_clean(); ?>

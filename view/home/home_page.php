@@ -29,7 +29,7 @@
             <div onclick="window.location.href='../view/home.php?query=telephone&filter=domain';" class="téléphone">       <h1>téléphone     </h1> <img class="img" src="../assets/télephone.svg"/>      </div>
         </div>
     </section>
-   
+    
 <?php $content = ob_get_clean(); ?>
 
 <?php require('../templates/baseTemplate.php'); ?>

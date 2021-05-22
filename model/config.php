@@ -8,7 +8,8 @@
         protected static $DB_PASSWORD = '';
         protected static $DB_DATABASE = 'sitetheproject';
         protected static $DB_HOST = 'localhost';
-
+        
+        protected static $CONNECTION_SECRET_TOKEN = 'qz534dqz56d4qz4dq8z94a49h89jyytg98kyu987ly84d65gz56q4f9J8syhe4DZQ98DQ984YH9Q8sdS';
         protected static $CSRF_TOKEN_SECRET = '123zqddrg123rth14561f21fq54d9821hz65qdzzqdq';
         protected static $ADMIN_TOKEN_SECRET = '1qzd5q4r7zd6q5z415q4z56q4dzq84dq5d1zq87rf8v5k6i8r4rd84qnz';
         protected static $FORGOT_PASS_SECRET_TOKEN = 'LojuBUBD4f54q5qpouqGFUGHPIQFPLKQQ4G65qqPIUIYUGYUGQZDIJpqOPKG542Q455';
@@ -40,12 +41,14 @@
         protected static $MIN_PERCENTAGE_CORRESPONDE_DOMAIN_SEARCH = 70;
 
         protected static $FORGOT_PASSWORD_LINK = 'http://127.0.0.2/view/forgot_password.php';
-        protected static function urlSafeEncode($m) {
+        
+        public static function urlSafeEncode($m) {
             return rtrim(strtr(base64_encode($m), '+/', '-_'), '=');
         }
 
-        protected static function urlSafeDecode($m) {
+        public static function urlSafeDecode($m) {
             return base64_decode(strtr($m, '-_', '+/'));
         }
+
     }
     

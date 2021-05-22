@@ -4,8 +4,11 @@
     include_once 'serviceManager.php';
 
     class Search extends Service {
-        protected static function getAllServices($min, $max) {
-            return Database::sqlSelect('SELECT `services`.`id`, `user_id`, `domain`, `sub_domain`, `title`, `description`, `services`.`creation_date`, `encryption_IV_domain`, `encryption_IV_desc`, `encryption_IV_sub_domain`, `encryption_IV_title`, `active`, `note`, `username`, `verified` FROM services INNER JOIN users ON users.id = services.user_id LIMIT ' . $min . ', ' . $max)->fetch_all(MYSQLI_ASSOC);
+        protected static function getAllServices($min, $max, $test = false) {
+            if ($test) {
+                return ($max > 0 ? 'LIMIT ' . $min . ', ' . $max : '');
+            }
+            return Database::sqlSelect('SELECT `services`.`id`, `user_id`, `domain`, `sub_domain`, `title`, `description`, `services`.`creation_date`, `encryption_IV_domain`, `encryption_IV_desc`, `encryption_IV_sub_domain`, `encryption_IV_title`, `active`, `note`, `username`, `verified` FROM services INNER JOIN users ON users.id = services.user_id ' . ($max > 0 ? 'LIMIT ' . $min . ', ' . $max : ''))->fetch_all(MYSQLI_ASSOC);
         }
 
         protected static function isActivate($serviceID) {

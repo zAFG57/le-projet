@@ -54,5 +54,39 @@
             }
             return $res;
         }
+
+        public static function getNearestService($query, $num, ...$types){
+            // return "qziyedgqz";
+            $res = [];
+            $services = parent::getAllServices(0, 0);
+            // return $services;
+            $types = parent::verifyTypes(...$types);
+            $i = 0;
+            foreach ($services as $service) {
+                Service::decodeService($service);
+                foreach ($types as $key) {
+                    if (isset($service[$key])) {
+                        foreach (explode(' ', $query) as $queryPart) {
+                            similar_text($queryPart, $service[$key], $perc);
+                            if (!empty($res)) {
+                                foreach ($res as $r) {
+                                    if ($perc > $r[0]) {
+                                        array_push($res, [$perc, $service[$key]]) ;
+                                    }
+
+                                    if (count($res) > $num) {
+                                        array_splice($res, -1, 1);
+                                    }
+                                }
+                            } else {
+                                array_push($res, [$perc, $service[$key]]);
+                            }
+                        }
+                    }
+                        
+                }
+            }
+            return $res;
+        }
     }
     

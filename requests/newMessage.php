@@ -1,4 +1,6 @@
 <?php
+    namespace verification;
+
     use \Controller\ControllerUser;
     use \Controller\ControllerCsrf;
     use \Controller\ControllerChatProUser;
@@ -11,21 +13,29 @@
     include_once '../controller/actionManager.php';
     include_once '../model/actionManager.php';
 
-    if (isset($_POST['chatin']) && isset($_POST['userID']) && isset($_POST['csrf_token']) && isset($_POST['action_token'])) {
-        $resultRequest = false;
-        if (!empty($_POST['chatin'])) {
+    if (isset($_POST['chatin']) && isset($_POST['userID']) && isset($_POST['csrf_token'])) {
+        if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
             session_start();
-            if (ControllerActionManager::allowRequestAction($_POST['action_token'], ActionManager::$NEW_MESSAGE_ACTION_TOKEN)) {
-                if(isset($_SESSION['userID'])){
-                    if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
-                        if(ControllerUser::isPro(intval($_POST['userID']))) {
-                            $resultRequest = ControllerChatProUser::newMessage(ControllerChatProUser::openChat(intval($_SESSION['userID']), intval($_POST['userID'])), htmlspecialchars($_POST['chatin']), $_SESSION['userID']);
-                        } else if(ControllerUser::isPro(intval($_SESSION['userID']))) {
-                            $resultRequest = ControllerChatProUser::newMessage(ControllerChatProUser::openChat(intval($_POST['userID']), intval($_SESSION['userID'])), htmlspecialchars($_POST['chatin']), $_SESSION['userID']);
-                        }
-                    }
-                }
-            }
+            messageVerification::messageVerification($_POST['chatin'], $_SESSION['userID'], $_POST['userID']);
         }
-        echo json_encode($resultRequest);
+    }
+
+    class MessageVerification {
+        public static function messageVerification($entry, $myUserID, $userIDRececer) {
+            $resultRequest = false;
+            if (!empty($entry)) {
+                // if (ControllerActionManager::allowRequestAction($_POST['action_token'], ActionManager::$NEW_MESSAGE_ACTION_TOKEN)) {
+                    if(isset($userID)){
+                        // if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
+                            if(ControllerUser::isPro(intval($userID))) {
+                                $resultRequest = ControllerChatProUser::newMessage(ControllerChatProUser::openChat(intval($myUserID), intval($userIDRececer)), htmlspecialchars($entry), $myUserID);
+                            } else if(ControllerUser::isPro(intval($myUserID))) {
+                                $resultRequest = ControllerChatProUser::newMessage(ControllerChatProUser::openChat(intval($userIDRececer), intval($myUserID)), htmlspecialchars($entry), $myUserID);
+                            }
+                        // }
+                    }
+                // }
+            }
+          echo json_encode($resultRequest);
+        }
     }

@@ -133,7 +133,6 @@
     }
 
     if (isset($_POST['chatID']) && isset($_POST['csrf_token'])) {
-        
         session_start();
         if (isset($_SESSION['userID'])) {
             if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {

@@ -192,16 +192,16 @@ function searchf() {
 
 }
 
-function sendMessage() {
-    request('../requests/newMessage.php', '#message', setloader = false, function(data) {
-        console.log(data);
+// function sendMessage() {
+//     request('../requests/newMessage.php', '#message', setloader = false, function(data) {
+//         console.log(data);
 
-        data = JSON.parse(data)
-        console.log(data);
-    })
-    document.getElementById('message').reset();
+//         data = JSON.parse(data)
+//         console.log(data);
+//     })
+//     document.getElementById('message').reset();
 
-}
+// }
 
 function getMessage() {
     request('../controller/chatProUser.php', '#getMessage', setloader = false, function(data) {
