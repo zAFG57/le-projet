@@ -1,7 +1,6 @@
 <?php 
     use \Controller\ControllerCsrf;
-
-    include_once "../controller/csrfConfig.php";
+    include_once "../controller/csrfConfig.php";    
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,4 +19,5 @@
     <body>
         <?= $content ?>
     </body>
+    
 </html>
