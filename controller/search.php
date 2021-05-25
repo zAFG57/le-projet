@@ -45,7 +45,7 @@
             }
             return $services;
         }
-
+ 
         public static function createStars($nbStars){
             $res = '';
             while ($nbStars > 0) {
@@ -71,7 +71,7 @@
                             if (!empty($res)) {
                                 foreach ($res as $r) {
                                     if ($perc > $r[0]) {
-                                        array_push($res, [$perc, $service[$key]]) ;
+                                        array_unshift($res, [$perc, $service[$key]]) ;
                                     }
 
                                     if (count($res) > $num) {
