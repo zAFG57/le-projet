@@ -105,12 +105,23 @@ input {
     cursor: pointer;
     transition: background-color 500ms;
 }
-#subbmit + #subbmit {
+.anuler + #subbmit {
     margin-left: 20px;
 }
 
 #subbmit:hover {
     background-color: #42a352;
+}
+.anuler {
+    background-color: #a52727;
+    color: white;
+    border-radius: 20px;
+    padding: 20px;
+    cursor: pointer;
+    transition: background-color 500ms;
+}
+.anuler:hover {
+    background-color: #cf3030;
 }
 
 #err {
