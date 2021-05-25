@@ -1,3 +1,4 @@
+
 <?php 
     use \Controller\ControllerService;
     
@@ -8,17 +9,20 @@
 <?php 
     $title = "mes préstation"; $css = "préstation.css";
     ob_start();  
-?>
 
+    
+    $json = 'displayppro';
+    require('../templates/lang.php');
+?>
 <header>
-    <?=$nav?>
+    <?=$nav?> 
 </header>
-        
+
 
 <div class="addprésta" onclick="window.location += '&addService'">
-            ajouter une préstation
+            <?=  $parsed_lang->{'ajouter_une_préstation'}?>
         </div>
-        
+         
 <div class="main" id="main">
 
     <?php 

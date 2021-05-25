@@ -1,6 +1,11 @@
 <?php include_once '../templates/nav.php'; ?>
 
-<?php $title ="My Profile" ; $css ="viewProProfile.css" ;?>
+<?php 
+    $title ="My Profile" ;
+    $css ="viewProProfile.css" ;
+    $json = 'viewproprofile';
+    require('../templates/lang.php');
+?>
 
 <?php ob_start(); ?>
 
@@ -12,7 +17,6 @@
     
     <div class="main">
 
-    <?php  var_dump($user); ?>  
 
 
         <div class="nom">
@@ -28,8 +32,8 @@
 
 
         <div class="btndiv">
-            <div class="btn présta">        mes préstation</div>
-            <div class="btn contact" onclick="window.location ='./chat?proID=<?=$user['id']?>'">me contacter</div>
+            <div class="btn présta"><?=  $parsed_lang->{'préstation'}?></div>
+            <div class="btn contact" onclick="window.location ='./chat?proID=<?=$user['id']?>'"><?=  $parsed_lang->{'contact'}?></div>
         </div>
 
     </div>

@@ -1,3 +1,7 @@
+<?php 
+    $json = 'chatBase';
+    require('../templates/lang.php');
+?>
 <link href="../public/css/chatBase.css" rel="stylesheet" />
 <div class="main">
 
@@ -7,7 +11,7 @@
 
 <div class="chat">
     <div class="bvnsurvosmessage">
-            <h1>Bienvenue sur vos messages</h1>
+            <h1><?=  $parsed_lang->{'bvn'}?></h1>
     </div>
 </div>
 

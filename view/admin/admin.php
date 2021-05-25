@@ -28,7 +28,7 @@
         <div class="admindroit">
             <div class="jaipasdenompourcettediv">
                 <div class="reutilisateur">recherche utilisateur</div>
-                <div class="modifcontenu">modifier le contenue</div>
+                <div class="modifcontenu">modifier le contenu</div>
             </div>
         </div>
     </div>

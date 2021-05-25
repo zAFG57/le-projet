@@ -1,7 +1,10 @@
 <?php include_once '../templates/nav.php'; ?>
 
 <?php $title = "My Profile"; $css = "profile.css";?>
-<?php ob_start(); ?>
+<?php ob_start(); 
+        $json = 'user';
+        require('../templates/lang.php');
+?>
 
 
     <header>
@@ -43,15 +46,17 @@
                 </div>
             </div>  
 
-            <input type="password" class="mdpverif" id="passwordverify" name="passwordVerifyChange" placeholder="Mots de passe de vérification" />
+            <input type="password" class="mdpverif" id="passwordverify" name="passwordVerifyChange" placeholder="<?=  $parsed_lang->{'mdp'}?>" />
             <input type="hidden" value="<?= $user['id'] ?>" name="userIdChange"/>
-            <div class="subanuler">    
+            <div class="subanuler"> 
+
+                <div class="anuler" onclick="anulermodif()">
+                    <h1><?=  $parsed_lang->{'annuler'}?></h1>
+                </div>  
                 <div id="subbmit" onclick="modifyUser()">
-                    <h1>enregistrer</h1>
+                    <h1><?=  $parsed_lang->{'enregistrer'}?></h1>
                 </div>
-                <div id="subbmit" onclick="anulermodif()">
-                    <h1>annuler</h1>
-                </div>
+                
             </div>
             <div id="err"></div>
 

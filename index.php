@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+    
     define("ROOTPATH", __DIR__);
 
 
