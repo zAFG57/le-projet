@@ -1,36 +1,39 @@
 <?php session_start(); ?>
 <?php include_once('../templates/nav.php'); ?>
-<?php $title = "se connecter"; $css = "login.css"?>
+<?php $title = "se connecter"; $css = "login.css";
+    $json = 'login';
+    require('../templates/lang.php');
+?>
 <?php ob_start(); ?>
 
 <header>
     <?=$nav?> 
 </header>
 <div class="login_form">
-    <h1>Se connecter</h1>
+    <h1><?=  $parsed_lang->{'connecter'}?></h1>
 
     <form id="loginform">
 
         <div class="txtfield">
             <input type="text" name="email" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();login();}">
             <span></span>
-            <label>Email</label>
+            <label><?=  $parsed_lang->{'Email'}?></label>
         </div>
 
         <div class="txtfield">
             <input type="password" name="password" required onkeydown="if(event.key === 'Enter'){event.preventDefault();login();}">
             <span></span>
-            <label>Mot de passe</label>
+            <label><?=  $parsed_lang->{'mdp'}?></label>
         </div>
 
-        <div class="pass" onclick="window.location = './forgot_password.php'">Mot de passe oublié ?</div>
+        <div class="pass" onclick="window.location = './forgot_password.php'"><?=  $parsed_lang->{'mdpoublier'}?></div>
 
         <div id="errs"></div>
 
-        <div class="submitButton" onclick="login()"><p>Connexion</p></div>
+        <div class="submitButton" onclick="login()"><p><?=  $parsed_lang->{'Connexion'}?></p></div>
 
         <div class="singupLink">
-            Pas encore de compte ? </br><a href="create_account">créer mon compte</a>
+        <?=  $parsed_lang->{'pdcompte'}?> </br><a href="create_account"><?=  $parsed_lang->{'compte'}?></a>
         </div>
     </form>
 </div>

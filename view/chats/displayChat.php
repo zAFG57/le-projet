@@ -6,12 +6,15 @@
     include_once '../model/actionManager.php';
     include_once '../controller/actionManager.php';
     include_once '../controller/chatProUser.php';
+
+    $json = 'displayChat';
+    require('../templates/lang.php');
 ?>
 
 <div class="main">
     <a class="retourenarrière" href="chat.php"></a>
 <div class="discution" id="scroll">
-    <h1>différente discution</h1>
+    <h1><?=  $parsed_lang->{'différente_discution'}?></h1>
 </div>
 <div class="chat">
 
@@ -21,8 +24,8 @@
 
         <form class="message" id="message">
 
-            <input id="chatin" type="text" placeholder="votre message" name="chatin" onkeydown="if(event.key === 'Enter'){event.preventDefault();sendMessage();}">
-            <input id="userID" type="hidden" placeholder="votre message" name="userID" value="<?=ControllerChatProUser::getLastUser($_SESSION['userID'], intval($_GET['chatID'])) ?>" readonly>
+            <input id="chatin" type="text" placeholder="<?=  $parsed_lang->{'message'}?>" name="chatin" onkeydown="if(event.key === 'Enter'){event.preventDefault();sendMessage();}">
+            <input id="userID" type="hidden" placeholder="<?=  $parsed_lang->{'message'}?>" name="userID" value="<?=ControllerChatProUser::getLastUser($_SESSION['userID'], intval($_GET['chatID'])) ?>" readonly>
             <input type="hidden" name="action_token" value="<?=ControllerActionManager::createRequestAction(ActionManager::$NEW_MESSAGE_ACTION_TOKEN)?>">
             <div class="send" onclick="sendMessage()" >
                 <img src="../assets/avion.svg">

@@ -1,7 +1,10 @@
 <?php include_once '../templates/nav.php'; ?>
 
 <?php $title = "My Profile"; $css = "profilepro.css";?>
-<?php ob_start(); ?>
+<?php ob_start(); 
+$json = 'pro';
+require('../templates/lang.php');
+?>
 
 
     <header>
@@ -10,13 +13,13 @@
 
     <div class="main">
         <div class="profil" onclick="window.location +='&action=1' ">
-            <h1>modifier mon Profile</h1>
-            <p>(mon email, ma photo, mon nom...)</p>
+            <h1><?=  $parsed_lang->{'gauche_titre'}?></h1>
+            <p><?=  $parsed_lang->{'gauche'}?></p>
         </div>
 
         <div class="travail" onclick="window.location +='&action=2' ">
-            <h1>ajouter une préstation</h1>
-            <p>(crée un service, apporter des doccuments légaux)</p>
+            <h1><?=  $parsed_lang->{'droit_titre'}?></h1>
+            <p><?=  $parsed_lang->{'droit'}?></p>
         </div>
     </div>
 

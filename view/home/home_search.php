@@ -21,13 +21,12 @@
 
         <?php
         if (empty($resultSearch)) {
-            var_dump(ControllerSearch::getNearestService($_GET['query'], 1, ''));
+            var_dump(ControllerSearch::getNearestService($_GET['query'], 3, ''));
             foreach (ControllerSearch::getNearestService($_GET['query'], 1) as $key) { ?>
                 <div class="noResFound"><?=$key[1]?></div>
                 
                 <?php }
             ?>
-            <div class="noResFound">test</div>
             <?php
         } else {
             ?> <div id="resSearch">

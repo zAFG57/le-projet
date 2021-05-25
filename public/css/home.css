@@ -249,11 +249,11 @@ body {
 
 .grid {
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
-  transform: translate(-50%, -35%);
+  transform: translate(-50%, -50%);
   width: 95vw;
-  height: 80vh;
+  height: 70vh;
   overflow: scroll;
   padding: 40px;
   -ms-overflow-style: none;
@@ -276,11 +276,12 @@ body {
   border-radius: 30px;
   overflow: hidden;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.25s;
+  margin-bottom: 20px;
 }
 
 .card:hover {
-  transform: scale(1.05) translateX(-50%);
+  transform: scale(1.025) translateX(-48.75%);
 }
 
 .cardgauche {
