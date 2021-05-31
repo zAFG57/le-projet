@@ -4,7 +4,7 @@ les contacts des deux développeur:
 >|nom|mail|tel|
 >|-|-|-|
 >|ludovic Castiglia|ludovic.castiglia@outlook.fr|+33 767466001|
->||jules.grivot.pelisson@gmail.com|+33 624735656|
+>|jules Grivot Pelisson|jules.grivot.pelisson@gmail.com|+33 624735656|
 
 les contacts du reste de l'équipe:
 >|nom|mail|tel|
