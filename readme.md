@@ -1,7 +1,6 @@
 salutation, on est une petit équipe quui veux faire un petit test
 
 ***
-
 les contacts des deux développeur:
 >|nom|mail|tel|
 >|-|-|-|
