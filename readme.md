@@ -1,5 +1,7 @@
 salutation, on est une petit équipe quui veux faire un petit test
 
+***
+
 les contacts des deux développeur:
 >|nom|mail|tel|
 >|-|-|-|
@@ -13,7 +15,3 @@ les contacts du reste de l'équipe:
 >|enzo El Younoussi|thedeltae.124@gmail.com|+33 769218988|
 >|Mathis|@gmail.com|+33 651012797|
 
-
-
-*** 
-test
