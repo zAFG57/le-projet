@@ -10,4 +10,4 @@ les contacts du reste de l'équipe:
 >|nom|mail|tel|
 >|-|-|-|
 >|pierre Ohannessian|pierus.ohannessian@gmail.com|+33 617990619|
->|enzo|jules.grivot.pelisson@gmail.com|+33 624735656|
+>|enzo|thedeltae.124@gmail.com|+33 624735656|
