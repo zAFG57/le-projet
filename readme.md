@@ -1,4 +1,4 @@
->  **salutation, on est une petit équipe quui veux faire un petit test**
+>  **salutation, on est une petite équipe qui veux faire un petit test**
 >  ---
 >
 >  **les contacts des deux développeur:**
