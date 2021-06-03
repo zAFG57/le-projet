@@ -3,9 +3,9 @@
 
     use \Model\User;
 
-    include_once '../model/user.php';
-    include_once '../controller/email_verification.php';
-    include_once '../controller/csrfConfig.php';
+    include_once  __DIR__ . '/../model/user.php';
+    include_once  __DIR__ . '/../controller/email_verification.php';
+    include_once  __DIR__ . '/../controller/csrfConfig.php';
 
     class ControllerUser extends User {
         public static function getUserInfo($id, $protectEmail = true, $getPassword = false, $bothEmail = false) {

@@ -5,9 +5,9 @@
     use \Model\Config;
     use \Model\Service;
 
-    include_once '../model/search.php';
-    include_once '../model/config.php';
-    include_once '../model/serviceManager.php';
+    include_once  __DIR__ . '/../model/search.php';
+    include_once  __DIR__ . '/../model/config.php';
+    include_once  __DIR__ . '/../model/serviceManager.php';
 
     class ControllerSearch extends Search {
         public static function searchService($query, $page, ...$types) {
@@ -66,12 +66,13 @@
                 Service::decodeService($service);
                 foreach ($types as $key) {
                     if (isset($service[$key])) {
-                        foreach (explode(' ', $query) as $queryPart) {
-                            similar_text($queryPart, $service[$key], $perc);
+
+                        similar_text($query, $service[$key], $perc);
                             if (!empty($res)) {
                                 foreach ($res as $r) {
                                     if ($perc > $r[0]) {
-                                        array_push($res, [$perc, $service[$key]]) ;
+                                        // return 'test';
+                                        array_unshift($res, [$perc, $service[$key]]) ;
                                     }
 
                                     if (count($res) > $num) {
@@ -79,7 +80,25 @@
                                     }
                                 }
                             } else {
-                                array_push($res, [$perc, $service[$key]]);
+                                array_unshift($res, [$perc, $service[$key]]);
+                            }
+
+                            
+                        foreach (explode(' ', $query) as $queryPart) {
+                            similar_text($queryPart, $service[$key], $perc);
+                            if (!empty($res)) {
+                                foreach ($res as $r) {
+                                    if ($perc > $r[0]) {
+                                        // return 'test';
+                                        array_unshift($res, [$perc, $service[$key]]) ;
+                                    }
+
+                                    if (count($res) > $num) {
+                                        array_splice($res, -1, 1);
+                                    }
+                                }
+                            } else {
+                                array_unshift($res, [$perc, $service[$key]]);
                             }
                         }
                     }

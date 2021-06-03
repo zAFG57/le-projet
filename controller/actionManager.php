@@ -3,7 +3,7 @@
 
     use \Model\ActionManager;
 
-    include_once '../model/actionManager.php';
+    include_once  __DIR__ . '/../model/actionManager.php';
 
     /**
      * @author Jules GRIVOT PELISSON

@@ -1,4 +1,3 @@
-// document.addEventListener('DOMContentLoaded', () => {
 var conn = new WebSocket('ws://127.0.0.2:8080/vendor/Server.php');
 var connected = false;
 conn.onopen = function(e) {
@@ -13,7 +12,3 @@ conn.onmessage = function(e) {
 
     }
 };
-
-
-
-// });

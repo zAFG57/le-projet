@@ -4,8 +4,8 @@
     use \Model\EmailVerification;
     use \Model\Config;
 
-    include_once '../model/email_verification.php';
-    include_once '../model/config.php';
+    include_once  __DIR__ . '/../model/email_verification.php';
+    include_once  __DIR__ . '/../model/config.php';
 
     class ControllerEmailVerification extends EmailVerification {
         private static function sendEmailVerification($email) {

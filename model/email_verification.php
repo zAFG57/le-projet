@@ -3,9 +3,9 @@
     use \PHPMailer\PHPMailer\PHPMailer;
 	use \PHPMailer\PHPMailer\Exception;
 
-	require '../src/PHPMailer-master/src/Exception.php';
-	require '../src/PHPMailer-master/src/PHPMailer.php';
-	require '../src/PHPMailer-master/src/SMTP.php';
+	require  __DIR__ . '/../src/PHPMailer-master/src/Exception.php';
+	require  __DIR__ . '/../src/PHPMailer-master/src/PHPMailer.php';
+	require  __DIR__ . '/../src/PHPMailer-master/src/SMTP.php';
 
     include_once 'database.php';
     

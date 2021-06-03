@@ -1,7 +1,7 @@
 <?php
     namespace Model;
 
-    include_once 'database.php';
+    include_once  __DIR__ . '/database.php';
 
     class CreateProAccount extends Database {
         protected static function isEmailNotAlreadyUsing($email) {

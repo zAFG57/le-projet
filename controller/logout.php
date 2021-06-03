@@ -3,7 +3,7 @@
     
     use \Model\Logout;
 
-    include_once '../model/logout.php';
+    include_once  __DIR__ . '/../model/logout.php';
 
     session_start();
 

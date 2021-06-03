@@ -31,8 +31,13 @@
         "chat" => "/view/chat.php"
     );
 
+    $authorized_get = array(
+        "profile" => "user"
+    );
+
     if(isset($_GET['location']) && isset($authorized_pages[$_GET['location']])){
-        header("Location: {$authorized_pages[htmlspecialchars($_GET['location'])]}"); 
+        echo $_GET[(array_key_exists($authorized_pages[htmlspecialchars($_GET['location'])])) ?  :];
+        // header("Location: {$authorized_pages[htmlspecialchars($_GET['location'])]}"); 
         die();
     } else {
         header("Location: {$authorized_pages['homePage']}");

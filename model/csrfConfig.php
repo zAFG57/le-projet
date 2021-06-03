@@ -1,7 +1,7 @@
 <?php 
     namespace Model;
 
-    include_once 'config.php';
+    include_once  __DIR__ . '/config.php';
 
     class Csrf extends Config{
         protected static function createToken() {

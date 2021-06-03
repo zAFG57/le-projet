@@ -3,7 +3,7 @@
 
     use \Model\Csrf;
 
-    include_once '../model/csrfConfig.php';
+    include_once  __DIR__ . '/../model/csrfConfig.php';
 
     class ControllerCsrf extends Csrf {
         public static function createCsrfToken() {

@@ -1,7 +1,7 @@
 <?php
     namespace Model;
 
-    include_once 'serviceManager.php';
+    include_once  __DIR__ . '/serviceManager.php';
 
     class Search extends Service {
         protected static function getAllServices($min, $max, $test = false) {

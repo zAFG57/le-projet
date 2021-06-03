@@ -7,11 +7,11 @@
     use \Controller\ControllerActionManager;
     use \model\ActionManager;
 
-    include_once '../controller/user.php';
-    include_once '../controller/csrfConfig.php';
-    include_once '../controller/chatProUser.php';
-    include_once '../controller/actionManager.php';
-    include_once '../model/actionManager.php';
+    include_once __DIR__ . '/../controller/user.php';
+    include_once __DIR__ . '/../controller/csrfConfig.php';
+    include_once __DIR__ . '/../controller/chatProUser.php';
+    include_once __DIR__ . '/../controller/actionManager.php';
+    include_once __DIR__ . '/../model/actionManager.php';
 
     if (isset($_POST['chatin']) && isset($_POST['userID']) && isset($_POST['csrf_token'])) {
         if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {

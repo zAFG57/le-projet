@@ -3,8 +3,8 @@
 
     use Controller\ControllerEmailVerification;
     
-    include_once '../controller/email_verification.php';
-    include_once 'database.php';
+    include_once  __DIR__ . '/../controller/email_verification.php';
+    include_once  __DIR__ . '/database.php';
 
     /**
      * undocumented class

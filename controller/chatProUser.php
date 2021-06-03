@@ -3,9 +3,9 @@
 
     use \Model\ChatProUser;
     
-    include_once '../model/chatProUser.php';
-    include_once '../controller/user.php';
-    include_once '../controller/csrfConfig.php';
+    include_once  __DIR__ . '/../model/chatProUser.php';
+    include_once  __DIR__ . '/../controller/user.php';
+    include_once  __DIR__ . '/../controller/csrfConfig.php';
     
     class ControllerChatProUser extends ChatProUser {
         public static function newMessage($chatID, $msg, $userID){

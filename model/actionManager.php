@@ -1,7 +1,7 @@
 <?php
     namespace Model;
 
-    include_once '../model/config.php';
+    include_once  __DIR__ . '/../model/config.php';
 
     class ActionManager extends Config {
         public static $NEW_MESSAGE_ACTION_TOKEN = 'My token';

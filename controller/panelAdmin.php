@@ -3,7 +3,7 @@
 
     use \Model\Admin;
     
-    include_once '../model/panelAdmin.php';
+    include_once  __DIR__ . '/../model/panelAdmin.php';
     
     class ControllerAdmin extends Admin {
         public static function createAdminToken($id) {

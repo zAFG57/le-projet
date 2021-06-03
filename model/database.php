@@ -3,7 +3,7 @@
 
     use Mysqli;
     
-    include_once 'config.php';
+    include_once  __DIR__ . '/config.php';
 
     class Database extends Config{
         public static $db = null;

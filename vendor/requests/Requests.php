@@ -7,7 +7,7 @@ use Model\Config;
 use \verification\MessageVerification;
 
 include_once __DIR__ . '/../../controller/connection.php';
-include_once __DIR__ . '/../../request/newMessage.php';
+include_once __DIR__ . '/../../requests/newMessage.php'; 
 
 class Requests implements MessageComponentInterface {
     protected $clients;
@@ -19,11 +19,13 @@ class Requests implements MessageComponentInterface {
     public function onOpen(ConnectionInterface $conn) {
         // Store the new connection to send messages to later
         $uniqueSeed = Config::urlSafeEncode(random_bytes(8));
-        echo $uniqueSeed . PHP_EOL;
-        $this->clients->attach($conn, [$conn, $uniqueSeed, ControllerConnection::createConnectionToken($uniqueSeed)]);
-        echo $this->clients[$conn][1];
-        $this->clients[$conn][0]->send(json_encode(['CONNECTION_TOKEN', $this->clients[$conn][2]]));
+        // echo $uniqueSeed . PHP_EOL;
 
+        $this->clients->attach($conn, []);
+        // echo $this->clients[$conn][1];
+        $this->clients[$conn][0]->send(json_encode(['CONNECTION_TOKEN', $this->clients[$conn][2]]));
+        // session_start();
+        // echo $this->clients[$conn][0]->Session();
         echo "New connection! ({$conn->resourceId})\n";
     }
 
@@ -38,6 +40,8 @@ class Requests implements MessageComponentInterface {
             echo 'not working' . PHP_EOL;
             return;
         }
+        
+        
 
         foreach ($this->allowedComands as $cmd) {
             // if ($cmd === $message[1]) {
@@ -45,12 +49,14 @@ class Requests implements MessageComponentInterface {
 
 
                 if ($message[1] === 'LOGIN') {
-                    messageVerification::MessageVerification($message[2][0],$message[2][1], $message[2][2]);
-                    // $client->send(json_encode('working'));
-
+                    $uniqueSeed = Config::urlSafeEncode(random_bytes(8));
+                    $connectionHashToken = $message[2];
+                    $this->clients->attach($from, [$from, $uniqueSeed, ControllerConnection::createConnectionToken($uniqueSeed, $connectionHashToken)]);
                 } else if ($message[1] === 'SEND MESSAGE') {
                     messageVerification::MessageVerification($message[2][0],$message[2][1], $message[2][2]);
                     // $client->send(json_encode('working'));
+                } else if ($message[1] === "") {
+
                 }
                 // echo $this->clients[$from][0]->Session()->get('userID');
                 break;

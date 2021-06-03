@@ -4,9 +4,9 @@
     // require_once(ROOTPATH . '/model/email_verification.php');
     use \Model\CreateProAccount;
 
-    include_once '../model/create_account.php';
-    include_once '../controller/csrfConfig.php';
-    include_once '../controller/email_verification.php';
+    include_once  __DIR__ . '/../model/create_account.php';
+    include_once  __DIR__ . '/../controller/csrfConfig.php';
+    include_once  __DIR__ . '/../controller/email_verification.php';
 
     class ControllerProCreateAccount extends CreateProAccount {
         public static function createAccount($username, $email, $password, $passwordverify, $csrfToken) {

@@ -3,8 +3,8 @@
     
     use \Model\Login;
     
-    include_once '../controller/csrfConfig.php';
-    include_once '../model/login.php';
+    include_once  __DIR__ . '/../controller/csrfConfig.php';
+    include_once  __DIR__ . '/../model/login.php';
 
     
     class ControllerLogin extends Login {
