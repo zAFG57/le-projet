@@ -4,11 +4,11 @@
     use \Model\Service;
     use \Model\Config;
 
-    include_once  __DIR__ . '/../model/serviceManager.php';
-    include_once  __DIR__ . '/../model/config.php';
-    include_once  __DIR__ . '/../controller/user.php';
-    include_once  __DIR__ . '/../controller/csrfConfig.php';
-    include_once  __DIR__ . '/../controller/panelAdmin.php';
+    include_once '../model/serviceManager.php';
+    include_once '../model/config.php';
+    include_once '../controller/user.php';
+    include_once '../controller/csrfConfig.php';
+    include_once '../controller/panelAdmin.php';
 
     class ControllerService extends Service {
 
@@ -80,26 +80,15 @@
             return $res;
         }
 
-        public static function showAllServices($id, $getUnAccepted = false) {
+        public static function showAllServices($id) {
             if(ControllerUser::userExisiting($id)) {
                 $services = parent::getAllUserServices($id);
                 if ($services) {
-                    if ($getUnAccepted) {
-                        foreach ($services as &$service) {  
-                            if ($service['active']) {
-                                parent::decodeService($service);
-                                unset($service['creation_date'], $service['encryption_IV_domain'], $service['encryption_IV_desc'], $service['encryption_IV_sub_domain'], $service['encryption_IV_title']);  
-                            }
-                        }
-                        return $services;
-                    } else {
-                        foreach ($services as &$service) {  
-                            parent::decodeService($service);
-                            unset($service['creation_date'], $service['encryption_IV_domain'], $service['encryption_IV_desc'], $service['encryption_IV_sub_domain'], $service['encryption_IV_title']);  
-                        }
-                        return $services;
+                    foreach ($services as &$service) {  
+                        parent::decodeService($service);
+                        unset($service['creation_date'], $service['encryption_IV_domain'], $service['encryption_IV_desc'], $service['encryption_IV_sub_domain'], $service['encryption_IV_title']);  
                     }
-                    
+                    return $services;
                 } else {
                     return false;
                 }
@@ -177,21 +166,6 @@
                 return -7;
             }
             return -8;
-        }
-
-        public static function removeAttPresta($prestaID, $userID) {
-            if (ControllerUser::userExisiting($userID)) {
-                if (parent::getUserIdFromService($prestaID) === $userID) {
-                    parent::removePresta($prestaID);
-                }
-            }
-        }
-
-        public static function newNote($userFrom, $userTo, $note){
-            if (ControllerUser::userExisiting($userFrom) && ControllerUser::userExisiting($userTo)) {
-                parent::addNote($userFrom, $userTo, $note);
-                return parent::updateNote($userTo);
-            }
         }
     }
 

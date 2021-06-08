@@ -33,8 +33,8 @@
         <div class="submitButton" onclick="login()"><p><?=  $parsed_lang->{'Connexion'}?></p></div>
 
         <div class="singupLink">
-        <?=  $parsed_lang->{'pdcompte'}?> </br><a href="create_account.php"><?=  $parsed_lang->{'compte'}?></a>
-        </div>
+        <?=  $parsed_lang->{'pdcompte'}?> </br><a href="create_account"><?=  $parsed_lang->{'compte'}?></a>
+        </div>  
     </form>
 </div>
 

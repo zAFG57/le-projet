@@ -27,7 +27,7 @@
     $authorized_pages = array(
         "emailVerification" => "/view/email_verification.php",
         "homePage" => "/view/home.php",
-        "profile" => "/view/profile.php?user=" . $_SESSION['userID'],
+        "profile" => "/view/profile.php",
         "chat" => "/view/chat.php"
     );
 
@@ -38,7 +38,3 @@
         header("Location: {$authorized_pages['homePage']}");
         exit;
     }
-    
-    
-    
-    

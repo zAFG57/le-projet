@@ -18,10 +18,8 @@
     if (isset($_GET['id']) && $_GET['id'] !== '' && isset($_GET['hash']) && $_GET['hash'] !== '') {
         if(ControllerEmailVerification::verificationEmailValidation($_GET['id'], $_GET['hash'])){
             // email verified page a faire : require_once('email_verification_page_success.php')
-            echo '<div id="blur"></div><div class="validation"><h1>votre compte a bien été vérifier</h1><div class="btn" onclick="window.location='."'../index.php?location=login'".'">se connecter</div></div>';
         } else {
             // error ocured page a faire : require_once('email_verification_page_not_success.php')
-        echo '<div id="blur"></div><div class="validation"><h1>il y a une erreur, votre email doit être déjà vérrifier</h1><div class="btn" onclick="window.location='."'../index.php?location=login'".'">se connecter</div></div>';
         }
     } else {
         require_once('vEmail/email_verification_page.php');

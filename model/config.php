@@ -2,12 +2,12 @@
     namespace Model;
     
     class Config {
-        protected static $DOMAI_NNAME = 'robin-du-web.tk';
+        protected static $DOMAI_NNAME = '127.0.0.2';
 
-        protected static $DB_USERNAME = 'ludofrwk_l';
-        protected static $DB_PASSWORD = '9WmHW6aae3g3vHn';
-        protected static $DB_DATABASE = 'ludofrwk_sitetheproject';
-        protected static $DB_HOST = '10.195.0.63';
+        protected static $DB_USERNAME = 'root';
+        protected static $DB_PASSWORD = '';
+        protected static $DB_DATABASE = 'sitetheproject';
+        protected static $DB_HOST = 'localhost';
         
         protected static $CONNECTION_SECRET_TOKEN = 'qz534dqz56d4qz4dq8z94a49h89jyytg98kyu987ly84d65gz56q4f9J8syhe4DZQ98DQ984YH9Q8sdS';
         protected static $CSRF_TOKEN_SECRET = '123zqddrg123rth14561f21fq54d9821hz65qdzzqdq';

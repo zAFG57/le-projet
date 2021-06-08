@@ -56,7 +56,7 @@
         </div>
 
     </div>
-    <script src="../../public/js/adminScript.js"></script>
+    <script src="../public/js/adminscript.js"></script>
     <script>
         const car = document.getElementById("car");
         function après() {
