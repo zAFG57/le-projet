@@ -139,7 +139,7 @@ header {
     background-repeat: no-repeat;
 }
 #selecterdedrapeu {
-    width: 27px; 
+    width: 27px;
     border: 1px black solid;
     z-index: 27px;
     display: flex;

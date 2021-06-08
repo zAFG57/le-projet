@@ -14,12 +14,12 @@
 
 <div class="droit">
     <ul>
-        <li><img src="../assets/drapeaufrancais.png" alt="drapeau français"></li>
+        <li><img src="../assets/drapeaufrancais.png" alt="drapeau français" width="27"></li>
         <li><a class="responsivlien2" href="../index.php?location=profile"><?=  $parsed_lang->{'profil'}?></a></li>
         <li><a class="responsivlien2" href="/view/admin_panel.php?h=<?= password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT) ?>"><?=  $parsed_lang->{'admin'}?></a></li>
         <li><div id="pro" class="responsivlien2" onclick="logout()"><?=  $parsed_lang->{'déconnecter'}?></div></li>
     </ul>
 </div>
-<div class="mesmessagenav" onclick="window.location.href='../index?location=chat';">
+<div class="mesmessagenav" onclick="window.location.href='../index.php?location=chat';">
     <img src="../assets/mail.svg">
 </div>
