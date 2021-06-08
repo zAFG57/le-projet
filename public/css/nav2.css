@@ -123,9 +123,33 @@ header {
     transition: 0.3s ease-in-out;
 }
 
-.droit img {
-    transform: translate(0%, 25%);
-    height: 25px;
+#drapeau , #drapeaufr , #drapeauus {
+    background: url('../../assets/drapeaufrancais.png');
+    height: 18px;
+    width: 27px;
+    z-index: 15;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#drapeauus {
+    background: url('../../assets/drapeauUS.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#selecterdedrapeu {
+    width: 27px; 
+    border: 1px black solid;
+    z-index: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: none;
 }
 
 .mesmessagenav {
@@ -145,7 +169,10 @@ header {
 
 .mesmessagenav:hover {
     transform: scale(1.1);
+
 }
+
+
 
 
 /*////////////////responsive 900px (téléphone et autre)//////*/

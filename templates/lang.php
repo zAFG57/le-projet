@@ -23,8 +23,3 @@
         $parsed_lang = json_decode(file_get_contents($chemin . $json . ".json"));
     }
 ?>
-
-<script>
-        console.log("'<?=  $json?>'");
-        console.log("'<?=  $_SESSION['l']?>'")
-</script>
