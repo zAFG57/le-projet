@@ -34,7 +34,7 @@
 
         <div class="singupLink">
         <?=  $parsed_lang->{'pdcompte'}?> </br><a href="create_account"><?=  $parsed_lang->{'compte'}?></a>
-        </div>
+        </div>  
     </form>
 </div>
 
@@ -42,3 +42,4 @@
 
 <?php $content = ob_get_clean(); ?>
 <?php require('../templates/baseTemplate.php'); ?>
+ 

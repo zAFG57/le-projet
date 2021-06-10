@@ -24,16 +24,9 @@
                 <?php echo $user['username'] ?>
             </h1>
         </div>
+        
         <div class="description">
-            <p>
-                description <?php echo $user['id'] ?>
-            </p>
-        </div>
-
-
-        <div class="btndiv">
-            <div class="btn présta" onclick="window.location ='./profile.php?user=<?=$user['id']?>&presta=1'"><?=  $parsed_lang->{'préstation'}?></div>
-            <div class="btn contact" onclick="window.location ='./chat?proID=<?=$user['id']?>'"><?=  $parsed_lang->{'contact'}?></div>
+            <h1>il faudra faire en sort de display les préstation de la personne</h1>
         </div>
 
     </div>

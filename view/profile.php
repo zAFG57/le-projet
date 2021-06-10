@@ -38,7 +38,11 @@
                 require_once('./profile/pro.php');
 
             } else if (!ControllerService::hasPresta(intval($_GET['user']))) {
-                require_once('./profile/viewProProfile.php');
+                if(isset($_GET['presta']) && intval(htmlspecialchars($_GET['presta'])) === 1) {
+                    require_once('./profile/viewPrestation.php');
+                } else {
+                    require_once('./profile/viewProProfile.php');
+                } 
             } else {  
                 require_once('./profile/userNotFound.php');
             }

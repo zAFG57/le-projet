@@ -1,6 +1,8 @@
 <?php       
     include_once '../templates/nav.php';
     $title = "changer le mot de passe"; $css = "email-verification.css";
+    $json = 'forgotr';
+    require('../templates/lang.php');
     ob_start();  
 ?>
 
@@ -11,29 +13,29 @@
 
 
 <div class="verificationForm">
-    <h1>changer mon<br/> mot de passe</h1>
+    <h1><?=$parsed_lang->{'changer'}?><br/> <?=$parsed_lang->{'mdp'}?></h1>
 
     <form id="modifPassword">
 
         <div class="txtfield">
             <input type="password" name="newPasswordForgotPassword" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();modifyPassword();}" >
             <span></span>
-            <label>nouveau mot de passe</label>
+            <label><?=$parsed_lang->{'nmdp'}?></label>
         </div>
         <div class="txtfield">
             <input type="password" name="newValidatePasswordForgotPassword" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();modifyPassword();}" >
             <span></span>
-            <label> verfication du nouveau mot de passe</label>
+            <label><?=$parsed_lang->{'vnmdp'}?></label>
         </div>
 
         <input type="hidden" name="hash" value="<?=$_GET['h']?>">
 
         <div id="err"></div>
         
-        <div class="submitButton" onclick="modifyPassword();"><p>enregister mon mot de passe</p></div>
+        <div class="submitButton" onclick="modifyPassword();"><p><?=$parsed_lang->{'emdp'}?></p></div>
 
         <div class="singinLink">
-            Déjà un compte ? </br><a href="log_in">Se connecter</a>
+            <?=$parsed_lang->{'duc'}?> </br><a href="log_in"><?=$parsed_lang->{'connect'}?></a>
         </div>
         
 

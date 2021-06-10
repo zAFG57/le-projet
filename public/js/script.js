@@ -27,7 +27,7 @@ function request(url, data, setloader = true, callback) {
     }
 
     xhr.send(formdata);
-}
+} 
 
 function loaderdiv(loader) {
     var loadera = document.createElement('div');
