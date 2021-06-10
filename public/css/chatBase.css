@@ -1,0 +1,30 @@
+/*///////////////responsive 900px (téléphone et autre)/////*/
+
+@media screen and (max-width: 900px) {
+    .discution {
+        display: block;
+        position: absolute;
+        width: 100%;
+        z-index: 2;
+    }
+    .chat {
+        display: none;
+    }
+}
+
+
+/*/////////////////responsive 1300px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
+
+@media screen and (min-width: 900px) {
+    @media screen and (max-width: 1300px) {
+        .discution {
+            display: block;
+            position: absolute;
+            width: 100%;
+            z-index: 2;
+        }
+        .chat {
+            display: none;
+        }
+    }
+}

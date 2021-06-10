@@ -1,0 +1,11 @@
+{
+    "creer_un_compte": "Create an account",
+    "nom_dutilisateur": "User name",
+    "Email": "Email",
+    "mdp": "Password",
+    "confirm": "confirmation",
+    "compte": "Create my account",
+    "djuncompte": "Already an account ?",
+    "connecter": "Log in",
+    "verif": "Verify my email"
+}
