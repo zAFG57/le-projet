@@ -15,5 +15,4 @@ use RequestsStream\Requests;
         8080
     );
 
-    
     $server->run();
