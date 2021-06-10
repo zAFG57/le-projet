@@ -1,0 +1,9 @@
+{
+    "changer": "change my",
+    "mdp": "password",
+    "nmdp": "new password",
+    "vnmdp": " Verification of the new password",
+    "emdp": "register my password",
+    "duc": "Already have an account?",
+    "connect": "Log in"
+}
