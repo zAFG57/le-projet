@@ -4,13 +4,8 @@
     use \Model\EmailVerification;
     use \Model\Config;
 
-<<<<<<< HEAD
     include_once __DIR__ . '/../model/email_verification.php';
     include_once __DIR__ . '/../model/config.php';
-=======
-    include_once '../model/email_verification.php';
-    include_once '../model/config.php';
->>>>>>> origin/wtf-énorme-merge
 
     class ControllerEmailVerification extends EmailVerification {
         private static function sendEmailVerification($email) {
@@ -20,11 +15,7 @@
                         $verifyCode = random_bytes(16);
                         $requestID = parent::saveHash(parent::getId($email), parent::createHashCode($verifyCode));
                         if ($requestID !== -1) {
-<<<<<<< HEAD
                             if(parent::sendEmail($email, parent::getUsername($email), 'Email Verification', '<html><head></head><body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"><table bgcolor="#2f743b" width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><table width="50%" leftmargin="25%" border="0" cellpadding="0" cellspacing="0" align="center"><tbody><tr><td height="250" style="font-size:250px;line-height:250px;" border="0"> </td></tr><tr><td style="text-align:center;font-size:200%;"><a href="http://localhost/site/view/email_verification?id=' . $requestID . '&amp;hash=' . Config::urlSafeEncode($verifyCode) . '" style="color: #FFF;text-decoration:none;">cliquez ici pour vérifier votre email</a></td></tr><tr><td height="250" style="font-size:250px;line-height:250px;" border="0"> </td></tr></tbody></table></td></tr></tbody></table></body></html>')){
-=======
-                            if(parent::sendEmail($email, parent::getUsername($email), 'Email Verification', '<html><head></head><body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"><table bgcolor="#2f743b" width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><table width="50%" leftmargin="25%" border="0" cellpadding="0" cellspacing="0" align="center"><tbody><tr><td height="250" style="font-size:250px;line-height:250px;" border="0"> </td></tr><tr><td style="text-align:center;font-size:200%;"><a href="https://robin-du-web.tk/view/email_verification.php?id=' . $requestID . '&amp;hash=' . Config::urlSafeEncode($verifyCode) . '" style="color: #FFF;text-decoration:none;">cliquez ici pour vérifier votre email</a></td></tr><tr><td height="250" style="font-size:250px;line-height:250px;" border="0"> </td></tr></tbody></table></td></tr></tbody></table></body></html>')){
->>>>>>> origin/wtf-énorme-merge
                                 return 0;
                             } else {
                                 return 1;

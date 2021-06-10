@@ -6,7 +6,8 @@
     $json = 'viewproprofile';
     // require('../templates/lang.php');
     include_once __DIR__. '/../../templates/lang.php';
-    include_once __DIR__ . '/../../controlleur/serviceManager.php';
+    include_once __DIR__ . '/../../controller/serviceManager.php';
+
     use \Controller\ControllerService;
     $presta = ControllerService::showAllServices(htmlspecialchars($_GET['user']), false);
 ?>
@@ -20,8 +21,6 @@
   
     
     <div class="main">
-
-
 
         <div class="nom">
             <h1>

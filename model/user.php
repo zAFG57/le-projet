@@ -192,3 +192,4 @@
         protected static function getHashFromUserID($id) {
             return parent::sqlSelect('SELECT connection_token FROM users WHERE id=?', 'i',$id)->fetch_assoc()['connection_token']; 
         }
+    }

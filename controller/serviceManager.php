@@ -80,17 +80,6 @@
             return $res;
         }
 
-<<<<<<< HEAD
-        public static function showAllServices($id) {
-            if(ControllerUser::userExisiting($id)) {
-                $services = parent::getAllUserServices($id);
-                if ($services) {
-                    foreach ($services as &$service) {  
-                        parent::decodeService($service);
-                        unset($service['creation_date'], $service['encryption_IV_domain'], $service['encryption_IV_desc'], $service['encryption_IV_sub_domain'], $service['encryption_IV_title']);  
-                    }
-                    return $services;
-=======
         public static function showAllServices($id, $getUnAccepted = true) {
             if(ControllerUser::userExisiting($id)) {
                 $services = parent::getAllUserServices($id);
@@ -111,7 +100,6 @@
                         return $services;
                     }
                     
->>>>>>> origin/wtf-énorme-merge
                 } else {
                     return false;
                 }
@@ -190,10 +178,6 @@
             }
             return -8;
         }
-<<<<<<< HEAD
-    }
-
-=======
 
         public static function removeAttPresta($prestaID, $userID) {
             if (ControllerUser::userExisiting($userID)) {
@@ -218,7 +202,6 @@
             ControllerService::removeAttPresta($_POST['user'],$_POST['service']);
         }
     }
->>>>>>> origin/wtf-énorme-merge
     if (isset($_POST['domain']) && isset($_POST['subdomain']) && isset($_POST['title']) && isset($_POST['description']) && isset($_POST['csrf_token']) && isset($_FILES["doccumentsLegeaux"])) {
         session_start();
         if (ControllerUser::isConnected()) {
