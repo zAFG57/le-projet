@@ -45,7 +45,7 @@
             <div class="submitButton" onclick="registerpro();"><p><?=  $parsed_lang->{'creermoncompte'}?></p></div>
 
             <div class="singinLink">
-                <?=  $parsed_lang->{'djuncompte'}?></br><a href="log_in"><?=  $parsed_lang->{'déco'}?></a> | <a href="email_verification"><?=  $parsed_lang->{'verifmonemail'}?></a>
+                <?=  $parsed_lang->{'djuncompte'}?></br><a href="log_in.php"><?=  $parsed_lang->{'déco'}?></a> | <a href="email_verification.php"><?=  $parsed_lang->{'verifmonemail'}?></a>
             </div>
         
 

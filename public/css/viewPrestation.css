@@ -1,0 +1,103 @@
+.main {
+    position: absolute;
+    width: 100vw;
+    height: 90vh;
+    top: 10vh;
+}
+.nom {
+    position: absolute;
+    width: max-content;
+    top: 2vh;
+    left: 50%;
+    transform: translate(-50%,0);
+    border-radius: 45px;
+    padding: 25px;
+    font-size: min(2em, calc(3vw + 0.5em));
+    color: var(--clr-primary);
+    text-decoration: underline var(--clr-primary);
+}
+.container {
+    position: absolute;
+    top: 15vh;
+    width: 100vw;
+    height: calc(100vh - 25vh);
+    padding: 40px;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: hidden;
+}
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+.container section {
+    position: relative;
+    margin-bottom: 30px;
+    height: 30vh;
+    left: 50%;
+    border: 1px solid black;
+    transform: translate(-50%, 0%);
+    display: flex;
+    flex-direction: column;
+    border-radius: 45px;
+    overflow: hidden;
+    transition: transform 0.25s ease-in-out;
+    cursor: pointer;
+}
+.container section:hover {
+    transform: translate(-50%, 0%) scale(1.05) ;
+}
+
+.titre {
+    position: relative;
+    height: 10vh;
+    width: 100%;
+    background: var(--clr-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 2em;
+    text-align: center;
+}
+.desc {
+    padding: 10px;
+    overflow: hidden;
+    font-size: 90%;
+}
+.scrolltop{
+    position: absolute;
+    top: 90vh;
+    left: 10vw;
+    position: relative;
+    display: block;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 1px solid var(--clr-primar);
+    cursor: pointer;
+    transition: scale 0.25s;
+    background: var(--clr-primary);
+}
+.scrolltop div {
+    position: relative;
+    top: calc(50% - 7.5px);
+    left: calc(50% - 15px);
+    height: 0px;
+    width: 0px;   
+    border-left: 30px solid transparent;
+    border-right: 0vw solid transparent;
+    border-bottom: 30px solid white;
+    transform: rotateZ(-135deg);
+    -webkit-touch-callout: none;
+     -webkit-user-select: none;
+     -khtml-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+}
+.scrolltop:hover {
+    scale: 1.2;
+}

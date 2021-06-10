@@ -1,8 +1,8 @@
 <?php 
     namespace Model;
 
-    include_once 'database.php';
-    include_once 'config.php';
+    include_once  __DIR__ . '/database.php';
+    include_once  __DIR__ . '/config.php';
 
     class Service extends Database {
 
@@ -300,5 +300,20 @@
 
         protected static function maxNumAttemptsachieved($userID) {
             return Database::sqlSelect('SELECT id FROM services WHERE user_id=? and active=0', 'i',$userID)->num_rows >= Config::$MAX_SERVICE_ATTEMPTS;
+        }
+
+
+        protected static function removePresta($prestaID) {
+            return Database::sqlUpdate('DELETE FROM services WHERE id=?', 's', $prestaID);
+        }
+
+        protected static function addNote($userFrom, $userTo, $note) {
+            return parent::sqlInsert('INSERT INTO notes VALUES (NULL, ?, ?, ?, ?)', 'iiii', $userTo, $userFrom, $note, time());
+        }
+
+        protected static function updateNote($user) {
+            $notes = parent::sqlSelect('SELECT SUM(value) as note, COUNT(value) as nbNotes FROM notes WHERE user_id=?', 'i', $user)->fetch_all(MYSQLI_ASSOC);
+            $moyNotes = $notes['value'] / $notes['nbNotes'];
+            return parent::sqlUpdate('UPDATE users SET notes=? WHERE id=?', 'ii', $moyNotes, $user);
         }
     }

@@ -33,7 +33,7 @@
 
         <div class="btndiv">
             <div class="btn présta" onclick="window.location ='./profile.php?user=<?=$user['id']?>&presta=1'"><?=  $parsed_lang->{'préstation'}?></div>
-            <div class="btn contact" onclick="window.location ='./chat?proID=<?=$user['id']?>'"><?=  $parsed_lang->{'contact'}?></div>
+            <div class="btn contact" onclick="window.location ='./chat.php?proID=<?=$user['id']?>'"><?=  $parsed_lang->{'contact'}?></div>
         </div>
 
     </div>

@@ -18,7 +18,7 @@ body {
     transform: translate(-50%,0);
     border-radius: 45px;
     padding: 25px;
-    font-size: 2em;
+    font-size: min(2em, calc(3vw + 0.5em));
     color: var(--clr-primary);
     text-decoration: underline var(--clr-primary);
 }
@@ -44,8 +44,8 @@ body {
     position: absolute;
     bottom: 2vh;
     height: 12vh;
-    width: 50vw;
-    left: 25vw;
+    width: 80vw;
+    left: 10vw;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -55,7 +55,7 @@ body {
     border: 2px solid var(--clr-primary);
     border-radius: 25px;
     padding: 20px;
-    font-size: 2em;
+    font-size: min(2em, calc(2vw + 0.15em));
     cursor: pointer;
     transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1);
 }

@@ -13,9 +13,16 @@
 
 <div class="droit">
     <ul>
-        <li><img src="../assets/drapeaufrancais.png" alt="drapeau français" height="25px"></li>
+        <li id="drapeau" onclick="pays()" style="background-image: url('../../assets/<?=$_SESSION['l']?>.png');"></li>
+        <ul id="selecterdedrapeu">
+            <li id="drapeaufr" onclick="fr()"></li>
+            <li id="drapeauus" onclick="en()"></li>
+        </ul>
         <li><a class="responsivlien" href="../index.php?location=login" title="Se connecter"><?=  $parsed_lang->{'connecter'}?></a></li>
         <li><a class="responsivlien" href="../index.php?location=createAccount" title="Créer mon compte"><?=  $parsed_lang->{'compte'}?></a></li>
         <li><a class="responsivlien" id="pro" href="../index.php?location=createProAccount" title="Je suis un professionel"><?=  $parsed_lang->{'pro'}?></a></li>
     </ul>
 </div>
+<form id="langform">
+    <input type="hidden" value="fr" id="langinput" name="langinput"/>
+</form>

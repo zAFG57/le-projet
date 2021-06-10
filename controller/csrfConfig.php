@@ -13,4 +13,7 @@
         public static function validateCsrfToken() {
             return parent::createToken();
         }
+        //public static function validateCsrfToken($token) {
+        //    return parent::validateToken($token);
+        //}
     }

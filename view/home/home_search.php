@@ -20,14 +20,15 @@
         </div>
 
         <?php
-        if (empty($resultSearch)) {
-            var_dump(ControllerSearch::getNearestService($_GET['query'], 3, ''));
-            foreach (ControllerSearch::getNearestService($_GET['query'], 1) as $key) { ?>
-                <div class="noResFound"><?=$key[1]?></div>
+        if (empty($resultSearch)) {?>
+            <div class="résultatproche"><h1>les trois résultats les plus proches sont:</h1><div><?php
+            foreach (ControllerSearch::getNearestService($_GET['query'], 3) as $key) { ?>
+                <div class="résultatprochebtn" onclick="window.location='./home.php?query=<?=$key[1]?>'"><?=$key[1]?></div>
                 
                 <?php }
             ?>
-            <?php
+                </div></div>
+            <?php 
         } else {
             ?> <div id="resSearch">
                     <div class="grid">
