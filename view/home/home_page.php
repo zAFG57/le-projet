@@ -17,7 +17,7 @@ require('../templates/lang.php');
     <header>
         <?=$nav?>
     </header>
-    <?php var_dump($_SERVER['SERVER_NAME'])?>
+    <?php var_dump($_SERVER['SERVER_NAME']) // woula c trop bien ?>
     <div class="content">
         <form id="search">
             <input type="text" class="search__input" placeholder="<?=  $parsed_lang->{'obj'}?>" name="search" required onkeydown="if(event.key === 'Enter'){event.preventDefault();searchf();}">

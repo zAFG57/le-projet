@@ -7,7 +7,6 @@
         protected static function createToken() {
             $seed = parent::urlSafeEncode(random_bytes(8));
             $t = time();
-            // return session_id();
             $hash = parent::urlSafeEncode(hash_hmac('sha256', session_id() . $seed . $t, parent::$CSRF_TOKEN_SECRET, true));
             return parent::urlSafeEncode($hash . '|' . $seed . '|' . $t);
         }

@@ -11,7 +11,6 @@
         public static function login($email, $password, $csrfToken) {
             if (isset($email) && isset($password) ) {
                 if (parent::userExisting($email)) {
-                    // return ControllerCsrf::validateCsrfToken($csrfToken);
                 if (isset($csrfToken) && ControllerCsrf::validateCsrfToken($csrfToken)) {
                     if (!parent::isMaxLoginAttemptsAchevied($email, $_SERVER['REMOTE_ADDR'])) {
                         if (parent::isCorrectPassword($email, $password)) {

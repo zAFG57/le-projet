@@ -1,0 +1,9 @@
+{
+    "changer": "changer mon",
+    "mdp": "mot de passe",
+    "nmdp": "nouveau mot de passe",
+    "vnmdp": " verfication du nouveau mot de passe",
+    "emdp": "enregister mon mot de passe",
+    "duc": "Déjà un compte ?",
+    "connect": "Se connecter"
+}
