@@ -12,21 +12,29 @@ require('../templates/lang.php');
 <div class="droit">
     <ul>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <li><img src="../assets/drapeaufrancais.png" alt="drapeau français"></li>
 =======
         <li id="drapeau" onclick="pays()" ></li>
+=======
+        <li id="drapeau" onclick="pays()" style="background-image: url('../../assets/<?=$_SESSION['l']?>.png');"></li>
+>>>>>>> origin/wtf-énorme-merge
         <ul id="selecterdedrapeu">
             <li id="drapeaufr" onclick="fr()"></li>
             <li id="drapeauus" onclick="en()"></li>
         </ul>
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> origin/wtf-énorme-merge
         <li><a class="responsivlien2" href="../index.php?location=profile"><?=  $parsed_lang->{'profil'}?></a></li>
         <li><a class="responsivlien2" href="../index.php?location=réparation"><?=  $parsed_lang->{'réparations'}?></a></li>
         <li><div id="pro" class="responsivlien2" onclick="logout()"><?=  $parsed_lang->{'déconnecter'}?></div></li>
     </ul>
 </div>
-<div class="mesmessagenav" onclick="window.location.href='../index?location=chat';">
+<div class="mesmessagenav" onclick="window.location.href='../index.php?location=chat';">
     <img src="../assets/mail.svg">
+<<<<<<< HEAD
 <<<<<<< HEAD
 </div>
 =======
@@ -59,3 +67,12 @@ require('../templates/lang.php');
 
 </script>
 >>>>>>> origin/main
+=======
+</div> 
+<form id="langform">
+    <input type="hidden" value="fr" id="langinput" name="langinput"/>
+</form>
+
+
+
+>>>>>>> origin/wtf-énorme-merge

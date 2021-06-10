@@ -1,5 +1,5 @@
 
-<?php include_once '../templates/nav.php';
+<?php include_once __DIR__ . '/../../templates/nav.php';
 $json = 'home';
 require('../templates/lang.php');
  ?>

@@ -76,10 +76,6 @@
 
         public static function getLastUser($userID, $chatID) {
             if(ControllerUser::userExisiting($userID)){
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/main
                 //verifier si le chat existe
                 if (ControllerUser::isPro($userID)) {
                     return parent::getLastClientUserID($chatID);

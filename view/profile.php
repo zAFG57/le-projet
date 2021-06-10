@@ -7,12 +7,8 @@
     include_once '../templates/nav.php';
     include_once '../controller/user.php';
     include_once '../controller/serviceManager.php';
-
-    
-
     
     
-
     if (!controllerUser::isConnected()) {
         header("Location: ../index.php?location=profile");
         exit;
@@ -38,7 +34,7 @@
                 require_once('./profile/pro.php');
 
             } else if (!ControllerService::hasPresta(intval($_GET['user']))) {
-                if(isset($_GET['presta']) && intval(htmlspecialchars($_GET['presta'])) === 1) {
+                 if(isset($_GET['presta']) && intval(htmlspecialchars($_GET['presta'])) === 1) {
                     require_once('./profile/viewPrestation.php');
                 } else {
                     require_once('./profile/viewProProfile.php');

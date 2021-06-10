@@ -12,7 +12,6 @@
     include_once __DIR__ . '/../templates/nav.php';
     include_once __DIR__ . '/../model/actionManager.php';
 
-
     if (!ControllerUser::isConnected()) {
         header("Location: ../index.php?location=chat");
         exit;

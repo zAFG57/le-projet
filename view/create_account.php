@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include_once '../templates/nav.php'; 
+    include_once __DIR__ . '/../templates/nav.php'; 
     $title = "créer mon compte"; 
     $css = "create-account.css";
     $json = 'creeruncompte';
@@ -46,7 +46,7 @@
         <div class="submitButton" onclick="register();"><p><?=  $parsed_lang->{'compte'}?></p></div>
 
         <div class="singinLink">
-        <?=  $parsed_lang->{'djuncompte'}?> </br><a href="log_in"><?=  $parsed_lang->{'connecter'}?></a> | <a href="email_verification"><?=  $parsed_lang->{'verif'}?></a>
+        <?=  $parsed_lang->{'djuncompte'}?> </br><a href="log_in.php"><?=  $parsed_lang->{'connecter'}?></a> | <a href="email_verification.php"><?=  $parsed_lang->{'verif'}?></a>
         </div>
         
 

@@ -28,13 +28,12 @@
         <div class="submitButton" onclick="sendResetPasswordAttempt();"><p><?=$parsed_lang->{'mail'}?></p></div>
 
         <div class="singinLink">
-            <?=$parsed_lang->{'djuc'}?></br><a href="log_in"><?=$parsed_lang->{'connecter'}?></a>
+            <?=$parsed_lang->{'djuc'}?></br><a href="log_in.php"><?=$parsed_lang->{'connecter'}?></a>
         </div>
         
 
     </form>
 </div>
-
 
 <?php $content = ob_get_clean(); ?>
 <?php require('../templates/baseTemplate.php'); ?>

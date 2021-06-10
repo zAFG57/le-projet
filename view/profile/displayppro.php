@@ -24,12 +24,13 @@
         </div>
          
 <div class="main" id="main">
-
+    
     <?php 
+        
         $services = ControllerService::showAllServices($_SESSION['userID']);
         if (!empty($services)) {
             foreach ($services as $service) {
-                echo '<div class="service" ><div class="titre"><h1>' . $service["title"] . '</h1></div><div class="description"><p>' . $service["description"] . '</p></div></div>';
+                echo '<form id="' . $service["id"] . '"><input type="hidden" value="' . $service["id"] . '"><input type="hidden" value="' . $service["user_id"] . '"><div class="service" onclick="remouvepresta(' . $service["id"] . ')" ><div class="titre"><h1>' . $service["title"] . '</h1></div><div class="description"><p>' . $service["description"] . '</p></div></div></form>';
             }
         } else {
             // pas de presta

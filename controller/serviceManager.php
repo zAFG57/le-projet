@@ -4,11 +4,11 @@
     use \Model\Service;
     use \Model\Config;
 
-    include_once '../model/serviceManager.php';
-    include_once '../model/config.php';
-    include_once '../controller/user.php';
-    include_once '../controller/csrfConfig.php';
-    include_once '../controller/panelAdmin.php';
+    include_once  __DIR__ . '/../model/serviceManager.php';
+    include_once  __DIR__ . '/../model/config.php';
+    include_once  __DIR__ . '/../controller/user.php';
+    include_once  __DIR__ . '/../controller/csrfConfig.php';
+    include_once  __DIR__ . '/../controller/panelAdmin.php';
 
     class ControllerService extends Service {
 
@@ -80,6 +80,7 @@
             return $res;
         }
 
+<<<<<<< HEAD
         public static function showAllServices($id) {
             if(ControllerUser::userExisiting($id)) {
                 $services = parent::getAllUserServices($id);
@@ -89,6 +90,28 @@
                         unset($service['creation_date'], $service['encryption_IV_domain'], $service['encryption_IV_desc'], $service['encryption_IV_sub_domain'], $service['encryption_IV_title']);  
                     }
                     return $services;
+=======
+        public static function showAllServices($id, $getUnAccepted = true) {
+            if(ControllerUser::userExisiting($id)) {
+                $services = parent::getAllUserServices($id);
+                if ($services) {
+                    if ($getUnAccepted) {
+                        foreach ($services as &$service) {  
+                            if ($service['active']) {
+                                parent::decodeService($service);
+                                unset($service['creation_date'], $service['encryption_IV_domain'], $service['encryption_IV_desc'], $service['encryption_IV_sub_domain'], $service['encryption_IV_title']);  
+                            }
+                        }
+                        return $services;
+                    } else {
+                        foreach ($services as &$service) {  
+                            parent::decodeService($service);
+                            unset($service['creation_date'], $service['encryption_IV_domain'], $service['encryption_IV_desc'], $service['encryption_IV_sub_domain'], $service['encryption_IV_title']);  
+                        }
+                        return $services;
+                    }
+                    
+>>>>>>> origin/wtf-énorme-merge
                 } else {
                     return false;
                 }
@@ -167,8 +190,35 @@
             }
             return -8;
         }
+<<<<<<< HEAD
     }
 
+=======
+
+        public static function removeAttPresta($prestaID, $userID) {
+            if (ControllerUser::userExisiting($userID)) {
+                if (parent::getUserIdFromService($prestaID) === $userID) {
+                    parent::removePresta($prestaID);
+                }
+            } else {
+                echo 45;
+                return 32;
+            }
+        }
+
+        public static function newNote($userFrom, $userTo, $note){
+            if (ControllerUser::userExisiting($userFrom) && ControllerUser::userExisiting($userTo)) {
+                parent::addNote($userFrom, $userTo, $note);
+                return parent::updateNote($userTo);
+            }
+        }
+    }
+    if (isset($_POST['user']) && isset($_POST['service'])) {
+        if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) { 
+            ControllerService::removeAttPresta($_POST['user'],$_POST['service']);
+        }
+    }
+>>>>>>> origin/wtf-énorme-merge
     if (isset($_POST['domain']) && isset($_POST['subdomain']) && isset($_POST['title']) && isset($_POST['description']) && isset($_POST['csrf_token']) && isset($_FILES["doccumentsLegeaux"])) {
         session_start();
         if (ControllerUser::isConnected()) {

@@ -22,6 +22,7 @@ header {
     width: 400px;
     background-color: rgb(213, 235, 213);
     border-radius: 10px;
+    max-width: 80vw;
 }
 
 .registerForm h1 {
@@ -29,6 +30,7 @@ header {
     padding: 20px 0 20px 0;
     border-bottom: 1px solid #adadad;
     color: var(--clr-primary);
+    font-size: min(5.5vw,2em);
 }
 
 .registerForm form {
@@ -58,7 +60,7 @@ header {
     left: 5px;
     color: #adadad;
     transform: translateY(-50%);
-    font-size: 16px;
+    font-size: min(3.5vw,16px);
     pointer-events: none;
     transition: .5s;
 }

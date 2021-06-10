@@ -123,9 +123,33 @@ header {
     transition: 0.3s ease-in-out;
 }
 
-.droit img {
-    transform: translate(0%, 25%);
-    height: 25px;
+#drapeau , #drapeaufr , #drapeauus {
+    background: url('../../assets/fr.png');
+    height: 18px;
+    width: 27px;
+    z-index: 15;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#drapeauus {
+    background: url('../../assets/en.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#selecterdedrapeu {
+    width: 27px;
+    border: 1px black solid;
+    z-index: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: none;
 }
 
 .mesmessagenav {
@@ -136,8 +160,8 @@ header {
     border: 1px solid black;
     z-index: 154189561;
     background: hsl(0, 0%, 100%);
-    bottom: 5%;
-    right: 5%;
+    top: calc(95vh - 100px);
+    left: calc(95vw - 100px);
     padding: 10px;
     cursor: pointer;
     transition: transform 0.25s ease-in-out;
@@ -145,7 +169,10 @@ header {
 
 .mesmessagenav:hover {
     transform: scale(1.1);
+
 }
+
+
 
 
 /*////////////////responsive 900px (téléphone et autre)//////*/
@@ -163,11 +190,22 @@ header {
     .responsivlien2 {
         font-size: 3vw;
     }
+    .mesmessagenav {
+        --tailledubtnchat:min(100px,calc(10vw + 2.1em)); 
+        border: none;
+        border-radius: 0;
+        border-top-left-radius: 20px;
+        width: var(--tailledubtnchat);
+        height: var(--tailledubtnchat);
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+        top: calc(100vh - var(--tailledubtnchat));
+        left: calc(100vw - var(--tailledubtnchat));
+    }
 }
 
 
 /*/////////////////responsive 1300px (tablette et autre intermédiaire)///////////////////////////////////////////////////////////*/
-
 @media screen and (min-width: 900px) {
     @media screen and (max-width: 1300px) {
         .responsivlien {

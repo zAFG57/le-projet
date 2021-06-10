@@ -35,7 +35,7 @@
         <div class="submitButton" onclick="modifyPassword();"><p><?=$parsed_lang->{'emdp'}?></p></div>
 
         <div class="singinLink">
-            <?=$parsed_lang->{'duc'}?> </br><a href="log_in"><?=$parsed_lang->{'connect'}?></a>
+            <?=$parsed_lang->{'duc'}?> </br><a href="log_in.php"><?=$parsed_lang->{'connect'}?></a>
         </div>
         
 

@@ -402,3 +402,39 @@ async function changeComboBoxValues() {
         }
     });
 }
+
+
+function remouvepresta(a) {
+    console.log(a);
+    //request('../../controller/serviceManager.php', arguments[0], setloader = true, function(data){
+    //    console.log('coucou');
+    //}
+}
+
+drapeau = document.getElementById('drapeau');
+select = document.getElementById('selecterdedrapeu');
+
+function pays() {
+    drapeau.style.display = 'none';
+    select.style.display = 'flex';
+}
+
+function fr() {
+    drapeau.style.display = 'block';
+    drapeau.style.background = 'url("../../assets/drapeaufrancais.png")';
+    drapeau.style.backgroundSize = 'cover';
+    select.style.display = 'none';
+    document.getElementById('langinput').value = 'fr';
+    request('/controller/lang.php', "#langform", setloader = true, function(data) { window.location = window.location; })
+}
+
+function en() {
+    drapeau.style.display = 'block';
+    drapeau.style.background = 'url("../../assets/drapeauUS.png")';
+    drapeau.style.backgroundSize = 'cover';
+    select.style.display = 'none';
+    document.getElementById('langinput').value = 'en';
+    request('../controller/lang.php', "#langform", setloader = true, function(data) {
+        window.location = window.location;
+    })
+}

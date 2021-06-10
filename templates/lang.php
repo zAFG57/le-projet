@@ -22,13 +22,4 @@
     if ($json)  {
         $parsed_lang = json_decode(file_get_contents($chemin . $json . ".json"));
     }
-<<<<<<< HEAD
-?>
 
-<script>
-        console.log("'<?=  $json?>'");
-        console.log("'<?=  $_SESSION['l']?>'")
-</script>
-=======
-?>
->>>>>>> origin/main

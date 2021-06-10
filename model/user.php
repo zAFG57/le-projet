@@ -188,12 +188,7 @@
         protected static function destroyAttempt($hash){
             return parent::sqlUpdate('UPDATE forgot_password_attempts SET status="off" WHERE hash=?', 's',$hash);
         }
-<<<<<<< HEAD
 
         protected static function getHashFromUserID($id) {
             return parent::sqlSelect('SELECT connection_token FROM users WHERE id=?', 'i',$id)->fetch_assoc()['connection_token']; 
         }
-=======
->>>>>>> origin/main
-    }
-    

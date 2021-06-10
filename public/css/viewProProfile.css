@@ -2,26 +2,29 @@ body {
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
-    overflow :hidden;
+    overflow: hidden;
 }
+
 .main {
     position: absolute;
     width: 100vw;
     height: 90vh;
     top: 10vh;
 }
+
 .nom {
     position: absolute;
     width: max-content;
     top: 2vh;
     left: 50%;
-    transform: translate(-50%,0);
+    transform: translate(-50%, 0);
     border-radius: 45px;
     padding: 25px;
-    font-size: 2em;
+    font-size: min(2em, calc(3vw + 0.5em));
     color: var(--clr-primary);
     text-decoration: underline var(--clr-primary);
 }
+
 .description {
     position: absolute;
     width: 60vw;
@@ -37,28 +40,32 @@ body {
     scrollbar-width: none;
     overflow-x: hidden;
 }
+
 .description::-webkit-scrollbar {
     display: none;
 }
+
 .btndiv {
     position: absolute;
     bottom: 2vh;
     height: 12vh;
-    width: 50vw;
-    left: 25vw;
+    width: 80vw;
+    left: 10vw;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
+
 .btn {
     color: var(--clr-primary);
     border: 2px solid var(--clr-primary);
     border-radius: 25px;
     padding: 20px;
-    font-size: 2em;
+    font-size: min(2em, calc(2vw + 0.15em));
     cursor: pointer;
     transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1);
 }
+
 .btn:hover {
     background: var(--clr-primary);
     color: white;
