@@ -25,7 +25,7 @@
             } elseif (!isset($passwordverify) || $passwordverify !== $password) {
                 return 5;
             }
-
+            session_start();
             if (isset($csrfToken) && ControllerCsrf::validateCsrfToken($csrfToken)) {
                 if (parent::isEmailNotAlreadyUsing($email)) {
                     if(parent::addUser(parent::createId(), $username, $email, $password) !== -1) {

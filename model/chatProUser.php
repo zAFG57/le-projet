@@ -66,7 +66,7 @@
             if (empty($messages)) {
                 return true;
             }
-            foreach ( $messages as $msg ) {
+            foreach ($messages as $msg ) {
                 $msg['message_content'] = parent::decodeMessage($msg['message_content'], parent::getIVFromMessageID($msg['message_id']));
                 $msg['isMe'] = $msg['message_author_id'] === $userID;
 

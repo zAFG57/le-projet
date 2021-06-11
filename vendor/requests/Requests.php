@@ -47,18 +47,16 @@ class Requests implements MessageComponentInterface {
                 return;
             }
         }
+
         if ($message[1] === "SendMessage" && $this->clients[$from->resourceId][1] !== -1) {
-
-
             $toID = ControllerChatProUser::getLastUser(intval($message[0][0]), intval(htmlspecialchars($message[2][0])));
             if (ControllerUser::userExisiting($toID)) {
-                
                 if(ControllerChatProUser::newMessage(htmlspecialchars($message[2][0]), $message[2][1],  $message[0][0]) === 0) {
-                    $from->send(json_encode($message[2][1]));
+                    $from->send(json_encode(['lastMessage', array('message_content' => htmlspecialchars($message[2][1]), 'isMe' => True)]));
                     // echo "nb de co : "  . count($this->clients) . PHP_EOL;
                     foreach ($this->clients as $user) {
                         if (intval($user[1]) === $toID) {
-                            if ($user[0]->send(json_encode($message[2][1]))) {
+                            if ($user[0]->send(json_encode(['lastMessage', array('message_content' => htmlspecialchars($message[2][1]), 'isMe' => False)]))) {
                                 // ça marche !!!!!!!!!!!!!!!!
                                 // echo 'Working++' . PHP_EOL;
                             }

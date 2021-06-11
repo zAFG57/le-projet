@@ -84,7 +84,7 @@
                 }
             }
         }
-
+        // public static function displayMessages
         public static function displayDiscussions($userID) {
             if (ControllerUser::userExisiting($userID)) {
                 $res = [];

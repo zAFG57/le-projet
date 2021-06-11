@@ -203,42 +203,41 @@ function searchf() {
 
 // }
 
-function getMessage() {
-    request('../controller/chatProUser.php', '#getMessage', setloader = false, function(data) {
-        try {
+// function getMessage() {
+//     request('../controller/chatProUser.php', '#getMessage', setloader = false, function(data) {
+//         try {
 
-            data = JSON.parse(data)
+//             data = JSON.parse(data)
 
-            const displayMessage = (data) => {
-                res = "";
-                data.forEach(element => {
-                    res += `<div class="${element['isMe'] === true ? "me" : "you"}"><span>${element['message_content']}</span></div>`
+//             const displayMessage = (data) => {
+//                 res = "";
+//                 data.forEach(element => {
+//                     res += `<div class="${element['isMe'] === true ? "me" : "you"}"><span>${element['message_content']}</span></div>`
 
-                });
-                return res;
-            }
+//                 });
+//                 return res;
+//             }
 
-            const changeEncoding = (data) => {
-                return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
-            }
+//             const changeEncoding = (data) => {
+//                 return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+//             }
 
-            if (data instanceof Array) {
-                if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('chat').innerHTML)) {
-                    document.getElementById('chat').innerHTML = displayMessage(data);
-                    getToBot();
-                }
-            } else {
-                console.log('pas de message');
-                // aucun message n'as été trouvé
-            }
-            setTimeout(getMessage, 250);
-        } catch (e) {
+//             if (data instanceof Array) {
+//                 if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('chat').innerHTML)) {
+//                     document.getElementById('chat').innerHTML = displayMessage(data);
+//                     getToBot();
+//                 }
+//             } else {
+//                 console.log('pas de message');
+//                 // aucun message n'as été trouvé
+//             }
+//             setTimeout(getMessage, 250);
+//         } catch (e) {
 
-        }
+//         }
 
-    })
-
-}
+//     })
+// }
 
 function getConv() {
     request('../requests/getConvs.php', '#getConv', setloader = false, function(data) {
@@ -271,7 +270,7 @@ function getConv() {
                 // aucune coversation n'as été trouvé
                 // console.log('pas de conv');
             }
-            setTimeout(getConv, 1000);
+            // setTimeout(getConv, 1000);
         } catch (e) {
 
         }
@@ -335,7 +334,7 @@ function sendResetPasswordAttempt() {
         var transition = document.getElementById('err').style.transition;
         document.getElementById('err').style.transition = "none";
         document.getElementById('err').style.opacity = 0;
-
+        console.log(data);
         data = JSON.parse(data)
 
         if (data === 0) {

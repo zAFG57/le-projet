@@ -21,6 +21,13 @@
 <div class="chat">
 
     <div class="mainchat" id="chat">
+        <?php $content = ControllerChatProUser::displayMessages($_SESSION['userID'] ,$_GET['chatID']);
+            foreach ($content as $element) {
+                ?>
+                    <div class="<?= ($element['isMe'] === true) ? "me" : "you"?>"><span><?=htmlspecialchars($element['message_content'])?></span></div>
+                <?php
+            }
+        ?>
     </div>
     <div class="chatinput">
 
@@ -54,12 +61,12 @@
 <!-- <script src="../public/js/sendMessage.js"></script> -->
 <script>
     // getMessage();
-    // function getToBot() {
-    //     // document.getElementById('scroll').style.scrollBehavior = "unset"
-    //     var chat = document.getElementsByClassName('mainchat')[0];
-    //     chat.scrollTop = chat.scrollHeight;
-    //     document.getElementById('scroll').style.scrollBehavior = "smooth"
-    // }
-    // getToBot(); 
+    function getToBot() {
+            // document.getElementById('scroll').style.scrollBehavior = "unset"
+            var chat = document.getElementsByClassName('mainchat')[0];
+            chat.scrollTop = chat.scrollHeight;
+            document.getElementById('scroll').style.scrollBehavior = "smooth"
+        }
+    getToBot(); 
 
 </script>
