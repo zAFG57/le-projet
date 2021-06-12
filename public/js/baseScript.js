@@ -18,7 +18,9 @@ function sendMessage() {
 const displayMessage = (data) => {
     return `<div class="${data['isMe'] === true ? "me" : "you"}"><span>${data['message_content']}</span></div>`;
 }
-
+const dispalyConvs = (data, username) => {
+    return `<span>${data['isMe'] === true ? "Moi" : username} : </span> <span>${data['message_content']}</span >`
+}
 conn.onmessage = function(e) {
     var res = JSON.parse(e.data);
     // console.log('test');
@@ -26,6 +28,7 @@ conn.onmessage = function(e) {
 
     if (res[0] === "lastMessage") {
         document.getElementById('chat').innerHTML += displayMessage(res[1]);
+        document.getElementById(res[2][0]).innerHTML = dispalyConvs(res[1], res[2][1]);
         getToBot();
     }
 

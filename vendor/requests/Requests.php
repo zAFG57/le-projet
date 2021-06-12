@@ -3,13 +3,13 @@ namespace RequestsStream;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use \Controller\ControllerUser;
-use Controller\ControllerChatProUser;
+use Controller\ControllerChatUsers;
 use Model\Config;
 use \verification\MessageVerification;
 
 include_once __DIR__ . '/../../controller/connection.php';
 include_once __DIR__ . '/../../requests/newMessage.php';
-include_once __DIR__ . '/../../controller/chatProUser.php';
+include_once __DIR__ . '/../../controller/chatUsers.php';
 
 class Requests implements MessageComponentInterface {
     protected $clients;
@@ -49,14 +49,14 @@ class Requests implements MessageComponentInterface {
         }
 
         if ($message[1] === "SendMessage" && $this->clients[$from->resourceId][1] !== -1) {
-            $toID = ControllerChatProUser::getLastUser(intval($message[0][0]), intval(htmlspecialchars($message[2][0])));
+            $toID = ControllerChatUsers::getLastUser(intval($message[0][0]), intval(htmlspecialchars($message[2][0])));
             if (ControllerUser::userExisiting($toID)) {
-                if(ControllerChatProUser::newMessage(htmlspecialchars($message[2][0]), $message[2][1],  $message[0][0]) === 0) {
-                    $from->send(json_encode(['lastMessage', array('message_content' => htmlspecialchars($message[2][1]), 'isMe' => True)]));
+                if(ControllerChatUsers::newMessage(htmlspecialchars($message[2][0]), $message[2][1],  $message[0][0]) === 0) {
+                    $from->send(json_encode(['lastMessage', array('message_content' => htmlspecialchars($message[2][1]), 'isMe' => True), [intval(htmlspecialchars($message[2][0])), ControllerUser::getUserName(intval(htmlspecialchars($message[0][0])))] ]));
                     // echo "nb de co : "  . count($this->clients) . PHP_EOL;
                     foreach ($this->clients as $user) {
                         if (intval($user[1]) === $toID) {
-                            if ($user[0]->send(json_encode(['lastMessage', array('message_content' => htmlspecialchars($message[2][1]), 'isMe' => False)]))) {
+                            if ($user[0]->send(json_encode(['lastMessage', array('message_content' => htmlspecialchars($message[2][1]), 'isMe' => False), [intval(htmlspecialchars($message[2][0])), ControllerUser::getUserName(intval(htmlspecialchars($message[0][0])))] ]))) {
                                 // ça marche !!!!!!!!!!!!!!!!
                                 // echo 'Working++' . PHP_EOL;
                             }

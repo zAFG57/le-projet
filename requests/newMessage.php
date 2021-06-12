@@ -3,13 +3,13 @@
 
     use \Controller\ControllerUser;
     use \Controller\ControllerCsrf;
-    use \Controller\ControllerChatProUser;
+    use \Controller\ControllerChatUsers;
     use \Controller\ControllerActionManager;
     use \model\ActionManager;
 
     include_once __DIR__ . '/../controller/user.php';
     include_once __DIR__ . '/../controller/csrfConfig.php';
-    include_once __DIR__ . '/../controller/chatProUser.php';
+    include_once __DIR__ . '/../controller/chatUsers.php';
     include_once __DIR__ . '/../controller/actionManager.php';
     include_once __DIR__ . '/../model/actionManager.php';
 
@@ -28,9 +28,9 @@
                     if(isset($userID)){
                         // if (ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) {
                             if(ControllerUser::isPro(intval($userID))) {
-                                $resultRequest = ControllerChatProUser::newMessage(ControllerChatProUser::openChat(intval($myUserID), intval($userIDRececer)), htmlspecialchars($entry), $myUserID);
+                                $resultRequest = ControllerChatUsers::newMessage(ControllerChatUsers::openChat(intval($myUserID), intval($userIDRececer)), htmlspecialchars($entry), $myUserID);
                             } else if(ControllerUser::isPro(intval($myUserID))) {
-                                $resultRequest = ControllerChatProUser::newMessage(ControllerChatProUser::openChat(intval($userIDRececer), intval($myUserID)), htmlspecialchars($entry), $myUserID);
+                                $resultRequest = ControllerChatUsers::newMessage(ControllerChatUsers::openChat(intval($userIDRececer), intval($myUserID)), htmlspecialchars($entry), $myUserID);
                             }
                         // }
                     }
