@@ -190,11 +190,14 @@
             }
         }
 
-        public static function newNote($userFrom, $userTo, $note){
-            if (ControllerUser::userExisiting($userFrom) && ControllerUser::userExisiting($userTo)) {
-                parent::addNote($userFrom, $userTo, $note);
-                return parent::updateNote($userTo);
+        public static function newNote($userFrom, $serviceID, $note){
+            if (ControllerUser::userExisiting($userFrom) && parent::serviceExisting($serviceID)) {
+                if ( $note >= 0 && $note <= Config::$MAX_NOTE_VALUE) {
+                    parent::addNote($userFrom, $serviceID, $note);
+                    return parent::updateNote($serviceID);
+                }
             }
+            return -1;
         }
     }
     if (isset($_POST['user']) && isset($_POST['service'])) {

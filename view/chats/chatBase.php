@@ -13,15 +13,15 @@
     <div class="mesDiscussions"><?= $parsed_lang->{'différente_discution'}?></div>
     <?php
     $discussitions = ControllerChatUsers::displayDiscussions($_SESSION['userID']);
-    var_dump($discussitions);
+    // var_dump($discussitions);
     if (!empty($discussitions)) {
         foreach ($discussitions as $conv) {
             ?>
                 <a href="./chat.php?chatID=<?=$conv['chat_id']?>" class="discutionlien">
                     <div>
-                        <h1 class="discutionnom"><?=$conv['username']?></h1>
+                        <h1 class="discutionnom"><?=htmlspecialchars($conv['username'])?></h1>
                         <?php if (isset($conv['message_content'])) {?>
-                            <h2 class="discutionmessage"><span><?=$conv['isMe'] === true ? "Moi" : $conv['username']?> : </span><?=$conv['message_content']?></h2>
+                            <h2 class="discutionmessage"><span><?=$conv['isMe'] === true ? "Moi" : htmlspecialchars($conv['username'])?> : </span><?=htmlspecialchars($conv['message_content'])?></h2>
                             <?php
                         } else {
                             ?>

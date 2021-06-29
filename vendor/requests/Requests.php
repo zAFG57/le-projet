@@ -13,7 +13,7 @@ include_once __DIR__ . '/../../controller/chatUsers.php';
 
 class Requests implements MessageComponentInterface {
     protected $clients;
-    private $allowedComands = ['SEND MESSAGE'];
+    // private $allowedComands = ['SEND MESSAGE'];
     public function __construct() {
         $this->clients = [];
     }
@@ -40,7 +40,9 @@ class Requests implements MessageComponentInterface {
         if(!count($message) === 3) return;
 
         if ($message[1] === "Connection" && $this->clients[$from->resourceId][1] === -1) {
-            if (ControllerUser::userExisiting(htmlspecialchars($message[0][0])) && password_verify(ControllerUser::getHashFromUserID(htmlspecialchars($message[0][0])), htmlspecialchars($message[0][1]))) {
+            // echo 12;
+            // echo ControllerUser::verifyConnectionToken($message[0][0], $message[0][1]);
+            if (ControllerUser::userExisiting($message[0][0]) && ControllerUser::verifyConnectionToken($message[0][0], $message[0][1])) {
                     $this->clients[$from->resourceId][1] = $message[0][0];
                 echo "UserID : " . $this->clients[$from->resourceId][1] . PHP_EOL;
             } else {

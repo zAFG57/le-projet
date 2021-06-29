@@ -307,13 +307,17 @@
             return Database::sqlUpdate('DELETE FROM services WHERE id=?', 's', $prestaID);
         }
 
-        protected static function addNote($userFrom, $userTo, $note) {
-            return parent::sqlInsert('INSERT INTO notes VALUES (NULL, ?, ?, ?, ?)', 'iiii', $userTo, $userFrom, $note, time());
+        protected static function addNote($userFrom, $serviceID, $note) {
+            return parent::sqlInsert('INSERT INTO notes VALUES (NULL, ?, ?, ?, ?)', 'isii', $userFrom, $serviceID, $note, time());
         }
 
-        protected static function updateNote($user) {
-            $notes = parent::sqlSelect('SELECT SUM(value) as note, COUNT(value) as nbNotes FROM notes WHERE user_id=?', 'i', $user)->fetch_all(MYSQLI_ASSOC);
+        protected static function updateNote($serviceID) {
+            $notes = parent::sqlSelect('SELECT SUM(note) as note, COUNT(note) as nbNotes FROM notes WHERE service_id=?', 's', $serviceID)->fetch_all(MYSQLI_ASSOC);
             $moyNotes = $notes['value'] / $notes['nbNotes'];
-            return parent::sqlUpdate('UPDATE users SET notes=? WHERE id=?', 'ii', $moyNotes, $user);
+            return parent::sqlUpdate('UPDATE services SET note=? WHERE id=?', 'ii', $moyNotes, $serviceID);
+        }
+
+        protected static function getNote($serviceID) {
+            return Database::sqlSelect('SELECT note FROM services WHERE id=? and active=0', 'i',$serviceID)->fetch_assoc()['note'];
         }
     }

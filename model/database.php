@@ -3,7 +3,7 @@
 
     use Mysqli;
     
-    include_once 'config.php';
+    include_once __DIR__ . '/config.php';
 
     class Database extends Config{
         public static $db = null;
@@ -20,6 +20,7 @@
             }
             return $db;
         }
+
 
         protected static function sqlSelect($query, $format = false, ...$vars){
             if (self::$db === null) {

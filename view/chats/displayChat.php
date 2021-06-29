@@ -11,6 +11,8 @@
 
     $json = 'displayChat';
     require('../templates/lang.php');
+
+    ControllerUser::createConnectionHash($_SESSION['userID']);
 ?>
 
 <div class="main">

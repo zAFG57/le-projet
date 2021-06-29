@@ -16,7 +16,7 @@
             if (ControllerUser::userExisiting($userID) && parent::chatIdAlreadyExist($chatID)) {
                 if (parent::belongsUser($userID, $chatID)) {
                     return self::getMessages($chatID, $userID);
-                } 
+                }
             } 
             return false;    
         }
