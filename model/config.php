@@ -40,7 +40,29 @@
         protected static $MAX_SERVICES_DISPLAY = 25;
         protected static $MIN_PERCENTAGE_CORRESPONDE_DOMAIN_SEARCH = 70;
 
+        protected static $MAX_NOTE_VALUE = 5;
+
         protected static $FORGOT_PASSWORD_LINK = 'http://127.0.0.2/view/forgot_password.php';
+
+
+        //////////////////////////// USER //////////////////////
+
+        protected static $PASSWORD_REGEX = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\~?!@#\$%\^&\*])(?=.{8,})/';
+        protected static $USERNAME_REGEX = '//'; // todo
+        protected static $BIO_REGEX = '//'; // todo
+
+        protected static $MAX_SIZE_PROFILE_PICTURE = 5 * 1024 * 1024;
+        protected static $FOLDER_STACK_USERS = '../users/';
+
+        protected static $MAX_ATTEMPTS_TIME_USERS = array(
+            'username' => [60*60*24* 20, 1], // 1 time in 20 days
+            'password' => [60*60*24* 20, 1], // 1 time in 20 days
+            'bio' => [60*60* 1, 3], // 3 times in 1 hour
+            'profilePicture' => [60*60* 1, 3], // 3 times in 1 hour
+            'email' =>[ 60*60*24* 100, 1] // 1 time in 100 days
+        );
+
+
         
         public static function urlSafeEncode($m) {
             return rtrim(strtr(base64_encode($m), '+/', '-_'), '=');

@@ -1,31 +1,60 @@
 <?php 
-    use \Controller\ControllerChatProUser;
+    use \Controller\ControllerChatUsers;
     use \Controller\ControllerActionManager;
     use \model\ActionManager;
     use \Controller\ControllerUser;
     
     include_once __DIR__ . '/../../model/actionManager.php';
     include_once __DIR__ . '/../../controller/actionManager.php';
-    include_once __DIR__ . '/../../controller/chatProUser.php';
+    include_once __DIR__ . '/../../controller/chatUsers.php';
     include_once __DIR__ . '/../../controller/user.php';
 
     $json = 'displayChat';
     require('../templates/lang.php');
+
+    ControllerUser::createConnectionHash($_SESSION['userID']);
 ?>
 
 <div class="main">
     <a class="retourenarrière" href="chat.php"></a>
 <div class="discution" id="scroll">
-    <h1><?=  $parsed_lang->{'différente_discution'}?></h1>
+    <div class="mesDiscussions"><?=  $parsed_lang->{'différente_discution'}?></div>
+    <?php
+    $discussitions = ControllerChatUsers::displayDiscussions($_SESSION['userID']);
+    if (!empty($discussitions)) {
+        foreach ($discussitions as $conv) {
+            ?>
+                <a href="./chat.php?chatID=<?=$conv['chat_id']?>" class="discutionlien">
+                    <div>
+                        <h1 class="discutionnom"><?=$conv['username']?></h1>
+                        <?php if (isset($conv['message_content'])) { ?>
+                                <h2 class="discutionmessage" id="<?=$conv['chat_id']?>"><span><?=$conv['isMe'] === true ? "Moi" : $conv['username']?> : </span> <span><?=htmlspecialchars($conv['message_content'])?></span></h2>
+                            <?php
+                        } else {
+                            ?>
+                                <h2 class="discutionmessage">aucun message</h2>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </a>
+            <?php
+        }
+    }
+        ?>
+    
 </div>
 <div class="chat">
 
     <div class="mainchat" id="chat">
-        <?php $content = ControllerChatProUser::displayMessages($_SESSION['userID'] ,$_GET['chatID']);
-            foreach ($content as $element) {
-                ?>
-                    <div class="<?= ($element['isMe'] === true) ? "me" : "you"?>"><span><?=htmlspecialchars($element['message_content'])?></span></div>
-                <?php
+        <?php 
+            $content = ControllerChatUsers::displayMessages($_SESSION['userID'], $_GET['chatID']);
+            if ($content) {
+                foreach ($content as $element) {
+                    ?>
+                        <div class="<?= ($element['isMe'] === true) ? "me" : "you"?>"><span><?=htmlspecialchars($element['message_content'])?></span></div>
+                    <?php
+                }
             }
         ?>
     </div>

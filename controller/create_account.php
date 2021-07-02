@@ -3,6 +3,7 @@
     // require_once(ROOTPATH . '/model/create_account.php');
     // require_once(ROOTPATH . '/model/email_verification.php');
     use \Model\CreateAccount;
+    use \Model\Config;
 
     include_once '../model/create_account.php';
     include_once '../controller/csrfConfig.php';
@@ -20,7 +21,7 @@
                return 3;
             }
             
-            if(!isset($password) || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\~?!@#\$%\^&\*])(?=.{8,})/', $password)){
+            if(!isset($password) || !preg_match(Config::$PASSWORD_REGEX, $password)){
                 return 4;
             } elseif (!isset($passwordverify) || $passwordverify !== $password) {
                 return 5;

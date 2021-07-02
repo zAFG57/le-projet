@@ -9,7 +9,7 @@
         }
 
         protected static function addUser($id, $username, $email, $password){
-            return parent::sqlInsert('INSERT INTO users VALUES (?, ?, ?, ?, 0, 0, ?)', 'isssi', $id, $username, $email,  password_hash($password, PASSWORD_DEFAULT), time());
+            return parent::sqlInsert('INSERT INTO users VALUES (?, ?, ?, ?, 0, 0, ?, ?, ?)', 'isssi', $id, $username, $email,  password_hash($password, PASSWORD_DEFAULT), '', '', time());
         }
 
         protected static function createId() {

@@ -88,6 +88,7 @@
 
         protected static function getUserName($id) {
             return parent::sqlSelect('SELECT username FROM users WHERE id = ?', 'i', $id)->fetch_assoc()['username'];
+            
         }
 
         protected static function protectEmail($email) {
@@ -95,23 +96,30 @@
             return $email[0][0] . "..." .$email[0][-1] . "@" . $email[1];
         }
 
-        protected static function ModifyUsername($id, $username) {
-            if (parent::sqlUpdate('UPDATE users SET username=? WHERE id = ?', 'si', $username, $id)) {
-                return ControllerEmailVerification::sendEmailToModifyUsername($id);
-            }
+
+
+        // modification on users
+
+        protected static function modifyUsername($id, $username) {
+            // if ()) {
+                // return ControllerEmailVerification::sendEmailToModifyUsername($id);
+            // }
+            return parent::sqlUpdate('UPDATE users SET username=? WHERE id = ?', 'si', $username, $id);
         } 
 
-        protected static function ModifyPassword($id, $newPassword) {
-            if (parent::sqlUpdate('UPDATE users SET password=? WHERE id = ?', 'si', password_hash($newPassword, PASSWORD_DEFAULT), $id)) {
-                return ControllerEmailVerification::sendEmailToModifyPassword($id);
-            }
+        protected static function modifyPassword($id, $newPassword) {
+            return parent::sqlUpdate('UPDATE users SET password=? WHERE id = ?', 'si', password_hash($newPassword, PASSWORD_DEFAULT), $id);
+            // if () {
+                // return ControllerEmailVerification::sendEmailToModifyPassword($id);
+            // }
         }
 
-        protected static function ModifyEmail($id, $newEmail, $csrfToken) {
-            if (parent::sqlUpdate('UPDATE users SET email=? WHERE id = ?', 'si', $newEmail, $id)) {
-                ControllerEmailVerification::sendValidationEmailFromArgs($newEmail, $csrfToken);
-                return parent::sqlUpdate('UPDATE users SET verified=0 WHERE id = ?', 'i', $id);
-            }
+        protected static function modifyEmail($id, $newEmail) {
+            return parent::sqlUpdate('UPDATE users SET email=? WHERE id = ?', 'si', $newEmail, $id);
+            // if () {
+                // ControllerEmailVerification::sendValidationEmailFromArgs($newEmail, $csrfToken);
+                // return parent::sqlUpdate('UPDATE users SET verified=0 WHERE id = ?', 'i', $id);
+            // }
         }
 
         protected static function maxAttemptsChangeUsernameAchieved($id) {
@@ -125,6 +133,9 @@
         protected static function maxAttemptsChangePasswordAchieved($id) {
             return parent::sqlSelect('SELECT COUNT(change_password_attempts.id) FROM users LEFT JOIN change_password_attempts ON users.id = change_password_attempts.user_id AND change_password_attempts.timestamp>? WHERE users.id=? GROUP BY users.id', 'ii', time() - 60*60*24*5, $id)->fetch_assoc()['COUNT(change_password_attempts.id)'] >= Config::$maxChangeAttempt;
         }
+
+
+
 
         protected static function addAttemptChangeUsername($id) {
             return parent::sqlInsert('INSERT INTO change_username_attempts VALUES (NULL, ?, ?, ?)', 'isi', $id, $_SERVER['REMOTE_ADDR'], time());
@@ -142,6 +153,11 @@
             return parent::sqlInsert('INSERT INTO change_password_attempts VALUES (NULL, ?, ?, ?)', 'isi', $userID, $_SERVER['REMOTE_ADDR'], time());
         }
 
+
+
+
+
+        
         protected static function createTokenForgotPassword() {
             $seed = Config::urlSafeEncode(random_bytes(8));
             $t = time();
@@ -192,4 +208,113 @@
         protected static function getHashFromUserID($id) {
             return parent::sqlSelect('SELECT connection_token FROM users WHERE id=?', 'i',$id)->fetch_assoc()['connection_token']; 
         }
+
+       
+
+        protected static function isCorrectPassword($userID, $password) {
+            return password_verify($password, parent::sqlSelect('SELECT password FROM users WHERE id=?', 'i',$userID)->fetch_assoc()['password']);
+        }
+
+
+        // modify users
+
+        protected static function maxAttemptsAchieved($userID, $type) {
+            return parent::sqlSelect('SELECT COUNT(id) FROM modification_users WHERE user_id = ? && type = ? && timestamp > ?', 'isi', $userID, $type, time() - Config::$MAX_ATTEMPTS_TIME_USERS[$type][0])->fetch_assoc()['COUNT(id)'] >= Config::$MAX_ATTEMPTS_TIME_USERS[$type][1];
+        }
+
+        protected static function isAcceptableInput($input, $type) {
+            switch ($type) {
+                case 'username':
+                    return preg_match(Config::$USERNAME_REGEX, $input);
+                
+                case 'password':
+                    return preg_match(Config::$PASSWORD_REGEX, $input);
+                
+                case 'bio':
+                    return preg_match(Config::$BIO_REGEX, $input);
+                
+                case 'email':
+                    return checkdnsrr(substr($input, strpos($input, '@') + 1), 'MX') && filter_var($input, FILTER_VALIDATE_EMAIL);
+                
+                case 'profilePicture':
+                    return self::validateImageType($input);
+                
+                default:
+                    return false;
+            }
+        }
+
+        protected static function validateImageType($file) {
+            if ($file["error"] === 0) {
+                $allowed = array('png' => 'image/png', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg');
+                return array_key_exists(pathinfo($file["name"], PATHINFO_EXTENSION), $allowed) && $file["size"] <= Config::$MAX_SIZE_PROFILE_PICTURE;
+            }
+            return false;
+        }
+
+
+        protected static function modifyUserProfile($userID, $type, $args) {
+            if ($type === 'profilePicture') {
+                $args = self::modifyUserProfilePicture($userID, $args, self::createProfilePicturefileName(), true);
+            }
+            return Database::sqlUpdate("UPDATE users SET {$type} = ? WHERE user_id = ?", 'si', $args, $userID);
+        }
+
+        protected static function modifyUserProfilePicture($userID, $file, $seq, $returnSeq) {
+            if (self::deleteUserProfilePicture($userID)) {
+                if (self::addUserProfilePicture($userID, $file, $seq)) {
+                    return $returnSeq ? $seq . pathinfo($file['name'], PATHINFO_EXTENSION) : true; 
+                }
+            }
+            return false;
+            // users/userID/seq. -> /png/jpg/jpeg
+        }
+        
+        private static function deleteUserProfilePicture($userID) {
+            if (file_exists(Config::$FOLDER_STACK_USERS . $userID . '/' . self::getProfilePictureSeq($userID))) {
+                return unlink(Config::$FOLDER_STACK_USERS .  $userID . '/' .self::getProfilePictureSeq($userID));
+            }
+        }
+
+        private static function addUserProfilePicture($userID, $file, $seq) {
+            while (!file_exists(Config::$FOLDER_STACK_USERS . $userID . '/' . $seq . '.' . pathinfo($file['name'], PATHINFO_EXTENSION))) {
+                return move_uploaded_file($file["tmp_name"], Config::$FOLDER_STACK_USERS .  $userID . '/' . $seq . '.' . pathinfo($file['name'], PATHINFO_EXTENSION));
+            }
+        }
+
+        protected static function createProfilePicturefileName() {
+            do {
+                $res = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(25/strlen($x)) )),1,25);
+            } while (self::seqExist($res));
+            return $res;
+        }
+
+        protected static function seqExist($seq) {
+            foreach (Database::sqlSelect('SELECT profilePicture FROM users')->fetch_assoc()['profilePicture'] as $userSeq) {
+                if (explode('.', $userSeq)[0] === $seq) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        protected static function getProfilePictureSeq($userID) {
+            return Database::sqlSelect('SELECT profilePicture FROM users WHERE id=?', 'i', $userID);
+        }
+
+        // connection token
+
+            protected static function createConnectionHash($id) {
+                return parent::sqlUpdate('UPDATE users SET connection_token=? WHERE id=?', 'si', self::randomConnectiontoken(), $id); 
+            }
+
+            protected static function verifyConnectionToken($userID, $token) {
+                if (self::userExisting($userID)) {
+                    return password_verify(self::getHashFromUserID($userID), $token);
+                }
+                return false;
+            }
+            protected static function randomConnectiontoken() {
+                return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(100/strlen($x)) )),1,100);
+            }
+        //
     }

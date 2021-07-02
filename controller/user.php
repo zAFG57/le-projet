@@ -2,6 +2,7 @@
     namespace Controller;
 
     use \Model\User;
+    use \Model\Config;
 
     include_once __DIR__ . '/../model/user.php';
     include_once __DIR__ . '/../controller/email_verification.php';
@@ -37,78 +38,6 @@
             if (is_int($id)) {
                 return parent::getUserName($id);
             }
-        }
-
-        public static function modifyUser($id, $username, $email, $password, $passwordVerify, $csrfToken) {
-
-            $res = 0;
-            if (!self::userExisiting($id)) {
-                return 1;
-            }
-
-            $user = self::getUserInfo($id, false, true, true);
-          
-            if (password_verify($passwordVerify, $user['password'])) {
-
-                if ($user['username'] !== $username) {
-                    if(parent::maxAttemptsChangeUsernameAchieved($id)) {
-                        return 2;
-                    } else {
-                        if(strlen($username) > 255 || !preg_match('/^[a-zA-Z- ]+$/', $username)){
-                            return 3;
-                        }
-                        if (parent::ModifyUsername($id, $username)) {
-                            if(!parent::addAttemptChangeUsername($id)) {
-                                return 9;
-                            }
-                        } else {
-                            return 9;
-                        }
-                    }
-                }  
-                
-                if ($user['email'] !== $email && $user['emailProtected'] !== $email) {
-
-                    if(parent::maxAttemptsChangeEmailAchieved($id)) {
-                        return 4;
-                    } else {
-
-                        if(strlen($email) > 255 || !filter_var($email, FILTER_VALIDATE_EMAIL)){
-                            return 5;
-                        }elseif (!checkdnsrr(substr($email, strpos($email, '@') + 1), 'MX')) {
-                           return 6;
-                        }
-                        if (parent::ModifyEmail($id, $email, $csrfToken)) {
-                            if(!parent::addAttemptChangeEmail($id)) {
-                                return 9;
-                            }   
-                            
-                        } else {
-                            return 9;
-                        }
-                    }
-                }
-                
-                if ($password !==  "defaultPassword") {
-                    if(parent::maxAttemptsChangePasswordAchieved($id)) {
-                        return 7;
-                    } else {
-                        if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\~?!@#\$%\^&\*])(?=.{8,})/', $password)){
-                            return 8;
-                        }
-                        if (parent::ModifyPassword($id, $password)) {
-                            if(!parent::addAttemptChangePass($id)) {
-                                return 9;
-                            }
-                        } else {
-                            return 9;
-                        }
-                    }
-                }
-            } else {
-                return 10;
-            }
-            return $res;
         }
 
         public static function forgotPasswordSend($email) {
@@ -164,17 +93,77 @@
          * @return int the userID of the user
          */
 
-        public static function getHashFromUserID($hash) {
-            parent::getHashFromUserID($hash);
+        public static function getHashFromUserID($id) {
+            if (self::userExisting($id)) {
+                return parent::getHashFromUserID($id);
+            }
+            return false;
         }
+
+        public static function createConnectionHash($userID) {
+            if (parent::userExisting($userID)) {
+                parent::createConnectionHash($userID);
+            }
+            return false;
+        }
+
+        public static function verifyConnectionToken($userID, $token) {
+            if (parent::userExisting($userID)) {
+                return parent::verifyConnectionToken($userID, $token);
+            }
+            return false;
+        }
+
+        public static function isCorrectPassword($userID, $password) {
+            return parent::isCorrectPassword($userID, $password);
+        }
+
+        /////////////////////////  MODIFY USER /////////////////////
+
+        public static function modifyUser($userID, $connectionToken, $password, $type, ...$args) {
+            if (parent::userExisting($userID)) {
+                if (self::verifyConnectionToken($userID, $connectionToken)) {
+                    if (self::isCorrectPassword($userID, $password)) {
+                        $typesAllowed = ['username', 'password', 'bio', 'profilePicture', 'email'];
+                        if (in_array($type, $typesAllowed, true)) {
+                            if (!parent::maxAttemptsAchieved($userID, $type)) {
+                                if (parent::isAcceptableInput($type, $args[0])) {
+
+                                    switch ($type) {
+                                        case 'password':
+                                            // password and passwordverify
+                                            if (!$args[0] === $args[1]) {
+                                                return 8;
+                                            }
+                                            break;
+                                    }
+
+                                    if(parent::modifyUserProfile($userID, $type, $args[0])){
+                                        return 0;
+                                    }
+                                    return 1;
+                                }   
+                                return 2;
+                            }
+                            return 3;
+                        }
+                        return 4;
+                    }
+                    return 5;
+                }
+                return 6;
+            }
+            return 7;
+        }
+
     }
     
-    if (isset($_POST['usernameChange']) && isset($_POST['emailChange']) && isset($_POST['passwordChange']) && isset($_POST['passwordVerifyChange']) && isset($_POST['userIdChange']) && isset($_POST['csrf_token'])){
-        session_start();
-        if(ControllerCsrf::validateCsrfToken($_POST['csrf_token']) && intval($_POST['userIdChange']) === $_SESSION['userID']) { 
-            echo json_encode(ControllerUser::modifyUser(intval(($_POST['userIdChange'])), trim($_POST['usernameChange']), trim($_POST['emailChange']), trim($_POST['passwordChange']), trim($_POST['passwordVerifyChange']), trim($_POST['csrf_token'])));
-        }
-    }
+    // if (isset($_POST['usernameChange']) && isset($_POST['emailChange']) && isset($_POST['passwordChange']) && isset($_POST['passwordVerifyChange']) && isset($_POST['userIdChange']) && isset($_POST['csrf_token'])){
+    //     session_start();
+    //     if(ControllerCsrf::validateCsrfToken($_POST['csrf_token']) && intval($_POST['userIdChange']) === $_SESSION['userID']) { 
+    //         echo json_encode(ControllerUser::modifyUser(intval(($_POST['userIdChange'])), trim($_POST['usernameChange']), trim($_POST['emailChange']), trim($_POST['passwordChange']), trim($_POST['passwordVerifyChange']), trim($_POST['csrf_token'])));
+    //     }
+    // }
     if (isset($_POST['newPasswordForgotPassword']) && isset($_POST['newValidatePasswordForgotPassword']) && isset($_POST['hash']) && isset($_POST['csrf_token'])){
         session_start();
         if(ControllerCsrf::validateCsrfToken($_POST['csrf_token'])) { 
@@ -188,4 +177,3 @@
             echo json_encode(ControllerUser::forgotPasswordSend(htmlspecialchars($_POST['emailForgotPassword'])));
         }
     }
-    
