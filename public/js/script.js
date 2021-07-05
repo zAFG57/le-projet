@@ -192,6 +192,93 @@ function searchf() {
 
 }
 
+// function sendMessage() {
+//     request('../requests/newMessage.php', '#message', setloader = false, function(data) {
+//         console.log(data);
+
+//         data = JSON.parse(data)
+//         console.log(data);
+//     })
+//     document.getElementById('message').reset();
+
+// }
+
+function getMessage() {
+    request('../controller/chatProUser.php', '#getMessage', setloader = false, function(data) {
+        try {
+
+            data = JSON.parse(data)
+
+            const displayMessage = (data) => {
+                res = "";
+                data.forEach(element => {
+                    res += `<div class="${element['isMe'] === true ? "me" : "you"}"><span>${element['message_content']}</span></div>`
+
+                });
+                return res;
+            }
+
+            const changeEncoding = (data) => {
+                return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+            }
+
+            if (data instanceof Array) {
+                if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('chat').innerHTML)) {
+                    document.getElementById('chat').innerHTML = displayMessage(data);
+                    getToBot();
+                }
+            } else {
+                console.log('pas de message');
+                // aucun message n'as été trouvé
+            }
+            setTimeout(getMessage, 250);
+        } catch (e) {
+
+        }
+
+    })
+
+}
+
+function getConv() {
+    request('../requests/getConvs.php', '#getConv', setloader = false, function(data) {
+        // console.log(data);
+        try {
+            data = JSON.parse(data)
+
+            const displayMessage = (data) => {
+                res = "<div class=\"mesDiscussions\">Mes discussions</div>";
+                data.forEach(element => {
+                    res += `<a href="./chat.php?chatID=${element['chat_id']}" class="discutionlien">
+                                <div>
+                                    <h1 class="discutionnom">${element['username']}</h1>
+                                    <h2 class="discutionmessage"><span>${element['isMe'] === true ? "Moi" : element['username']} : </span>${element['message_content']}</h2>
+                                </div>
+                            </a>`
+                });
+                return res;
+            }
+
+            const changeEncoding = (data) => {
+                return data.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+            }
+
+            if (data instanceof Array) {
+                if (changeEncoding(displayMessage(data)) != changeEncoding(document.getElementById('scroll').innerHTML)) {
+                    document.getElementById('scroll').innerHTML = displayMessage(data);
+                }
+            } else {
+                // aucune coversation n'as été trouvé
+                // console.log('pas de conv');
+            }
+            setTimeout(getConv, 1000);
+        } catch (e) {
+
+        }
+    })
+}
+
+
 function modifyUser() {
     request('../controller/user.php', '#modifprofile', setloader = true, function(data) {
         document.getElementById('err').innerHTML = "";
@@ -248,7 +335,7 @@ function sendResetPasswordAttempt() {
         var transition = document.getElementById('err').style.transition;
         document.getElementById('err').style.transition = "none";
         document.getElementById('err').style.opacity = 0;
-        console.log(data);
+
         data = JSON.parse(data)
 
         if (data === 0) {
@@ -351,3 +438,69 @@ function en() {
         window.location = window.location;
     })
 }
+
+drapeaure = document.getElementById('drapeaure');
+selectre = document.getElementById('selecterdedrapeure');
+
+function paysre() {
+    drapeaure.style.display = 'none';
+    selectre.style.display = 'flex';
+}
+
+function frre() {
+    drapeaure.style.display = 'block';
+    drapeaure.style.background = 'url("../../assets/drapeaufrancais.png")';
+    drapeaure.style.backgroundSize = 'cover';
+    selectre.style.display = 'none';
+    document.getElementById('langinput').value = 'fr';
+    request('/controller/lang.php', "#langform", setloader = true, function(data) { window.location = window.location; })
+}
+
+function enre() {
+    drapeaure.style.display = 'block';
+    drapeaure.style.background = 'url("../../assets/drapeauUS.png")';
+    drapeaure.style.backgroundSize = 'cover';
+    selectre.style.display = 'none';
+    document.getElementById('langinput').value = 'en';
+    request('../controller/lang.php', "#langform", setloader = true, function(data) {
+        window.location = window.location;
+    })
+} 
+ouver = 0;
+    function navresponsive() {
+        burger();
+        navi = document.getElementsByClassName('contentnav')[0];
+        if (ouver === 1) {
+            navi.style.top =  - 100 + 'vh';
+            ouver = 0;
+        } else if (ouver === 0) {
+            navi.style.top = 10 + 'vh';
+            ouver = 1;
+        }
+    }
+    function burger() {
+        burgerhaut = document.getElementsByClassName('burgerhaut')[0];
+        burgermillieu = document.getElementsByClassName('burgermillieu')[0];
+        burgerbas = document.getElementsByClassName('burgerbas')[0];
+        bull = document.getElementsByClassName('lesbull')[0];
+        ulnavresponsiv = document.getElementsByClassName('ulnavresponsiv')[0];
+        if (ouver === 1) {
+            burgerhaut.style.transform="translateY(0vh) rotate(0)";
+            burgermillieu.style.opacity= 1;
+            burgermillieu.style.transition= "0.5s 0.25s ease-in-out";
+            burgerbas.style.transform="translateY(0vh) rotate(0)";
+            bull.style.top = -100 + 'vh';
+            ulnavresponsiv.style.top = -100 + 'vh ';
+            document.getElementsByClassName('burgeur')[0].setAttribute('onclick','');
+            setTimeout(function test(){document.getElementsByClassName('burgeur')[0].setAttribute('onclick','navresponsive()')},1000);
+        } else if (ouver === 0) {
+            burgerhaut.style.transform="translateY(2.5vh) rotate(45deg)";
+            burgermillieu.style.opacity= 0;
+            burgermillieu.style.transition= "0s";
+            burgerbas.style.transform="translateY(-3.25vh) rotate(-45deg)";
+            bull.style.top = 0 + 'px';
+            ulnavresponsiv.style.top = 0 + 'px ';
+            document.getElementsByClassName('burgeur')[0].setAttribute('onclick','');
+            setTimeout(function test(){document.getElementsByClassName('burgeur')[0].setAttribute('onclick','navresponsive()')},1000);
+        }
+    }
