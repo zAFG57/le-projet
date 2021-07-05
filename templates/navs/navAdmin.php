@@ -13,7 +13,7 @@
 </div>
 
 <div class="droit">
-    <ul>
+    <ul class="navpasresponsiv">
         <li id="drapeau" onclick="pays()" style="background-image: url('../../assets/<?=$_SESSION['l']?>.png');"></li>
         <ul id="selecterdedrapeu">
             <li id="drapeaufr" onclick="fr()"></li>
@@ -23,6 +23,11 @@
         <li><a class="responsivlien2" href="/view/admin_panel.php?h=<?= password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT) ?>"><?=  $parsed_lang->{'admin'}?></a></li>
         <li><div id="pro" class="responsivlien2" onclick="logout()"><?=  $parsed_lang->{'déconnecter'}?></div></li>
     </ul>
+    <div class="burgeur" onclick="navresponsive()">
+        <span class="burgerhaut"></span>
+        <span class="burgermillieu"></span>
+        <span class="burgerbas"></span>
+    </div>
 </div>
 <div class="mesmessagenav" onclick="window.location.href='../index.php?location=chat';">
     <img src="../assets/mail.svg">
@@ -30,3 +35,24 @@
 <form id="langform">
     <input type="hidden" value="fr" id="langinput" name="langinput"/>
 </form>
+
+
+<div class="contentnav">
+<ul class="ulnavresponsiv" style="top: -100vh;">
+        <div class="drapeaure">lang:
+            <li id="drapeaure" onclick="paysre();" style="background-image: url('../../assets/<?=$_SESSION['l']?>.png');"></li>
+            <ul class="drapeaure" id="selecterdedrapeure">
+                <li id="drapeaufrre" onclick="frre()"></li>
+                <li id="drapeauusre" onclick="enre()"></li>
+            </ul>
+        </div>
+        <li><a class="responsivlien2" href="../index.php?location=profile"><?=  $parsed_lang->{'profil'}?></a></li>
+        <li><a class="responsivlien2" href="/view/admin_panel.php?h=<?= password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT) ?>"><?=  $parsed_lang->{'admin'}?></a></li>
+        <li><div id="pro" class="responsivlien2" onclick="logout()"><?=  $parsed_lang->{'déconnecter'}?></div></li>
+    </ul>
+        <div class="lesbull" style="top: -100vh;">
+            <div class="bulla"></div>
+            <div class="bullb"></div>
+            <div class="bullc"></div>
+        </div>
+</div>
