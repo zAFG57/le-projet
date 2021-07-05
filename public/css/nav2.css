@@ -11,7 +11,7 @@
 }
 
 header {
-    z-index: 3;
+    z-index: 99999;
     width: 100vw;
     height: 10vh;
     position: fixed;
@@ -26,6 +26,7 @@ header {
     height: 100%;
     background: var(--clr-primary);
     display: flex;
+    z-index: 45;
 }
 
 .gauche a {
@@ -66,13 +67,14 @@ header {
 }
 
 .droit {
+    z-index: 45;
     position: relative;
     width: 50%;
     height: 100%;
     background-color: rgb(255, 255, 255);
 }
 
-.droit ul {
+.droit ul , .contentnav ul {
     all: unset;
     width: 100%;
     height: 100%;
@@ -82,11 +84,11 @@ header {
     align-items: center;
 }
 
-.droit li {
+.droit li , .contentnav li {
     all: unset;
 }
 
-.droit li :hover {
+.droit li :hover , .contentnav li :hover  {
     color: var(--clr-primary);
     transition: 0.3s ease-in-out;
 }
@@ -111,14 +113,14 @@ header {
     cursor: pointer;
 }
 
-.droit #pro {
+.droit #pro , .contentnav #pro{
     padding: 5px;
     background-color: var(--clr-primary);
     color: #ffffff;
     border-radius: 5px 5px;
 }
 
-.droit #pro:hover {
+.droit #pro:hover ,  .contentnav #pro:hover {
     color: #333333;
     transition: 0.3s ease-in-out;
 }
@@ -178,18 +180,6 @@ header {
 /*////////////////responsive 900px (téléphone et autre)//////*/
 
 @media screen and (max-width: 900px) {
-    .gauche {
-        display: none;
-    }
-    .droit {
-        width: 100%;
-    }
-    .responsivlien {
-        font-size: 2vw;
-    }
-    .responsivlien2 {
-        font-size: 3vw;
-    }
     .mesmessagenav {
         --tailledubtnchat:min(100px,calc(10vw + 2.1em)); 
         border: none;
@@ -202,6 +192,231 @@ header {
         top: calc(100vh - var(--tailledubtnchat));
         left: calc(100vw - var(--tailledubtnchat));
     }
+    .droit {
+        width: calc(10vh + 4vw);
+        background: var(--clr-primary);
+    }
+    .gauche{
+        width: calc(100% - calc(10vh + 4vw));
+    }
+    .navpasresponsiv {
+        display: none !important;
+    }
+    header {
+        overflow: visible;
+        flex-direction: row-reverse;
+    }
+    .burgeur {
+        left: 2vw;
+        position: absolute;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        height: 10vh;
+        width: 10vh;
+        transform: translateY(0vh) rotate(0deg);
+    }
+        .burgerhaut {
+        transition: 0.5s cubic-bezier(1,-0.02,.31,1.52);
+    }
+        .burgerbas {
+        transition:  0.5s cubic-bezier(1,-0.02,.31,1.52);
+    }
+        .burgeur span {
+        height: 1.5vh;
+        width: 10vh;
+        background: #fff;
+        border-radius: 5px; 
+    }
+        .contentnav {
+        display: block !important;
+        position: absolute;
+        height: 90vh;
+        width: 100vw;
+        top: -100vh;
+        background: #dddd;
+        text-align: center;
+        transition: top 0.5s ease-in-out;
+        z-index: 44;
+        overflow: hidden;
+    }
+    .contentnav ul{
+        flex-direction: column;
+        z-index: 30;
+    }
+    .logo {
+        display: none;
+    }
+    .gauche a h1 {
+        font-size: calc(2vw + 1em);
+    }
+    .gauche a h1 span {
+        font-size: calc(1vw + 0.2em);
+    }
+    #drapeaure , #drapeaufrre , #drapeauusre {
+        background: url('../../assets/fr.png');
+        height: 18px;
+        width: 27px;
+        z-index: 15;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    #drapeauusre {
+        background: url('../../assets/en.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    #selecterdedrapeure {
+        width: 27px;
+        border: 1px black solid;
+        z-index: 27px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        height: auto;
+        padding-left: 10px;
+        padding-right: 10px;
+        display: none;
+    }
+    .drapeaure {
+        position: absolute;
+        top: 2vh;
+        right: 2vh;
+        height: 5vh;
+        display: flex;
+        padding: 10px;
+        border-radius: 10px;
+        background: var(--clr-primary);
+        color: #fff;
+        overflow: scroll;
+    }
+    .drapeaure #drapeaure {
+        transform: translateY(-25%);
+        margin-bottom: 0px;
+        margin-left: 2vh;
+        display: block;
+    }
+
+
+
+
+    /* //////////////////////////////les btn /////////////////////////////////*/
+
+    .contentnav .responsivlien2 {
+        border-radius: 15px;
+        width: 80vw;
+        height: 7vh;
+        background: var(--clr-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: calc(2vw + 1em);
+        color: #fff;
+    }
+    .créerunpro {
+        font-size: calc(2vw + 0.75em) !important;
+    }
+    .drapeaureul {
+        border: none !important;
+        height: 60px;
+    }
+    .drapeaureul li{
+        position: relative;
+        margin-left: 5px;
+    }
+
+/* //////////////////////////////fin des btn /////////////////////////////*/
+
+
+
+    /*//////////////////////////bull////////////////////////////*/
+    .contentnav .bulla {
+        position: absolute;
+        z-index: 20;
+        height: 70vw;
+        width: 70vw;
+        top: 3vh;
+        left: -10vw;
+        background: #72d0f4;
+        border-radius: 50%;
+        animation: bullrota 5s infinite ease-in-out ,bulltranslte 8s infinite ease-in-out , bullr 3s infinite ease-in-out;
+    }
+    .contentnav .bullb {
+        position: absolute;
+        z-index: 25;
+        height: 100vw;
+        width: 100vw;
+        top: 20vh;
+        left: 20vw;
+        background: #8494c8;
+        border-radius: 50%;
+        animation: bullrota 6s infinite ease-in-out , bulltranslte 9s infinite ease-in-out ,  bullr 4s infinite ease-in-out;
+    }
+    .contentnav .bullc {
+        position: absolute;
+        z-index: 20;
+        height: 120vw;
+        width: 120vw;
+        bottom: -10vh;
+        left: -30vw;
+        background: #7fa8d7;
+        border-radius: 50%;
+        animation: bullrota 7s infinite ease-in-out , bulltranslte 10s infinite ease-in-out , bullr 5s infinite ease-in-out;
+    }
+    .ulnavresponsiv {
+        position: absolute !important;
+        height: 90vh;
+        width: 100vw;
+        transition: top 0.5s 0.6s ease-in-out !important;
+        top: -100vh ;
+    }
+    .lesbull {
+        position: absolute;
+        height: 90vh;
+        width: 100vw;
+        transition: top 0.5s 0.3s ease-in-out;
+    }
+    @keyframes bulltranslte {
+        0% {
+           transform: translate(-7px, 15px);
+        }
+        25% {
+            transform: translate(7px, -7px);
+        }
+        50% {
+            transform: translate(15px, -15px);
+        }
+        75% {
+            transform: translate(0px, -7px);
+        }
+        100% {
+            transform: translate(-7px, 15px);
+        }
+    }
+    @keyframes bullrota {
+        0% {
+            rotate: 0deg;
+        }
+        100% {
+            rotate: 360deg;
+        }
+    }
+    @keyframes bullr {
+        0% {
+            border-radius: 50%;
+        }
+        50% {
+            border-radius: 25%;
+        }
+        100% {
+            border-radius: 50%;
+        }
+    }
+                /*//////////////////////////////////fin bull//////////////////////////*/
 }
 
 
@@ -269,3 +484,11 @@ header {
 
 
 /*                                                                  loader     fin                      */
+/*                                                                  le burgeur                           */
+.burgeur {
+    display: none;
+}
+.contentnav {
+    display: none;
+}
+/*                                                                  fin burger                          */
