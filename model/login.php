@@ -3,39 +3,59 @@
 
     include_once 'database.php';
 
-    class  Login extends Database {
-        
-        protected static function userExisting($email) {
-            return parent::sqlSelect('SELECT id FROM users WHERE email=?', 's', $email)->num_rows === 1;
+    class Login extends User {
+
+        protected $loginAttempts;
+
+        /**
+         * **Create an Login object**
+         * @param int $userID 
+         * @param string $email
+         * 
+         * @return void
+         */
+        public function __construct(int $userID = NULL, string $email = NULL, User $user = NULL) {
+            parent::__construct($userID, $email, $user);
+            $this->setLoginAttempts();
         }
 
-        protected static function isMaxLoginAttemptsAchevied($email, $ip){
-            return parent::sqlSelect('SELECT COUNT(loginattempts.userId) FROM users LEFT JOIN loginattempts ON users.id = userId AND timestamp>? AND ip=? WHERE email=? GROUP BY users.id','iss', time() - 60*60, $ip, $email)->fetch_assoc()['COUNT(loginattempts.userId)'] >= parent::$MAX_LOGIN_ATTEMPTS_PER_HOUR;   
+        /**
+         * destruct the class
+         */
+        public function __destruct() {
+            parent::__destruct();
+            $this->loginAttempts = null;
         }
 
-        protected static function isCorrectPassword($email, $password) {
-            return password_verify($password, parent::sqlSelect('SELECT password FROM users WHERE email=?','s', $email)->fetch_assoc()['password']);
+        private function setLoginAttempts() {
+            return ($this->loginAttempts = ($this->errorCode === 0) ? Database::sqlSelect('SELECT * FROM loginattempts WHERE user_id = ? and timestamp > ?','ii', time() - 60*60, $this->userID) : null) ? true : false;
         }
 
-        protected static function isVerified($email){
-            return parent::sqlSelect('SELECT verified FROM users WHERE email=?','s', $email)->fetch_assoc()['verified'];
+        public function getLoginAttempts() {
+            return ($this->setLoginAttempts() && $this->errorCode === 0) ? $this->loginAttempts : false;
         }
 
-        protected static function suppAttempts($id, $ip){
-            return parent::sqlUpdate('DELETE FROM loginattempts WHERE userId=? AND ip=?', 'is', $id, $ip);
+        /**
+         * @return bool if the login attempt has created
+         */
+        protected function createLoginAttempt() {
+            return ($this->errorCode === 0) ? Database::sqlInsert('INSERT INTO loginattempts VALUES (NULL, ?, ?, ?)', 'isi', $this->userID, $_SERVER['REMOTE_ADDR'], time()) : false;
         }
 
-        protected static function getId($email) {
-            return parent::sqlSelect('SELECT id FROM users WHERE email=?','s', $email)->fetch_assoc()['id'];
+        /**
+         * @param string $ip
+         * 
+         * @return bool if the login attempt has deleted
+         */
+        protected function suppAttempts(string $ip) {
+            return ($this->errorCode === 0) ? Database::sqlUpdate('DELETE FROM loginattempts WHERE user_id=? AND ip=?', 'is', $this->userID, $ip) : false;
         }
 
-        protected static function createLoginAttempt($id) {
-            return parent::sqlInsert('INSERT INTO loginattempts VALUES (NULL, ?, ?, ?)', 'isi', $id, $_SERVER['REMOTE_ADDR'], time());
-        }   
-
-        protected static function setSessionVariables($email) {
-            $_SESSION['loggedin'] = true;
-            $_SESSION['userID'] = self::getId($email);
+        /**
+         * @return bool if the sessions variables has setted
+         */
+        protected function setSessionVariables() {
+            return ($this->errorCode === 0 && $_SESSION['loggedin'] = true && $_SESSION['userID'] = $this->userID) ? true : false;
         }
     }
 
