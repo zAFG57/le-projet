@@ -3,11 +3,14 @@
     use model\ForgotPassword;
     use model\Login;
     use model\ModifyUsers;
+    use model\ServiceManager;
+
 
     include_once __DIR__ . '/../model/user.php';
     include_once __DIR__ . '/../model/forgotPassword.php';
     include_once __DIR__ . '/../model/login.php';
     include_once __DIR__ . '/../model/modifyUsers.php';
+    include_once __DIR__ . '/../model/serviceManager.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +28,9 @@
         // var_dump((new User($userID = 124))->getUserID());
 
         $sheeeesh = new User(null,'jules.grivot.pelisson@gmail.com');
-        $test = new ModifyUsers(null,null, $sheeeesh);
-        var_dump($test->getAttempts());
+        $test = new ServiceManager(null,null, $sheeeesh);
+        // var_dump($test->createService('mondomain', 'monsousdomain', 'montitre', 'madescription'));
+        var_dump($test);
     ?> 
 </body>
 </html>

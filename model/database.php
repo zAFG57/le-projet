@@ -13,7 +13,7 @@
         }
 
         private static function connect() {
-            $db = new Mysqli(parent::$DB_HOST, parent::$DB_USERNAME,parent::$DB_PASSWORD, parent::$DB_DATABASE);
+            $db = new Mysqli(Config::DB_HOST, Config::DB_USERNAME, Config::DB_PASSWORD, Config::DB_DATABASE);
     
             if($db->connect_error) {
                 return false;
