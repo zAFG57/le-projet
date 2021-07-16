@@ -4,6 +4,7 @@
     use model\Login;
     use model\ModifyUsers;
     use model\ServiceManager;
+    use model\ChatUsers;
 
 
     include_once __DIR__ . '/../model/user.php';
@@ -11,6 +12,7 @@
     include_once __DIR__ . '/../model/login.php';
     include_once __DIR__ . '/../model/modifyUsers.php';
     include_once __DIR__ . '/../model/serviceManager.php';
+    include_once __DIR__ . '/../model/chatUsers.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +30,8 @@
         // var_dump((new User($userID = 124))->getUserID());
 
         $sheeeesh = new User(null,'jules.grivot.pelisson@gmail.com');
-        $test = new ServiceManager(null,null, $sheeeesh);
+        $test = new ChatUsers(123456);
+        // $test->createMessage('Hello World', $sheeeesh->getUserID());
         // var_dump($test->createService('mondomain', 'monsousdomain', 'montitre', 'madescription'));
         var_dump($test);
     ?> 
