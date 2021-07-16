@@ -7,34 +7,27 @@ include_once 'database.php';
 
     class ChatUsersMessage extends Database {
 
-        // protected $messageInfo = array(
-        //     'messageID' => null,
-        //     'chatID' => null,
-        //     'messageContent' => null,
-        //     'messageCreation' => null,
-        //     'authorID' => null,
-        // );
         private $messageID;
         private $chatID;
         private $messageContent;
         private $messageCreation;
         private $authorID;
 
-        public function __construct(string $messageID = null, ChatUsersMessage $message = null, array $messageArray = null, array $createMessage = null/* [content, authorID] */) {
-            $this->setMessageInfo($messageID, $message, $messageArray);
+        public function __construct(string $messageID = null, ChatUsersMessage $message = null, array $messageArray = null, array $createMessage = null/* [chatID, content, authorID] */) {
+            $this->setMessageInfo($messageID, $message, $messageArray);   
             if (!is_null($createMessage)) {
-                # code...
+                $messageID = $this->newMessage($createMessage[0], $createMessage[1], $createMessage[2]);
             }
         }
 
         private function setMessageInfo(string $messageID = null, ChatUsersMessage $message = null, array $messageArray = null) {
             if (!is_null($messageID)) {
                 $messageInfo = Database::sqlSelect('SELECT * FROM chat_messages WHERE message_id = ?', 's', $messageID);
-                if (!($messageInfo && $messageInfo->num_rows === 1)) {
+                if (!$messageInfo || !$messageInfo->num_rows) {
                     return;
                 }
                 $messageInfo = $messageInfo->fetch_assoc();
-                
+ 
             }
             if (!is_null($messageArray)) {
                 $messageInfo = $messageArray;
@@ -60,6 +53,37 @@ include_once 'database.php';
             }
             
         }
+
+        /**
+         * @return string|null messageID
+         */
+        public function getMessageID() {
+            return $this->messageID;
+        }
+        /**
+         * @return int|null messageID
+         */
+        public function getChatID() {
+            return $this->chatID;
+        }
+        /**
+         * @return string|null messageID
+         */
+        public function getMessageContent() {
+            return $this->messageContent;
+        }
+        /**
+         * @return int|null messageID
+         */
+        public function getMessageCreation() {
+            return $this->messageCreation;
+        }
+        /**
+         * @return int|null messageID
+         */
+        public function getAuthroID() {
+            return $this->authorID;
+        }
         
         /** 
          * @param string $msg
@@ -69,7 +93,8 @@ include_once 'database.php';
          */
         public static function newMessage($chatID, $content, $authorID){
             $IV = openssl_random_pseudo_bytes(openssl_cipher_iv_length(Config::ENCODING_MESSAGES_SCHEMA));
-            return Database::sqlInsert('INSERT INTO chat_messages (message_id, chat_id, message_content, message_creation, message_author_id, encryption_IV) VALUES (?,?,?,?,?,?)', 'sisiis', self::createMessageId(), $chatID, self::encodeMessage($content, $IV), time(), $authorID, $IV);
+            $messageID = self::createMessageId();
+            return (Database::sqlInsert('INSERT INTO chat_messages (message_id, chat_id, message_content, message_creation, message_author_id, encryption_IV) VALUES (?,?,?,?,?,?)', 'sisiis', $messageID, $chatID, self::encodeMessage($content, $IV), time(), $authorID, $IV)) ? $messageID : false;
         }
 
         protected static function createMessageId() {
@@ -82,10 +107,6 @@ include_once 'database.php';
         protected static function messageIdAlreadyExist($id) {
             return parent::sqlSelect('SELECT message_id FROM chat_messages WHERE message_id=?', 's', $id)->num_rows === 1;
         }
-
-        // protected static function sendMessageToDB($messageId, $chatId, $messageContent, $creationTime, $mesAuthorId, $IV) {
-        //     return 
-        // }
 
         protected static function encodeMessage($msg, $IV) {
             return Config::urlSafeEncode(openssl_encrypt($msg, Config::ENCODING_MESSAGES_SCHEMA, Config::MESSAGE_KEY_SECRET, 0, $IV));
@@ -107,9 +128,9 @@ include_once 'database.php';
             return parent::sqlSelect('SELECT encryption_IV FROM chat_messages WHERE message_id=?', 's', $msgID)->fetch_assoc()['encryption_IV'];
         }
 
-        protected static function getAllMessages($chatId) {
-            return parent::sqlSelect('SELECT * FROM chat_messages WHERE chat_id=? ORDER BY message_creation ASC', 'i', $chatId)->fetch_all(MYSQLI_ASSOC);
-        }
+        // protected static function getAllMessages($chatId) {
+        //     return parent::sqlSelect('SELECT * FROM chat_messages WHERE chat_id=? ORDER BY message_creation ASC', 'i', $chatId)->fetch_all(MYSQLI_ASSOC);
+        // }
 
         protected static function getLastMessage($chatID) {
             return parent::sqlSelect('SELECT * FROM chat_messages WHERE chat_id=? ORDER BY message_creation DESC LIMIT 1', 'i', $chatID)->fetch_assoc();
@@ -224,7 +245,8 @@ include_once 'database.php';
          * create a new message
          */
         public function createMessage(string $content, int $authorID) {
-            ChatUsersMessage::newMessage($this->chatID, $content, $authorID);
+            array_push($this->messages, new ChatUsersMessage(null, null, null, [$this->chatID, $content, $authorID]));
+            // ChatUsersMessage::newMessage($this->chatID, $content, $authorID);
         }
 
         /**
@@ -278,7 +300,7 @@ include_once 'database.php';
         /**
          * @return array messages
          */
-        protected function getMessages() {
+        public function getMessages() {
             return $this->messages;
         }
 

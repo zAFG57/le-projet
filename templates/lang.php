@@ -1,6 +1,6 @@
 <?php 
-    use \Controller\ControllerCsrf;
-    include_once "../controller/csrfConfig.php";    
+    // use \Controller\Csrf;
+    include_once "../model/csrfConfig.php";
 ?>
 <?php
     
@@ -13,7 +13,7 @@
         $_SESSION['l'] = 'fr';
     }
     
-    $chemin = '../public/js/langue/'. $_SESSION['l'] .'/';
+    $chemin = __DIR__ . '/../public/js/langue/'. htmlspecialchars($_SESSION['l']) .'/';
 
 
 

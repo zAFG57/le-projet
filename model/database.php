@@ -40,6 +40,7 @@
                 return $res;
             }
             $stmt->close();
+            self::$db->close();
             self::$db = null;
             return false;
         }
@@ -60,6 +61,7 @@
                 return $id;
             }
             $stmt->close();
+            self::$db->close();
             self::$db = null;
             return -1;
         }
@@ -78,6 +80,7 @@
                 return true;
             }
             $stmt->close();
+            self::$db->close();
             self::$db = null;
             return false;
         }

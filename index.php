@@ -1,10 +1,13 @@
 <?php
-    session_start();
+
+    use Model\User;
     
-    define("ROOTPATH", __DIR__);
+    require_once __DIR__ . '/model/user.php';
+
+    session_start();
 
 
-    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    if(!user::isConnected()) {
 
 
         $authorized_pages = array(

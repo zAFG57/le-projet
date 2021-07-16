@@ -1,8 +1,13 @@
 <?php
-    $json = 'navadmin';
-    require('../templates/lang.php');
     use \Controller\ControllerAdmin;
+use Model\Admin;
+
+require_once __DIR__ . '/../../templates/lang.php';
     include_once '../controller/panelAdmin.php';
+
+    $json = 'navadmin';
+
+    $admin = new Admin($_SESSION['userID'])
 ?>
 
 <div class="gauche">
@@ -20,7 +25,7 @@
             <li id="drapeauus" onclick="en()"></li>
         </ul>
         <li><a class="responsivlien2" href="../index.php?location=profile"><?=  $parsed_lang->{'profil'}?></a></li>
-        <li><a class="responsivlien2" href="/view/admin_panel.php?h=<?= password_hash(ControllerAdmin::getHashToken($_SESSION['userID']), PASSWORD_DEFAULT) ?>"><?=  $parsed_lang->{'admin'}?></a></li>
+        <li><a class="responsivlien2" href="/view/admin_panel.php?h=<?= password_hash($admin->getAdminToken(), PASSWORD_DEFAULT) ?>"><?=  $parsed_lang->{'admin'}?></a></li>
         <li><div id="pro" class="responsivlien2" onclick="logout()"><?=  $parsed_lang->{'déconnecter'}?></div></li>
     </ul>
 </div>

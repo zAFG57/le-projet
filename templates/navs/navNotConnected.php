@@ -1,6 +1,6 @@
 <?php
     $json = 'navnotco';
-    require('../templates/lang.php');
+    include_once __DIR__ . '/../../templates/lang.php';
 ?>
 
 

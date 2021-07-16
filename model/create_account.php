@@ -15,11 +15,11 @@
         protected static function createId() {
             do {
                 $id = rand(1, 1000000000);
-            } while (self::idAlreadyExisting($id));
+            } while (self::userIDAlreadyExisting($id));
             return $id;
         }
 
-        protected static function idAlreadyExisting($id) {
+        protected static function userIDAlreadyExisting($id) {
             return (parent::sqlSelect('SELECT id FROM users WHERE id=?', 'i', $id)->num_rows === 1);
         }
     }

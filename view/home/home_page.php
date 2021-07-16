@@ -1,10 +1,11 @@
 
-<?php include_once __DIR__ . '/../../templates/nav.php';
-$json = 'home';
-require('../templates/lang.php');
- ?>
-
 <?php 
+
+    include_once __DIR__ . '/../../templates/nav.php';
+    include_once __DIR__ . '/../../templates/lang.php';
+
+    $json = 'home';
+
 // if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 //     header("Location: ../index.php?location='réparation'");
 // }
@@ -20,7 +21,7 @@ require('../templates/lang.php');
     <?php var_dump($_SERVER['SERVER_NAME']) // woula c trop bien ?>
     <div class="content">
         <form id="search">
-            <input type="text" class="search__input" placeholder="<?=  $parsed_lang->{'obj'}?>" name="search" required onkeydown="if(event.key === 'Enter'){event.preventDefault();searchf();}">
+            <input type="text" class="search__input" placeholder="<?=$parsed_lang->{'obj'}?>" name="search" required onkeydown="if(event.key === 'Enter'){event.preventDefault();searchf();}">
             <button type="button" class="search__submit" onclick="searchf();" value=""><i class="fas fa-search"></i></button>
         </form>
     </div>
@@ -35,5 +36,5 @@ require('../templates/lang.php');
     
 <?php $content = ob_get_clean(); ?>
 
-<?php require('../templates/baseTemplate.php'); ?>
+<?php require __DIR__ . '/../../templates/baseTemplate.php'; ?>
 

@@ -30,10 +30,10 @@
         // var_dump((new User($userID = 124))->getUserID());
 
         $sheeeesh = new User(null,'jules.grivot.pelisson@gmail.com');
-        $test = new ChatUsers(123456);
-        // $test->createMessage('Hello World', $sheeeesh->getUserID());
+        $test = (new ChatUsers(123456));
+        $test->createMessage('Hello World', $sheeeesh->getUserID());
         // var_dump($test->createService('mondomain', 'monsousdomain', 'montitre', 'madescription'));
-        var_dump($test);
+        var_dump($test->getMessages());
     ?> 
 </body>
 </html>

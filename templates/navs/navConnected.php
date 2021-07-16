@@ -1,5 +1,6 @@
-<?php $json = 'navconnected';
-require('../templates/lang.php');
+<?php 
+    $json = 'navconnected';
+    require_once __DIR__ . '/../../templates/lang.php';
 ?>
 
 <div class="gauche">

@@ -1,24 +1,25 @@
 <?php 
 
-    use \Controller\ControllerUser;
-    use \Controller\ControllerAdmin;
+    use \Model\User;
+    use \Model\Admin;
 
-    include_once '../controller/user.php';
-    include_once '../controller/panelAdmin.php';
+    include_once __DIR__ . '/../model/user.php';
+    include_once __DIR__ . '/../model/panelAdmin.php';
 
     ob_start();  
     
-    if(ControllerUser::isConnected()) { 
-        if (isset($_SESSION['userID']) && ControllerUser::isAdmin($_SESSION['userID'])){ 
-            if(ControllerAdmin::updateAdminToken(ControllerAdmin::createAdminToken($_SESSION['userID']), $_SESSION['userID'])){
-                require_once('navs/navAdmin.php');
+    if(User::isConnected()) {
+        $user = new Admin($_SESSION['userID']);
+        if (!$user->isAdmin()){ 
+            if($user->updateAdminToken($user->createAdminToken())){
+                include_once __DIR__ . '/navs/navAdmin.php';
             }
         } else {
-            require_once('navs/navConnected.php');
+            include_once __DIR__ . '/navs/navConnected.php';
         }
 
     } else {
-        require_once('navs/navNotConnected.php');
+        include_once __DIR__ . '/navs/navNotConnected.php';
     }
 ?>
 

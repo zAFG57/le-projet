@@ -18,16 +18,19 @@
             parent::__construct($userID, $email, $user);
             if ($this->isAdmin()) {
                 $this->adminToken = $this->setAdminToken();
-            } else {
-                $this->__destruct();
-            }
+            } 
+            // else {
+            //     $this->__destruct();
+            // }
         }
 
         public function __destruct() {
             parent::__destruct();
         }
 
-
+        /**
+         * set the admin token
+         */
         private function setAdminToken(){
             if ($this->errorCode === 0) {
                 $this->adminToken = parent::sqlSelect('SELECT token FROM admin WHERE user_id = ?', 'i', $this->userID);
@@ -44,7 +47,7 @@
         /**
          * @return boolean if the user is admin
          */
-        protected function isAdmin() : bool {
+        public function isAdmin() : bool {
             if ($this->errorCode === 0) {
                 $res = parent::sqlSelect('SELECT admin_type FROM admin WHERE user_id = ?', 'i', $this->userID);
                 if ($res->num_rows === 1) {
@@ -60,7 +63,7 @@
         /**
          * @return bool|string the token
          */
-        protected function createAdminToken() {
+        public function createAdminToken() {
             if ($this->errorCode === 0) {
                 $seed = Config::urlSafeEncode(random_bytes(8));
                 $t = time();
@@ -70,7 +73,7 @@
             return false;
         }
     
-        protected function validateAdminToken($token) {
+        public function validateAdminToken($token) {
             if ($this->errorCode === 0) {
                 $parts = explode('|', Config::urlSafeDecode($token));
                 if(count($parts) === 3) {
@@ -86,7 +89,7 @@
          * @param string $token 
             * @return bool if the update successful
             */
-        protected function updateAdminToken($token) {
+        public function updateAdminToken($token) {
             return ($this->errorCode === 0) ?  parent::sqlUpdate('UPDATE admin SET token=? WHERE user_id=?' ,'si', $token, $this->userID) : false;
         }
     }

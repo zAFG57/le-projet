@@ -9,11 +9,11 @@
     include_once __DIR__ . '/../controller/csrfConfig.php';
 
     class ControllerUser extends User {
-        public static function getUserInfo($id, $protectEmail = true, $getPassword = false, $bothEmail = false) {
-            if (is_int($id)) {
-                return parent::getInfoUser($id, $protectEmail, $getPassword, $bothEmail);
-            }
-        }
+        // public static function getUserInfo($id, $protectEmail = true, $getPassword = false, $bothEmail = false) {
+        //     if (is_int($id)) {
+        //         return parent::getInfoUser($id, $protectEmail, $getPassword, $bothEmail);
+        //     }
+        // }
 
         public static function userExisiting($id) {
             return parent::userExisting($id);

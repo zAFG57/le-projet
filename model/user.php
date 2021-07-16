@@ -167,7 +167,7 @@
         /**
          * @return boolean connection statement
          */
-        protected static function isConnected() : bool{
+        public static function isConnected() : bool{
             return isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && isset($_SESSION['userID']) && is_int($_SESSION['userID']) && $_SESSION['userID'] > 0;
         }
 
