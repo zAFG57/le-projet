@@ -1,12 +1,15 @@
 <?php 
-    use \controller\ControllerSearch;
-    include_once __DIR__ . '/../../controller/search.php';
+    use \model\Search;
+    include_once __DIR__ . '/../../model/search.php';
     include_once __DIR__ . '/../../templates/nav.php';
 
     if (!empty($_GET['query'])) {
-        $resultSearch = ControllerSearch::searchService(htmlspecialchars($_GET['query']), (isset($_GET['page']) && intval($_GET['page']) && intval($_GET['page']) > 0) ? intval($_GET['page']) : 1, (isset($_GET['filter'])) ? $_GET['filter'] : '');
+        $search = new Search(htmlspecialchars($_GET['query']), (isset($_GET['filter'])) ? $_GET['filter'] : '');
+        // $resultSearch = Search::searchService(htmlspecialchars($_GET['query']), (isset($_GET['page']) && intval($_GET['page']) && intval($_GET['page']) > 0) ? intval($_GET['page']) : 1, (isset($_GET['filter'])) ? $_GET['filter'] : '');
+        $resultSearch = $search->searchService((isset($_GET['page']) && intval($_GET['page']) && intval($_GET['page']) > 0) ? intval($_GET['page']) : 1);
         $title = "Recherche - " . $_GET['query']; $css = "home.css";
         ob_start(); 
+        // var_dump($resultSearch);
         ?>
 
         <header>
@@ -22,8 +25,8 @@
         <?php
         if (empty($resultSearch)) {?>
             <div class="résultatproche"><h1>les trois résultats les plus proches sont:</h1><div><?php
-            foreach (ControllerSearch::getNearestService($_GET['query'], 3) as $key) { ?>
-                <div class="résultatprochebtn" onclick="window.location='./home.php?query=<?=$key[1]?>'"><?=$key[1]?></div>
+            foreach ($search->getNearestServices(3) as $service) { ?>
+                <div class="résultatprochebtn" onclick="window.location='./home.php?query=<?=$service[0]['domain']?>'"><?=$service[0]['domain']?></div>
                 
                 <?php }
             ?>
@@ -41,7 +44,7 @@
                         </div>
                         <div class="carddroit">
                             <div class="cardnom"><h1><?=$service['username']?></h1></div>
-                            <div class="cardétoile"><?=ControllerSearch::createStars($service['note'])?></div>
+                            <div class="cardétoile"><?=Search::createStars($service['note'])?></div>
                             <div class="carddescription"><h3><?=$service['description']?></h3></div>
                         </div>
                     </div>

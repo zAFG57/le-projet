@@ -1,14 +1,19 @@
-<?php session_start(); ?>
-<?php include_once('../templates/nav.php'); ?>
 <?php 
-    $json = 'modify';
-    require('../templates/lang.php');
-    $title = $parsed_lang->{'a'}; $css = "modifyProfile.css";
+    use Model\Lang;
+
+    session_start();
+
+    include_once __DIR__ . '/../templates/nav.php';
+    include_once __DIR__ . '/../../model/lang.php';
+
+    $lang = new Lang((isset($_GET['l'])) ? $_GET['l'] : ((isset($_SESSION['l'])) ? $_SESSION['l'] : null));
+
+    $title = $lang->getFile()['modify']['a']; $css = "modifyProfile.css";
 ?>
 <?php ob_start(); ?>
 
 <header>
-            <?= $nav?>  
+    <?= $nav?>  
 </header>
 
 
@@ -17,18 +22,18 @@
 <?php ob_start();?>  
 <!--///////////////////////////////////////début du nom ////////////////////////////  -->
     <div class="form">
-            <h1><?=$parsed_lang->{'d'};?></h1>
+            <h1><?=$lang->getFile()['modify']['d'];?></h1>
             <form id="form">
             <div class="txtfield">
                 <input name="nom" required autofocus />
                 <span></span>
-                <label><?=$parsed_lang->{'e'};?></label>
+                <label><?=$lang->getFile()['modify']['e'];?></label>
             </div>
         
 
         <div class="btndiv">
-                <div class="anuler"><?=$parsed_lang->{'c'};?></div>
-                <div id="subbmit"><?=$parsed_lang->{'b'};?></div>
+                <div class="anuler"><?=$lang->getFile()['modify']['c'];?></div>
+                <div id="subbmit"><?=$lang->getFile()['modify']['b'];?></div>
             </div>  
 
         </form>
@@ -43,22 +48,22 @@
 <!--///////////////////////////////////////début du mail ////////////////////////////  -->
     <div class="form">
         
-        <h1><?=$parsed_lang->{'f'};?></h1>
+        <h1><?=$lang->getFile()['modify']['f'];?></h1>
         <form id="form">
             <div class="txtfield">
                 <input name="mail" required autofocus />
                 <span></span>
-                <label><?=$parsed_lang->{'g'};?></label>
+                <label><?=$lang->getFile()['modify']['g'];?></label>
             </div>
             <div class="txtfield">
                 <input name="mailb" required autofocus />
                 <span></span>
-                <label><?=$parsed_lang->{'gb'}; ?></label>
+                <label><?=$lang->getFile()['modify']['gb']; ?></label>
             </div>
 
         <div class="btndiv">
-                <div class="anuler"><?=$parsed_lang->{'c'};?></div>
-                <div id="subbmit"><?=$parsed_lang->{'b'};?></div>
+                <div class="anuler"><?=$lang->getFile()['modify']['c'];?></div>
+                <div id="subbmit"><?=$lang->getFile()['modify']['b'];?></div>
             </div>  
 
         </form>
@@ -73,29 +78,29 @@
 <!--///////////////////////////////////////début du mdp ////////////////////////////  -->
     <div class="form">
         
-        <h1><?=$parsed_lang->{'h'};?></h1>
+        <h1><?=$lang->getFile()['modify']['h'];?></h1>
         <form id="form">
             <div class="txtfield">
                 <input name="amdp"  required autofocus />
                 <span></span>
-                <label><?=$parsed_lang->{'i'};?></label>
+                <label><?=$lang->getFile()['modify']['i'];?></label>
             </div> 
             <div class="txtfield">
                 <input name="mdp"  required autofocus />
                 <span></span>
-                <label><?=$parsed_lang->{'ib'};?></label>
+                <label><?=$lang->getFile()['modify']['ib'];?></label>
             </div> 
             <div class="txtfield">
                 <input name="mdpb"  required autofocus />
                 <span></span>
-                <label><?=$parsed_lang->{'ic'};?></label>
+                <label><?=$lang->getFile()['modify']['ic'];?></label>
             </div> 
 
             <div id="errs"></div>
 
             <div class="btndiv">
-                <div class="anuler"><?=$parsed_lang->{'c'};?></div>
-                <div id="subbmit"><?=$parsed_lang->{'b'};?></div>
+                <div class="anuler"><?=$lang->getFile()['modify']['c'];?></div>
+                <div id="subbmit"><?=$lang->getFile()['modify']['b'];?></div>
             </div>  
 
         </form>
@@ -109,15 +114,15 @@
 <?php ob_start();?>  
 <!--///////////////////////////////////////début de la bio ////////////////////////////  -->
         <div class="form n">
-            <h1><?=$parsed_lang->{'j'};?></h1>
+            <h1><?=$lang->getFile()['modify']['j'];?></h1>
             <form id="form">
             <div class="txtfieldn">
-                <textarea id="bio" name="bio" placeholder="<?=$parsed_lang->{'k'};?>" onkeydown="resizetextarea()"></textarea>
+                <textarea id="bio" name="bio" placeholder="<?=$lang->getFile()['modify']['k'];?>" onkeydown="resizetextarea()"></textarea>
             </div>
 
             <div class="btndiv">
-                <div class="anuler"><?=$parsed_lang->{'c'};?></div>
-                <div id="subbmit"><?=$parsed_lang->{'b'};?></div>
+                <div class="anuler"><?=$lang->getFile()['modify']['c'];?></div>
+                <div id="subbmit"><?=$lang->getFile()['modify']['b'];?></div>
             </div>  
 
         </form>
@@ -131,17 +136,17 @@
 <?php ob_start();?>  
 <!--///////////////////////////////////////début de la photo ////////////////////////////  -->
     <div class="form n">
-            <h1><?=$parsed_lang->{'l'};?></h1>
+            <h1><?=$lang->getFile()['modify']['l'];?></h1>
         <form id="form">
             <div class="photodiv">    
-                <h1 class="labelphoto" id="hun"><?=$parsed_lang->{'m'};?></h1>
+                <h1 class="labelphoto" id="hun"><?=$lang->getFile()['modify']['m'];?></h1>
                 <label for="photo" class="labelphoto" id="labelphoto"></label>
                 <input type="file" accept="image/png" onchange="loadFile(event)" class="photoinput" id="photo" style="display: none">
                 <img id="output" class="labelphoto"/>
             </div>
             <div class="btndiv">
-                <div class="anuler"><?=$parsed_lang->{'c'};?></div>
-                <div id="subbmit"><?=$parsed_lang->{'b'};?></div>
+                <div class="anuler"><?=$lang->getFile()['modify']['c'];?></div>
+                <div id="subbmit"><?=$lang->getFile()['modify']['b'];?></div>
             </div>  
 
         </form>
@@ -155,11 +160,11 @@
 <?php ob_start();?>  
     <div class="navedit">
     
-        <div class="éditbtn" onclick="window.location= './modifyProfile.php?edit=nom'"><?=$parsed_lang->{'n'};?></div>
-        <div class="éditbtn" onclick="window.location= './modifyProfile.php?edit=mail'"><?=$parsed_lang->{'o'};?></div>
-        <div class="éditbtn" onclick="window.location= './modifyProfile.php?edit=mdp'"><?=$parsed_lang->{'p'};?></div>
-        <div class="éditbtn" onclick="window.location= './modifyProfile.php?edit=bio'"><?=$parsed_lang->{'q'};?></div>
-        <div class="éditbtn" onclick="window.location= './modifyProfile.php?edit=photo'"><?=$parsed_lang->{'r'};?></div>
+        <div class="éditbtn" onclick="window.location= './modifyProfile.php?edit=nom'"><?=$lang->getFile()['modify']['n'];?></div>
+        <div class="éditbtn" onclick="window.location= './modifyProfile.php?edit=mail'"><?=$lang->getFile()['modify']['o'];?></div>
+        <div class="éditbtn" onclick="window.location= './modifyProfile.php?edit=mdp'"><?=$lang->getFile()['modify']['p'];?></div>
+        <div class="éditbtn" onclick="window.location= './modifyProfile.php?edit=bio'"><?=$lang->getFile()['modify']['q'];?></div>
+        <div class="éditbtn" onclick="window.location= './modifyProfile.php?edit=photo'"><?=$lang->getFile()['modify']['r'];?></div>
     
     </div>
 <?php $editpiaf = ob_get_clean();?>

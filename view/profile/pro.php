@@ -1,9 +1,14 @@
-<?php include_once '../templates/nav.php'; ?>
+<?php 
+    use Model\Lang;
 
-<?php $title = "My Profile"; $css = "profilepro.css";?>
-<?php ob_start(); 
-$json = 'pro';
-require('../templates/lang.php');
+    include_once __DIR__ . '/../../templates/nav.php';
+    include_once __DIR__ . '/../../model/lang.php';
+
+    $title = "My Profile"; $css = "profilepro.css";
+
+    $lang = new Lang((isset($_GET['l'])) ? $_GET['l'] : ((isset($_SESSION['l'])) ? $_SESSION['l'] : null));
+
+    ob_start();
 ?>
 
 
@@ -13,13 +18,13 @@ require('../templates/lang.php');
 
     <div class="main">
         <div class="profil" onclick="window.location +='&action=1' ">
-            <h1><?=  $parsed_lang->{'gauche_titre'}?></h1>
-            <p><?=  $parsed_lang->{'gauche'}?></p>
+            <h1><?=  $lang->getFile()['pro']['gauche_titre']?></h1>
+            <p><?=  $lang->getFile()['pro']['gauche']?></p>
         </div>
 
         <div class="travail" onclick="window.location +='&action=2' ">
-            <h1><?=  $parsed_lang->{'droit_titre'}?></h1>
-            <p><?=  $parsed_lang->{'droit'}?></p>
+            <h1><?=  $lang->getFile()['pro']['droit_titre']?></h1>
+            <p><?=  $lang->getFile()['pro']['droit']?></p>
         </div>
     </div>
 

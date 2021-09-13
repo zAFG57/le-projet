@@ -1,10 +1,14 @@
 <?php 
+    use Model\Lang;
+
     session_start();
-    include_once __DIR__ . '/../templates/nav.php'; 
-    $title = "créer mon compte"; 
-    $css = "create-account.css";
-    $json = 'creeruncompte';
-    require('../templates/lang.php');
+   
+    include_once __DIR__ . '/../templates/nav.php';
+    include_once __DIR__ . '/../model/lang.php';
+   
+    $lang = new Lang((isset($_GET['l'])) ? $_GET['l'] : ((isset($_SESSION['l'])) ? $_SESSION['l'] : null));
+
+    $title = "créer mon compte"; $css = "create-account.css";
     ob_start(); 
 ?>
 
@@ -12,41 +16,41 @@
     <?=$nav?>
 </header>
 <div class="registerForm">
-    <h1><?=  $parsed_lang->{'creer_un_compte'}?></h1>
+    <h1><?= $lang->getFile()['createAccount']['creer_un_compte']?></h1>
 
     <form id="registerForm">
 
         <div class="txtfield">
             <input type="text" name="username" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
             <span></span>
-            <label><?=  $parsed_lang->{'nom_dutilisateur'}?></label>
+            <label><?=  $lang->getFile()['createAccount']['nom_dutilisateur']?></label>
         </div>
 
         <div class="txtfield">
             <input type="text" name="email" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}">
             <span></span>
-            <label><?=  $parsed_lang->{'Email'}?></label>
+            <label><?=  $lang->getFile()['createAccount']['Email']?></label>
         </div>
       
         <div class="txtfield">
             <input type="password" name="password" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}">
             <span></span>
-            <label><?=  $parsed_lang->{'mdp'}?></label>
+            <label><?=  $lang->getFile()['createAccount']['mdp']?></label>
         </div>  
 
         <div class="txtfield">
             <input type="password" name="passwordVerify" required onkeydown="if(event.key === 'Enter'){event.preventDefault();register();}" >
             <span></span>
-            <label><?=  $parsed_lang->{'confirm'}?></label>
+            <label><?=  $lang->getFile()['createAccount']['confirm']?></label>
         </div>
         <input type="hidden" name="pro" value="0">
 
         <div id="errs"></div>
         
-        <div class="submitButton" onclick="register();"><p><?=  $parsed_lang->{'compte'}?></p></div>
+        <div class="submitButton" onclick="register();"><p><?=  $lang->getFile()['createAccount']['compte']?></p></div>
 
         <div class="singinLink">
-        <?=  $parsed_lang->{'djuncompte'}?> </br><a href="log_in.php"><?=  $parsed_lang->{'connecter'}?></a> | <a href="email_verification.php"><?=  $parsed_lang->{'verif'}?></a>
+        <?=  $lang->getFile()['createAccount']['djuncompte']?> </br><a href="log_in.php"><?=  $lang->getFile()['createAccount']['connecter']?></a> | <a href="email_verification.php"><?=  $lang->getFile()['createAccount']['verif']?></a>
         </div>
         
 

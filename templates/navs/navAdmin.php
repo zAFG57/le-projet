@@ -1,11 +1,11 @@
 <?php
-    use \Controller\ControllerAdmin;
-use Model\Admin;
+    use Model\Lang;
+    use Model\Admin;
 
-require_once __DIR__ . '/../../templates/lang.php';
+    include_once __DIR__ . '/../../model/lang.php';
     include_once '../controller/panelAdmin.php';
 
-    $json = 'navadmin';
+    $lang = new Lang((isset($_GET['l'])) ? $_GET['l'] : ((isset($_SESSION['l'])) ? $_SESSION['l'] : null));
 
     $admin = new Admin($_SESSION['userID'])
 ?>
@@ -13,7 +13,7 @@ require_once __DIR__ . '/../../templates/lang.php';
 <div class="gauche">
     <a class="leftSiide" href="../index.php" title="Acceuil">
         <img class="logo" src="../assets/Sans_titre-8.png" alt="logo" height="50px">
-        <h1><?=  $parsed_lang->{'Mesréparations'}?> </br><span><?=  $parsed_lang->{'larfrançaise'}?></span></h1>
+        <h1><?= $lang->getFile()['navAdmin']['Mesréparations']?> </br><span><?=  $lang->getFile()['navAdmin']['larfrançaise']?></span></h1>
     </a>
 </div>
 
@@ -24,9 +24,9 @@ require_once __DIR__ . '/../../templates/lang.php';
             <li id="drapeaufr" onclick="fr()"></li>
             <li id="drapeauus" onclick="en()"></li>
         </ul>
-        <li><a class="responsivlien2" href="../index.php?location=profile"><?=  $parsed_lang->{'profil'}?></a></li>
-        <li><a class="responsivlien2" href="/view/admin_panel.php?h=<?= password_hash($admin->getAdminToken(), PASSWORD_DEFAULT) ?>"><?=  $parsed_lang->{'admin'}?></a></li>
-        <li><div id="pro" class="responsivlien2" onclick="logout()"><?=  $parsed_lang->{'déconnecter'}?></div></li>
+        <li><a class="responsivlien2" href="../index.php?location=profile"><?=  $lang->getFile()['navAdmin']['profil']?></a></li>
+        <li><a class="responsivlien2" href="/view/admin_panel.php?h=<?= password_hash($admin->getAdminToken(), PASSWORD_DEFAULT) ?>"><?=  $lang->getFile()['navAdmin']['admin']?></a></li>
+        <li><div id="pro" class="responsivlien2" onclick="logout()"><?=  $lang->getFile()['navAdmin']['déconnecter']?></div></li>
     </ul>
 </div>
 <div class="mesmessagenav" onclick="window.location.href='../index.php?location=chat';">

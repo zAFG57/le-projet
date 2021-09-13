@@ -1,6 +1,6 @@
 <?php 
     // use \Controller\Csrf;
-    include_once "../model/csrfConfig.php";
+    // include_once "../model/csrfConfig.php";
 ?>
 <?php
     

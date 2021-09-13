@@ -1,8 +1,8 @@
 <?php 
     use \controller\ControllerAdmin;
     
-    include_once '../controller/serviceManager.php';
-    include_once '../templates/nav.php';
+    include_once __DIR__ . '/../../controller/serviceManager.php';
+    include_once __DIR__ . '../../templates/nav.php';
 ?>
 
 <?php $title = "Admin Panel"; $css = "adminPanel.css"?>

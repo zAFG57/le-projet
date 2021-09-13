@@ -10,7 +10,7 @@
     
     if(User::isConnected()) {
         $user = new Admin($_SESSION['userID']);
-        if (!$user->isAdmin()){ 
+        if ($user->isAdmin()){ 
             if($user->updateAdminToken($user->createAdminToken())){
                 include_once __DIR__ . '/navs/navAdmin.php';
             }

@@ -107,7 +107,7 @@
          * @return boolean|string the username of the user
          */
         public function getUsername() : string {
-            return  ($this->username === 0) ? $this->userID : false;
+            return  ($this->errorCode === 0) ? $this->userName : false;
         }
 
         /**

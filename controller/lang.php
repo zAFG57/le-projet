@@ -1,6 +1,6 @@
 <?php 
-    include_once '../model/csrfConfig.php';
-    include_once '../model/lang.php';
+    // include_once '../model/csrfConfig.php';
+    // include_once '../model/lang.php';
     class ControllerLang extends Lang {
         public static function changeLang($lang) {
             session_start(); 

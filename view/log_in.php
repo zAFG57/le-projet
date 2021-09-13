@@ -1,8 +1,14 @@
-<?php session_start(); ?>
-<?php include_once('../templates/nav.php'); ?>
-<?php $title = "se connecter"; $css = "login.css";
-    $json = 'login';
-    require('../templates/lang.php');
+<?php 
+    use Model\Lang;
+
+    session_start(); 
+
+    include_once __DIR__ . '/../templates/nav.php';
+    include_once __DIR__ . '/../model/lang.php';
+
+    $lang = new Lang((isset($_GET['l'])) ? $_GET['l'] : ((isset($_SESSION['l'])) ? $_SESSION['l'] : null));
+
+    $title = "se connecter"; $css = "login.css";
 ?>
 <?php ob_start(); ?>
 
@@ -10,30 +16,30 @@
     <?=$nav?> 
 </header>
 <div class="login_form">
-    <h1><?=  $parsed_lang->{'connecter'}?></h1>
+    <h1><?=  $lang->getFile()['login']['connecter']?></h1>
 
     <form id="loginform">
 
         <div class="txtfield">
             <input type="text" name="email" required autofocus onkeydown="if(event.key === 'Enter'){event.preventDefault();login();}">
             <span></span>
-            <label><?=  $parsed_lang->{'Email'}?></label>
+            <label><?=  $lang->getFile()['login']['Email']?></label>
         </div>
 
         <div class="txtfield">
             <input type="password" name="password" required onkeydown="if(event.key === 'Enter'){event.preventDefault();login();}">
             <span></span>
-            <label><?=  $parsed_lang->{'mdp'}?></label>
+            <label><?=  $lang->getFile()['login']['mdp']?></label>
         </div>
 
-        <div class="pass" onclick="window.location = './forgot_password.php'"><?=  $parsed_lang->{'mdpoublier'}?></div>
+        <div class="pass" onclick="window.location = './forgot_password.php'"><?=  $lang->getFile()['login']['mdpoublier']?></div>
 
         <div id="errs"></div>
 
-        <div class="submitButton" onclick="login()"><p><?=  $parsed_lang->{'Connexion'}?></p></div>
+        <div class="submitButton" onclick="login()"><p><?=  $lang->getFile()['login']['Connexion']?></p></div>
 
         <div class="singupLink">
-        <?=  $parsed_lang->{'pdcompte'}?> </br><a href="create_account.php"><?=  $parsed_lang->{'compte'}?></a>
+        <?=  $lang->getFile()['login']['pdcompte']?> </br><a href="create_account.php"><?=  $lang->getFile()['login']['compte']?></a>
         </div>
     </form>
 </div>

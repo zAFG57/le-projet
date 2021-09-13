@@ -16,7 +16,6 @@
     "login": [
         "",
         "<div class='err'>email ou mot de passe incorrect.</div>",
-        "<div class='err'>Le serveur n'a pas pu se connecter a la base de donnée.</div>",
         "<div class='err'>Vous avez dépasser le nombre limite d'essay en une heure. réessayez plus tard</div>",
         "<div class='err'>Votre compte n'a toujours pas été vérifié. Regardez vos mail pour obtennir le lien de vérification ou <a href='../view/email_verification'>réenvoyez un email de vérification</a></div>",
         "<div class='err'>Une erreur est survenu, Réessayez plus tard</div>"

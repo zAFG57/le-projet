@@ -1,0 +1,150 @@
+{
+    "addPrestationPro": {
+        "catégorie_du_service": "service category",
+        "titre_et_description": "title and description",
+        "doccument_légaux": "legal documents",
+        "vous_pouvez_réparer": "you can repair:",
+        "category": "--category--",
+        "téléphones": " telephones",
+        "ordinateurs": "computers",
+        "éléctro ménager": "household appliances",
+        "plus_particulièrement": "in particular:",
+        "sous_catégorie": "--sub category--",
+        "suivant": "next",
+        "votre_titre": "your title",
+        "votre_description": "your description",
+        "déposer_votre_cb": "deposit your ID card here",
+        "enregister": "register"
+    },
+    "chatBase": {
+        "bvn": "Welcome to your messages",
+        "différente_discution": "My discussions"
+    },
+    "createProAccount": {
+        "creeruncompte": "Create a professional account",
+        "uttilisateur": "User name",
+        "Email": "Email",
+        "mdp": "Password",
+        "confirm": "Confirmation",
+        "creermoncompte": "Create my account",
+        "djuncompte": "Already have an account ?",
+        "déco": "Log in",
+        "verifmonemail": "Check my email"
+    },
+    "createAccount": {
+        "creer_un_compte": "Create an account",
+        "nom_dutilisateur": "User name",
+        "Email": "Email",
+        "mdp": "Password",
+        "confirm": "confirmation",
+        "compte": "Create my account",
+        "djuncompte": "Already an account ?",
+        "connecter": "Log in",
+        "verif": "Verify my email"
+    },
+    "displayChat": {
+        "différente_discution": "My discussions",
+        "message": "your message"
+    },
+    "displayServicesPro": {
+        "ajouter_une_préstation": "add a presetation "
+    },
+    "forgotPassword": {
+        "changer": "change my",
+        "mdp": " password",
+        "Email": "Email",
+        "mail": "send mail",
+        "djuc": "Already have an account? ",
+        "connecter": "Log in"
+    },
+    "forgotPasswordResponse": {
+        "changer": "change my",
+        "mdp": "password",
+        "nmdp": "new password",
+        "vnmdp": " Verification of the new password",
+        "emdp": "register my password",
+        "duc": "Already have an account?",
+        "connect": "Log in"
+    },
+    "home": {
+        "électroménager": "appliances",
+        "ordi": "computer",
+        "tel": "phone",
+        "obj": "object to repair"
+    },
+    "login": {
+        "connecter": "Log in",
+        "Email": "Email",
+        "mdp": "Password",
+        "mdpoublier": "Forgotten your password?",
+        "Connexion": "Connection",
+        "compte": "create my account",
+        "pdcompte": "No account yet ?"
+    },
+    "modify": {
+        "a": "edit my profile",
+        "b": "save",
+        "c": "cancel",
+        "d": "user name",
+        "e": "your new name",
+        "f": "my email",
+        "g": "my new email",
+        "gb": "confirmed my new email",
+        "h": "change my password",
+        "i": "old password",
+        "ib": "my new password",
+        "ic": "confirm my password",
+        "j": "my description",
+        "k": "your new description",
+        "l": "my profile picture",
+        "m": "click to upload your profile picture in png, jpg or jpeg format",
+        "n": "modify my username",
+        "o": "modify my email",
+        "p": "modify my password",
+        "q": "modify my bio",
+        "r": "modify my profile picture"
+    },
+    "navAdmin": {
+        "Mesréparations": "Mesréparations.com",
+        "larfrançaise": "The ecological and 99.9% French repair",
+        "profil": "My profile",
+        "admin": "Admin panel",
+        "déconnecter": "Disconnecting"
+    },
+    "navConnected": {
+        "Mesréparations": "Mesréparations.com",
+        "larfrançaise": "The ecological and 99.9% French repair",
+        "profil": "My profile",
+        "réparations": "My repairs",
+        "déconnecter": "Disconnecting"
+    },
+    "navNotConnected": {
+        "Mesréparations": "Mesréparations.com",
+        "larfrançaise": "The ecological and 99.9% French repair",
+        "connecter": "Log in",
+        "compte": "Create an account",
+        "pro": "I am a professional"
+    },
+    "pro": {
+        "gauche_titre": "change my Profile",
+        "gauche": "(my email, my photo, my name...)",
+        "droit_titre": "add a presetation",
+        "droit": "(create a service, provide legal documents)"
+    },
+    "user": {
+        "annuler": "cancel",
+        "enregistrer": "register",
+        "mdp": "Verification passwords"
+    },
+    "verification": {
+        "vemail": "Verify my Email",
+        "Email": "Email",
+        "elv": "Send verification",
+        "duc": "Already have an account? ",
+        "connect": "Log in"
+    },
+    "viewProProfile": {
+        "préstation": "see his presentations",
+        "contact": "contact him"
+    }
+}

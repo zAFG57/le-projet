@@ -1,16 +1,18 @@
 <?php 
-
+    use Model\Lang;
     use \Controller\ControllerChatUsers;
 
-    $json = 'chatBase';
-    require('../templates/lang.php');
     include_once __DIR__ . '/../../controller/chatUsers.php';
+    include_once __DIR__ . '/../../model/lang.php';
+
+    $lang = new Lang((isset($_GET['l'])) ? $_GET['l'] : ((isset($_SESSION['l'])) ? $_SESSION['l'] : null));
+
 ?>
 <link href="../public/css/chatBase.css" rel="stylesheet" />
 <div class="main">
 
 <div class="discution" id="scroll">
-    <div class="mesDiscussions"><?= $parsed_lang->{'différente_discution'}?></div>
+    <div class="mesDiscussions"><?= $lang->getFile()['chatBase']['différente_discution']?></div>
     <?php
     $discussitions = ControllerChatUsers::displayDiscussions($_SESSION['userID']);
     // var_dump($discussitions);
@@ -39,7 +41,7 @@
 
 <div class="chat">
     <div class="bvnsurvosmessage">
-            <h1><?=  $parsed_lang->{'bvn'}?></h1>
+            <h1><?=  $lang->getFile()['chatBase']['bvn']?></h1>
     </div>
 </div>
 

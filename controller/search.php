@@ -12,8 +12,8 @@
     class ControllerSearch extends Search {
         public static function searchService($query, $page, ...$types) {
             parent::numPageVerify($page);
-            $max = $page * Config::$MAX_SERVICES_DISPLAY;
-            $min = $max - Config::$MAX_SERVICES_DISPLAY;
+            $max = $page * Config::MAX_SERVICES_DISPLAY;
+            $min = $max - Config::MAX_SERVICES_DISPLAY;
             $services = parent::getAllServices($min, $max);
             $types = parent::verifyTypes(...$types);
             $i = 0;
@@ -29,7 +29,7 @@
                         if(isset($services[$i][$key])) {
                             foreach (explode(' ', $query) as $queryPart) {
                                 similar_text($queryPart, $services[$i][$key], $perc);
-                                if ($perc >= Config::$MIN_PERCENTAGE_CORRESPONDE_DOMAIN_SEARCH) {
+                                if ($perc >= Config::MIN_PERCENTAGE_CORRESPONDE_DOMAIN_SEARCH) {
                                     unset($services[$i]['encryption_IV_domain'], $services[$i]['encryption_IV_desc'], $services[$i]['encryption_IV_sub_domain'], $services[$i]['encryption_IV_title'], $services[$i]['active'], $services[$i]['verified']); 
                                     $accepted ? : $i++;
                                     $accepted = true;

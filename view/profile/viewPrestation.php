@@ -1,14 +1,15 @@
-<?php include_once '../templates/nav.php'; ?>
-
 <?php 
-    $title = $user['username'] . " profile" ;
-    $css ="viewPrestation.css" ;
-    $json = 'viewproprofile';
-    // require('../templates/lang.php');
-    include_once __DIR__. '/../../templates/lang.php';
-    include_once __DIR__ . '/../../controller/serviceManager.php';
-
+    use Model\Lang;
     use \Controller\ControllerService;
+
+    include_once __DIR__ . '/../../templates/nav.php';
+    include_once __DIR__. '/../../templates/lang.php';
+
+    $title = $user['username'] . " profile"; $css ="viewPrestation.css" ;
+    // $json = 'viewproprofile';
+  
+    $lang = new Lang((isset($_GET['l'])) ? $_GET['l'] : ((isset($_SESSION['l'])) ? $_SESSION['l'] : null));
+
     $presta = ControllerService::showAllServices(htmlspecialchars($_GET['user']), false);
 ?>
 

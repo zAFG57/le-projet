@@ -39,6 +39,7 @@
 
         protected const MAX_SERVICES_DISPLAY = 25;
         protected const MIN_PERCENTAGE_CORRESPONDE_DOMAIN_SEARCH = 70;
+        protected const MIN_SIZE_WORD_FOR_SEARCH = 3;
 
         protected const MAX_NOTE_VALUE = 5;
 
@@ -64,6 +65,10 @@
         );
 
         protected const MAX_ATTEMPTS_FORGOT_PASSWORD = [60*30, 1]; // 30 minutes
+
+        protected const LANGUAGE_FILE = 'public/js/language/';
+
+        protected const DEFAULT_LANGUAGE = 'fr';
 
 
         

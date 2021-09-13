@@ -1,10 +1,12 @@
-<?php include_once '../templates/nav.php'; ?>
-
 <?php 
-    $title ="My Profile" ;
-    $css ="viewProProfile.css" ;
-    $json = 'viewproprofile';
-    require('../templates/lang.php');
+    use Model\Lang;
+
+    include_once __DIR__ .'/../../templates/nav.php';
+    include_once __DIR__ . '/../../model/lang.php';
+
+    $title ="My Profile"; $css ="viewProProfile.css" ;
+
+    $lang = new Lang((isset($_GET['l'])) ? $_GET['l'] : ((isset($_SESSION['l'])) ? $_SESSION['l'] : null));
 ?>
 
 <?php ob_start(); ?>
@@ -16,8 +18,6 @@
   
     
     <div class="main">
-
-
 
         <div class="nom">
             <h1>
@@ -32,8 +32,8 @@
 
 
         <div class="btndiv">
-            <div class="btn présta" onclick="window.location ='./profile.php?user=<?=$user['id']?>&presta=1'"><?=  $parsed_lang->{'préstation'}?></div>
-            <div class="btn contact" onclick="window.location ='./chat.php?proID=<?=$user['id']?>'"><?=  $parsed_lang->{'contact'}?></div>
+            <div class="btn présta" onclick="window.location ='./profile.php?user=<?=$user['id']?>&presta=1'"><?= $lang->getFile()['viewproprofile']['préstation']?></div>
+            <div class="btn contact" onclick="window.location ='./chat.php?proID=<?=$user['id']?>'"><?= $lang->getFile()['viewproprofile']['contact']?></div>
         </div>
 
     </div>

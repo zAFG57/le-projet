@@ -1,0 +1,150 @@
+{
+    "addPrestationPro": {
+        "catégorie_du_service": "catégorie du service",
+        "titre_et_description": "titre et description",
+        "doccument_légaux": "doccument légaux",
+        "vous_pouvez_réparer": "vous pouvez réparer:",
+        "category": "--catégory--",
+        "téléphones": " des téléphones",
+        "ordinateurs": "des ordinateurs",
+        "éléctro ménager": "de l'éléctro ménager",
+        "plus_particulièrement": "plus particulièrement:",
+        "sous_catégorie": "--sous catégorie--",
+        "suivant": "suivant",
+        "votre_titre": "votre titre",
+        "votre_description": "votre description",
+        "déposer_votre_cb": "déposer ici votre carte d'identiter",
+        "enregister": "enregister"
+    },
+    "chatBase": {
+        "bvn": "Bienvenue sur vos messages",
+        "différente_discution": "Mes discutions"
+    },
+    "createProAccount": {
+        "creeruncompte": "Créer un compte professionnelle",
+        "uttilisateur": "Nom d'utilisateur",
+        "Email": "Email",
+        "mdp": "Mot de passe",
+        "confirm": "Confirmation",
+        "creermoncompte": "Créer mon compte",
+        "djuncompte": "Déjà un compte ? ",
+        "déco": "Se connecter",
+        "verifmonemail": "Vérifier mon email"
+    },
+    "createAccount": {
+        "creer_un_compte": "Créer un compte",
+        "nom_dutilisateur": "Nom d'utilisateur",
+        "Email": "Email",
+        "mdp": "Mot de passe",
+        "confirm": "confirmation",
+        "compte": "Créer mon compte",
+        "djuncompte": "Déjà un compte ?",
+        "connecter": "Se connecter",
+        "verif": "Vérifier mon email"
+    },
+    "displayChat": {
+        "différente_discution": "Mes discutions",
+        "message": "votre message"
+    },
+    "displayServicesPro": {
+        "ajouter_une_préstation": "ajouter une préstation "
+    },
+    "forgotPassword": {
+        "changer": "changer mon",
+        "mdp": " mot de passe",
+        "Email": "Email",
+        "mail": "envoyer le mail",
+        "djuc": "Déjà un compte ? ",
+        "connecter": "Se connecter"
+    },
+    "forgotPasswordResponse": {
+        "changer": "changer mon",
+        "mdp": "mot de passe",
+        "nmdp": "nouveau mot de passe",
+        "vnmdp": " verfication du nouveau mot de passe",
+        "emdp": "enregister mon mot de passe",
+        "duc": "Déjà un compte ?",
+        "connect": "Se connecter"
+    },
+    "home": {
+        "électroménager": "électroménager",
+        "ordi": "ordinateur",
+        "tel": "téléphone",
+        "obj": "objet à réparer"
+    },
+    "login": {
+        "connecter": "Se connecter",
+        "Email": "Email",
+        "mdp": "Mot de passe",
+        "mdpoublier": "Mot de passe oublié ?",
+        "Connexion": "Connexion",
+        "compte": "créer mon compte",
+        "pdcompte": "Pas encore de compte ?"
+    },
+    "modify": {
+        "a": "modifier mon profile",
+        "b": "enregistrer",
+        "c": "annuler",
+        "d": "nom d'ultilisateur",
+        "e": "votre nouveau nom",
+        "f": "mon email",
+        "g": "mon nouveau email",
+        "gb": "confirmé mon nouveau email",
+        "h": "modifier mon mot de passe",
+        "i": "ancien mot de passe",
+        "ib": "mon nouveau mot de passe",
+        "ic": "confirmer mon mot de passe",
+        "j": "ma description",
+        "k": "votre nouvelle description",
+        "l": "ma photo de profile",
+        "m": "clicker pour déposer votre photo de profile au format png, jpg ou jpeg",
+        "n": "modifier mon nom",
+        "o": "modifier mon mail",
+        "p": "modifier mon mots de passe",
+        "q": "modifier ma bio",
+        "r": "modifier ma photo de profile"
+    },
+    "navAdmin": {
+        "Mesréparations": "Mesréparations.com",
+        "larfrançaise": "La réparation écologique et 100% française",
+        "profil": "Mon profil",
+        "admin": "Admin panel",
+        "déconnecter": "Se déconnecter"
+    },
+    "navConnected": {
+        "Mesréparations": "Mesréparations.com",
+        "larfrançaise": "La réparation écologique et 100% française",
+        "profil": "Mon profil",
+        "réparations": "Mes réparations",
+        "déconnecter": "Se déconnecter"
+    },
+    "navNotConnected": {
+        "Mesréparations": "Mesréparations.com",
+        "larfrançaise": "La réparation écologique et 100% française",
+        "connecter": "Se connecter",
+        "compte": "Créer un compte",
+        "pro": "Je suis un professionnel"
+    },
+    "pro": {
+        "gauche_titre": "modifier mon Profile",
+        "gauche": "(mon email, ma photo, mon nom...)",
+        "droit_titre": "ajouter une préstation",
+        "droit": "(crée un service, apporter des doccuments légaux)"
+    },
+    "user": {
+        "annuler": "annuler",
+        "enregistrer": "enregistrer",
+        "mdp": "Mots de passe de vérification"
+    },
+    "verification": {
+        "vemail": "Vérifier mon Email",
+        "Email": "Email",
+        "elv": "Envoyer la vérification",
+        "duc": "Déjà un compte ? ",
+        "connect": "Se connecter"
+    },
+    "viewProProfile": {
+        "préstation": "voir ses préstations",
+        "contact": "le contacter"
+    }
+}

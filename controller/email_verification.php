@@ -3,6 +3,7 @@
 
     use \Model\EmailVerification;
     use \Model\Config;
+    use \Model\Csrf;
 
     include_once __DIR__ . '/../model/email_verification.php';
     include_once __DIR__ . '/../model/config.php';
@@ -36,12 +37,11 @@
         }
 
         public static function sendEmailVerificationFromPOST($email) {
-           
-                return self::sendEmailVerification($email);
-            
+            return self::sendEmailVerification($email);
         }
+
         public static function sendValidationEmailFromArgs($email, $csrfToken){
-            if (isset($email) && isset($csrfToken) && ControllerCsrf::validateCsrfToken(htmlspecialchars($csrfToken))) {
+            if (isset($email) && isset($csrfToken) && Csrf::validateToken(htmlspecialchars($csrfToken))) {
                 return self::sendEmailVerification(htmlspecialchars($email));
             }
         }
@@ -73,7 +73,7 @@
         }
 
         public static function sendEmailForgotPassword($email, $hash){
-            return parent::sendEmail($email, parent::getUsername($email), "Changement de mot de passe", '<a href="' . Config::$FORGOT_PASSWORD_LINK . '?h=' . $hash . '">Cliquez ici pour reset votre mot de passe</a> <br/> <p>si vous n\'etes pas a l\'origine de ce changement ne cliquez sur aucun lien</p>');
+            return parent::sendEmail($email, parent::getUsername($email), "Changement de mot de passe", '<a href="' . Config::FORGOT_PASSWORD_LINK . '?h=' . $hash . '">Cliquez ici pour reset votre mot de passe</a> <br/> <p>si vous n\'etes pas a l\'origine de ce changement ne cliquez sur aucun lien</p>');
         }
     }
 

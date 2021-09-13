@@ -43,7 +43,7 @@ function loaderdiv(loader) {
 }
 
 function register() {
-    request('../controller/create_account.php', '#registerForm', setloader = true, function(data) {
+    request('../requests/createAccount.php', '#registerForm', setloader = true, function(data) {
         document.getElementById('errs').innerHTML = "";
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
@@ -79,7 +79,7 @@ function register() {
  * @param none
  */
 function registerpro() {
-    request('../controller/create_professional_account.php', '#registerForm', setloader = true, function(data) {
+    request('../requests/createProAccount.php', '#registerForm', setloader = true, function(data) {
         document.getElementById('errs').innerHTML = "";
         var transition = document.getElementById('errs').style.transition;
         document.getElementById('errs').style.transition = "none";
@@ -111,7 +111,7 @@ function registerpro() {
 
 
 function login() {
-    request('../controller/login.php', '#loginform', setloader = true, function(data) {
+    request('../requests/login.php', '#loginform', setloader = true, function(data) {
 
         document.getElementById('errs').innerHTML = "";
         var transition = document.getElementById('errs').style.transition;
@@ -120,6 +120,7 @@ function login() {
         try {
             console.log(data);
             data = JSON.parse(data);
+            console.log(data);
 
             if (data == 0) {
                 window.location = '../';
@@ -142,11 +143,14 @@ function login() {
 }
 
 function logout() {
-    request('../controller/logout.php', false, setloader = true, function(data) {
+    request('../requests/logout.php', false, setloader = true, function(data) {
+        console.log(data);
         try {
             data = JSON.parse(data);
             if (data === 0) {
                 window.location = '../';
+            } else {
+                window.location = window.location;
             }
         } catch (e) {
 

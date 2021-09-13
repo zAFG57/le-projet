@@ -5,11 +5,11 @@
 
     class CreateAccount extends Database {
         protected static function isEmailNotAlreadyUsing($email) {
-            return parent::sqlSelect('SELECT id FROM users WHERE email=?', 's', $email)->num_rows === 0;
+            return parent::sqlSelect('SELECT user_id FROM users WHERE email=?', 's', $email)->num_rows === 0;
         }
 
         protected static function addUser($id, $username, $email, $password){
-            return parent::sqlInsert('INSERT INTO users VALUES (?, ?, ?, ?, 0, 0, ?, ?, ?)', 'isssi', $id, $username, $email,  password_hash($password, PASSWORD_DEFAULT), '', '', time());
+            return parent::sqlInsert('INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, 0, 0, ?, ?)', 'issssssi', $id, $username, password_hash($password, PASSWORD_DEFAULT), $email,'', '','', time());
         }
 
         protected static function createId() {
@@ -20,6 +20,6 @@
         }
 
         protected static function userIDAlreadyExisting($id) {
-            return (parent::sqlSelect('SELECT id FROM users WHERE id=?', 'i', $id)->num_rows === 1);
+            return (parent::sqlSelect('SELECT user_id FROM users WHERE user_id=?', 'i', $id)->num_rows === 1);
         }
     }

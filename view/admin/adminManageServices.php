@@ -2,11 +2,10 @@
     use \controller\ControllerService;
     use \controller\ControllerAdmin;
 
-    include_once '../controller/serviceManager.php';
-    include_once '../templates/nav.php';
+    include_once __DIR__ . '/../../controller/serviceManager.php';
+    include_once __DIR__ . '/../../templates/nav.php';
 
-    $title = "Admin Panel - Manage services"; 
-    $css = "adminPanelManageServices.css";
+    $title = "Admin Panel - Manage services"; $css = "adminPanelManageServices.css";
     ob_start(); 
 ?>
 

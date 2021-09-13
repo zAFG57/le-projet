@@ -28,11 +28,11 @@
         }
 
         private function setLoginAttempts() {
-            return ($this->loginAttempts = ($this->errorCode === 0) ? Database::sqlSelect('SELECT * FROM loginattempts WHERE user_id = ? and timestamp > ?','ii', time() - 60*60, $this->userID) : null) ? true : false;
+            return ($this->loginAttempts = ($this->errorCode === 0) ? Database::sqlSelect('SELECT * FROM loginattempts WHERE user_id = ? and timestamp > ?','ii', time() - 60*60, $this->userID)->fetch_all(MYSQLI_ASSOC) : null) ? true : false;
         }
 
         public function getLoginAttempts() {
-            return ($this->setLoginAttempts() && $this->errorCode === 0) ? $this->loginAttempts : false;
+            return $this->errorCode === 0 ? $this->loginAttempts : false;
         }
 
         /**

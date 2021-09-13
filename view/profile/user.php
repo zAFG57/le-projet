@@ -1,22 +1,25 @@
-<?php include_once '../templates/nav.php'; ?>
+<?php 
+    use Model\Lang;
 
-<?php $title = "My Profile"; $css = "profile.css";?>
-<?php ob_start(); 
-        $json = 'user';
-        require('../templates/lang.php');
+    include_once __DIR__ . '/../../templates/nav.php';
+    include_once __DIR__ . '/../../model/lang.php';
+    // include_once __DIR__ . '/../../templates/lang.php';
+    // include_once __DIR__ . '/../../controller/serviceManager.php';
+
+    $lang = new Lang((isset($_GET['l'])) ? $_GET['l'] : ((isset($_SESSION['l'])) ? $_SESSION['l'] : null));
+
+    $title = "My Profile"; $css = "profile.css";
+
+    ob_start();
 ?>
-
-
     <header>
         <?= $nav ?>
     </header>
 
- 
-
 <form id="modifprofile">
     <div class="haut">
         <div class="form">
-            <input class="namein" value="<?= $user['username'] ?>" readonly name="usernameChange" id="nameinputmodif"/>
+            <input class="namein" value="<?= $user->getUsername() ?>" readonly name="usernameChange" id="nameinputmodif"/>
             <div class="modifier namesub" onclick="modifyInputName()"><img src="../assets/edit.svg"/></div>
         </div>
     </div>
@@ -30,10 +33,9 @@
 
             <div class="mail">
                 <div class="form">
-                    <input class="mailin" value="<?= $user['email'] ?>" readonly name="emailChange" id="mailinputmodif">
+                    <input class="mailin" value="<?= $user->getEmail() ?>" readonly name="emailChange" id="mailinputmodif">
                     <div class="modifier mailsub" onclick="modifyInputEmail()"><img src="../assets/edit.svg"/></div>
                 </div>
-
             </div>
 
             <div class="password">
@@ -46,15 +48,15 @@
                 </div>
             </div>  
 
-            <input type="password" class="mdpverif" id="passwordverify" name="passwordVerifyChange" placeholder="<?=  $parsed_lang->{'mdp'}?>" />
-            <input type="hidden" value="<?= $user['id'] ?>" name="userIdChange"/>
+            <input type="password" class="mdpverif" id="passwordverify" name="passwordVerifyChange" placeholder="<?=  $lang->getFile()['user']['mdp']?>" />
+            <input type="hidden" value="<?= $user->getUserID() ?>" name="userIdChange"/>
             <div class="subanuler"> 
 
                 <div class="anuler" onclick="anulermodif()">
-                    <h1><?=  $parsed_lang->{'annuler'}?></h1>
+                    <h1><?= $lang->getFile()['user']['annuler']?></h1>
                 </div>  
                 <div id="subbmit" onclick="modifyUser()">
-                    <h1><?=  $parsed_lang->{'enregistrer'}?></h1>
+                    <h1><?=  $lang->getFile()['user']['enregistrer']?></h1>
                 </div>
                 
             </div>

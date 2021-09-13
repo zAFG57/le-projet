@@ -1,11 +1,16 @@
 <?php
-    use \controller\ControllerUser;
-    include_once '../controller/user.php';
+    use Model\User;
 
-    if (controllerUser::userExisiting($_SESSION['userID']) ) {
+    include_once __DIR__ . '/../../model/user.php';
+
+    // if ($userForProfile === new User($_SESSION['userID'])) {
         if (isset($_GET['addService'])) {
-            require_once('./profile/addPrestationPro.php');
+            // echo 'test';
+            require_once __DIR__ . '/addPrestationPro.php';
         } else {
-            require_once('./profile/displayppro.php');
+            // echo 'test';
+            require_once __DIR__ . '/displaypro.php';
         }
-    }
+    // } else {
+    //     echo 'tqzdqzdest';
+    // }

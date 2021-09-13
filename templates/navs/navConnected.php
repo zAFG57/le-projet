@@ -1,12 +1,14 @@
 <?php 
-    $json = 'navconnected';
-    require_once __DIR__ . '/../../templates/lang.php';
+    use Model\Lang;
+
+    include_once __DIR__ . '/../../model/lang.php';
+    $lang = new Lang((isset($_GET['l'])) ? $_GET['l'] : ((isset($_SESSION['l'])) ? $_SESSION['l'] : null));
 ?>
 
 <div class="gauche">
     <a class="leftSiide" href="../index.php" title="Acceuil">
         <img class="logo" src="../assets/Sans_titre-8.png" alt="logo" height="50px">
-        <h1><?=  $parsed_lang->{'Mesréparations'}?> </br><span><?=  $parsed_lang->{'larfrançaise'}?></span></h1>
+        <h1><?= $lang->getFile()['navConnected']['Mesréparations']?> </br><span><?=  $lang->getFile()['navConnected']['larfrançaise']?></span></h1>
     </a>
 </div>
 
@@ -20,9 +22,9 @@
             <li id="drapeauus" onclick="en()"></li>
         </ul>
 
-        <li><a class="responsivlien2" href="../index.php?location=profile"><?=  $parsed_lang->{'profil'}?></a></li>
-        <li><a class="responsivlien2" href="../index.php?location=réparation"><?=  $parsed_lang->{'réparations'}?></a></li>
-        <li><div id="pro" class="responsivlien2" onclick="logout()"><?=  $parsed_lang->{'déconnecter'}?></div></li>
+        <li><a class="responsivlien2" href="../index.php?location=profile"><?=  $lang->getFile()['navConnected']['profil']?></a></li>
+        <li><a class="responsivlien2" href="../index.php?location=réparation"><?=  $lang->getFile()['navConnected']['réparations']?></a></li>
+        <li><div id="pro" class="responsivlien2" onclick="logout()"><?=  $lang->getFile()['navConnected']['déconnecter']?></div></li>
     </ul>
 </div>
 <div class="mesmessagenav" onclick="window.location.href='../index.php?location=chat';">

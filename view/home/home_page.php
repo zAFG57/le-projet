@@ -1,10 +1,15 @@
 
 <?php 
+    use Model\Lang;
+    // session_start();
+    // $json = 'home';
 
+    include_once __DIR__ . '/../../model/lang.php';
     include_once __DIR__ . '/../../templates/nav.php';
-    include_once __DIR__ . '/../../templates/lang.php';
 
-    $json = 'home';
+    $lang = new Lang((isset($_GET['l'])) ? $_GET['l'] : ((isset($_SESSION['l'])) ? $_SESSION['l'] : null));
+
+
 
 // if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 //     header("Location: ../index.php?location='réparation'");
@@ -21,20 +26,20 @@
     <?php var_dump($_SERVER['SERVER_NAME']) // woula c trop bien ?>
     <div class="content">
         <form id="search">
-            <input type="text" class="search__input" placeholder="<?=$parsed_lang->{'obj'}?>" name="search" required onkeydown="if(event.key === 'Enter'){event.preventDefault();searchf();}">
+            <input type="text" class="search__input" placeholder="<?=$lang->getFile()['home']['obj']?>" name="search" required onkeydown="if(event.key === 'Enter'){event.preventDefault();searchf();}">
             <button type="button" class="search__submit" onclick="searchf();" value=""><i class="fas fa-search"></i></button>
         </form>
     </div>
 
     <section class="maindiv">
         <div class="hover"> 
-            <div onclick="window.location.href='../view/home.php?query=electromenager&filter=domain';" class="électroménager">  <h1><?=  $parsed_lang->{'électroménager'}?></h1> <img class="img" src="../assets/électroménager.svg"/> </div>
-            <div onclick="window.location.href='../view/home.php?query=ordinateur&filter=domain';" class="ordinateur">      <h1><?=  $parsed_lang->{'ordi'}?></h1> <img class="img" src="../assets/ordinateur2.svg"/>    </div>
-            <div onclick="window.location.href='../view/home.php?query=telephone&filter=domain';" class="téléphone">       <h1><?=  $parsed_lang->{'tel'}?></h1> <img class="img" src="../assets/télephone.svg"/>      </div>
+            <div onclick="window.location.href='../view/home.php?query=electromenager&filter=domain';" class="électroménager">  <h1><?=$lang->getFile()['home']['électroménager']?></h1> <img class="img" src="../assets/électroménager.svg"/> </div>
+            <div onclick="window.location.href='../view/home.php?query=ordinateur&filter=domain';" class="ordinateur">      <h1><?=$lang->getFile()['home']['ordi']?></h1> <img class="img" src="../assets/ordinateur2.svg"/>    </div>
+            <div onclick="window.location.href='../view/home.php?query=telephone&filter=domain';" class="téléphone">       <h1><?=$lang->getFile()['home']['tel']?></h1> <img class="img" src="../assets/télephone.svg"/>      </div>
         </div>
     </section>
     
 <?php $content = ob_get_clean(); ?>
 
-<?php require __DIR__ . '/../../templates/baseTemplate.php'; ?>
+<?php include_once __DIR__ . '/../../templates/baseTemplate.php'; ?>
 

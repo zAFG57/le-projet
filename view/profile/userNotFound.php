@@ -1,7 +1,9 @@
-<?php include_once '../templates/nav.php'; ?>
+<?php 
+    include_once __DIR__ .'/../../templates/nav.php';
 
-<?php $title = "My Profile"; $css = "profile.css";?>
-<?php ob_start(); ?>
+    $title = "My Profile"; $css = "profile.css";
+    ob_start(); 
+?>
 
 
     <header>
@@ -13,4 +15,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('../templates/baseTemplate.php'); ?>
+<?php require __DIR__ . '/../../templates/baseTemplate.php'; ?>

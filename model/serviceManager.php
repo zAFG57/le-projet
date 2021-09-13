@@ -29,7 +29,7 @@
          */
         private function setUserService() {
             if ($this->errorCode === 0) {
-                $services = Database::sqlSelect('SELECT * FROM services WHERE user_id = ? ORDER BY creation_date DESC', 'i', $this->userID);
+                $services = Database::sqlSelect('SELECT * FROM services WHERE user_id = ? AND active = 1 ORDER BY creation_date DESC', 'i', $this->userID);
 
                 if ($services && $services->num_rows >= 1) {
                     $services = $services->fetch_all(MYSQLI_ASSOC);
@@ -60,6 +60,19 @@
             return false;
         }
 
+        /**
+         * @return array services
+         */
+        public function getUserService() {
+           return $this->userServices;
+        }
+
+        /**
+         * @return array servicesAttempts
+         */
+        public function getUserServiceAttempts() {
+            return $this->userServicsAttempts;
+        }
 
         /**
          * create a new service in database

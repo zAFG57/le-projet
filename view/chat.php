@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    
     use \Controller\ControllerChatUsers;
     use \Controller\ControllerActionManager;
     use \Controller\ControllerUser;

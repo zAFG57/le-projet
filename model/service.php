@@ -36,8 +36,64 @@
         /**
          * @return string serviceID
          */
-        public function __getServiceID() {
+        public function getServiceID() {
             return ($this->errorCode === 0) ? $this->serviceID : false;
+        }
+
+        /**
+         * @return int userID
+         */
+        public function getUserID() {
+            return ($this->errorCode === 0) ? $this->userID : false;
+        }
+
+        /**
+         * @return string domain
+         */
+        public function getDomainName() {
+            return ($this->errorCode === 0) ? $this->domain : false;
+        }
+
+        /**
+         * @return string subDomain
+         */
+        public function getSubDomainName() {
+            return ($this->errorCode === 0) ? $this->subDomain : false;
+        }
+
+        /**
+         * @return string title
+         */
+        public function getTitle() {
+            return ($this->errorCode === 0) ? $this->title : false;
+        }
+
+        /**
+         * @return string description
+         */
+        public function getDescription() {
+            return ($this->errorCode === 0) ? $this->description : false;
+        }
+
+        /**
+         * @return int creationDate
+         */
+        public function getCreationDate() {
+            return ($this->errorCode === 0) ? $this->creationDate : false;
+        }
+
+        /**
+         * @return bool active
+         */
+        public function isActive() {
+            return ($this->errorCode === 0) ? $this->active : false;
+        }
+
+        /**
+         * @return int note
+         */
+        public function getNote() {
+            return ($this->errorCode === 0) ? $this->note : false;
         }
 
         /**

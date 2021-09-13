@@ -3,22 +3,23 @@
     use \Controller\ControllerActionManager;
     use \model\ActionManager;
     use \Controller\ControllerUser;
+    use Model\Lang;
     
     include_once __DIR__ . '/../../model/actionManager.php';
     include_once __DIR__ . '/../../controller/actionManager.php';
     include_once __DIR__ . '/../../controller/chatUsers.php';
     include_once __DIR__ . '/../../controller/user.php';
+    include_once __DIR__ . '/../../model/lang.php';
 
-    $json = 'displayChat';
-    require('../templates/lang.php');
+    $lang = new Lang((isset($_GET['l'])) ? $_GET['l'] : ((isset($_SESSION['l'])) ? $_SESSION['l'] : null));
 
     ControllerUser::createConnectionHash($_SESSION['userID']);
 ?>
 
 <div class="main">
     <a class="retourenarrière" href="chat.php"></a>
-<div class="discution" id="scroll">
-    <div class="mesDiscussions"><?=  $parsed_lang->{'différente_discution'}?></div>
+    <div class="discution" id="scroll">
+        <div class="mesDiscussions"><?=  $lang->getFile()['displayChat']['différente_discution']?></div>
     <?php
     $discussitions = ControllerChatUsers::displayDiscussions($_SESSION['userID']);
     if (!empty($discussitions)) {
@@ -62,7 +63,7 @@
 
         <form class="message" id="message">
 
-            <input id="chatin" type="text" placeholder="<?=  $parsed_lang->{'message'}?>" onkeydown="if(event.key === 'Enter'){event.preventDefault();sendMessage();}">
+            <input id="chatin" type="text" placeholder="<?=  $lang->getFile()['displayChat']['message']?>" onkeydown="if(event.key === 'Enter'){event.preventDefault();sendMessage();}">
             <input type="hidden" name="action_token" value="<?=ControllerActionManager::createRequestAction(ActionManager::$NEW_MESSAGE_ACTION_TOKEN)?>">
             <div class="send" onclick="sendMessage()" >
                 <img src="../assets/avion.svg">
