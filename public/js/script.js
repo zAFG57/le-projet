@@ -337,21 +337,40 @@ function pays() {
 }
 
 function fr() {
-    drapeau.style.display = 'block';
-    drapeau.style.background = 'url("../../assets/drapeaufrancais.png")';
-    drapeau.style.backgroundSize = 'cover';
-    select.style.display = 'none';
-    document.getElementById('langinput').value = 'fr';
-    request('/controller/lang.php', "#langform", setloader = true, function(data) { window.location = window.location; })
+    // drapeau.style.display = 'block';
+    // drapeau.style.background = 'url("../../assets/drapeaufrancais.png")';
+    // drapeau.style.backgroundSize = 'cover';
+    // select.style.display = 'none';
+    // document.getElementById('langinput').value = 'fr';
+    // request('../controller/lang.php', "#langform", setloader = true, function(data) { window.location = window.location; })
+
+    // Construct URLSearchParams object instance from current URL querystring.
+    var queryParams = new URLSearchParams(window.location.search);
+
+    // Set new or modify existing parameter value. 
+    queryParams.set("l", "fr");
+
+    // Replace current querystring with the new one.
+    history.replaceState(null, null, "?" + queryParams.toString());
+    window.location = window.location;
 }
 
 function en() {
-    drapeau.style.display = 'block';
-    drapeau.style.background = 'url("../../assets/drapeauUS.png")';
-    drapeau.style.backgroundSize = 'cover';
-    select.style.display = 'none';
-    document.getElementById('langinput').value = 'en';
-    request('../controller/lang.php', "#langform", setloader = true, function(data) {
-        window.location = window.location;
-    })
+    // drapeau.style.display = 'block';
+    // drapeau.style.background = 'url("../../assets/drapeauUS.png")';
+    // drapeau.style.backgroundSize = 'cover';
+    // select.style.display = 'none';
+    // document.getElementById('langinput').value = 'en';
+    // request('../controller/lang.php', "#langform", setloader = true, function(data) {
+    //     window.location = window.location;
+    // }) var queryParams = new URLSearchParams(window.location.search);
+
+    var queryParams = new URLSearchParams(window.location.search);
+
+    // Set new or modify existing parameter value. 
+    queryParams.set("l", "en");
+
+    // Replace current querystring with the new one.
+    history.replaceState(null, null, "?" + queryParams.toString());
+    window.location = window.location;
 }

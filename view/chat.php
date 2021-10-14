@@ -3,7 +3,7 @@
     
     use \Controller\ControllerChatUsers;
     use \Controller\ControllerActionManager;
-    use \Controller\ControllerUser;
+    use \model\User;
     use \model\ActionManager;
 
     include_once __DIR__ . '/../controller/actionManager.php';
@@ -12,7 +12,7 @@
     include_once __DIR__ . '/../templates/nav.php';
     include_once __DIR__ . '/../model/actionManager.php';
 
-    if (!ControllerUser::isConnected()) {
+    if (!User::isConnected()) {
         header("Location: ../index.php?location=chat");
         exit;
     }
