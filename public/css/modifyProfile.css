@@ -1,3 +1,7 @@
+:root {
+    --left: 20vw;
+    --cent: 0px;
+}
 body {
     margin: 0;
     padding: 0;
@@ -10,7 +14,7 @@ body {
     overflow: hidden;
 }
 
-header {
+header { 
     margin: 40px 40px;
 }
 
@@ -36,7 +40,7 @@ header {
     font-size: min(5.5vw,2em);
 }
 
-.form form {
+.form .formdiv {
     padding: 0 40px;
     box-sizing: border-box;
 }
@@ -208,12 +212,13 @@ header {
 .navedit {
     position: absolute;
     height: 90vh;
-    width: 20vw;
+    width: var(--left);
     top: 10vh;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
+    transform: translateX(calc( 0px - var(--left)));
 }
 .éditbtn {
     position: relative;
@@ -228,8 +233,119 @@ header {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: height 0.25s cubic-bezier(.78,.69,.43,1.3);
+    left: 0px;
 }
-.éditbtn:hover {
-    height: 150%;
+.éditbtn:nth-child(1) {
+    transition: 0.2s ease-in-out , transform 0.1s ease-in-out ;
+}
+.éditbtn:nth-child(2) {
+    transition: 0.2s ease-in-out , transform 0.2s ease-in-out ;
+}
+.éditbtn:nth-child(3) {
+    transition: 0.2s ease-in-out , transform 0.3s ease-in-out ;
+}
+.éditbtn:nth-child(4) {
+    transition: 0.2s ease-in-out , transform 0.4s ease-in-out ;
+}
+.éditbtn:nth-child(5) {
+    transition: 0.2s ease-in-out , transform 0.5s ease-in-out ;
+}
+.navbtn {
+    position: absolute;
+    top: 10vh;
+    left: 0px;
+    padding: 15px;
+    border-bottom-right-radius: 50px;
+    background: #fff;
+    transition: 0.1s ease-in-out;
+    overflow: hidden;
+    cursor: pointer;
+}
+.navbtn:focus ~ .navedit .éditbtn  {
+    transform: translateX(var(--left)) ;
+}
+.navbtn:focus {
+    transform: translate(var(--left));
+}
+.navedit .éditbtn:hover  {
+    font-size: 120%;
+    filter: brightness(120%);
+}
+.navbtn img {
+    position: relative;
+    width: 5vw;
+    transform-origin: center;
+    transform: rotate(180deg);
+    transition: 0.25s ease-in-out;
+}
+.navbtn:hover img {
+    transform: rotate(180deg);
+}
+.navbtn:hover img {
+    width: calc(5vw + 15px);
+}
+
+
+
+
+#mdp {
+    z-index: -40;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.5);
+}
+#fond {
+    z-index: -40;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 50%;
+    left: 50%;
+    background: #0000009f;
+    transform: translate(-50vw , -50vh);
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+}
+.opacity {
+    opacity: 1 !important;
+}
+
+
+
+
+
+
+@media screen and (max-width: 900px) {
+    :root {
+        --left: 100vw;
+        --cent: 100%;
+    }
+    .anuler , #subbmit {
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .navedit {
+        width: var(--left);
+    }
+    .navbtn {
+        z-index: 2;
+        border-top-left-radius: 0px !important;
+        border-top-right-radius: 50% !important;
+    }
+    .txtfieldn textarea {
+        max-height: 40vh;
+    }
+    .photodiv {
+        margin-bottom: 10px;
+    }
+    #hun {
+        font-size: 85%;
+        padding: 10px;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    @media screen and (max-width: 1300px) {
+        
+    }
 }

@@ -24,7 +24,37 @@
         <li><a class="responsivlien" href="../index.php?location=createAccount" title="Créer mon compte"><?=  $lang->getFile()['navNotConnected']['compte']?></a></li>
         <li><a class="responsivlien" id="pro" href="../index.php?location=createProAccount" title="Je suis un professionel"><?=  $lang->getFile()['navNotConnected']['pro']?></a></li>
     </ul>
+    
+
+    <div class="burgeur" onclick="navresponsive()">
+        <span class="burgerhaut"></span>
+        <span class="burgermillieu"></span>
+        <span class="burgerbas"></span>
+    </div>
+
+
+
 </div>
+<div class="contentnav">
+        <ul class="ulnavresponsiv" style="top: -100vh;">
+            <div class="drapeaure">lang:
+                <li id="drapeaure" onclick="paysre();" style="background-image: url('../../assets/<?=$_SESSION['l']?>.png');"></li>
+                <ul class="drapeaure" id="selecterdedrapeure">
+                    <li id="drapeaufrre" onclick="fr()"></li>
+                    <li id="drapeauusre" onclick="en()"></li>
+                </ul>
+            </div>
+            <li><a class="responsivlien2" href="../index.php?location=login" title="Se connecter"><?=$lang->getFile()['navNotConnected']['connecter']?></a></li>
+            <li><a class="responsivlien2" href="../index.php?location=createAccount" title="Créer mon compte"><?=$lang->getFile()['navNotConnected']['compte']?></a></li>
+            <li><a class="responsivlien2 créerunpro" href="../index.php?location=createProAccount" title="Je suis un professionel"><?=$lang->getFile()['navNotConnected']['pro']?></a></li>
+        </ul>
+        <div class="lesbull" style="top: -100vh;">
+            <div class="bulla"></div>
+            <div class="bullb"></div>
+            <div class="bullc"></div>
+        </div>
+</div>
+
 <form id="langform">
     <input type="hidden" value="fr" id="langinput" name="langinput"/>
 </form>

@@ -26,34 +26,43 @@
         <li><a class="responsivlien2" href="../index.php?location=réparation"><?=  $lang->getFile()['navConnected']['réparations']?></a></li>
         <li><div id="pro" class="responsivlien2" onclick="logout()"><?=  $lang->getFile()['navConnected']['déconnecter']?></div></li>
     </ul>
+
+    <div class="burgeur" onclick="navresponsive()">
+        <span class="burgerhaut"></span>
+        <span class="burgermillieu"></span>
+        <span class="burgerbas"></span>
+    </div>
+
+
 </div>
 <div class="mesmessagenav" onclick="window.location.href='../index.php?location=chat';">
     <img src="../assets/mail.svg">
 </div>
-
-<script>
-    drapeau = document.getElementById('drapeau');
-    select = document.getElementById('selecterdedrapeu');
-    function pays() {
-        drapeau.style.display = 'none';
-        select.style.display = 'flex';
-    }
-    function fr() {
-        drapeau.style.display = 'block';
-        drapeau.style.background = 'url("../../assets/drapeaufrancais.png")';
-        drapeau.style.backgroundSize = 'cover';
-        select.style.display = 'none';
-    }
-    function en() {
-        drapeau.style.display = 'block';
-        drapeau.style.background = 'url("../../assets/drapeauUS.png")';
-        drapeau.style.backgroundSize = 'cover';
-        select.style.display = 'none';
-    }
-
-
-</script>
 </div> 
+
+
+<div class="contentnav">
+        <ul class="ulnavresponsiv" style="top: -100vh;">
+            <div class="drapeaure">lang:
+                <li id="drapeaure" onclick="paysre();" style="background-image: url('../../assets/<?=$_SESSION['l']?>.png');"></li>
+                <ul class="drapeaureul" id="selecterdedrapeure">
+                    <li id="drapeaufrre" onclick="fr()"></li>
+                    <li id="drapeauusre" onclick="en()"></li>
+                </ul>
+            </div>
+            <li><a class="responsivlien2" href="../index.php?location=profile"><?=$lang->getFile()['navConnected']['profil']?></a></li>
+            <li><a class="responsivlien2" href="../index.php?location=réparation"><?=$lang->getFile()['navConnected']['réparations']?></a></li>
+            <li><div id="pro" class="responsivlien2" onclick="logout()"><?=$lang->getFile()['navConnected']['déconnecter']?></div></li>
+        </ul>
+        <div class="lesbull" style="top: -100vh;">
+            <div class="bulla"></div>
+            <div class="bullb"></div>
+            <div class="bullc"></div>
+        </div>
+    </div>
+
+
+
 <form id="langform">
     <input type="hidden" value="fr" id="langinput" name="langinput"/>
 </form>

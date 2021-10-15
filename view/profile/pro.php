@@ -17,7 +17,7 @@
     </header>
 
     <div class="main">
-        <div class="profil" onclick="window.location +='&action=1' ">
+        <div class="profil" onclick="window.location +='&action=1&edit=nom' ">
             <h1><?=  $lang->getFile()['pro']['gauche_titre']?></h1>
             <p><?=  $lang->getFile()['pro']['gauche']?></p>
         </div>
