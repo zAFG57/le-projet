@@ -30,7 +30,7 @@
             // $user = controllerUser::getUserInfo(intval($_GET['user']));
 
             if (intval($_GET['user']) === $_SESSION['userID'] && isset($_GET['action']) && intval($_GET['action']) === 1) {
-                require_once('./profile/user.php');
+                require_once('./modifyProfile.php');
             } elseif (intval($_GET['user']) === $_SESSION['userID'] && isset($_GET['action']) && intval($_GET['action']) === 2){
                 require_once('./profile/prestationPro.php');
             } elseif (intval($_GET['user']) === $_SESSION['userID'] ){
