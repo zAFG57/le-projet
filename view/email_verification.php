@@ -1,8 +1,8 @@
 <?php 
     use \Controller\ControllerEmailVerification;
 
-    include_once '../templates/nav.php';
-    include_once '../controller/email_verification.php';
+    include_once __DIR__ . '/../templates/nav.php';
+    include_once __DIR__ . '/../controller/email_verification.php';
 
     $title = "Vérifier mon email"; 
     $css = "email-verification.css";

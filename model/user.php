@@ -58,7 +58,9 @@
          * @return void
          */
         private function setUserInfos(int $userID = NULL, string $email = NULL, User $user = NULL){
-            if (!is_null($userID)) {
+            if(!is_null($user)){
+                $this->errorCode = $user->errorCode;
+            } elseif (!is_null($userID)) {
                 $user = Database::sqlSelect('SELECT * FROM users WHERE user_id = ?', 'i', $userID);
             } elseif (!is_null($email)) {
                 $user = Database::sqlSelect('SELECT * FROM users WHERE email = ?', 's', $email);
@@ -70,7 +72,6 @@
                 $this->bio = $user->bio;
                 $this->pro = $user->pro;
                 $this->verified = $user->verified;
-                $this->errorCode = $user->errorCode;
                 return;
             } else {
                 throw new \Exception("at least one arg is required", 1);

@@ -96,6 +96,6 @@ class EmailVerification extends Database {
     }
 
     protected static function getUserId($requestId){
-        return parent::sqlSelect('SELECT user_id FROM requests WHERE id=? AND type = 0', 'i', $requestId)->fetch_assoc()['userId'];
+        return parent::sqlSelect('SELECT user_id FROM requests WHERE id=? AND type = 0', 'i', $requestId)->fetch_assoc()['user_id'];
     }
 }

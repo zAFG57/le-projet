@@ -221,16 +221,17 @@ function modifyUser() {
 }
 
 function newPrestation() {
-    request('../controller/serviceManager.php', '#addFerviceForm', setloader = true, function(data) {
+    request('../requests/createService.php', '#addServiceForm', setloader = true, function(data) {
         document.getElementById('err').innerHTML = "";
         var transition = document.getElementById('err').style.transition;
         document.getElementById('err').style.transition = "none";
         document.getElementById('err').style.opacity = 0;
+        console.log(data);
         data = JSON.parse(data)
 
         if (data === 0) {
             document.getElementById('err').innerHTML += '<div>Prestation enregistrée, elle sera utilisable quand un administrateur l\'aura approuvée</div>';
-            document.getElementById('addFerviceForm').reset();
+            document.getElementById('addServiceForm').reset();
         } else {
             fetch('../public/js/error.json')
                 .then(res => res.json())
@@ -382,40 +383,42 @@ function paysre() {
     selectre.style.display = 'flex';
 }
 ouver = 0;
-    function navresponsive() {
-        burger();
-        navi = document.getElementsByClassName('contentnav')[0];
-        if (ouver === 1) {
-            navi.style.top =  - 100 + 'vh';
-            ouver = 0;
-        } else if (ouver === 0) {
-            navi.style.top = 10 + 'vh';
-            ouver = 1;
-        }
+
+function navresponsive() {
+    burger();
+    navi = document.getElementsByClassName('contentnav')[0];
+    if (ouver === 1) {
+        navi.style.top = -100 + 'vh';
+        ouver = 0;
+    } else if (ouver === 0) {
+        navi.style.top = 10 + 'vh';
+        ouver = 1;
     }
-    function burger() {
-        burgerhaut = document.getElementsByClassName('burgerhaut')[0];
-        burgermillieu = document.getElementsByClassName('burgermillieu')[0];
-        burgerbas = document.getElementsByClassName('burgerbas')[0];
-        bull = document.getElementsByClassName('lesbull')[0];
-        ulnavresponsiv = document.getElementsByClassName('ulnavresponsiv')[0];
-        if (ouver === 1) {
-            burgerhaut.style.transform="translateY(0vh) rotate(0)";
-            burgermillieu.style.opacity= 1;
-            burgermillieu.style.transition= "0.5s 0.25s ease-in-out";
-            burgerbas.style.transform="translateY(0vh) rotate(0)";
-            bull.style.top = -100 + 'vh';
-            ulnavresponsiv.style.top = -100 + 'vh ';
-            document.getElementsByClassName('burgeur')[0].setAttribute('onclick','');
-            setTimeout(function test(){document.getElementsByClassName('burgeur')[0].setAttribute('onclick','navresponsive()')},1000);
-        } else if (ouver === 0) {
-            burgerhaut.style.transform="translateY(2.5vh) rotate(45deg)";
-            burgermillieu.style.opacity= 0;
-            burgermillieu.style.transition= "0s";
-            burgerbas.style.transform="translateY(-3.25vh) rotate(-45deg)";
-            bull.style.top = 0 + 'px';
-            ulnavresponsiv.style.top = 0 + 'px ';
-            document.getElementsByClassName('burgeur')[0].setAttribute('onclick','');
-            setTimeout(function test(){document.getElementsByClassName('burgeur')[0].setAttribute('onclick','navresponsive()')},1000);
-        }
+}
+
+function burger() {
+    burgerhaut = document.getElementsByClassName('burgerhaut')[0];
+    burgermillieu = document.getElementsByClassName('burgermillieu')[0];
+    burgerbas = document.getElementsByClassName('burgerbas')[0];
+    bull = document.getElementsByClassName('lesbull')[0];
+    ulnavresponsiv = document.getElementsByClassName('ulnavresponsiv')[0];
+    if (ouver === 1) {
+        burgerhaut.style.transform = "translateY(0vh) rotate(0)";
+        burgermillieu.style.opacity = 1;
+        burgermillieu.style.transition = "0.5s 0.25s ease-in-out";
+        burgerbas.style.transform = "translateY(0vh) rotate(0)";
+        bull.style.top = -100 + 'vh';
+        ulnavresponsiv.style.top = -100 + 'vh ';
+        document.getElementsByClassName('burgeur')[0].setAttribute('onclick', '');
+        setTimeout(function test() { document.getElementsByClassName('burgeur')[0].setAttribute('onclick', 'navresponsive()') }, 1000);
+    } else if (ouver === 0) {
+        burgerhaut.style.transform = "translateY(2.5vh) rotate(45deg)";
+        burgermillieu.style.opacity = 0;
+        burgermillieu.style.transition = "0s";
+        burgerbas.style.transform = "translateY(-3.25vh) rotate(-45deg)";
+        bull.style.top = 0 + 'px';
+        ulnavresponsiv.style.top = 0 + 'px ';
+        document.getElementsByClassName('burgeur')[0].setAttribute('onclick', '');
+        setTimeout(function test() { document.getElementsByClassName('burgeur')[0].setAttribute('onclick', 'navresponsive()') }, 1000);
     }
+}

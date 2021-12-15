@@ -23,7 +23,7 @@
 
 </div>
 
-<form id="addFerviceForm" enctype="multipart/form-data">
+<form id="addServiceForm" enctype="multipart/form-data">
     <div class="main" id="catsouscat">
         <div class="cat">
             <div class="maintxt"><?=  $lang->getFile()['addPrestationPro']['vous_pouvez_réparer']?></div>
@@ -80,7 +80,7 @@
 
         <div id="err"></div>
         <div class="suivant" onclick="newPrestation()">
-            <?=  $lang->getFile()['addPrestationPro']['enregister']?>
+            <?= $lang->getFile()['addPrestationPro']['enregister']?>
         </div>
     </div>
 
