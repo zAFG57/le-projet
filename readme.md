@@ -1,7 +1,7 @@
 >  **salutation, on est une petite équipe qui veulent crée une entreprise**
 >  ---
 >
->  **les contacts des deux développeur:**
+>  **les contacts des deux développeurs:**
 >  >|nom|mail|tel|
 >  >|-|-|-|
 >  >|ludovic Castiglia|ludovic.castiglia@outlook.fr|+33 767466001|
