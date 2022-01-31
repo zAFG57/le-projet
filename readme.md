@@ -1,16 +1,16 @@
->  **salutation, on est une petite équipe qui veulent crée une entreprise**
+>  **Salutations, nous sommes une petite équipe souhaitant créer une petite entreprise**
 >  ---
 >
->  **les contacts des deux développeurs:**
+>  **Les contacts des deux développeurs:**
 >  >|nom|mail|tel|
 >  >|-|-|-|
->  >|ludovic Castiglia|ludovic.castiglia@outlook.fr|+33 767466001|
->  >|jules Grivot Pelisson|jules.grivot.pelisson@gmail.com|+33 624735656|
+>  >|Ludovic Castiglia|ludovic.castiglia@outlook.fr|+33 767466001|
+>  >|Jules Grivot Pelisson|jules.grivot.pelisson@gmail.com|+33 624735656|
 >
 >  **les contacts du reste de l'équipe:**
 >  >|nom|mail|tel|
 >  >|-|-|-|
->  >|pierre Ohannessian|pierus.ohannessian@gmail.com|+33 617990619|
->  >|enzo El Younoussi|thedeltae.124@gmail.com|+33 769218988|
+>  >|Pierre Ohannessian|pierus.ohannessian@gmail.com|+33 617990619|
+>  >|Enzo El Younoussi|thedeltae.124@gmail.com|+33 769218988|
 >  >|Mathis|@gmail.com|+33 651012797|
 >  ***
