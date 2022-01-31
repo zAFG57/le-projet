@@ -10,7 +10,7 @@ require('../templates/lang.php');
 // }
 ?>
  
-<?php $title = "mesréparation.com"; $css = "home.css"?>
+<?php $title = "mesréparations.com"; $css = "home.css"?>
 
 <?php ob_start(); ?>
 
